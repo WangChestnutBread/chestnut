@@ -1,0 +1,11 @@
+.LoginBox{
+    align-self: stretch;
+    height: 116px;
+    padding: 10px;
+    background: rgba(255, 249, 239, 0);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    display: flex;
+}

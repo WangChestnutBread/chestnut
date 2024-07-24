@@ -1,0 +1,14 @@
+import React from "react";
+import LoginIdPwFont from "../atoms/LoginIdPwFont";
+import LoginInputForm from "../atoms/LoginInputForm";
+import "./LoginInput.css";
+function LoginIdInput(props){
+    return(
+        <div className="LoginBox">
+            <LoginIdPwFont title={props.title} />
+            <LoginInputForm content={props.content} />
+        </div>
+        
+    );
+}
+export default LoginIdInput;
