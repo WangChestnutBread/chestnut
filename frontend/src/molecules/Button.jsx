@@ -1,10 +1,10 @@
 import React from "react";
 import LoginButton from "../atoms/LoginButton";
 import "./LoginButton.css";
-function Button(){
+function Button(props){
     return(
         <div className="Button">
-            <LoginButton />
+            <LoginButton button={props.button}/>
         </div>
         
     );
