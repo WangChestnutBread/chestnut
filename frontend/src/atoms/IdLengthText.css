@@ -1,0 +1,13 @@
+.LengthAlert{
+    align-self: stretch;
+    height: 17px;
+    color: #D22D33;
+    font-Size: 1.125rem;
+    font-Family: 'Jua';
+    font-Weight: 400;
+    word-Wrap: break-word;
+    gap: 10px;
+}
+.Box{
+    margin-top: 8px;
+}
