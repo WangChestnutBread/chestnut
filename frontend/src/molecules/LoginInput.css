@@ -1,7 +1,7 @@
 .LoginBox{
     align-self: stretch;
     height: 116px;
-    padding: 10px;
+    padding-left: 10px;
     background: rgba(255, 249, 239, 0);
     flex-direction: column;
     justify-content: flex-start;
