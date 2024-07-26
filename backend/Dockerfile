@@ -12,4 +12,4 @@ COPY ${JAR_FILE_PATH} deploy.jar
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod" ,"/app/deploy.jar"]
 
 # 5. 컨테이너가 사용할 포트 설정
-EXPOSE 9001
+#EXPOSE ///
