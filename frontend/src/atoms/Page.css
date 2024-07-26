@@ -71,28 +71,17 @@
     word-Wrap: break-word;
 }
 /*LoginPage*/
-.LoginFormBorder, .FormBorder{
-    width: 645px;
-    height: 50px;
+.LoginFormBorder{
+    width: 582px;
     padding-top: 9px;
     padding-bottom: 11px;
     background: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     overflow: hidden;
     justify-content: flex-start;
     align-items: center;
     display: inline-flex;
-    border: white;
-}
-.FormBorder{
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-.LoginFormBorder{
-    width: 469px;
-    margin-right: 70px;
-    margin-left: 8px;
-    justify-content: flex-start;
-
 }
 .LoginFormFont{
     color: black;
