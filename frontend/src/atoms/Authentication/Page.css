@@ -71,7 +71,8 @@
     word-Wrap: break-word;
 }
 /*LoginPage*/
-.LoginFormBorder{
+.LoginFormBorder, .FormBorder{
+    height: 50px;
     width: 582px;
     padding-top: 9px;
     padding-bottom: 11px;
@@ -82,6 +83,17 @@
     justify-content: flex-start;
     align-items: center;
     display: inline-flex;
+    border: white;
+}
+.FormBorder{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.LoginFormBorder{
+    width: 469px;
+    margin-right: 70px;
+    margin-left: 8px;
+    justify-content: flex-start;
+
 }
 .LoginFormFont{
     color: black;
