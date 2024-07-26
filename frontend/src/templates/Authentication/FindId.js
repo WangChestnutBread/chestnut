@@ -1,8 +1,8 @@
 import React from "react";
-import MemberLogo from "../molecules/MemberLogo";
-import LoginIdInput from "../molecules/LoginIdInput";
-import Button from "../molecules/Button";
-import BackButton from "../atoms/BackButton";
+import MemberLogo from "../../molecules/Authentication/MemberLogo";
+import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
+import Button from "../../molecules/Authentication/Button";
+import BackButton from "../../atoms/BackButton";
 function FindId(){
     return(
         <div className="Page">

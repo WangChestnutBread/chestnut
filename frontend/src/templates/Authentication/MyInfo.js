@@ -1,9 +1,9 @@
 import React from "react";
-import MemberLogo from "../molecules/MemberLogo";
-import BackButton from "../atoms/BackButton";
-import Button from "../molecules/Button";
-import PasswordButton from "../molecules/PasswordButton";
-import InfoBox from "../molecules/InfoBox";
+import MemberLogo from "../../molecules/Authentication/MemberLogo";
+import BackButton from "../../atoms/BackButton";
+import Button from "../../molecules/Authentication/Button";
+import PasswordButton from "../../molecules/Authentication/PasswordButton";
+import InfoBox from "../../molecules/Authentication/InfoBox";
 function MyInfo(){
     return(
         <div style={{width: '100%', height: '100%', position: 'relative', background: '#FFF9EF'}}>

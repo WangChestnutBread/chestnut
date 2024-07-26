@@ -1,9 +1,9 @@
-import SignUPPage from "../templates/SignUpPage";
+import SignUPPage from "../templates/Authentication/SignUpPage";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import LoginPage from "../templates/LoginPage";
-import FindId from "../templates/FindId";
-import FindPw from "../templates/FindPw";
+import LoginPage from "../templates/Authentication/LoginPage";
+import FindId from "../templates/Authentication/FindId";
+import FindPw from "../templates/Authentication/FindPw";
 function Member() {
   return (
     <Routes>

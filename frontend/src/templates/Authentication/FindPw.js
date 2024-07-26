@@ -1,9 +1,9 @@
 import React from "react";
-import PasswordButton from "../molecules/PasswordButton";
-import MemberLogo from "../molecules/MemberLogo";
-import FindIdForm from "../organisms/FindIdForm";
-import LoginIdInput from "../molecules/LoginIdInput";
-import BackButton from "../atoms/BackButton";
+import PasswordButton from "../../molecules/Authentication/PasswordButton";
+import MemberLogo from "../../molecules/Authentication/MemberLogo";
+import FindIdForm from "../../organisms/Authentication/FindIdForm";
+import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
+import BackButton from "../../atoms/BackButton";
 function FindPw(){
     return(
         <div style={{width: '100%', height: '100%', position: 'relative', background: '#FFF9EF'}}>

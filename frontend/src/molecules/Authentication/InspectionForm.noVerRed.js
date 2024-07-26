@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import "../atoms/Page.css";
-import InspectionButton from "../atoms/InspectionButton";
+import "../../atoms/Authentication/Page.css";
+import InspectionButton from "../../atoms/Authentication/InspectionButton";
 function InspectionFormNoRed(props){
     const [name, setName] = useState("");
 

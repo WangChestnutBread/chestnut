@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import InspectionButton from "../atoms/InspectionButton";
-import LoginInputForm from "../atoms/LoginInputForm";
-import IdLengthText from "../atoms/IdLengthText";
-import "../atoms/Page.css";
+import InspectionButton from "../../atoms/Authentication/InspectionButton";
+import LoginInputForm from "../../atoms/Authentication/LoginInputForm";
+import IdLengthText from "../../atoms/Authentication/IdLengthText";
+import "../../atoms/Authentication/Page.css";
 function InspectionForm(props){
     const [name, setName] = useState("");
 

@@ -1,4 +1,4 @@
-import IconWithText from "../molecules/IconWithText/IconWithText"
+import IconWithText from "../../molecules/Main/IconWithText"
 import "./MainMenu.css"
 
 const MainMenu = ({menu}) => {

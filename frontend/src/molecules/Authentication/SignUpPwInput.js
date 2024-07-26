@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import LoginButton from "../atoms/LoginButton";
-import "./Page.css";
-function LoginInputForm(props){
+import IdLengthText from "../../atoms/Authentication/IdLengthText";
+import "../../atoms/Authentication/Page.css";
+
+function SignUpPwInput(props){
     const [name, setName] = useState("");
 
     const handleChangeName = (event) => {
-        setName(event.target.value);
+    setName(event.target.value);
     };
 
     const handleSubmit = (event) =>{
@@ -13,9 +14,12 @@ function LoginInputForm(props){
         event.preventDefault();
     };
     return(
-        <form onSubmit={handleSubmit}>
+        <div>
+        <form className="FormBorder LoginFormFont" onSubmit={handleSubmit}>
             <input className="LoginFormBorder LoginFormFont" type="text" value={name} onChange={handleChangeName} placeholder={props.content}/>
         </form>
+        <IdLengthText text={props.text} />
+    </div>
     );
 }
-export default LoginInputForm;
+export default SignUpPwInput;
