@@ -1,0 +1,20 @@
+.MainTemplate {
+    display: flex;
+    max-width: 1194px;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+}
+
+.Logo {
+    display: flex;
+    width: 270px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.LogoImage {
+    height: 110px;
+}
