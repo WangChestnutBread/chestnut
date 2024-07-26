@@ -1,0 +1,16 @@
+.Button{
+    left: 204px;
+    right: 204px;
+    bottom:111px;
+    padding-top: 10px;
+    position: absolute;
+}
+
+.pwButton{
+    left: 204px;
+    right: 204px;
+    bottom: 2px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    position: absolute;
+}

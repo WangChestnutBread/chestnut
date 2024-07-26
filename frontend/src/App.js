@@ -5,7 +5,9 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <MainPage/>
+      <Routes>
+        <Route path="/" element={<StartPage />} />
+      </Routes>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from "react"
-import MainMenu from "../organisms/MainMenu"
+import MainMenu from "../organisms/Main/MainMenu"
 import "./MainTemplate.css"
-import LastStudyButton from "../molecules/LastStudyButton"
+import LastStudyButton from "../molecules/Main/LastStudyButton"
 
 const MainTemplate = () => {
     let [menu, setMenu] = useState(['학습', '대화연습', '단어장', '게시판'])
