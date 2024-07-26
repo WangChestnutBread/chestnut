@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import LoginButton from "../Authentication/LoginButton";
+import LoginButton from "./LoginButton";
 import "./Page.css";
 function LoginInputForm(props){
     const [name, setName] = useState("");
