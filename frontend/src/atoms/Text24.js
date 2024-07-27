@@ -1,4 +1,4 @@
-const Text24 = ({text}) => {
+function Text24({text}) {
     return (
         <p style={{ fontSize: '1.5rem' }}>{ text }</p>
     )

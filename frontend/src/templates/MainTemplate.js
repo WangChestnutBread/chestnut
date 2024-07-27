@@ -1,7 +1,8 @@
 import { useState } from "react"
 import MainMenu from "../organisms/Main/MainMenu"
 import "./MainTemplate.css"
-import LastStudyButton from "../molecules/Main/LastStudyButton"
+import LastStudy from "../organisms/Main/LastStudy"
+
 
 const MainTemplate = () => {
     let [menu, setMenu] = useState(['학습', '대화연습', '단어장', '게시판'])
@@ -12,7 +13,8 @@ const MainTemplate = () => {
                 <img src="/image/Logo.png" className="LogoImage"/>
             </div>
             <MainMenu menu={menu}/>
-            <LastStudyButton/>
+            <LastStudy chapter="자/모" word="나는 사과를 먹는다"/>
+            
         </div>
     )
 }

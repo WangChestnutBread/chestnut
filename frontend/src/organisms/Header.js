@@ -1,7 +1,7 @@
 import IconGroup from "../molecules/IconGroup"
 import "./Header.css"
 
-const Header = ({leftIcons}) => {
+function Header({leftIcons}) {
     return (     
         <div className="header">   
             <IconGroup leftIcons={leftIcons}/>
