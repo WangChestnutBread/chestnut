@@ -1,5 +1,5 @@
-LABEL authors="KIM AREUM"
 FROM nginx:alpine
+LABEL authors="KIM AREUM"
 
 COPY ./fontend/build /usr/share/nginx/html
 COPY ./images /usr/share/nginx/html/images

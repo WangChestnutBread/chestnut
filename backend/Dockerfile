@@ -1,8 +1,7 @@
-LABEL authors="KIM AREUM"
-
 # 1. 실제 애플리케이션을 실행할 기본 이미지 설정
 FROM openjdk:17-jdk-slim
 
+LABEL authors="KIM AREUM"
 # 2. 작업 디렉토리 설정
 WORKDIR /app
 
