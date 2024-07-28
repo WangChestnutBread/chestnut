@@ -60,25 +60,32 @@ const QnaPage = () => {
     <div className="container text-start justify-center">
       <NavBar />
       <div className="logo-container">
-        <img src="/image/Logo.png" alt="밤빵" className="logo" />
-        <span className="qna">Q&A</span>
+        <div className="position-relative">
+          <img src="/image/Logo.png" alt="밤빵" className="logo" />
+          <span className="qna position-absolute bottom-0 start-100">
+            {isAnnouncement ? "게시판" : "Q&A"}
+          </span>
+        </div>
       </div>
       {/* 공지사항 & qna 전환 탭 */}
-      <div className="btn-container">
-        <NavLink
-          to="announcement"
-          className={({ isActive }) => (isActive ? "active" : "")}
-          onClick={() => setIsAnnouncement(true)}
-        >
-          <button className="announcementbtn">공지사항</button>
-        </NavLink>
-        <NavLink
-          to="qna"
-          className={({ isActive }) => (isActive ? "active" : "")}
-          onClick={() => setIsAnnouncement(false)}
-        >
-          <button className="qnabtn">Q & A</button>
-        </NavLink>
+      <div className="d-flex justify-content-between mt-5">
+        <div className="btn-container d-flex gap-3">
+          <NavLink
+            to="announcement"
+            className={({ isActive }) => (isActive ? "active" : "")}
+            onClick={() => setIsAnnouncement(true)}
+          >
+            <button className="announcementbtn ">공지사항</button>
+          </NavLink>
+          <NavLink
+            to="qna"
+            className={({ isActive }) => (isActive ? "active" : "")}
+            onClick={() => setIsAnnouncement(false)}
+          >
+            <button className="qnabtn">Q & A</button>
+          </NavLink>
+        </div>
+        <button className="writebtn">글쓰기</button>
       </div>
 
       {/* 공지사항 or qna가 목록형 */}
@@ -122,7 +129,13 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
                 {isAnnouncement ? (
                   hit
                 ) : (
-                  <button>{is_answer ? "답변완료" : "답변대기"}</button>
+                  <button
+                    className={
+                      is_answer ? "completed_answer" : "waiting_answer"
+                    }
+                  >
+                    {is_answer ? "답변완료" : "답변대기"}
+                  </button>
                 )}
               </td>
             </tr>
@@ -132,4 +145,3 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
     </table>
   );
 };
-
