@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "./Page.css";
-function LoginButton(){
+import "./Page.css";
+function LoginButton(props){
     return(
         <button className="LoginButtonBorder">
-            <div className="LoginButtonFont">로그인</div>
+            <div className="LoginButtonFont">{props.button}</div>
         </button>
     );
 }

@@ -4,6 +4,7 @@ import BackButton from "../../atoms/BackButton";
 import Button from "../../molecules/Authentication/Button";
 import PasswordButton from "../../molecules/Authentication/PasswordButton";
 import InfoBox from "../../molecules/Authentication/InfoBox";
+import ProfileButton from "../../molecules/Authentication/ProfileButton";
 function MyInfo(){
     return(
         <div style={{width: '100%', height: '100%', position: 'relative', background: '#FFF9EF'}}>
@@ -41,7 +42,9 @@ function MyInfo(){
             <div style={{alignSelf: 'stretch', height: 102,padding: 10, background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'flex'}}>
                 <InfoBox title={'ID'} name={'1245K'} />
             </div>
-           <Button />
+            <div style={{alignSelf: 'stretch', paddingLeft: 100, paddingRight: 100, paddingTop: 10, paddingBottom: 10, justifyContent: 'center', alignItems: 'flex-start', gap: 10, display: 'inline-flex'}}>
+                <ProfileButton button={'내 정보 수정'}/>
+            </div>
         </div>
     </div>
     <BackButton />
