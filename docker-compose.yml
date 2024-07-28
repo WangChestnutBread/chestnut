@@ -11,7 +11,7 @@ services:
     networks:
       - backend-network
     depends_on:
-      - springboot
+      - ${DOCKER_TAG_BE}
 
   springboot:
     image: ${DOCKER_IMAGE}:${DOCKER_TAG_BE}-latest
