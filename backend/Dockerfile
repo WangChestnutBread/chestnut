@@ -8,8 +8,10 @@ WORKDIR /app
 ARG JAR_FILE_PATH=./build/libs/backend-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE_PATH} deploy.jar
 
+ENV PROFILES_ACTIVE="prod"
+
 # 4. 애플리케이션을 실행하는 명령어 설정
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod" ,"/app/deploy.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=${PROFILES_ACTIVE}" ,"/app/deploy.jar"]
 
 # 5. 컨테이너가 사용할 포트 설정
 #EXPOSE ///
