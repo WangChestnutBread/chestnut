@@ -33,7 +33,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - ${MYSQL_DATA_PATH}:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     ports:
       - "${MYSQL_BINDING_PORT}:3306"
     networks:
@@ -43,7 +43,7 @@ services:
     image: redis:latest
     container_name: my-redis
     volumes:
-      - ${REDIS_DATA_PATH}:/data
+      - redis_data:/data
       - ${REDIS_DEFAULT_CONFIG_FILE}:/usr/local/etc/redis/redis.conf
     ports:
       - "${REDIS_BINDING_PORT}:6379"
@@ -52,9 +52,10 @@ services:
       - backend-network
 
 volumes:
-  ${MYSQL_DATA_PATH}:
-  ${REDIS_DATA_PATH}:
-  ${REDIS_DEFAULT_CONFIG_FILE}:
+  mysql_data:
+    external: true
+  redis_data:
+    external: true
 
 networks:
   backend-network:
