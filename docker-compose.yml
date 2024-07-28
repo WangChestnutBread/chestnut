@@ -1,6 +1,6 @@
 version: '3'
 services:
-  ${DOCKER_TAG_FE}:
+  nginx:
     image : ${DOCKER_IMAGE}:${DOCKER_TAG_FE}-latest
     container_name: ${DOCKER_TAG_FE}
     ports:
@@ -11,9 +11,9 @@ services:
     networks:
       - backend-network
     depends_on:
-      - ${DOCKER_TAG_BE}
+      - springboot
 
-  ${DOCKER_TAG_BE}:
+  springboot:
     image: ${DOCKER_IMAGE}:${DOCKER_TAG_BE}-latest
     container_name: ${DOCKER_TAG_BE}
     environment:
