@@ -10,7 +10,7 @@ function App() {
       <QNApage />
       {/* <Routes>
         <Route path="/" element={<StartPage />} />
-      </Routes> */}
+      </Routes>
     </div>
   );
 }
