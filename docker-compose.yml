@@ -5,12 +5,12 @@ services:
     ports:
       - "80:80"
     environment:
-      - BACKEND_SERVICE_NAME=${DOCKER_TAG_BE}
+      - DOCKER_TAG_BE=${DOCKER_TAG_BE}
       - WEB_SERVER_PORT=${WEB_SERVER_PORT}
     networks:
       - backend-network
     depends_on:
-      - springboot
+      - ${DOCKER_TAG_BE}
 
   springboot:
     image: ${DOCKER_IMAGE}:${DOCKER_TAG_BE}-latest
