@@ -1,4 +1,3 @@
-version: '3'
 services:
   nginx:
     image : ${DOCKER_IMAGE}:${DOCKER_TAG_FE}-latest
