@@ -1,3 +1,5 @@
+LABEL authors="KIM AREUM"
+
 # 1. 실제 애플리케이션을 실행할 기본 이미지 설정
 FROM openjdk:17-jdk-slim
 
@@ -14,4 +16,5 @@ ENV PROFILES_ACTIVE="prod"
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=${PROFILES_ACTIVE}" ,"/app/deploy.jar"]
 
 # 5. 컨테이너가 사용할 포트 설정
-#EXPOSE ///
+ENV WEB_SERVER_PORT=8080
+EXPOSE ${WEB_SERVER_PORT}
