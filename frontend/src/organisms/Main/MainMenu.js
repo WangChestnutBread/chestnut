@@ -1,7 +1,7 @@
 import IconWithText from "../../molecules/Main/IconWithText"
 import "./MainMenu.css"
 
-const MainMenu = ({menu}) => {
+function MainMenu({menu}) {
     return (
         <div className="MainMenu">
             {

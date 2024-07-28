@@ -1,7 +1,7 @@
 import Text20 from "../../atoms/Text20"
 import "./IconWithText.css"
 
-const IconWithText = ({ text }) => {
+function IconWithText({ text }) {
     return (
         <div className="IconWithText">
             <img src="/icons/ChestNut.svg" className="ChestNut"/>
