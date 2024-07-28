@@ -1,0 +1,60 @@
+version: '3'
+services:
+  ${DOCKER_TAG_FE}:
+    image : ${DOCKER_IMAGE}:${DOCKER_TAG_FE}-latest
+    container_name: ${DOCKER_TAG_FE}
+    ports:
+      - "80:80"
+    environment:
+      - BACKEND_SERVICE_NAME=${DOCKER_TAG_BE}
+      - WEB_SERVER_PORT=${WEB_SERVER_PORT}
+    networks:
+      - backend-network
+    depends_on:
+      - ${DOCKER_TAG_BE}
+
+  ${DOCKER_TAG_BE}:
+    image: ${DOCKER_IMAGE}:${DOCKER_TAG_BE}-latest
+    container_name: ${DOCKER_TAG_BE}
+    environment:
+      - PROFILES_ACTIVE=${PROFILES_ACTIVE}
+      - WEB_SERVER_PORT=${WEB_SERVER_PORT}
+    expose:
+      - ${WEB_SERVER_PORT}
+    networks:
+      - backend-network
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: mysql:8.0
+    container_name: MySQL-8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ${MYSQL_DATA_PATH}:/var/lib/mysql
+    ports:
+      - "${MYSQL_BINDING_PORT}:3306"
+    networks:
+      - backend-network
+
+  redis:
+    image: redis:latest
+    container_name: my-redis
+    volumes:
+      - ${REDIS_DATA_PATH}:/data
+      - ${REDIS_DEFAULT_CONFIG_FILE}:/usr/local/etc/redis/redis.conf
+    ports:
+      - "${REDIS_BINDING_PORT}:6379"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - backend-network
+
+volumes:
+  ${MYSQL_DATA_PATH}:
+  ${REDIS_DATA_PATH}:
+  ${REDIS_DEFAULT_CONFIG_FILE}:
+
+networks:
+  backend-network:
