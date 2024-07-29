@@ -13,7 +13,8 @@ function LoginInputForm(props){
         event.preventDefault();
     };
     return(
-        <form onSubmit={handleSubmit}>
+
+        <form className="FormBorder LoginFormFont"  onSubmit={handleSubmit}>
             <input className="LoginFormBorder LoginFormFont" type="text" value={name} onChange={handleChangeName} placeholder={props.content}/>
         </form>
     );
