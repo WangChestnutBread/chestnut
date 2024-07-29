@@ -1,7 +1,7 @@
-package com.example.demo.member;
+package com.chestnut.backend.member;
 
-import com.example.demo.avatar.Avatar;
-import com.example.demo.study.Study;
+import com.chestnut.backend.avatar.Avatar;
+import com.chestnut.backend.study.Study;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
