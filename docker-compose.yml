@@ -10,8 +10,8 @@ services:
       - BACKEND_PORT=${BACKEND_PORT}
       - SERVER_NAME=${SERVER_NAME}
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - /data/certbot/conf:/etc/letsencrypt
+      - /data/certbot/www:/var/www/certbot
     networks:
       - backend-network
     depends_on:
@@ -21,8 +21,8 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - /data/certbot/conf:/etc/letsencrypt
+      - /data/certbot/www:/var/www/certbot
     depends_on:
       - nginx
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot --deploy-hook \"docker-compose exec nginx nginx -s reload\"; sleep 60d & wait $${!}; done;'"
