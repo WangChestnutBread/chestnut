@@ -1,5 +1,6 @@
 import IconGroup from "../molecules/IconGroup";
 import "./Header.css";
+import "./NavBar.css"
 
 const NavBar = () => {
   const navBarIcons = [

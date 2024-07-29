@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "./MainTemplate.css";
-import NavBar from "../organisms/NavBar";
-import Pagenation from "../atoms/Pagenation";
+import "../MainTemplate.css";
+import NavBar from "../../organisms/NavBar";
+import Pagenation from "../../atoms/Pagenation";
 import { NavLink } from "react-router-dom";
-import "./QNAPage.css";
+import "./QnaTemplate.css"
 
 const announcements = [
   {
@@ -57,8 +57,11 @@ const QnaPage = () => {
   const [isAnnouncement, setIsAnnouncement] = useState(true);
 
   return (
-    <div className="container text-start justify-center">
+    <div>
+      {/* 헤더 */}
       <NavBar />
+      {/* 로고 */}
+    <div className="container text-start justify-center">
       <div className="logo-container">
         <div className="position-relative">
           <img src="/image/Logo.png" alt="밤빵" className="logo" />
@@ -95,6 +98,7 @@ const QnaPage = () => {
       />
       {/* 페이지네이션 */}
       <Pagenation />
+    </div>
     </div>
   );
 };
