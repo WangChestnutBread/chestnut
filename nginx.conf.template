@@ -25,17 +25,43 @@ http {
             proxy_set_header X-Forwarded-Proto $scheme;
         }
 
+        ## 개발용 ####################
+        # HTML (index.html)
         location / {
             root /usr/share/nginx/html;
             try_files $uri /index.html;
-            expires 5d;  # 캐싱 설정 - 5일
-            add_header Cache-Control "public";  # 캐싱 설정
+            expires -1;
+            add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate";
         }
+
+        # 정적 자산 (JS, CSS, 이미지 등)
         location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
             root /usr/share/nginx/html;
-            expires 1d;
-            add_header Cache-Control "public, max-age=86400";
+            expires 5m;  # 5분
+            add_header Cache-Control "public, max-age=300, must-revalidate";
         }
+        ## 배포용 ####################
+        # HTML (index.html)
+        #location / {
+        #    root /usr/share/nginx/html;
+        #    try_files $uri /index.html;
+        #    expires -1;
+        #    add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate";
+        #}
+
+        # 정적 자산 (JS, CSS)
+        #location ~* \.(js|css)$ {
+        #    root /usr/share/nginx/html;
+        #    expires 7d;
+        #    add_header Cache-Control "public, max-age=604800, immutable";
+        #}
+
+        # 이미지 및 아이콘
+        #location ~* \.(png|jpg|jpeg|gif|ico|svg)$ {
+        #    root /usr/share/nginx/html;
+        #    expires 30d;
+        #    add_header Cache-Control "public, max-age=2592000, immutable";
+        #}
 
         location /images/ {
             root /usr/share/nginx/html;
