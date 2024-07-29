@@ -33,6 +33,9 @@ services:
     environment:
       - PROFILES_ACTIVE=${PROFILES_ACTIVE}
       - WEB_SERVER_PORT=${WEB_SERVER_PORT}
+      - MYSQL_URL=${MYSQL_URL}
+      - MYSQL_ROOT_USERNAME=${MYSQL_ROOT_USERNAME}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     expose:
       - ${WEB_SERVER_PORT}
     networks:
