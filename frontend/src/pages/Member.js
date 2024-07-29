@@ -1,4 +1,4 @@
-import SignUPPage from "../templates/Authentication/SignUpPage";
+import SignUPPage from "../templates/Authentication/SignUpTemplates";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "../templates/Authentication/LoginPage";

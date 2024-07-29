@@ -4,7 +4,7 @@ import "./LoginButton.css";
 function ProfileButton(props){
     return(
         <div className="profileButton">
-            <LoginButton button={props.button}/>
+            <LoginButton button={props.button} work={props.work}/>
         </div>
         
     );
