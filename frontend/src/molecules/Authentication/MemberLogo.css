@@ -4,11 +4,12 @@
     left: 629px;
     top: 110px;
     position: absolute;
+    margin-right: 17px;
 }
 .SubTitle{
-    width: 445px;
+    width: 150px;
     height: 107px;
-    left: 645px;
+    left: 837px;
     top: 151px;
     position: absolute;
     text-align: center;

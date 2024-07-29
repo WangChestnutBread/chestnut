@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import MemberLogo from "../../molecules/Authentication/MemberLogo";
 import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
 import LoginButton from "../../atoms/Authentication/LoginButton";
@@ -8,6 +8,7 @@ import BackButton from "../../atoms/BackButton";
 import "../../atoms/Authentication/Page.css";
 function LoginPage(){
     const [name, setName] = useState("");
+    const navigate = useNavigate();
 
     const handleChangeName = (event) => {
         setName(event.target.value);
@@ -17,15 +18,21 @@ function LoginPage(){
         alert(`이름: ${name}`);
         event.preventDefault();
     };
+    const GotoBack=()=>{
+        navigate(-1);
+    };
+    const success=()=>{
+        navigate("/main");
+    }
     return(
         <div className="Page">
             <MemberLogo title={'Login'} />
             <div style={{width: 786, height: 630, left: 327, top: 232, position: 'absolute', background: '#DCB78F', borderRadius: 25, overflow: 'hidden'}}>
-                <div style={{height: 246, left: 60, top: 122, position: 'absolute', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'inline-flex'}}>
+                <div style={{height: 246, left: 92, top: 122, position: 'absolute', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'inline-flex'}}>
                     <LoginIdInput title={'ID'} content={'아이디를 입력하세요'} />
                     <LoginIdInput title={'PW'} content={'비밀번호를 입력하세요'} />
                 </div>
-                <div style={{padding: 10, left: 60, top: 403, position: 'absolute', background: '#DCB78F', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'inline-flex'}}>
+                <div style={{padding: 10, left: 92, top: 403, position: 'absolute', background: '#DCB78F', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'inline-flex'}}>
                     <input type="checkbox" name="saveId" id="Id" style={{width: 25, height: 25, position: 'relative', background: 'white', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', borderRadius: 30, border: '2px black solid'}}/>
                     <div style={{width: 187, height: 32, color: 'black', fontSize: 16, fontFamily: 'Jua', fontWeight: '400', wordWrap: 'break-word'}} >아이디 저장</div>
                 </div>
@@ -38,9 +45,9 @@ function LoginPage(){
                     </Link>
                 
                 </div>
-                <Button button={'로그인'} />
+                <Button button={'로그인'} work={success}/>
             </div>
-            <BackButton />
+            <BackButton work={GotoBack} />
         </div>
     );
     
