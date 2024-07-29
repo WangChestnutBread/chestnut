@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import InspectionButton from "../../atoms/Authentication/InspectionButton";
 import LoginIdPwFont from "../../atoms/Authentication/LoginIdPwFont";
-import "../../atoms/Authentication/Page.css";
 function FindIdForm(props){
     const [name, setName] = useState("");
 

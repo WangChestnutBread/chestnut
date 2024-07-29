@@ -1,15 +1,8 @@
 import React from "react";
-import { Link,useNavigate } from "react-router-dom";
-import "./StartTemplates.css";
+import { Link } from "react-router-dom";
+import "./StartPage.css";
 
 function LandingPage() {
-  const navigate = useNavigate();
-  const GotoLogin=()=>{
-    navigate("/login");
-  };
-  const GotoSignup=()=>{
-    navigate("/signup");
-  }
   return (
     <div className="LandingPage">
       <div className="LandingPageMainLogo">
@@ -26,7 +19,7 @@ function LandingPage() {
         }}
         src="/image/drawsquzz.png"
       />
-      <button className="LoginPageButton no-underline" onClick={GotoLogin}>
+      <Link to="/login" className="LoginPageButton no-underline">
         <div
           style={{
             width: 445,
@@ -41,8 +34,8 @@ function LandingPage() {
         >
           로그인
         </div>
-      </button>
-      <button className="SignUpButton no-underline" onClick={GotoSignup}>
+      </Link>
+      <Link to="/signup" className="SignUpButton no-underline">
         <div
           style={{
             width: 445,
@@ -57,7 +50,7 @@ function LandingPage() {
         >
           회원가입
         </div>
-      </button>
+      </Link>
       <img
         style={{ width: 174, height: 95, left: 907, top: 508, position: "absolute" }} src="/image/sexysquezz.png"/>
     </div>

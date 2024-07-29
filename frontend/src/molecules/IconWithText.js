@@ -1,4 +1,4 @@
-import Text20 from "../../atoms/Text20"
+import Text20 from "../atoms/Text20"
 import "./IconWithText.css"
 
 const IconWithText = ({ text }) => {

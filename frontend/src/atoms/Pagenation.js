@@ -1,5 +1,5 @@
 import React from "react";
-// import "./Page.css";
+import "./Page.css";
 
 function Pagenation({ currentPage, totalPages, onPageChange }) {
   const handlePageChange = (page) => {

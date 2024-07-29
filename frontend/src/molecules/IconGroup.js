@@ -2,7 +2,7 @@ import HeaderIcon from "../atoms/HeaderIcon"
 import "./IconGroup.css"
 import { useNavigate } from "react-router-dom"
 
-function IconGroup({leftIcons}) {
+const IconGroup = ({leftIcons}) => {
     let navigate = useNavigate()
     return (
         <div> 

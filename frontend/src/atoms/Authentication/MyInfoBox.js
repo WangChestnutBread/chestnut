@@ -1,8 +1,7 @@
 import React from "react";
-import "./Page.css";
 function MyInfoBox(props){
     return(
-        <div className="MyInfoBox LoginFormFont">
+        <div className="MyInfoBox">
             {props.name}
         </div>
     );

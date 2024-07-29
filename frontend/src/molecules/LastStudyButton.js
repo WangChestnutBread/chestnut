@@ -1,4 +1,4 @@
-import Text24 from "../../atoms/Text24"
+import Text24 from "../atoms/Text24"
 import "./LastStudyButton.css"
 
 const LastStudyButton = () => {

@@ -13,10 +13,12 @@ function InspectionFormNoRed(props){
         event.preventDefault();
     };
     return(
-        <form className="FormBorder LoginFormFont" onSubmit={handleSubmit}>
-            <input className="LoginFormBorder LoginFormFont" type="text" value={name} onChange={handleChangeName} placeholder={props.content}/>
-            <InspectionButton name={props.name}/>
-        </form>
+        <div>
+            <form className="FormBorder LoginFormFont" onSubmit={handleSubmit}>
+                <input className="LoginFormBorder LoginFormFont" type="text" value={name} onChange={handleChangeName} placeholder={props.content}/>
+                <InspectionButton name={props.name}/>
+            </form>
+        </div>
         
     );
 }
