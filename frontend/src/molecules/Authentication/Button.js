@@ -4,7 +4,7 @@ import "./LoginButton.css";
 function Button(props){
     return(
         <div className="Button">
-            <LoginButton button={props.button}/>
+            <LoginButton button={props.button} work={props.work}/>
         </div>
         
     );

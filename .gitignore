@@ -38,3 +38,7 @@ out/
 
 ## Custom
 application-local.properties
+
+## CICD Script ##
+JenkinsPipeline
+.env

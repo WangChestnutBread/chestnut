@@ -1,4 +1,4 @@
-const HeaderIcon = ({url}) => {
+function HeaderIcon({url}) {
     return (          
         <div>
             <img src={url} />

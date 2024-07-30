@@ -1,0 +1,18 @@
+.MainProfile {
+    display: flex;
+    width: 786px;
+    border: 3px dashed #DCB78F;
+    border-radius: 25px;
+    padding: 9px 30px;
+    gap: 30px;
+    
+}
+
+.ProfileImage {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}

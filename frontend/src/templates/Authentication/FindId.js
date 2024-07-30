@@ -1,9 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import MemberLogo from "../../molecules/Authentication/MemberLogo";
 import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
 import Button from "../../molecules/Authentication/Button";
 import BackButton from "../../atoms/BackButton";
 function FindId(){
+    const navigate=useNavigate();
+    const succes=()=>{
+        navigate("/login");
+    };
+    const GotoBack=()=>{
+        navigate(-1);
+    };
     return(
         <div className="Page">
             <MemberLogo title={'ID 찾기'} />
@@ -12,9 +20,9 @@ function FindId(){
                     <LoginIdInput title={'이름'} content={'이름을 입력하세요'} />
                     <LoginIdInput title={'이메일'} content={'이메일을 입력하세요'} />
                 </div>
-                <Button />
+                <Button button={'아이디 찾기'} work={succes}/>
             </div>
-            <BackButton />
+            <BackButton work={GotoBack}/>
         </div>
     );
 }
