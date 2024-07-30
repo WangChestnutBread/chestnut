@@ -40,7 +40,6 @@ public class MemberService {
             throw new UnknownException("299");
         }
 
-
     }
 
 }
