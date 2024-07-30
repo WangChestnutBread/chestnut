@@ -1,8 +1,8 @@
 package com.chestnut.backend.studyLog;
 
 import com.chestnut.backend.member.entity.Member;
-import com.chestnut.backend.study.Chapter;
-import com.chestnut.backend.study.Study;
+import com.chestnut.backend.study.entity.Chapter;
+import com.chestnut.backend.study.entity.Study;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,7 +35,7 @@ public class StudyLog {
     private LocalDateTime studiedAt;
 
     @Column(columnDefinition = "date default (CURRENT_DATE)", nullable = false)
-    private LocalDate studyDay;
+    private LocalDate studiedDay;
 
     @Column(columnDefinition = "tinyint", nullable = false)
     private int todayCount;
@@ -70,8 +70,8 @@ public class StudyLog {
         if (this.studiedAt == null) {
             this.studiedAt = LocalDateTime.now();
         }
-        if (this.studyDay == null) {
-            this.studyDay = LocalDate.now();
+        if (this.studiedDay == null) {
+            this.studiedDay = LocalDate.now();
         }
     }
 }

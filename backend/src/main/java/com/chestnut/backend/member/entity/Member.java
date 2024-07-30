@@ -1,7 +1,5 @@
 package com.chestnut.backend.member.entity;
 
-import com.chestnut.backend.avatar.Avatar;
-import com.chestnut.backend.study.Study;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
