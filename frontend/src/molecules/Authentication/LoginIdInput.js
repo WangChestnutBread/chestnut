@@ -6,7 +6,7 @@ function LoginIdInput(props){
     return(
         <div className="LoginBox">
             <LoginIdPwFont title={props.title} />
-            <LoginInputForm content={props.content} />
+            <LoginInputForm content={props.content} value={props.value} work={props.work}/>
         </div>
         
     );

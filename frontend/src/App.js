@@ -1,6 +1,6 @@
 import './App.css';
 import MainPage from './pages/MainPage';
-import StartPage from "./templates/StartPage";
+import StartPage from "./templates/StartTemplates";
 import { Routes, Route } from "react-router-dom";
 import QNApage from './templates/Board/QnaTemplate';
 import QNAWritePage from './templates/Board/QnaWriteTemplate';

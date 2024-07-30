@@ -1,0 +1,76 @@
+.MainProfileTextBox {
+    display: flex;
+    flex-direction: column;
+    height: 267px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.First {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.Second {
+    display: flex;
+    align-items: flex-end;  
+    margin-right: 10px;
+    margin-bottom: 10px;
+    flex: 1;
+
+}
+
+.Mine {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.Third {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 10px;
+    flex: 1;
+
+}
+
+.Attend {
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.Ranking {
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.Fourth {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.InfoChange {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+}
+
+.Bar {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}

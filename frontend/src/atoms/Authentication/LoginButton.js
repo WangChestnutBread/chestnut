@@ -1,9 +1,10 @@
 import React from "react";
-import styled from "./Page.css";
-function LoginButton(){
+import "./Page.css";
+import { useNavigate } from "react-router-dom";
+function LoginButton(props){
     return(
-        <button className="LoginButtonBorder">
-            <div className="LoginButtonFont">로그인</div>
+        <button className="LoginButtonBorder" onClick={props.work}>
+            <div className="LoginButtonFont">{props.button}</div>
         </button>
     );
 }
