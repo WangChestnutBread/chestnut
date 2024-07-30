@@ -28,7 +28,7 @@ public class Announcement {
     @Column(columnDefinition = "text", nullable = false)
     private String content;
 
-    @Column(columnDefinition = "int unsigned defualt 0", nullable = false)
+    @Column(columnDefinition = "int unsigned default 0", nullable = false)
     private int hit;
 
     @ManyToOne(fetch = FetchType.LAZY)
