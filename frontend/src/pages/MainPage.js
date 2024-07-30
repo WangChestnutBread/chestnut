@@ -6,7 +6,7 @@ function MainPage () {
         <div className="MainPage">
             <MainTemplate/>
         </div>
-    )
+    );
 }
 
 export default MainPage;

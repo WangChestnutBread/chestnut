@@ -11,8 +11,8 @@ function MainProfile() {
                 <Text20 text="Lv2. 맑은 눈을 가진 밤송"/>
             </div>
             <MainProfileTextBox/>
-            <div>
-                <img src="/image/Leaf.png"/>
+            <div className="LeafImage">
+                <img src="/image/Leaf.png" width="49px"/>
             </div>
         </div>
     )
