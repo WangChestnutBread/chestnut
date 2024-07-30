@@ -1,22 +1,60 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 import "./Reset.css";
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import Member from './pages/Member';
+import "./index.css";
+import App from "./App";
+import QNApage from "./templates/Board/QnaTemplate";
+import QNAWritePage from "./templates/Board/QnaWriteTemplate";
+import QnaDetailTemplate from "./templates/Board/QnaDetailTemplate";
+import QnaManagerDetail from "./templates/Board/QnaManagerDetail";
+import AnnouncementDetail from "./templates/Board/AnnouncementDetail";
+import AnnouncementWrite from "./templates/Board/AnnouncementWrite";
+
+import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Member from "./pages/Member";
 import MyProfile from "./pages/MyProfile";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const router = createBrowserRouter([
+  {
+    path: "/board",
+    element: <QNApage />
+  },
+  {
+    path: "/qna",
+    element: <QNApage />
+  },
+  {
+    path: "/board/qna/detail/:id",
+    element: <QnaDetailTemplate />
+  },
+  {
+    path: "/board/qna/manager",
+    element: <QnaManagerDetail />
+  },
+  {
+    path: "/board/qna/write",
+    element: <QNAWritePage />
+  },
+  {
+    path: "/board/announcement/detail/:id",
+    element: <AnnouncementDetail />
+  },
+  {
+    path: "/board/announcement/write/",
+    element: <AnnouncementWrite />
+  },
+
+])
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
+    <RouterProvider router={router} />
+      {/* <App />
       <Member />
       <MyProfile />
-      <StudyPage />
-    </BrowserRouter>  
+      <StudyPage /> */}
   </React.StrictMode>
 );
 
