@@ -16,7 +16,7 @@ const NavBar = () => {
   ];
   return (
     <div className="navbar">
-      <IconGroup leftIcons={navBarIcons} />
+      <IconGroup leftIcons={navBarIcons}/>
     </div>
   );
 };

@@ -112,3 +112,9 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
 
 }
+
+.detail:hover {
+  background-color: #DCB78F;
+  cursor: pointer;
+  transition: 0.5s;
+}

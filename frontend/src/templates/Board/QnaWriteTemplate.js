@@ -1,7 +1,16 @@
 import NavBar from "../../organisms/NavBar";
 import "./QnaWriteTemplate.css";
+import { useNavigate } from "react-router-dom";
 
 const QNAWritePage = () => {
+  const navigate = useNavigate()
+  const handleQnaClick = () => {
+    navigate('/qna')
+  }
+  const handleDetailClick = () => {
+    navigate('/qna')
+  }
+
   return (
     <div>
       {/* // 헤더 영역 */}
@@ -56,8 +65,8 @@ const QNAWritePage = () => {
 
         {/* // 취소 등록 버튼 */}
         <div className="d-flex justify-content-between">
-          <button className="nobtn fs-3">취소</button>
-          <button className="yesbtn fs-3">등록</button>
+          <button className="nobtn fs-3" onClick={handleQnaClick}>취소</button>
+          <button className="yesbtn fs-3" onClick={handleDetailClick}>등록</button>
         </div>
       </div>
     </div>
