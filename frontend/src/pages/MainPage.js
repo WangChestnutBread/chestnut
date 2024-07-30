@@ -1,4 +1,5 @@
 import MainTemplate from "../templates/MainTemplate";
+import { Route, Router } from "react-router-dom";
 import "./MainPage.css"
 function MainPage () {
     return(
