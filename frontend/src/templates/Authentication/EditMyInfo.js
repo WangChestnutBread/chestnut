@@ -13,7 +13,7 @@ import BackButton from "../../atoms/BackButton";
 import PwResetButton from "../../atoms/Authentication/PwResetButton";
 import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
 import PasswordButton from "../../molecules/Authentication/PasswordButton";
-import HiddenForm from "../../organisms/Authentication/HiddenForm";
+import HiddenForm from "../../organisms/Authentication/hiddenForm";
 import LoginPwInput from "../../molecules/Authentication/LoginPwInput"
 function EditMyInfo(){
     const navigate=useNavigate();

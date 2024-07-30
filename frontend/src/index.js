@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import Member from './pages/Member';
 import MyProfile from "./pages/MyProfile";
-
+import StudyPage from "./pages/StudyPage";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
