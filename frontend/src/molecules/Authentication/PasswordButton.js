@@ -3,8 +3,8 @@ import LoginButton from "../../atoms/Authentication/LoginButton";
 import "./LoginButton.css";
 function PasswordButton(props){
     return(
-        <div className="pwButton">
-            <LoginButton button={props.button}/>
+        <div className={props.classname}>
+            <LoginButton button={props.button} work={props.work}/>
         </div>
         
     );

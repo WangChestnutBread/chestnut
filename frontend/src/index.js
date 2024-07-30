@@ -15,6 +15,7 @@ root.render(
       <App />
       <Member />
       <MyProfile />
+      <StudyPage />
     </BrowserRouter>  
   </React.StrictMode>
 );
