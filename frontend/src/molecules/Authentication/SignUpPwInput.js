@@ -4,6 +4,7 @@ import "../../atoms/Authentication/Page.css";
 
 function SignUpPwInput(props){
     const [name, setName] = useState("");
+    const [text, setText] = useState("");
 
     const handleChangeName = (event) => {
     setName(event.target.value);
@@ -13,10 +14,19 @@ function SignUpPwInput(props){
         alert(`이름: ${name}`);
         event.preventDefault();
     };
+
+    const inspection = ()=>{
+        if(name==""){
+            setText((text)=>"빈칸을 입력하세요");
+        }
+        else{
+            setText((text)=>"");
+        }
+    };
     return(
         <div>
         <form className="FormBorder LoginFormFont" onSubmit={handleSubmit}>
-            <input className="LoginFormBorder LoginFormFont" type="text" value={name} onChange={handleChangeName} placeholder={props.content}/>
+            <input className="LoginFormBorder LoginFormFont" type="password" value={props.value} onChange={props.work} placeholder={props.content}/>
         </form>
         <IdLengthText text={props.text} />
     </div>

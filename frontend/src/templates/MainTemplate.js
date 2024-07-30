@@ -3,6 +3,7 @@ import MainMenu from "../organisms/Main/MainMenu"
 import "./MainTemplate.css"
 import LastStudy from "../organisms/Main/LastStudy"
 import MainProfile from "../organisms/Main/MainProfile"
+import MainCalendar from "../organisms/Main/MainCalendar"
 
 
 const MainTemplate = () => {
@@ -14,9 +15,11 @@ const MainTemplate = () => {
                 <img src="/image/Logo.png" className="LogoImage"/>
             </div>
             <MainMenu menu={menu}/>
-            <MainProfile/>
-            <LastStudy chapter="자/모" word="나는 사과를 먹는다"/>
-            
+            <div className="MainStatus">
+                <MainProfile/>
+                <LastStudy chapter="자/모" word="나는 사과를 먹는다"/>
+            </div>
+            <MainCalendar/>
         </div>
     )
 }

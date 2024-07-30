@@ -1,12 +1,12 @@
 import React from "react";
 import LoginIdPwFont from "../../atoms/Authentication/LoginIdPwFont";
-import LoginInputForm from "../../atoms/Authentication/LoginInputForm";
+import LoginInputPwForm from "../../atoms/Authentication/LoginInputPwForm";
 import "./LoginInput.css";
 function LoginIdInput(props){
     return(
         <div className="LoginBox">
             <LoginIdPwFont title={props.title} />
-            <LoginInputForm content={props.content} value={props.value} work={props.work}/>
+            <LoginInputPwForm content={props.content} value={props.value} work={props.work}/>
         </div>
         
     );

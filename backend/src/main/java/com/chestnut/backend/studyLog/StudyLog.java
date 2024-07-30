@@ -34,7 +34,7 @@ public class StudyLog {
     @Column(columnDefinition = "timestamp default now()", nullable = false)
     private LocalDateTime studiedAt;
 
-    @Column(columnDefinition = "date default now()", nullable = false)
+    @Column(columnDefinition = "date default (CURRENT_DATE)", nullable = false)
     private LocalDate studyDay;
 
     @Column(columnDefinition = "tinyint", nullable = false)
