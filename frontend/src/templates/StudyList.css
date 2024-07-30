@@ -1,0 +1,22 @@
+.img{
+    width: 171px;
+    height: 183px;
+    border-radius: 2px;
+}
+.imgBox{
+    width: 171px;
+    height: 183px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+.titleFont{
+    text-align: center;
+    color: #412522;
+    font-size: 2rem;
+    font-family: 'Jua';
+    font-weight: 400;
+    line-height: 1;
+    word-Wrap: break-word;
+}
