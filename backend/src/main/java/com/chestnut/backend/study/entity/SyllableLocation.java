@@ -1,4 +1,4 @@
-package com.chestnut.backend.study;
+package com.chestnut.backend.study.entity;
 
 public enum SyllableLocation {
     INITIAL, MIDDLE, FINAL
