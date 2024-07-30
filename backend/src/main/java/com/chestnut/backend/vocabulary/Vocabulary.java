@@ -1,6 +1,6 @@
 package com.chestnut.backend.vocabulary;
 
-import com.chestnut.backend.member.Member;
+import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.study.Study;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name="Vocabulary")
-@RequiredArgsConstructor
 @Getter
 @IdClass(VocabularyId.class)
 public class Vocabulary {

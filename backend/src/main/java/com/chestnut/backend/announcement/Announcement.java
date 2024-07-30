@@ -1,6 +1,6 @@
 package com.chestnut.backend.announcement;
 
-import com.chestnut.backend.member.Member;
+import com.chestnut.backend.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

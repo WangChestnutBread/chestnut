@@ -1,6 +1,6 @@
 package com.chestnut.backend.studyLog;
 
-import com.chestnut.backend.member.Member;
+import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.study.Chapter;
 import com.chestnut.backend.study.Study;
 import jakarta.persistence.*;
