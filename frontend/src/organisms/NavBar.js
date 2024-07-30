@@ -1,5 +1,6 @@
 import IconGroup from "../molecules/IconGroup";
 import "./Header.css";
+import "./NavBar.css"
 
 const NavBar = () => {
   const navBarIcons = [
@@ -15,7 +16,7 @@ const NavBar = () => {
   ];
   return (
     <div className="navbar">
-      <IconGroup leftIcons={navBarIcons} />
+      <IconGroup leftIcons={navBarIcons}/>
     </div>
   );
 };
