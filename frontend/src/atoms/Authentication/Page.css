@@ -49,12 +49,11 @@
     font-weight: 400;
     word-wrap: break-word;
 }
-.LoginButtonBorder{
+.LoginButtonBorder, .pwResetButton{
     width: 378px;
     height: 56px;
     padding-left: 83px;
     padding-right: 83px;
-    background: #6B3906;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 40px;
     overflow: hidden;
@@ -62,6 +61,19 @@
     align-items: center;
     gap: 10px;
     display: inline-flex;
+}
+.pwResetButton{
+    background: #fff9ef;
+}
+.LoginButtonBorder{
+    background: #6B3906;
+}
+.pwResetFont{
+    color: #000000;
+    font-size: 1.25rem;
+    font-family: 'Jua';
+    font-Weight: 400px;
+    word-Wrap: break-word;
 }
 .LoginButtonFont{
     color: white;
@@ -134,7 +146,7 @@
 }
 
 .MyInfoBox{
-    width: 645px;
+    width: 582px;
     height: 50px;
     padding-top: 9px;
     padding-bottom: 11px;

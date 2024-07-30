@@ -21,3 +21,11 @@
     padding-top: 10px;
     position: absolute;
 }
+.modalButton{
+    left: 520px;
+    right: 204px;
+    bottom: 2px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    position: absolute;
+}
