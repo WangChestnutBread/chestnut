@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "./Birth.css";
-function Birth() {
+function Birth(props) {
   const birthMontEl = useRef(null);
 
   useEffect(() => {
@@ -32,9 +32,9 @@ function Birth() {
   return (
     <div className="info" id="info__birth">
       <select className="box year" id="birth-month" ref={birthMontEl}>
-        <option disabled selected className="Font">월</option>
+        <option disabled selected className="Font">{props.month}</option>
       </select>
-      <span className="Font"> 일</span>
+      <span className="Font"> 월</span>
     </div>
   );
 }

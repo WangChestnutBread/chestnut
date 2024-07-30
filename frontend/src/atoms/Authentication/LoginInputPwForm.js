@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import LoginButton from "./LoginButton";
 import "./Page.css";
-function LoginInputForm(props){
+function LoginInputPwForm(props){
     const [name, setName] = useState("");
 
     const handleChangeName = (event) => {
@@ -15,8 +15,8 @@ function LoginInputForm(props){
     return(
 
         <form className="FormBorder LoginFormFont"  onSubmit={handleSubmit}>
-            <input className="LoginFormBorder LoginFormFont" type="text" value={props.name} onChange={props.work} placeholder={props.content}/>
+            <input className="LoginFormBorder LoginFormFont" type="password" value={props.value} onChange={props.work} placeholder={props.content}/>
         </form>
     );
 }
-export default LoginInputForm;
+export default LoginInputPwForm;
