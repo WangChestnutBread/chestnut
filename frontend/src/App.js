@@ -8,6 +8,7 @@ import QnaDetailTemplate from './templates/Board/QnaDetailTemplate';
 import QnaManagerDetail from './templates/Board/QnaManagerDetail';
 import AnnouncementDetail from './templates/Board/AnnouncementDetail';
 import AnnouncementWrite from './templates/Board/AnnouncementWrite';
+import ChestNutButton from './organisms/ChestNutButton';
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
       {/* <Routes>
         <Route path="/" element={<StartPage />} />
       </Routes> */}
+
+      <ChestNutButton/>
     </div>
   );
 }
