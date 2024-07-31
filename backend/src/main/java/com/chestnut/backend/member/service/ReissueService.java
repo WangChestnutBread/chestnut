@@ -1,9 +1,6 @@
 package com.chestnut.backend.member.service;
 
-import com.chestnut.backend.common.exception.InvalidRefreshTokenException;
-import com.chestnut.backend.common.exception.RefreshTokenCategoryException;
-import com.chestnut.backend.common.exception.RefreshTokenExpiredException;
-import com.chestnut.backend.common.exception.RefreshTokenNullException;
+import com.chestnut.backend.common.exception.*;
 import com.chestnut.backend.common.jwt.JWTUtil;
 import com.chestnut.backend.member.entity.RefreshEntity;
 import com.chestnut.backend.member.repository.RefreshRepository;
@@ -36,22 +33,22 @@ public class ReissueService {
         }
 
         if(refresh == null){
-            throw new RefreshTokenNullException("805");
+            throw new RefreshTokenException("802");
         }
 
         if(jwtUtil.isExpired(refresh)){
-            throw new RefreshTokenExpiredException("806");
+            throw new RefreshTokenException("802");
         }
 
         String category = jwtUtil.getCategory(refresh);
         if (!category.equals("refresh")) {
-            throw new RefreshTokenCategoryException("807");
+            throw new RefreshTokenException("802");
         }
 
         //db에 해당 refresh 토큰이 저장되어 있는지 확인
         Boolean isExist = refreshRepository.existsByRefresh(refresh);
         if(!isExist){
-            throw new InvalidRefreshTokenException("808");
+            throw new RefreshTokenException("802");
         }
 
         //저장되어 있는 경우라면 -> 기존 refresh 삭제 및 새로운 refresh 저장
