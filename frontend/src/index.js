@@ -51,8 +51,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
-      {/* <App />
-      <Member />
+      <App />
+      {/* <Member />
       <MyProfile />
       <StudyPage /> */}
   </React.StrictMode>

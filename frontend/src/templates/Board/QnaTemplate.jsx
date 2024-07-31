@@ -95,7 +95,7 @@ const QnaPage = () => {
         <div className="d-flex justify-content-between mt-5">
           <div className="btn-container d-flex gap-3">
             <NavLink
-              to="/board"
+              to="/board/announcement"
               className={({ isActive }) => (isActive ? "active" : "")}
               onClick={() => setIsAnnouncement(true)}
             >
@@ -104,7 +104,7 @@ const QnaPage = () => {
               </button>
             </NavLink>
             <NavLink
-              to="/qna"
+              to="/board/qna"
               className={({ isActive }) => (isActive ? "active" : "")}
               onClick={() => setIsAnnouncement(false)}
             >
