@@ -9,6 +9,7 @@ services:
       - DOCKER_TAG_BE=${DOCKER_TAG_BE}
       - BACKEND_PORT=${BACKEND_PORT}
       - SERVER_NAME=${SERVER_NAME}
+      - CONTEXT_PATH=${CONTEXT_PATH}
     volumes:
       - /home/ubuntu/data/certbot/conf:/etc/letsencrypt
       - /home/ubuntu/data/certbot/www:/var/www/certbot
