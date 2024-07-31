@@ -36,6 +36,7 @@ function EditMyInfo(){
     const [PwConMessage, setPwConMessage]=useState("");
     const [nameMessage, setNameMessage]=useState("");
     const [AuthMessage, setAuthMessage]=useState("");
+    const [EmailMessage, setEmailMessage]=useState("");
 
     const [isId, setIsId]=useState(false);
     const [isname, setIsName]=useState(false);
