@@ -37,6 +37,7 @@ services:
       - MYSQL_URL=${MYSQL_URL}
       - MYSQL_ROOT_USERNAME=${MYSQL_ROOT_USERNAME}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
     expose:
       - ${BACKEND_PORT}
     networks:
