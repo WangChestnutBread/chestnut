@@ -24,10 +24,10 @@ public class SignupReqDTO {
     private String memberName;
     private LocalDate birthday;
 
-    public Member toEntity(){
+    public Member toEntity(String codePassword){
         return Member.builder()
                 .loginId(loginId)
-                .password(password)
+                .password(codePassword)
                 .email(email)
                 .nickname(nickname)
                 .memberName(memberName)
