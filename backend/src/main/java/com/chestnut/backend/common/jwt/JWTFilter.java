@@ -40,13 +40,13 @@ public class JWTFilter extends OncePerRequestFilter {
         try{
             jwtUtil.isExpired(accessToken);
         } catch (ExpiredJwtException e) {
-            sendErrorMessage(response, "801");
+            sendErrorMessage(response, "803");
             return;
         }
 
         String category = jwtUtil.getCategory(accessToken);
         if(!category.equals("access")){
-            sendErrorMessage(response, "801");
+            sendErrorMessage(response, "804");
             return;
         }
 

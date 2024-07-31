@@ -4,6 +4,8 @@ import com.chestnut.backend.common.dto.ResponseDto;
 import com.chestnut.backend.member.dto.CustomMemberDetails;
 import com.chestnut.backend.member.dto.LoginReqDTO;
 import com.chestnut.backend.member.dto.LoginResDTO;
+import com.chestnut.backend.member.entity.RefreshEntity;
+import com.chestnut.backend.member.repository.RefreshRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -24,6 +26,7 @@ import org.springframework.util.StreamUtils;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
 @RequiredArgsConstructor
@@ -31,6 +34,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
+    private final RefreshRepository refreshRepository;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -74,6 +78,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String access = jwtUtil.createJwt("access", loginId, role, 600000L);
         String refresh = jwtUtil.createJwt("refresh", loginId, role, 86400000L);
 
+        addRefreshEntity(loginId, refresh, 86400000L);
+
         response.setHeader("access", access);
         response.addCookie(createCookie("refresh", refresh));
         response.setStatus(HttpStatus.OK.value());
@@ -84,6 +90,18 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonResponse = objectMapper.writeValueAsString(apiResponse);
         response.getWriter().write(jsonResponse);
+    }
+
+    private void addRefreshEntity(String loginId, String refresh, Long expiredMs){
+
+        Date date = new Date(System.currentTimeMillis()+expiredMs);
+
+        RefreshEntity refreshEntity = new RefreshEntity();
+        refreshEntity.setLoginId(loginId);
+        refreshEntity.setRefresh(refresh);
+        refreshEntity.setExpiration(date.toString());
+
+        refreshRepository.save(refreshEntity);
     }
 
     private Cookie createCookie(String key, String value){
