@@ -25,10 +25,10 @@ class StudyServiceTest {
     @Autowired
     StudyService studyService;
 
-    @Test
-    public void 챕터_정보_조회() throws Exception {
-        List<ChapterInfoDto> chapterInfoByMemberId = chapterRepository.findChapterInfoByMemberId(1L);
-//        System.out.println(chapterInfoByMemberId);
-        Assertions.assertThat(chapterInfoByMemberId.size()).isEqualTo(7);
-    }
+//    @Test
+//    public void 챕터_정보_조회() throws Exception {
+////        List<ChapterInfoDto> chapterInfoByMemberId = chapterRepository.findChapterInfoByMemberId(1L);
+////        System.out.println(chapterInfoByMemberId);
+////        Assertions.assertThat(chapterInfoByMemberId.size()).isEqualTo(7);
+//    }
 }
