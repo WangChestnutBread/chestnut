@@ -9,6 +9,7 @@ import QnaManagerDetail from './templates/Board/QnaManagerDetail';
 import AnnouncementDetail from './templates/Board/AnnouncementDetail';
 import AnnouncementWrite from './templates/Board/AnnouncementWrite';
 import ChestNutButton from './organisms/ChestNutButton';
+import BookMarkButton from './molecules/BookMarkButton';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
         <Route path="/" element={<StartPage />} />
       </Routes> */}
 
-      <ChestNutButton/>
+      <BookMarkButton/>
     </div>
   );
 }
