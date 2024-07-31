@@ -2,13 +2,18 @@ import './App.css';
 import Camera from './organisms/StudyList/CameraOrganism';
 import Pronunciations from './organisms/StudyList/Pronunciations';
 import Record from './organisms/StudyList/Record';
+import MouseTongue from './organisms/StudyList/MouseTongue';
+
 
 function App() {
   return (
     <div className="App">
+      <MouseTongue />
         {/* <Camera /> */}
-      <Pronunciations />
-      <Record />
+      {/* <Pronunciations /> */}
+      {/* <Mouse /> */}
+      {/* <Record />
+      <MouseTongue /> */}
       {/* <Routes>
         <Route path='board' element={<QNApage/>}></Route>
         <Route path='qna' element={<QNApage/>}></Route>

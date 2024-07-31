@@ -1,17 +1,13 @@
-import Mouse from "../../molecules/StudyList/mouse";
-import Tongue from "../../molecules/StudyList/tongue";
+import Mouse from "../../molecules/StudyList/Mouse";
+import Tongue from "../../molecules/StudyList/Tongue";
 
 const MouseTongue = () => {
   return (
-    <div>
-      <div>
-        {/* 입모양 영역 */}
-        <Mouse />
-      </div>
-      <div>
-        {/* 혀모양 영역 */}
-        <Tongue />
-      </div>
+    <div className="d-flex">
+      {/* 입모양 영역 */}
+      <Mouse />
+      {/* 혀모양 영역 */}
+      <Tongue />
     </div>
   );
 };
