@@ -3,6 +3,7 @@ import "./App.css";
 import MainPage from "./pages/MainPage";
 import StartPage from "./templates/StartTemplates";
 import { Routes, Route } from "react-router-dom";
+
 import QNApage from "./templates/Board/QnaTemplate";
 import QNAWritePage from "./templates/Board/QnaWriteTemplate";
 import QnaDetailTemplate from "./templates/Board/QnaDetailTemplate";
@@ -10,6 +11,7 @@ import QnaManagerDetail from "./templates/Board/QnaManagerDetail";
 import AnnouncementDetail from "./templates/Board/AnnouncementDetail";
 import AnnouncementWrite from "./templates/Board/AnnouncementWrite";
 import ChestNutButton from "./organisms/ChestNutButton";
+import BookMarkButton from "./molecules/BookMarkButton";
 
 function App() {
   return (
