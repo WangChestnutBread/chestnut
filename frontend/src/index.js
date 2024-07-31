@@ -1,22 +1,101 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./Reset.css";
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import Member from './pages/Member';
+import "./index.css";
+import App from "./App";
+import QNApage from "./templates/Board/QnaTemplate";
+import QNAWritePage from "./templates/Board/QnaWriteTemplate";
+import QnaDetailTemplate from "./templates/Board/QnaDetailTemplate";
+import QnaManagerDetail from "./templates/Board/QnaManagerDetail";
+import AnnouncementDetail from "./templates/Board/AnnouncementDetail";
+import AnnouncementWrite from "./templates/Board/AnnouncementWrite";
+import StartTemplates from "./templates/StartTemplates";
+import reportWebVitals from "./reportWebVitals";
+import Member from "./pages/Member";
 import MyProfile from "./pages/MyProfile";
-import StudyPage from "./pages/StudyPage";
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import LoginPage from "./templates/Authentication/LoginPage";
+import SignUPPage from "./templates/Authentication/SignUpTemplates";
+import FindId from "./templates/Authentication/FindId";
+import FindPw from "./templates/Authentication/FindPw";
+import EditMyInfo from "./templates/Authentication/EditMyInfo";
+import MyInfo from "./templates/Authentication/MyInfo";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <StartTemplates />
+  },
+  {
+    path: "/board",
+    element: <QNApage />
+  },
+  {
+    path: "/qna",
+    element: <QNApage />
+  },
+  {
+    path: "/board/qna/detail/:id",
+    element: <QnaDetailTemplate />
+  },
+  {
+    path: "/board/qna/manager",
+    element: <QnaManagerDetail />
+  },
+  {
+    path: "/board/qna/write",
+    element: <QNAWritePage />
+  },
+  {
+    path: "/board/announcement/detail/:id",
+    element: <AnnouncementDetail />
+  },
+  {
+    path: "/board/announcement/write/",
+    element: <AnnouncementWrite />
+  },
+  {
+    path: "/member",
+    element: <Member />,
+    children: [
+      {
+        path: "login",
+        element: <LoginPage />
+      },
+      {
+        path: "signup",
+        element: <SignUPPage />
+      },
+      {
+        path: "find-id",
+        element: <FindId />
+      },
+      {
+        path: "password",
+        element: <FindPw />
+      }
+    ]
+  },
+  {
+    path: "/myprofile",
+    element: <MyProfile />,
+    children: [
+      {
+        path: "myinfo",
+        element: <MyInfo />
+      },
+      {
+        path: "edit",
+        element: <EditMyInfo />,
+      }
+    ]
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-      <Member />
-      <MyProfile />
-      <StudyPage />
-    </BrowserRouter>  
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
