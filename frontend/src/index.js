@@ -20,6 +20,7 @@ import FindId from "./templates/Authentication/FindId";
 import FindPw from "./templates/Authentication/FindPw";
 import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
+import ChapterTitle from "./atoms/ChapterTitle";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "/study",
+    element: <ChapterTitle />
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

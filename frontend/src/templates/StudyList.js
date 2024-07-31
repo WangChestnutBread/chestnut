@@ -1,9 +1,11 @@
 import React from "react";
 import NavBar from "../organisms/NavBar";
 import "./StudyList.css"
+import ChapterTitle from "../atoms/ChapterTitle";
 function StudyList(){
     return(
         <div style={{width: '100%', height: '100%', paddingBottom: 80, background: '#FFF9F1', justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}>
+            <ChapterTitle />
     <div style={{flex: '1 1 0', alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}>
         <div style={{width: 1440, height: 80, position: 'relative'}}>
             <div style={{width: 1440, height: 80, left: 0, top: 0, position: 'absolute', background: '#DCB78F'}} />
