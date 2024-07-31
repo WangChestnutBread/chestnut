@@ -24,8 +24,8 @@ function SignUpPwInput(props){
         }
     };
     return(
-        <div>
-        <form className="FormBorder LoginFormFont" onSubmit={handleSubmit}>
+        <div >
+        <form className="FormBorder LoginFormFont" >
             <input className="LoginFormBorder LoginFormFont" type="password" value={props.value} onChange={props.work} placeholder={props.content}/>
         </form>
         <IdLengthText text={props.text} />
