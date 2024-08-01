@@ -24,6 +24,7 @@ import ChapterTitle from "./atoms/ChapterTitle";
 import ChapterList from "./molecules/StudyList/ChapterList";
 import StudyList from "./templates/StudyList";
 import ChapterMenu from "./atoms/ChapterMenu";
+import MainPage from "./pages/MainPage";
 
 const router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
   {
     path: "/study",
     element: <StudyList />
+  },
+  {
+    path: "/main",
+    element: <MainPage/>
   }
 ]);
 
