@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./Reset.css";
 import "./index.css";
 import App from "./App";
@@ -9,13 +10,23 @@ import QnaDetailTemplate from "./templates/Board/QnaDetailTemplate";
 import QnaManagerDetail from "./templates/Board/QnaManagerDetail";
 import AnnouncementDetail from "./templates/Board/AnnouncementDetail";
 import AnnouncementWrite from "./templates/Board/AnnouncementWrite";
-
+import StartTemplates from "./templates/StartTemplates";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Member from "./pages/Member";
 import MyProfile from "./pages/MyProfile";
+import LoginPage from "./templates/Authentication/LoginPage";
+import SignUPPage from "./templates/Authentication/SignUpTemplates";
+import FindId from "./templates/Authentication/FindId";
+import FindPw from "./templates/Authentication/FindPw";
+import EditMyInfo from "./templates/Authentication/EditMyInfo";
+import MyInfo from "./templates/Authentication/MyInfo";
+import ChapterTitle from "./atoms/ChapterTitle";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <StartTemplates />
+  },
   {
     path: "/board",
     element: <QNApage />
@@ -44,17 +55,52 @@ const router = createBrowserRouter([
     path: "/board/announcement/write/",
     element: <AnnouncementWrite />
   },
-
-])
+  {
+    path: "/member",
+    element: <Member />,
+    children: [
+      {
+        path: "login",
+        element: <LoginPage />
+      },
+      {
+        path: "signup",
+        element: <SignUPPage />
+      },
+      {
+        path: "find-id",
+        element: <FindId />
+      },
+      {
+        path: "password",
+        element: <FindPw />
+      }
+    ]
+  },
+  {
+    path: "/myprofile",
+    element: <MyProfile />,
+    children: [
+      {
+        path: "myinfo",
+        element: <MyInfo />
+      },
+      {
+        path: "edit",
+        element: <EditMyInfo />,
+      }
+    ]
+  },
+  {
+    path: "/study",
+    element: <ChapterTitle />
+  }
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
-      <App />
-      {/* <Member />
-      <MyProfile />
-      <StudyPage /> */}
   </React.StrictMode>
 );
 

@@ -8,6 +8,7 @@ import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     public void signup(SignupReqDTO signupReqDTO){
@@ -32,7 +34,8 @@ public class MemberService {
         }
 
         try{
-            Member member = signupReqDTO.toEntity();
+            String codePwd = bCryptPasswordEncoder.encode(password);
+            Member member = signupReqDTO.toEntity(codePwd);
             memberRepository.save(member);
         } catch (DataAccessException e){
             throw new DatabaseException("704");

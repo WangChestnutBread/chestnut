@@ -1,7 +1,7 @@
 package com.chestnut.backend.vocabulary;
 
 import com.chestnut.backend.member.entity.Member;
-import com.chestnut.backend.study.Study;
+import com.chestnut.backend.study.entity.Study;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.chestnut.backend.study;
+package com.chestnut.backend.study.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

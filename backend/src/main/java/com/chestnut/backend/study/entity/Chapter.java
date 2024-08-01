@@ -1,4 +1,4 @@
-package com.chestnut.backend.study;
+package com.chestnut.backend.study.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,16 +14,13 @@ public class Chapter {
 
     @Id
     @Column(columnDefinition = "tinyint", nullable = false)
-    private Long chapterId;
+    private Integer chapterId;
 
     @Column(columnDefinition = "varchar(10)", nullable = false)
     private String chapterName;
 
     @Column(columnDefinition = "smallint", nullable = false)
     private int totalStudies;
-
-    @Column(columnDefinition = "varchar(255)", nullable = false)
-    private String chapterImgUrl;
 
     protected Chapter() {}
 }

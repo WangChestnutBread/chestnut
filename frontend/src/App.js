@@ -8,16 +8,9 @@ import MouseTongue from './organisms/StudyList/MouseTongue';
 function App() {
   return (
     <div className="App">
-     
-      <MouseTongue />
-      <Pronunciations />
-        {/* <Camera /> */}
-
-      <Record />
-      {/* <Mouse /> */}
-      {/* <Record />
-      <MouseTongue /> */}
-      {/* <Routes>
+      <Routes>
+        <Route path="/" element={<StartPage />} />
+        <Route path="/main" element={<MainPage />}/>
         <Route path='board' element={<QNApage/>}></Route>
         <Route path='qna' element={<QNApage/>}></Route>
         <Route path='board/qna/detail/' element={<QnaDetailTemplate/>}></Route>
@@ -32,9 +25,6 @@ function App() {
       {/* <MainPage /> */}
       {/* <QNApage /> */}
       {/* <QNAWritePage /> */}
-      {/* <Routes>
-        <Route path="/" element={<StartPage />} />
-      </Routes> */}
     </div>
   );
 }

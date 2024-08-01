@@ -1,4 +1,4 @@
-package com.chestnut.backend.study;
+package com.chestnut.backend.study.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
@@ -7,8 +7,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 
 @Entity
-@Table(name="Study_confused_pronounce")
-@DiscriminatorValue("confused_pronunce")
+@Table(name="study_confused_pronounce")
+@DiscriminatorValue("confused_pronounce")
 @Getter
 public class StudyConfusedPronounce extends Study {
 

@@ -1,25 +1,12 @@
 import React, {useState} from "react";
-import InspectionButton from "../../atoms/Authentication/InspectionButton";
+import InspectionForm from "../../molecules/Authentication/InspectionForm";
 import LoginIdPwFont from "../../atoms/Authentication/LoginIdPwFont";
 import "../../atoms/Authentication/Page.css";
 function FindIdForm(props){
-    const [name, setName] = useState("");
-
-    const handleChangeName = (event) => {
-        setName(event.target.value);
-    };
-
-    const handleSubmit = (event) =>{
-        alert(`이름: ${name}`);
-        event.preventDefault();
-    };
     return(
         <div>
             <LoginIdPwFont title={props.title} />
-            <form className="FormBorder LoginFormFont" onSubmit={handleSubmit}>
-                <input className="LoginFormBorder LoginFormFont" type="text" value={name} onChange={handleChangeName} placeholder={props.content}/>
-                <InspectionButton name={props.name}/>
-            </form>
+            <InspectionForm content={props.content} text={props.text} name={props.name} work={props.work} value={props.value} input={props.input}/>
         </div>
         
     );
