@@ -44,4 +44,6 @@ public class StudyController {
             return new ResponseEntity<ResponseDto<?>>(result, HttpStatus.OK);
         }
     }
+
+
 }
