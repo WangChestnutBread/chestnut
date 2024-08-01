@@ -5,9 +5,9 @@ function BookMarkButton() {
   let [inVoca, setInVoca] = useState(false);
   useEffect(() => {
     if (initialMount && inVoca) {
-      window.alert("단어장에 추가됐습니다!");
+      window.alert("단어장에 추가됐습니다");
     } else if (initialMount && !inVoca) {
-      window.alert("단어장에서 삭제됐습니다!");
+      window.alert("단어장에서 삭제됐습니다");
     }
   }, [inVoca]);
 
