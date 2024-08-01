@@ -25,10 +25,15 @@ import ChapterList from "./molecules/StudyList/ChapterList";
 import StudyList from "./templates/StudyList";
 import ChapterMenu from "./atoms/ChapterMenu";
 import MainPage from "./pages/MainPage";
+import Chapter1Listpage from "./templates/Chapter1Listpage";
+import Chapter2Listpage from "./templates/Chapter2Listpage";
+import Chapter3Listpage from "./templates/Chapter3Listpage";
+import Chapter5Listpage from "./templates/Chapter5Listpage";
+import Chapter6Listpage from "./templates/Chapter6Listpage";
 
 const router = createBrowserRouter([
   {
-    path: "/z",
+    path: "/",
     element: <StartTemplates />
   },
   {
@@ -98,6 +103,26 @@ const router = createBrowserRouter([
   {
     path: "/study",
     element: <StudyList />
+  },
+  {
+    path: "/chapter1",
+    element: <Chapter1Listpage />
+  },
+  {
+    path: "/chapter2",
+    element: <Chapter2Listpage />
+  },
+  {
+    path: "/chapter3",
+    element: <Chapter3Listpage />
+  },
+  {
+    path: "/chapter5",
+    element: <Chapter5Listpage />
+  },
+  {
+    path: "/chapter6",
+    element: <Chapter6Listpage />
   },
   {
     path: "/main",
