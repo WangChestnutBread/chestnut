@@ -1,13 +1,9 @@
 import './App.css';
-import MainPage from './pages/MainPage';
-import StartPage from "./templates/StartTemplates";
-import { Routes, Route } from "react-router-dom";
-import QNApage from './templates/Board/QnaTemplate';
-import QNAWritePage from './templates/Board/QnaWriteTemplate';
-import QnaDetailTemplate from './templates/Board/QnaDetailTemplate';
-import QnaManagerDetail from './templates/Board/QnaManagerDetail';
-import AnnouncementDetail from './templates/Board/AnnouncementDetail';
-import AnnouncementWrite from './templates/Board/AnnouncementWrite';
+import Camera from './organisms/StudyList/CameraOrganism';
+import Pronunciations from './organisms/StudyList/Pronunciations';
+import Record from './organisms/StudyList/Record';
+import MouseTongue from './organisms/StudyList/MouseTongue';
+
 
 function App() {
   return (
@@ -22,7 +18,7 @@ function App() {
         <Route path='board/qna/write' element={<QNAWritePage/>}></Route>
         <Route path='board/announcement/detail/' element={<AnnouncementDetail/>}></Route>
         <Route path='board/announcement/write' element={<AnnouncementWrite/>}></Route>
-      </Routes>
+      </Routes> */}
 
       {/* <QnaDetailTemplate /> */}
       {/* <QnaManagerDetail /> */}
