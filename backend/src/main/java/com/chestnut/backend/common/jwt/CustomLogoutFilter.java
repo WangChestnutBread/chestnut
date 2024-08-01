@@ -45,27 +45,33 @@ public class CustomLogoutFilter extends GenericFilterBean {
 
         String refresh = null;
         Cookie[] cookies = request.getCookies();
+
+        if(cookies == null) {
+            sendMessage(response, "802, 쿠키 널");
+            return;
+        }
+
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("refresh")) {
                 refresh = cookie.getValue();
             }
         }
 
-        if (refresh == null) {
-            sendMessage(response, "802");
+        if(refresh == null) {
+            sendMessage(response, "802, 리프레시 널");
             return;
         }
 
         try {
             jwtUtil.isExpired(refresh);
         } catch (ExpiredJwtException e) {
-            sendMessage(response, "802");
+            sendMessage(response, "802, 토큰 만료");
             return;
         }
 
         String category = jwtUtil.getCategory(refresh);
         if (!category.equals("refresh")) {
-            sendMessage(response, "802");
+            sendMessage(response, "802, 카테고리 불일치");
             return;
         }
 

@@ -4,7 +4,6 @@ import com.chestnut.backend.common.dto.ResponseDto;
 import com.chestnut.backend.member.dto.CustomMemberDetails;
 import com.chestnut.backend.member.dto.SessionDTO;
 import com.chestnut.backend.member.entity.Member;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -31,8 +30,6 @@ public class JWTFilter extends OncePerRequestFilter {
         String accessToken = request.getHeader("access");
 
         if(accessToken == null){
-            //sendErrorMessage(response, "803");
-            //http는 응답을 하는 순간 끝나는데 여기서 응답을 해버리니까 끝남!
             filterChain.doFilter(request, response);
             return;
         }
