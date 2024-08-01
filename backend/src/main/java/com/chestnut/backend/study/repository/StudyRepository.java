@@ -50,13 +50,13 @@ public class StudyRepository {
                 "case when sl.passRecord is null then 0 else 1 end, " +
                 "case when v.studyId is null then 0 else 1 end) " +
                 "from Study s left join (" +
-                        "select x.study.studyId as studyId, x.studiedAt as studiedAt, x.passRecord as passRecord " +
+                        "select x.study.studyId as studyId, x.studyLogId as studyLogId, x.passRecord as passRecord " +
                         "from StudyLog x join ( " +
-                                "select studyLog.study.studyId as studyId, max(studyLog.studiedAt) as recent from StudyLog studyLog " +
+                                "select studyLog.study.studyId as studyId, max(studyLog.studyLogId) as recent from StudyLog studyLog " +
                                 "where studyLog.member.memberId = :memberId " +
                                 "group by studyLog.study.studyId " +
                         ") y " +
-                        "on x.study.studyId = y.studyId and x.studiedAt = y.recent " +
+                        "on x.study.studyId = y.studyId and x.studyLogId = y.recent " +
                         "where x.member.memberId = :memberId " +
                 ") sl " +
                 "on s.studyId = sl.studyId " +
