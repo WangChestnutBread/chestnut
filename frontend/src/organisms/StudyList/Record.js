@@ -18,7 +18,7 @@ const Record = () => {
   return (
     <div className="d-flex row justify-content-center">
       {showIcons && isRecording && (
-        <div className="d-flex">
+        <div className="d-flex justify-content-center m-3">
           <FaRegCircleCheck className="icon-check" />
           <FaRegCircleXmark className="icon-xmark" />
         </div>

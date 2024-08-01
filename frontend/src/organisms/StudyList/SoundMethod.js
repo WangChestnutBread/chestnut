@@ -23,7 +23,7 @@ const mokData = {
 
 const SoundMethod = () => {
   return (
-    <div className="box">
+    <div className="qwer rounded-3 shadow ">
       <HowSpeak />
       <SpeakExplanation data={mokData.data.syllableList} />
     </div>
