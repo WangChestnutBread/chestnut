@@ -29,12 +29,12 @@ public class JWTFilter extends OncePerRequestFilter {
 
         String accessToken = request.getHeader("access");
 
-        if(accessToken == null){
+        if (accessToken == null) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        try{
+        try {
             jwtUtil.isExpired(accessToken);
         } catch (ExpiredJwtException e) {
             sendErrorMessage(response, "803");
@@ -42,12 +42,10 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         String category = jwtUtil.getCategory(accessToken);
-        if(!category.equals("access")){
+        if (!category.equals("access")) {
             sendErrorMessage(response, "804");
             return;
         }
-
-        //검증 끝 -> 일시적인 세션 만들기
 
         String loginId = jwtUtil.getLoginId(accessToken);
         String role = jwtUtil.getRole(accessToken);
