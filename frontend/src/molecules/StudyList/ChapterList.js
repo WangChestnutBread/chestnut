@@ -1,6 +1,6 @@
 import React from "react";
-import BlackBoard from "../atoms/BlackBoard";
-import ChapterTitle from "../atoms/ChapterTitle";
+import BlackBoard from "../../atoms/BlackBoard";
+import ChapterTitle from "../../atoms/ChapterTitle";
 function ChapterList(props){
     return(
         <div className="container">
