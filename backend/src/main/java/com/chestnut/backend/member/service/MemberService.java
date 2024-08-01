@@ -46,21 +46,28 @@ public class MemberService {
         String memberName = findIdReqDTO.getMemberName();
         String email = findIdReqDTO.getEmail();
 
-        Member findByName = memberRepository.findByMemberName(memberName)
+        Member member = memberRepository.findByMemberName(memberName)
                 .orElseThrow(()-> new MemberNotFoundException("714"));
 
-        if(!findByName.getEmail().equals(email)){
+        if (!member.getEmail().equals(email)) {
             throw new IdEmailMismatchException("712");
         }
 
-        FindIdResDTO findIdResDTO = new FindIdResDTO(findByName.getLoginId());
+        FindIdResDTO findIdResDTO = new FindIdResDTO(member.getLoginId());
         return findIdResDTO;
     }
 
     @Transactional
     public void checkNicknameDuplicate(String nickname) {
-        if(!memberRepository.existsByNickname(nickname)){
-            throw new NotFoundException("714");
+        if (memberRepository.existsByNickname(nickname)) {
+            throw new DataDuplicatedException();
+        }
+    }
+
+    @Transactional
+    public void checkLoginIdDuplicate(String loginId) {
+        if (memberRepository.existsByLoginId(loginId)) {
+            throw new DataDuplicatedException();
         }
     }
 
