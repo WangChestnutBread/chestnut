@@ -39,6 +39,7 @@ function App() {
       {/* <QNApage /> */}
       {/* <QNAWritePage /> */}
 
+
     </div>
   );
 }

@@ -12,7 +12,7 @@ function QuestionMarkButton() {
         setShowGuide(!showGuide);
       }}
     >
-      <img src="/icons/QuestionMark.svg" width="100%" />
+      <img src="/icons/QuestionMark.svg" height="100%" />
       {showGuide ? <UserGuide /> : null}
     </div>
   );

@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-
+import "./StudyBackButton.css"
 
 function StudyBackButton() {
     let navigate = useNavigate()
     return (
-        <div>
-            <img src="/icons/BackButton.svg" width="50px" onClick={()=>{navigate(-1)}}/>
+        <div className="StudyBackButton">
+            <img src="/icons/BackButton.svg" width="100%" onClick={()=>{navigate(-1)}}/>
         </div>
     )
 }
