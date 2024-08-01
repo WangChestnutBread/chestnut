@@ -5,7 +5,7 @@ function BlackBoard(){
         <div className="container">
             <div className="BlackBoardBox">
                 <div className="MainBoard">
-                    <div className="Box">
+                    <div className="Box1">
                         <div className="Size">
                             <div className="BoardBox">
                                 <div className="greenBox">

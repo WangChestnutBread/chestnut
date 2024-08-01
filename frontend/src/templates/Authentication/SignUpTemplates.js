@@ -12,7 +12,7 @@ import Button from "../../molecules/Authentication/Button";
 function SignUPPage(){
     const navigate = useNavigate();
     const succes=()=>{
-        navigate("/main");
+        navigate("/member/login");
     }
     const GotoBack=()=>{
         navigate(-1);
@@ -50,7 +50,6 @@ function SignUPPage(){
         if(!idRegExp.test(currentId)){
             setIdMessage("5~15 사이의 대소문자와 숫자로만 작성해주세요.");
             setIsId(false);
-            console.log(IdMessage)
         }
         else{
             setIdMessage("사용가능한 아이디 입니다.");
@@ -88,16 +87,16 @@ function SignUPPage(){
         }
     };
 
-    const createEmail=(e) =>{
-        const currentEmail=e.target.value;
+    const createEmail = (e) => {
+        const currentEmail = e.target.value;
         setEmail(currentEmail);
-        const emailRegExp=/^[A-Za-z0-9_]*[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
-        if(!emailRegExp.test(currentEmail)){
-            setEmailMessage("이메일 형식이 올바르지 않습니다.")
+
+        const emailRegExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        if (!emailRegExp.test(Email)) {
+            setEmailMessage("이메일 형식이 올바르지 않습니다.");
             setIsEmail(false);
-        }
-        else{
-            setEmailMessage("사용 가능한 이메일 입니다.")
+        } else {
+            setEmailMessage("사용 가능한 이메일 입니다.");
             setIsEmail(true);
         }
         e.preventDefault();
@@ -153,7 +152,7 @@ function SignUPPage(){
                                 <BirthMonth month={'월'}/>
                                 <BirthDay day={'일'}/>
                             </div>
-                            <Button button={'회원 가입'}/>
+                            <Button button={'회원 가입'} work={succes}/>
                         </div>
                     </div>
                 </div>

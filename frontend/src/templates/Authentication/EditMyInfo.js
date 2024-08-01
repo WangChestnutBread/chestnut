@@ -14,6 +14,7 @@ import PwResetButton from "../../atoms/Authentication/PwResetButton";
 import PasswordButton from "../../molecules/Authentication/PasswordButton";
 import HiddenForm from "../../organisms/Authentication/hiddenForm";
 import NewInputForm from "../../organisms/Authentication/NewInputForm";
+import FindIdForm from "../../organisms/Authentication/FindIdForm";
 function EditMyInfo(){
     const navigate=useNavigate();
     const GotoBack=()=>{
@@ -30,6 +31,7 @@ function EditMyInfo(){
     const [name, setName]=useState("");
     const [Email, setEmail]=useState("");
     const [Auth, setAuth]=useState("");
+    const [CurPw, setCurPw]=useState("");
 
     const [IdMessage, setIdMessage]=useState("");
     const [PwMessage, setPwMessage]=useState("");
@@ -37,6 +39,7 @@ function EditMyInfo(){
     const [nameMessage, setNameMessage]=useState("");
     const [AuthMessage, setAuthMessage]=useState("");
     const [EmailMessage, setEmailMessage]=useState("");
+    const [CurPwMessage, setCurPwMessage]=useState("");
 
     const [isId, setIsId]=useState(false);
     const [isname, setIsName]=useState(false);
@@ -44,6 +47,7 @@ function EditMyInfo(){
     const [isPwCon, setIsPwCon]=useState(false);
     const [isEmail, setIsEmail]=useState(false);
     const [isAuth, setIsAuth]=useState(false);
+    const [isCurPw, setIsCurPw]=useState(false);
     const inputId=(e)=>{
         const currentId=e.target.value;
         setId(currentId);
@@ -84,7 +88,7 @@ function EditMyInfo(){
 
     const createPwCon=(e)=>{
         const currentPwCon=e.target.value;
-        setPwCon(currentPwCon)
+        setPwCon(currentPwCon);
         console.log(Pw)
         if(Pw !== currentPwCon){
             setPwConMessage("비밀번호가 일치하지 않습니다.");
@@ -95,6 +99,21 @@ function EditMyInfo(){
             setIsPwCon(true);
 
         }
+    };
+
+    const checkPw=(e)=>{
+        const currentPwnow=e.target.value;
+        setCurPw(currentPwnow);
+        console.log(CurPw)
+        if(CurPw !== "ssafy"){
+            setCurPwMessage("비밀번호가 일치하지 않습니다.");
+            setIsCurPw(false);
+        }
+        else{
+            setCurPwMessage("비밀번호가 일치합니다.");
+            setIsCurPw(true);
+        }
+        e.preventDefault();
     };
 
     const createEmail=(e) =>{
@@ -146,6 +165,10 @@ function EditMyInfo(){
         const currentname=e.target.value;
         setName(currentname);
     };
+    const inputPw=(e)=>{
+        const currentPw=e.target.value;
+        setCurPw(currentPw);
+    }
     return(
         <div>
             <div className="container">
@@ -175,10 +198,13 @@ function EditMyInfo(){
                 <div style={{width: 700, height: 500, borderRadius: 25, justifyContent: 'center', alignItems: 'center', display: 'inline-flex', background: '#DCB78F'}}>
                     <div style={{flex: '1 1 0', alignSelf: 'stretch', paddingTop: 50, paddingLeft: 40, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
                         <div style={{alignSelf: 'stretch', background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
-                            <NewInputForm title={'새 비밀번호'} content={'비밀번호를 입력하세요'} value={Pw} work={createPw} text={PwMessage}/>
+                            <FindIdForm title={'현재 비밀번호'}content={'현재 비밀번호를 입력하세요'} name={'확인'} text={CurPwMessage} work={checkPw} value={CurPw} input={inputPw} />  
+                        </div>
+                        <div style={{alignSelf: 'stretch', background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
+                            <NewInputForm title={'새 비밀번호'} content={'새 비밀번호를 입력하세요'} value={Pw} work={createPw} text={PwMessage}/>
                         </div>
                         <div style={{alignSelf: 'stretch', background: 'rgba(255, 249, 239, 0)', flexDirection: 'flex-start', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
-                            <NewInputForm title={'비밀번호 확인'} content={'비밀번호를 입력하세요'} value={PwCon} work={createPwCon} text={PwConMessage}/>
+                            <NewInputForm title={'비밀번호 확인'} content={'새 비밀번호를 입력하세요'} value={PwCon} work={createPwCon} text={PwConMessage}/>
                         </div> 
                         <PasswordButton button={'PW 재설정'} work={succes} classname={"Buttton"}/>
                     </div>
