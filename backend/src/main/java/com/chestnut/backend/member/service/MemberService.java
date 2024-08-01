@@ -57,4 +57,11 @@ public class MemberService {
         return findIdResDTO;
     }
 
+    @Transactional
+    public void checkNicknameDuplicate(String nickname) {
+        if(!memberRepository.existsByNickname(nickname)){
+            throw new NotFoundException("714");
+        }
+    }
+
 }
