@@ -47,7 +47,7 @@ public class CustomLogoutFilter extends GenericFilterBean {
         Cookie[] cookies = request.getCookies();
 
         if(cookies == null) {
-            sendMessage(response, "802, 쿠키 널");
+            sendMessage(response, "802");
             return;
         }
 
@@ -58,20 +58,20 @@ public class CustomLogoutFilter extends GenericFilterBean {
         }
 
         if(refresh == null) {
-            sendMessage(response, "802, 리프레시 널");
+            sendMessage(response, "802");
             return;
         }
 
         try {
             jwtUtil.isExpired(refresh);
         } catch (ExpiredJwtException e) {
-            sendMessage(response, "802, 토큰 만료");
+            sendMessage(response, "802");
             return;
         }
 
         String category = jwtUtil.getCategory(refresh);
         if (!category.equals("refresh")) {
-            sendMessage(response, "802, 카테고리 불일치");
+            sendMessage(response, "802");
             return;
         }
 
