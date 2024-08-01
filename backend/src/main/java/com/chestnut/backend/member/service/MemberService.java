@@ -25,7 +25,7 @@ public class MemberService {
         String password = signupReqDTO.getPassword();
         String checkPassword = signupReqDTO.getCheckPassword();
         if (!password.equals(checkPassword)) {
-            throw new PasswordNotEqualException("604");
+            throw new PasswordNotEqualException();
         }
 
         try {
@@ -33,9 +33,9 @@ public class MemberService {
             Member member = signupReqDTO.toEntity(codePwd);
             memberRepository.save(member);
         } catch (DataAccessException e) {
-            throw new DatabaseException("704");
+            throw new DatabaseException();
         } catch (Exception e) {
-            throw new UnknownException("299");
+            throw new UnknownException();
         }
 
     }
@@ -47,14 +47,13 @@ public class MemberService {
         String email = findIdReqDTO.getEmail();
 
         Member member = memberRepository.findByMemberName(memberName)
-                .orElseThrow(()-> new MemberNotFoundException("714"));
+                .orElseThrow(MemberNotFoundException::new);
 
         if (!member.getEmail().equals(email)) {
-            throw new IdEmailMismatchException("712");
+            throw new IdEmailMismatchException();
         }
 
-        FindIdResDTO findIdResDTO = new FindIdResDTO(member.getLoginId());
-        return findIdResDTO;
+        return new FindIdResDTO(member.getLoginId());
     }
 
     @Transactional
