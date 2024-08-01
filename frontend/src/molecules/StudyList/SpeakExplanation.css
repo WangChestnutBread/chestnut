@@ -1,0 +1,25 @@
+.leaf-container {
+  position: relative; /* Establishes a positioned ancestor for absolute elements */
+  display: inline-block;
+  margin-bottom: 10px; /* Optional: add space between items */
+  width: 40px; /* Set the width of the container */
+  height: 50px; /* Set the height of the container */
+}
+
+.leaf-image {
+  width: 100%; /* Ensure image fills the container */
+  height: 100%; /* Ensure image fills the container */
+  display: block;
+}
+
+.leaf-text {
+  position: absolute;
+  top: 50%; /* Vertically centers the text */
+  left: 50%; /* Horizontally centers the text */
+  transform: translate(-70%, -30%); /* Adjusts the text position to be truly centered */
+  color: white; /* Text color for visibility over the image */
+  font-weight: bold; /* Optionally make the text bold */
+  font-size: 20px; /* Adjust text size as needed */
+  z-index: 1; /* Ensures the text appears above the image */
+  pointer-events: none; /* Allows clicks to pass through the text to the image */
+}

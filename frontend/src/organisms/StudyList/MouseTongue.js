@@ -1,5 +1,5 @@
 import Mouse from "../../molecules/StudyList/Mouse";
-import Tongue from "../../molecules/StudyList/tongue";
+import Tongue from "../../molecules/StudyList/Tongue";
 
 const MouseTongue = () => {
   return (
