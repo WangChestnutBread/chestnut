@@ -1,5 +1,6 @@
 package com.chestnut.backend.member.service;
 
+import com.chestnut.backend.common.exception.MemberNotFoundException;
 import com.chestnut.backend.member.dto.CustomMemberDetails;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MemberRepository;
@@ -17,10 +18,8 @@ public class CustomMemberDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
-        Member memberData = memberRepository.findByLoginId(loginId);
-        if(memberData != null){
-            return new CustomMemberDetails(memberData);
-        }
-        return null;
+        Member memberData = memberRepository.findByLoginId(loginId)
+                .orElseThrow(() -> new MemberNotFoundException("714"));
+        return new CustomMemberDetails(memberData);
     }
 }

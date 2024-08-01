@@ -1,5 +1,7 @@
 package com.chestnut.backend.member.entity;
 
+import com.chestnut.backend.avatar.Avatar;
+import com.chestnut.backend.study.entity.Study;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -45,13 +47,13 @@ public class Member {
     //    @NotNull
     private int ranking;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="avatar_id")
-//    private Avatar avatar;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="study_id")
-//    private Study study;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="avatar_id")
+    private Avatar avatar;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="study_id")
+    private Study study;
 
     @PrePersist
     protected void onCreate() {
