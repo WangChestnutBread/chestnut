@@ -13,7 +13,7 @@ import axios from "axios";
 function SignUPPage(){
     const navigate = useNavigate();
     const succes=()=>{
-        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/signup/",{
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/signup",{
             "loginId": Id,
             "email": Email,
             "password": Pw,
@@ -234,7 +234,7 @@ function SignUPPage(){
         //     setIsName(true);
         // }
         e.preventDefault();
-        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/duplication/", {
+        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/duplication", {
             params: {
                 "nickname": nickname
             }
