@@ -20,15 +20,15 @@ public class RewardLog {
     private LocalDateTime rewardAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id", nullable = false)
+    @JoinColumn(name="member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="log_type_id", nullable = false)
+    @JoinColumn(name="log_type_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private LogType logType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="reward_type_id", nullable = false)
+    @JoinColumn(name="reward_type_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private RewardType rewardType;
 
     protected RewardLog() {}

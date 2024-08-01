@@ -1,0 +1,32 @@
+.NavbarExample {
+    display: flex;
+    width: 100%;
+    height: 80px;
+    justify-content: center;
+    background: #DCB78F;
+    flex-shrink: 0;
+}
+
+.NavbarButton {
+    display: flex;
+    width: 1194px;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.LeftButton {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 60px;
+}
+
+.RightButton {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 60px;
+}

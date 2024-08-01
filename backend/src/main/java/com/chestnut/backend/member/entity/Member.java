@@ -35,24 +35,24 @@ public class Member {
     private LocalDate birthday;
     @NotNull
     private String memberName;
-    //    @NotNull
+    @NotNull
     private boolean isAdmin;
-    //    @NotNull //default값은 어떻게 설정하는게 좋을까?
+    @NotNull
     private long reward;
-    //    @NotNull
+    @NotNull
     private LocalDateTime joinAt;
     private LocalDateTime withdrawAt;
-    //    @NotNull
+    @NotNull
     private boolean isWithdraw;
-    //    @NotNull
+    @NotNull
     private int ranking;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="avatar_id")
+    @JoinColumn(name="avatar_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Avatar avatar;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="study_id")
+    @JoinColumn(name="study_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Study study;
 
     @PrePersist

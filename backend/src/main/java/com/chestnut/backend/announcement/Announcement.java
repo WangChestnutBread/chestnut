@@ -32,11 +32,11 @@ public class Announcement {
     private int hit;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id", nullable = false)
+    @JoinColumn(name="member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="announce_category_id", nullable = false)
+    @JoinColumn(name="announce_category_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private AnnouncementCategory announcementCategory;
 
     protected Announcement() {}

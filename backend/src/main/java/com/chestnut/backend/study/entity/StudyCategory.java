@@ -19,7 +19,7 @@ public class StudyCategory {
     private String categoryContent;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="parent_id")
+    @JoinColumn(name="parent_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private StudyCategory parent;
 
     @OneToMany(mappedBy = "parent")
