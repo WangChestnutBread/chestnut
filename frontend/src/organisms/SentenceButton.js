@@ -45,4 +45,5 @@ function RelatedSentence({ sentences }) {
   );
 }
 
+
 export default SentenceButton;
