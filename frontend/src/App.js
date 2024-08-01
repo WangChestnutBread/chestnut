@@ -8,9 +8,12 @@ import MouseTongue from './organisms/StudyList/MouseTongue';
 function App() {
   return (
     <div className="App">
+     
       <MouseTongue />
+      <Pronunciations />
         {/* <Camera /> */}
-      {/* <Pronunciations /> */}
+
+      <Record />
       {/* <Mouse /> */}
       {/* <Record />
       <MouseTongue /> */}

@@ -17,7 +17,7 @@ const Pronunciations = () => {
         <div><PronunciationLeft data={"발음"} /></div>
         <div><PronunciationRight data={mokData1} /></div>
       </div>
-      <div className="d-flex mt-5">
+      <div className="d-flex" style={{marginTop:30}}>
         <div><PronunciationLeft data={"내 발음"} /></div>
         <div><PronunciationRight data={mokData2} /></div>
       </div>
