@@ -36,9 +36,9 @@ public class StudyService {
         //loginId -> memberId로 바꾸는 로직 추가
 
         if (chapterId == 4) {
-            return studyRepository.getPhonologyStudyInfo(memberId);
+            return studyRepository.getPhonologyStudyInfo();
         } else if (chapterId == 7) {
-            return new ArrayList<>();
+            return studyRepository.getConfusedStudyInfo();
         } else {
             return studyRepository.findChapterStudyInfo(memberId, chapterId);
         }

@@ -1,5 +1,6 @@
 package com.chestnut.backend.study.repository;
 
+import com.chestnut.backend.study.dto.ConfusedStudyInfo;
 import com.chestnut.backend.study.dto.PhonologyStudyInfo;
 import com.chestnut.backend.study.dto.ChapterInfoDto;
 import com.chestnut.backend.study.dto.ChapterStudyInfo;
@@ -75,36 +76,38 @@ public class StudyRepository {
 
     /**
      * 4단원 챕터내 학습 목록 조회
-     * 근데 4단원은 학습여부 표시 안하는걸로 기억하는데(아닐지도..) isPass나 isStudy 없어도 되지 않나?
-     * isPass나 isStudy만 없어도 쿼리가 굉장히 간단해짐
      */
-    public List<PhonologyStudyInfo> getPhonologyStudyInfo(Long memberId) {
-        String query = "select new com.chestnut.backend.study.dto.PhonologyStudyInfo(sc.categoryContent, " +
-                "s.studyCategory.studyCategoryId, s.studyId, s.word, sp.phonologyExplanation, sp.example, " +
-                "case when sl.passRecord = true then 1 else 0 end, " +
-                "case when sl.passRecord is null then 0 else 1 end) " +
-                "from Study s left join ( " +
-                        "select x.study.studyId as studyId, x.passRecord as passRecord " +
-                        "from StudyLog x join ( " +
-                                "select x.study.studyId as studyId, max(x.studiedAt) as recent from StudyLog x " +
-                                "where x.member.memberId = :memberId " +
-                                "group by x.study.studyId " +
-                        ") y " +
-                        "on x.study.studyId = y.studyId and x.studiedAt = y.recent " +
-                        "where x.member.memberId = :memberId " +
-                ") sl " +
-                "on s.studyId = sl.studyId " +
+    public List<PhonologyStudyInfo> getPhonologyStudyInfo() {
+        String query = "select new com.chestnut.backend.study.dto.PhonologyStudyInfo(sc.categoryContent, sc.studyCategoryId, s.studyId, s.word, sp.phonologyExplanation, sp.example) " +
+                "from Study s " +
                 "join StudyPhonology sp " +
                 "on s.studyId = sp.studyId " +
                 "join StudyCategory sc " +
-                "on sc.studyCategoryId = s.studyCategory.studyCategoryId " +
-                "where s.chapter.chapterId = 4";
+                "on s.studyCategory.studyCategoryId = sc.studyCategoryId";
 
         return em.createQuery(query, PhonologyStudyInfo.class)
-                .setParameter("memberId", memberId)
                 .getResultList();
     }
 
+    /**
+     * 7단원 챕터내 학습 목록 조회
+     */
+    public List<ConfusedStudyInfo> getConfusedStudyInfo() {
+        String query = "select new com.chestnut.backend.study.dto.ConfusedStudyInfo(parent.studyCategoryId, parent.categoryContent, " +
+                            "sc.studyCategoryId, sc.categoryContent, " +
+                            "s.studyId, scp.confusedGroupId, " +
+                            "s.word, s.pronounce) " +
+                    "from Study s " +
+                    "join StudyCategory sc " +
+                    "on s.studyCategory.studyCategoryId = sc.studyCategoryId " +
+                    "join StudyConfusedPronounce scp " +
+                    "on scp.studyId = s.studyId " +
+                    "join StudyCategory parent " +
+                    "on parent.studyCategoryId = sc.parent.studyCategoryId";
+
+        return em.createQuery(query, ConfusedStudyInfo.class)
+                .getResultList();
+    }
 
 
 

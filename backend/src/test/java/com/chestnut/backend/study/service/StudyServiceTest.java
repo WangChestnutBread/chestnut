@@ -1,6 +1,7 @@
 package com.chestnut.backend.study.service;
 
 import com.chestnut.backend.member.repository.MemberRepository;
+import com.chestnut.backend.study.dto.ConfusedStudyInfo;
 import com.chestnut.backend.study.dto.PhonologyStudyInfo;
 import com.chestnut.backend.study.dto.ChapterInfoDto;
 import com.chestnut.backend.study.dto.ChapterStudyInfo;
@@ -44,9 +45,17 @@ class StudyServiceTest {
 
     @Test
     public void 음운론_조회() throws Exception {
-        List<PhonologyStudyInfo> list = studyRepository.getPhonologyStudyInfo(1L);
+        List<PhonologyStudyInfo> list = studyRepository.getPhonologyStudyInfo();
         for (PhonologyStudyInfo info : list) {
             System.out.println(info);
+        }
+    }
+
+    @Test
+    public void 헷갈_단어_조회() throws Exception {
+        List<ConfusedStudyInfo> confusedStudyInfo = studyRepository.getConfusedStudyInfo();
+        for (ConfusedStudyInfo o : confusedStudyInfo) {
+            System.out.println(o);
         }
     }
 

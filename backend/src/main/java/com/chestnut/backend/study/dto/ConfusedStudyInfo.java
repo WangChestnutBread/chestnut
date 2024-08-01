@@ -9,11 +9,13 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class PhonologyStudyInfo {
-    private String categoryContent;
+public class ConfusedStudyInfo {
+    private Long parentCategoryId;
+    private String parentCategory;
     private Long studyCategoryId;
+    private String categoryContent;
     private Long studyId;
-    private String phonologyRule;
-    private String phonologyExplanation;
-    private String example;
+    private int confusedGroupId;
+    private String word;
+    private String pronounce;
 }
