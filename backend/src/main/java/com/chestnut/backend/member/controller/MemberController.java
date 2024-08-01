@@ -30,6 +30,12 @@ public class MemberController {
         return new ResponseEntity<>(new ResponseDto<>("200", findIdResDTO), HttpStatus.OK);
     }
 
+    @GetMapping("/duplication")
+    public ResponseEntity<?> checkNicknameDuplicate(@RequestParam String nickname){
+        memberService.checkNicknameDuplicate(nickname);
+        return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
+    }
+
     @GetMapping("/test")
     public String test(){
         return "test";

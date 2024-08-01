@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .httpBasic((auth) -> auth.disable());
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/member/login", "/member/find-id", "/join", "/member/signup").permitAll() //이 경로에 대해서는 모든 권한 허용
+                        .requestMatchers("/member/login", "/member/find-id", "member/duplication", "/member/signup").permitAll() //이 경로에 대해서는 모든 권한 허용
                         .requestMatchers("/admin").hasRole("ADMIN") //"/admin" 경로는 ADMIN 권한을 가진 사용자만 접근 허용
                         .requestMatchers("/reissue").permitAll()
                         .anyRequest().authenticated()); //그 외는 로그인 한 사용자만 접근 가능
