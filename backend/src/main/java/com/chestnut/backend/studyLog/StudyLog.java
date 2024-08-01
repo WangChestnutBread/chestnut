@@ -20,15 +20,15 @@ public class StudyLog {
     private Long studyLogId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id", nullable = false)
+    @JoinColumn(name="member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="chapter_id", nullable = false)
+    @JoinColumn(name="chapter_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Chapter chapter;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="study_id", nullable = false)
+    @JoinColumn(name="study_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Study study;
 
     @Column(columnDefinition = "timestamp default now()", nullable = false)

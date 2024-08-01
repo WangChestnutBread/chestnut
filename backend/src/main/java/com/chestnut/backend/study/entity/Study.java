@@ -25,11 +25,11 @@ public abstract class Study {
 //    private ChapterType chapterType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="chapter_id", nullable = false)
+    @JoinColumn(name="chapter_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Chapter chapter;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="study_category_id")
+    @JoinColumn(name="study_category_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private StudyCategory studyCategory;
 
     protected Study() {}
