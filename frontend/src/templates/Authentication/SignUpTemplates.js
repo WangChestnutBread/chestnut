@@ -9,11 +9,43 @@ import Birth from "../../atoms/Authentication/MemberBirth/Birth";
 import BirthMonth from "../../atoms/Authentication/MemberBirth/BirthMonth";
 import BirthDay from "../../atoms/Authentication/MemberBirth/BirthDay";
 import Button from "../../molecules/Authentication/Button";
+import axios from "axios";
 function SignUPPage(){
     const navigate = useNavigate();
     const succes=()=>{
-        navigate("/member/login");
-    }
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/signup/",{
+            "loginId": Id,
+            "email": Email,
+            "password": Pw,
+            "checkPassword": PwCon,
+            "name": name,
+            "nickname": nickname,
+            "birthday": "2024-08-01",
+        })
+        .then(response=>{
+            if(response.code==200){
+                alert("회원가입에 성공했습니다.");
+                navigate("/member/login");
+            }
+            console.log(response.code);
+        })
+        .catch(error=>{
+            if(error.code==603){
+                alert("올바르지 않은 비밀번호 형식입니다.");
+            }
+            else if(error.code==604){
+                alert("비밀번호가 일치하지 않습니다.");
+            }
+            else if(error.code==707){
+                alert("MySQL CRUD 실패");
+            }
+            else if(error.code==299){
+                alert("알 수 없는 오류로 인해 회원가입에 실패했습니다.");
+            }
+            console.log(error.code);
+        })
+        
+    };
     const GotoBack=()=>{
         navigate(-1);
     };
@@ -24,6 +56,7 @@ function SignUPPage(){
     const [name, setName]=useState("");
     const [Email, setEmail]=useState("");
     const [Auth, setAuth]=useState("");
+    const [nickname, setnickname]=useState("");
 
     const [IdMessage, setIdMessage]=useState("");
     const [PwMessage, setPwMessage]=useState("");
@@ -39,6 +72,7 @@ function SignUPPage(){
     const [isPwCon, setIsPwCon]=useState(false);
     const [isEmail, setIsEmail]=useState(false);
     const [isAuth, setIsAuth]=useState(false);
+    const [isNickname, setIsNickname]=useState(false);
     const inputId=(e)=>{
         const currentId=e.target.value;
         setId(currentId);
@@ -56,6 +90,27 @@ function SignUPPage(){
             setIsId(true);
         }
         e.preventDefault();
+        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/duplication/",{
+            params: {
+                "lgoinId": Id
+            }
+        }).then(response=>{
+            if(response.code==200){
+                setIdMessage("사용가능한 아이디 입니다.");
+                setIsId(true)
+            }
+            console.log(response.code);
+        }).catch(error=>{
+            if(error==601){
+                setIdMessage("이미 사용중인 아이디입니다.");
+                setIsId(false);
+            }
+            else if(error==603){
+                setIdMessage("5~15 사이의 대소문자와 숫자로만 작성해주세요.");
+                setIsId(false);
+            }
+            console.log(error.code);
+        });
     };
 
     const createPw=(e)=>{
@@ -91,16 +146,46 @@ function SignUPPage(){
         const currentEmail = e.target.value;
         setEmail(currentEmail);
 
-        const emailRegExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-        if (!emailRegExp.test(Email)) {
-            setEmailMessage("이메일 형식이 올바르지 않습니다.");
-            setIsEmail(false);
-        } else {
-            setEmailMessage("사용 가능한 이메일 입니다.");
-            setIsEmail(true);
-        }
+        // const emailRegExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        // if (!emailRegExp.test(Email)) {
+        //     setEmailMessage("이메일 형식이 올바르지 않습니다.");
+        //     setIsEmail(false);
+        // } else {
+        //     setEmailMessage("사용 가능한 이메일 입니다.");
+        //     setIsEmail(true);
+        // }
         e.preventDefault();
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-request/",{
+            "email": Email
+        })
+        .then(response=>{
+            if(response.code==200){
+                setEmailMessage("인증번호가 전송되었습니다.");
+                setIsEmail(true);
+            }
+            console.log(response.code);
+        })
+        .catch(error=>{
+            if(error.code==601){
+                setEmailMessage("이미 존재하는 이메일입니다.");
+                setIsEmail(false);
+            }
+            else if(error.code==603){
+                setEmailMessage("올바르지 않은 이메일 양식입니다.");
+                setIsEmail(false);
+            }
+            else if(error.code==606){
+                setEmailMessage("인증번호 보내는 데 실패했습니다.");
+                setIsEmail(false);
+            }
+            else if(error.code==299){
+                setEmailMessage("알 수 없는 오류로 다시 시도하시기 바랍니다.");
+                setIsEmail(false);
+            }
+            console.log(error.code);
+        })
     };
+
     const checkAuth = (e) => {
         if (Auth !== "1234") {
             setAuthMessage("인증번호가 일치하지 않습니다.");
@@ -110,6 +195,29 @@ function SignUPPage(){
             setIsAuth(true);
         }
         e.preventDefault();
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-check/",{
+            "verificationCode" : Auth
+        }).then(response=>{
+            if(response.code==200){
+                setAuthMessage("인증번호가 일치합니다.");
+                setIsAuth(true);
+            }
+            console.log(response.code);
+        }).catch(error=>{
+            if(error.code==605){
+                setAuthMessage("인증번호가 일치하지 않습니다.");
+                setIsAuth(false);
+            }
+            else if(error.code==602){
+                setAuthMessage("유효시간 초과로 다시 하셔야 합니다.");
+                setIsAuth(false);
+            }
+            else if(error.code==299){
+                setAuthMessage("알수 없는 오류로 인해 다시 시도 해주세요.");
+                setIsAuth(false);
+            }
+            console.log(error.code);
+        })
     };
 
     const inputAuth = (e) => {
@@ -118,18 +226,37 @@ function SignUPPage(){
     };
 
     const checkname=(e)=>{
-        if (name == "ssafy") {
-            setNameMessage("이미 사용중인 닉네임입니다.");
-            setIsName(false);
-        } else {
-            setNameMessage("사용 가능한 닉네임입니다.");
-            setIsName(true);
-        }
+        // if (nickname == "ssafy") {
+        //     setNameMessage("이미 사용중인 닉네임입니다.");
+        //     setIsName(false);
+        // } else {
+        //     setNameMessage("사용 가능한 닉네임입니다.");
+        //     setIsName(true);
+        // }
         e.preventDefault();
+        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/duplication/", {
+            params: {
+                "nickname": nickname
+            }
+        })
+        .then(response=>{
+            if(response.code==200){
+                setnickMessage("사용 가능한 닉네임입니다.");
+                setIsNickname(true)
+                console.log(response.code);
+            }
+        })
+        .catch(error=>{
+            if(error.code==710){
+                setnickMessage("이미 중복된 닉네임입니다.");
+                setIsNickname(false);
+            }
+            console.log(error.code);
+        })
     };
     const inputname=(e)=>{
         const currentname=e.target.value;
-        setName(currentname);
+        setnickname(currentname);
     };
 
     return(
@@ -146,7 +273,7 @@ function SignUPPage(){
                             <InspectionForm content={'이메일'} text={EmailMessage} name={'인증'} work={createEmail}/>
                             <InspectionForm content={'인증번호'} name={'확인'} text={AuthMessage} work={checkAuth} value={Auth} input={inputAuth}/>
                             <LoginInputForm content={'이름'} />
-                            <InspectionForm content={'닉네임'} name={'중복확인'} text={nameMessage} work={checkname} value={name} input={inputname} />
+                            <InspectionForm content={'닉네임'} name={'중복확인'} text={nickMessage} work={checkname} value={nickname} input={inputname} />
                             <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'inline-flex'}}>
                                 <Birth year={'년도'}/>
                                 <BirthMonth month={'월'}/>

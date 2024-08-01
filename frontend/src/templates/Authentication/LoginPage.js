@@ -6,6 +6,7 @@ import LoginPwInput from "../../molecules/Authentication/LoginPwInput";
 import Button from "../../molecules/Authentication/Button";
 import BackButton from "../../atoms/BackButton";
 import "../../atoms/Authentication/Page.css";
+import axios from "axios";
 function LoginPage(){
     const [name, setName] = useState("");
     const [password, setPassword]= useState("");
@@ -24,13 +25,30 @@ function LoginPage(){
     const success=(event)=>{
         console.log(name);
         console.log(password);
-        if(name==1234 && password==1234){
-             navigate("/main");
-        }
-       else{
-            alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
-            event.preventDefault();
-       }
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login/",{
+            "loginId" : name,
+            "password": password,
+        })
+        .then(response =>{
+            if(response.code==200){
+                navigate("/main");
+                console.log(response.code)
+            }
+        })
+        .catch(error=>{
+            if(error.code==706){
+                alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
+                console.log(error.code);
+            }
+        })
+        event.preventDefault();
+    //     if(name==1234 && password==1234){
+    //          navigate("/main");
+    //     }
+    //    else{
+    //         alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
+    //         event.preventDefault();
+    //    }
     }
     return(
         <div className="container">
@@ -65,3 +83,4 @@ function LoginPage(){
     );
 }
 export default LoginPage;
+
