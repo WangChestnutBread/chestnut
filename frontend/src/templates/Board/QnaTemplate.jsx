@@ -4,6 +4,10 @@ import NavBar from "../../organisms/NavBar";
 import Pagenation from "../../atoms/Pagenation";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./QnaTemplate.css";
+import "../NavbarExample.css"
+import StudyBackButton from "../../molecules/StudyBackButton";
+import ChestNutButton from "../../organisms/ChestNutButton";
+
 
 const announcements = [
   {
@@ -80,7 +84,14 @@ const QnaPage = () => {
   return (
     <div>
       {/* 헤더 */}
-      <NavBar />
+      <div className="NavbarExample">
+        <div className="NavbarButton">
+          <div className="LeftButton">
+              <StudyBackButton/>
+              <ChestNutButton/>
+          </div>
+        </div>
+      </div>
       {/* 로고 */}
       <div className="container text-start justify-center">
         <div className="logo-container">
