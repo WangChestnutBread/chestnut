@@ -28,15 +28,15 @@ import MainPage from "./pages/MainPage";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/z",
     element: <StartTemplates />
   },
   {
-    path: "/board",
+    path: "/board/qna",
     element: <QNApage />
   },
   {
-    path: "/qna",
+    path: "/board/announcement",
     element: <QNApage />
   },
   {
@@ -108,6 +108,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <App />
     <RouterProvider router={router} />
   </React.StrictMode>
 );
