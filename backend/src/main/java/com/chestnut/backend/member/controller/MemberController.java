@@ -1,7 +1,9 @@
 package com.chestnut.backend.member.controller;
 
 import com.chestnut.backend.common.dto.ResponseDto;
+import com.chestnut.backend.member.dto.FindIdResDTO;
 import com.chestnut.backend.member.dto.SignupReqDTO;
+import com.chestnut.backend.member.dto.FindIdReqDTO;
 import com.chestnut.backend.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,12 @@ public class MemberController {
     public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDTO signupReqDTO) {
         memberService.signup(signupReqDTO);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
+    }
+
+    @PostMapping("/find-id")
+    public ResponseEntity<?> findId(@RequestBody FindIdReqDTO findIdReqDTO){
+        FindIdResDTO findIdResDTO = memberService.findId(findIdReqDTO);
+        return new ResponseEntity<>(new ResponseDto<>("200", findIdResDTO), HttpStatus.OK);
     }
 
     @GetMapping("/test")

@@ -17,7 +17,7 @@ public class AttendanceLog {
     private Long attendanceLogId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id", nullable = false)
+    @JoinColumn(name="member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
 
     @Column(columnDefinition = "timestamp", nullable = false)
