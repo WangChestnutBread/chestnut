@@ -11,7 +11,7 @@ import BirthDay from "../../atoms/Authentication/MemberBirth/BirthDay";
 import LoginButton from "../../atoms/Authentication/LoginButton";
 import BackButton from "../../atoms/BackButton";
 import PwResetButton from "../../atoms/Authentication/PwResetButton";
-import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
+
 import PasswordButton from "../../molecules/Authentication/PasswordButton";
 import HiddenForm from "../../organisms/Authentication/hiddenForm";
 import LoginPwInput from "../../molecules/Authentication/LoginPwInput"
