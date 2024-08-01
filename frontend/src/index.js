@@ -25,6 +25,7 @@ import ChapterList from "./molecules/StudyList/ChapterList";
 import StudyList from "./templates/StudyList";
 import ChapterMenu from "./atoms/ChapterMenu";
 import MainPage from "./pages/MainPage";
+import BlackBoardWithTab from "./organisms/BlackBoardWithTab";
 
 const router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
   {
     path: "/main",
     element: <MainPage/>
+  },
+  {
+    path: "/example",
+    element: <BlackBoardWithTab/>
   }
 ]);
 

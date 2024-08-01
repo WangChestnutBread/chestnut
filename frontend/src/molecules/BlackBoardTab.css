@@ -1,0 +1,16 @@
+.BlackBoardTab {
+    display: inline-block;
+    padding: 10px 50px 20px 50px ;
+    color: white;
+    border-radius: 25px 25px 0 0;
+    background: #6B3906;
+    cursor: pointer;
+}
+
+.BlackBoardTab:hover {
+    background: #C5813D;
+}
+
+.BlackBoardTab:active {
+    background: #C5813D;
+}

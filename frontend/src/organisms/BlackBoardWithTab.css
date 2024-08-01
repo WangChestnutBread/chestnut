@@ -1,0 +1,21 @@
+.BlackBoardWithTab {
+
+}
+
+.BlackBoardBody {
+    position: relative;
+}
+
+.VerticalLine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px; /* 선의 두께 조절 */
+    background-color: white; /* 선의 색상 */
+}
+
+.TabButton {
+    display: flex;
+    position: absolute;
+}
