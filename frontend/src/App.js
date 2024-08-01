@@ -1,19 +1,16 @@
 import './App.css';
-import MainPage from './pages/MainPage';
-import StartPage from "./templates/StartTemplates";
-import { Routes, Route } from "react-router-dom";
-import QNApage from './templates/Board/QnaTemplate';
-import QNAWritePage from './templates/Board/QnaWriteTemplate';
-import QnaDetailTemplate from './templates/Board/QnaDetailTemplate';
-import QnaManagerDetail from './templates/Board/QnaManagerDetail';
-// import AnnouncementDetail from './templates/Board/AnnouncementDetail';
-// import AnnouncementWrite from './templates/Board/AnnouncementWrite';
+import Camera from './organisms/StudyList/CameraOrganism';
+import Pronunciations from './organisms/StudyList/Pronunciations';
+import Record from './organisms/StudyList/Record';
+import MouseTongue from './organisms/StudyList/MouseTongue';
 
 
 function App() {
   return (
     <div className="App">
-      {/* <Routes>
+      <Routes>
+        <Route path="/" element={<StartPage />} />
+        <Route path="/main" element={<MainPage />}/>
         <Route path='board' element={<QNApage/>}></Route>
         <Route path='qna' element={<QNApage/>}></Route>
         <Route path='board/qna/detail/' element={<QnaDetailTemplate/>}></Route>
@@ -21,17 +18,13 @@ function App() {
         <Route path='board/qna/write' element={<QNAWritePage/>}></Route>
         <Route path='board/announcement/detail/' element={<AnnouncementDetail/>}></Route>
         <Route path='board/announcement/write' element={<AnnouncementWrite/>}></Route>
-      </Routes> */}
+      </Routes>
 
       {/* <QnaDetailTemplate /> */}
       {/* <QnaManagerDetail /> */}
       {/* <MainPage /> */}
       {/* <QNApage /> */}
       {/* <QNAWritePage /> */}
-      {/* <Routes>
-        <Route path="/" element={<StartPage />} />
-      </Routes> */}
-
     </div>
   );
 }
