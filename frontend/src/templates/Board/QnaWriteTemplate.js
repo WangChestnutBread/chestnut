@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 const QNAWritePage = () => {
   const navigate = useNavigate()
   const handleQnaClick = () => {
-    navigate('/qna')
+    navigate('/board/qna')
   }
   const handleDetailClick = () => {
-    navigate('/qna')
+    navigate('/board/qna')
   }
 
   return (

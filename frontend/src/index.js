@@ -21,6 +21,7 @@ import FindPw from "./templates/Authentication/FindPw";
 import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
 import ChapterTitle from "./atoms/ChapterTitle";
+import ChapterList from "./molecules/ChapterList";
 
 const router = createBrowserRouter([
   {
@@ -93,7 +94,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/study",
-    element: <ChapterTitle />
+    element: <ChapterList />
   }
 ]);
 

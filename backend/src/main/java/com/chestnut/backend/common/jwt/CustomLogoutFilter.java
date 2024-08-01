@@ -22,32 +22,34 @@ public class CustomLogoutFilter extends GenericFilterBean {
 
     private final JWTUtil jwtUtil;
     private final RefreshRepository refreshRepository;
+    private final String logoutUrl = "/member/logout";
 
     @Override
     public void doFilter (ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
-        doFilter((HttpServletRequest) servletRequest, (HttpServletResponse) servletResponse, chain);
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+
+        if (shouldFilter((request))) {
+            doFilter(request, response, chain);
+        } else {
+            chain.doFilter(request, response);
+        }
+    }
+
+    private boolean shouldFilter(HttpServletRequest request) {
+        String requestURI = request.getRequestURI();
+        String requestMethod = request.getMethod();
+
+        return requestURI.equals(logoutUrl) && requestMethod.equals("POST");
     }
 
     private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        String requestUri = request.getRequestURI();
-        if (!requestUri.matches("^\\/logout$")) {
-
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        String requestMethod = request.getMethod();
-        if (!requestMethod.equals("POST")) {
-
-            filterChain.doFilter(request, response);
-            return;
-        }
 
         String refresh = null;
         Cookie[] cookies = request.getCookies();
 
         if(cookies == null) {
-            sendMessage(response, "802");
+            sendMessage(response, "802, 쿠키널");
             return;
         }
 
@@ -58,25 +60,25 @@ public class CustomLogoutFilter extends GenericFilterBean {
         }
 
         if(refresh == null) {
-            sendMessage(response, "802");
+            sendMessage(response, "802, 리프레시 널");
             return;
         }
 
         try {
             jwtUtil.isExpired(refresh);
         } catch (ExpiredJwtException e) {
-            sendMessage(response, "802");
+            sendMessage(response, "802, 기간 만료");
             return;
         }
 
         String category = jwtUtil.getCategory(refresh);
         if (!category.equals("refresh")) {
-            sendMessage(response, "802");
+            sendMessage(response, "802, 카테고리 오류");
             return;
         }
 
         if (!refreshRepository.existsByRefresh(refresh)) {
-            sendMessage(response, "802");
+            sendMessage(response, "802, 리프레시 존재 안함");
             return;
         }
 

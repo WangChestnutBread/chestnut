@@ -6,14 +6,12 @@ import com.chestnut.backend.member.dto.LoginReqDTO;
 import com.chestnut.backend.member.dto.LoginResDTO;
 import com.chestnut.backend.member.entity.RefreshEntity;
 import com.chestnut.backend.member.repository.RefreshRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,17 +27,22 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
-@RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
     private final RefreshRepository refreshRepository;
 
+    public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, RefreshRepository refreshRepository) {
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
+        this.refreshRepository = refreshRepository;
+        setFilterProcessesUrl("/member/login");
+    }
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         LoginReqDTO loginReqDTO = new LoginReqDTO();
-        //프론트에서 JSON 형식으로 로그인 데이터를 보낸다.
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             ServletInputStream inputStream = request.getInputStream();
@@ -92,7 +95,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         response.getWriter().write(jsonResponse);
     }
 
-    private void addRefreshEntity(String loginId, String refresh, Long expiredMs){
+    private void addRefreshEntity(String loginId, String refresh, Long expiredMs) {
 
         Date date = new Date(System.currentTimeMillis()+expiredMs);
 
@@ -104,11 +107,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         refreshRepository.save(refreshEntity);
     }
 
-    private Cookie createCookie(String key, String value){
+    private Cookie createCookie(String key, String value) {
         Cookie cookie = new Cookie(key, value);
         cookie.setMaxAge(24*60*60);
-        cookie.setHttpOnly(true); //클라이언트 쪽에서 js로 해당 쿠키로 접근하지 못하도록 막는다.
-
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
         return cookie;
     }
 

@@ -7,6 +7,7 @@ import "./QnaTemplate.css";
 
 const announcements = [
   {
+    id: 1,
     title: "1월달 공지사항",
     created_at: "2024.05.27",
     hit: 79,
@@ -15,6 +16,7 @@ const announcements = [
     authentication: true,
   },
   {
+    id: 2,
     title: "1월달 공지사항",
     created_at: "2024.05.27",
     hit: 33,
@@ -23,6 +25,7 @@ const announcements = [
     authentication: true,
   },
   {
+    id: 3,
     title: "1월달 공지사항",
     created_at: "2024.05.27",
     hit: 11,
@@ -34,6 +37,7 @@ const announcements = [
 
 const qnas = [
   {
+    id: 1,
     title: "단순질문",
     created_at: "2024.05.27",
     is_answer: false,
@@ -41,6 +45,7 @@ const qnas = [
     name: "김시현",
   },
   {
+    id: 2,
     title: "랭킹 시스템 문의",
     created_at: "2024.05.27",
     is_answer: true,
@@ -48,6 +53,7 @@ const qnas = [
     name: "김시현",
   },
   {
+    id:3,
     title: "랭킹 시스템 문의",
     created_at: "2024.05.27",
     is_answer: false,
@@ -89,7 +95,7 @@ const QnaPage = () => {
         <div className="d-flex justify-content-between mt-5">
           <div className="btn-container d-flex gap-3">
             <NavLink
-              to="/board"
+              to="/board/announcement"
               className={({ isActive }) => (isActive ? "active" : "")}
               onClick={() => setIsAnnouncement(true)}
             >
@@ -98,7 +104,7 @@ const QnaPage = () => {
               </button>
             </NavLink>
             <NavLink
-              to="/qna"
+              to="/board/qna"
               className={({ isActive }) => (isActive ? "active" : "")}
               onClick={() => setIsAnnouncement(false)}
             >
@@ -132,11 +138,11 @@ const ArticleList = ({ isAnnouncement, articleArray,  }) => {
   const [isAuthenticated, setIsAuthenticated] = useState("운영자")
   const navigate = useNavigate()
 
-  const handleDetailClick = () => {
+  const handleDetailClick = (id) => {
     if (isAnnouncement) {
-      navigate('/board/announcement/detail')}
+      navigate(`/board/announcement/detail/${id}`)}
     else {
-      navigate('/board/qna/detail')
+      navigate(`/board/qna/detail/${id}`)
     }
   }
   // console.log(isAuthenticated);
@@ -146,6 +152,7 @@ const ArticleList = ({ isAnnouncement, articleArray,  }) => {
       <tbody className="table-group-divider">
         {articleArray.map(
           ({
+            id,
             title,
             name,
             created_at,
@@ -158,7 +165,7 @@ const ArticleList = ({ isAnnouncement, articleArray,  }) => {
               <td className="col-2 d-flex align-items-center justify-content-center">
                 {isAnnouncement ? announce_category_name : qna_category_name}
               </td>
-              <td className="col-8 detail" onClick={handleDetailClick}>
+              <td className="col-8 detail" onClick={()=>handleDetailClick(id)}>
                 <span>{title}</span> <br />
                 <span>
                   {name} {created_at}
