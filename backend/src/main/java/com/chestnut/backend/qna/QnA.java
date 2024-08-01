@@ -35,11 +35,11 @@ public class QnA {
     private LocalDateTime answerAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id", nullable = false)
+    @JoinColumn(name="member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="qna_category_id", nullable = false)
+    @JoinColumn(name="qna_category_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private QnACategory qnaCategory;
 
     protected QnA() {}

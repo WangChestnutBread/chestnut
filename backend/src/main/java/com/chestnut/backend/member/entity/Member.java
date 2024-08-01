@@ -48,11 +48,11 @@ public class Member {
     private int ranking;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="avatar_id")
+    @JoinColumn(name="avatar_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Avatar avatar;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="study_id")
+    @JoinColumn(name="study_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Study study;
 
     @PrePersist
