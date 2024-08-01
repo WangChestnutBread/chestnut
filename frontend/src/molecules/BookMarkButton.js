@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./BookMarkButton.css"
 
 function BookMarkButton() {
   let [initialMount, setInitialMount] = useState(false);
@@ -12,16 +13,16 @@ function BookMarkButton() {
   }, [inVoca]);
 
   return (
-    <div
+    <div className="BookMarkButton"
       onClick={() => {
         setInitialMount(true);
         setInVoca(!inVoca);
       }}
     >
       {inVoca ? (
-        <img src="/icons/BookMark.svg" />
+        <img src="/icons/BookMark.svg" height="100%"/>
       ) : (
-        <img src="/icons/EmptyBookMark.svg" />
+        <img src="/icons/EmptyBookMark.svg" height="100%"/>
       )}
     </div>
   );

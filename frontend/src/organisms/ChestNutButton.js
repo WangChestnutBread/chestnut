@@ -7,7 +7,7 @@ function ChestNutButton() {
   return (
     <div className="ChestNutButton">
       <img
-        src="/icons/ChestNut.svg"
+        src="/icons/ChestNut.svg" width="100%" height="100%"
         onClick={() => {
           setShowMenu(!showMenu);
         }}
