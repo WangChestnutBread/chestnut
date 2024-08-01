@@ -13,6 +13,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/" element={<StartPage />} />
+        <Route path="/main" element={<MainPage />}/>
         <Route path='board' element={<QNApage/>}></Route>
         <Route path='qna' element={<QNApage/>}></Route>
         <Route path='board/qna/detail/' element={<QnaDetailTemplate/>}></Route>
@@ -27,9 +29,6 @@ function App() {
       {/* <MainPage /> */}
       {/* <QNApage /> */}
       {/* <QNAWritePage /> */}
-      {/* <Routes>
-        <Route path="/" element={<StartPage />} />
-      </Routes> */}
     </div>
   );
 }

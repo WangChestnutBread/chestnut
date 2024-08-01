@@ -1,9 +1,10 @@
 .Button{
-    left: 204px;
-    right: 204px;
-    bottom:111px;
-    padding-top: 10px;
-    position: absolute;
+    height: 108px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 27px;
+    display: flex;
 }
 
 .pwButton{

@@ -9,6 +9,7 @@ services:
       - DOCKER_TAG_BE=${DOCKER_TAG_BE}
       - BACKEND_PORT=${BACKEND_PORT}
       - SERVER_NAME=${SERVER_NAME}
+      - CONTEXT_PATH=${CONTEXT_PATH}
     volumes:
       - /home/ubuntu/data/certbot/conf:/etc/letsencrypt
       - /home/ubuntu/data/certbot/www:/var/www/certbot
@@ -37,6 +38,7 @@ services:
       - MYSQL_URL=${MYSQL_URL}
       - MYSQL_ROOT_USERNAME=${MYSQL_ROOT_USERNAME}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
     expose:
       - ${BACKEND_PORT}
     networks:

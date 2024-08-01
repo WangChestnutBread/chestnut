@@ -4,9 +4,12 @@ function MemberLogo(props){
     return(
         <div>
               <div className="LogoBox">
-                <img style={{width: 200, height: 100, left: 0, top: 0, position: 'absolute'}} src="/image/Logo.png" />
+                <img style={{width: 200, height: 100}} src="/image/Logo.png" />
             </div>
-            <div className="SubTitle">{props.title}</div>
+            <div className="TitleBox">
+                <div className="SubTitle">{props.title}</div>
+            </div>
+            
         </div>
     );
 }
