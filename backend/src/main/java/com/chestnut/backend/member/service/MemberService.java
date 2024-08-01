@@ -1,8 +1,8 @@
 package com.chestnut.backend.member.service;
 
-import com.chestnut.backend.common.exception.DatabaseException;
-import com.chestnut.backend.common.exception.PasswordNotEqualException;
-import com.chestnut.backend.common.exception.UnknownException;
+import com.chestnut.backend.common.exception.*;
+import com.chestnut.backend.member.dto.FindIdReqDTO;
+import com.chestnut.backend.member.dto.FindIdResDTO;
 import com.chestnut.backend.member.dto.SignupReqDTO;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MemberRepository;
@@ -20,29 +20,41 @@ public class MemberService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
-    public void signup(SignupReqDTO signupReqDTO){
-
-        //회원가입 안 되는 경우
-        //1. 비밀번호 양식 이상함 -> 애노테이션으로 해결
-        //2. 비밀전호, 확인용 비밀번호 불일치
-        //이거 다 됐으면 try catch문으로 repo에 넣기
+    public void signup(SignupReqDTO signupReqDTO) {
 
         String password = signupReqDTO.getPassword();
         String checkPassword = signupReqDTO.getCheckPassword();
-        if(!password.equals(checkPassword)){
+        if (!password.equals(checkPassword)) {
             throw new PasswordNotEqualException("604");
         }
 
-        try{
+        try {
             String codePwd = bCryptPasswordEncoder.encode(password);
             Member member = signupReqDTO.toEntity(codePwd);
             memberRepository.save(member);
-        } catch (DataAccessException e){
+        } catch (DataAccessException e) {
             throw new DatabaseException("704");
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new UnknownException("299");
         }
 
+    }
+
+    @Transactional
+    public FindIdResDTO findId(FindIdReqDTO findIdReqDTO) {
+
+        String memberName = findIdReqDTO.getMemberName();
+        String email = findIdReqDTO.getEmail();
+
+        Member findByName = memberRepository.findByMemberName(memberName)
+                .orElseThrow(()-> new MemberNotFoundException("714"));
+
+        if(!findByName.getEmail().equals(email)){
+            throw new IdEmailMismatchException("712");
+        }
+
+        FindIdResDTO findIdResDTO = new FindIdResDTO(findByName.getLoginId());
+        return findIdResDTO;
     }
 
 }
