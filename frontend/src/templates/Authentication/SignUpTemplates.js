@@ -90,7 +90,7 @@ function SignUPPage(){
             setIsId(true);
         }
         e.preventDefault();
-        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/duplication/",{
+        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/duplication",{
             params: {
                 "lgoinId": Id
             }
@@ -155,7 +155,7 @@ function SignUPPage(){
         //     setIsEmail(true);
         // }
         e.preventDefault();
-        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-request/",{
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-request",{
             "email": Email
         })
         .then(response=>{
@@ -195,7 +195,7 @@ function SignUPPage(){
             setIsAuth(true);
         }
         e.preventDefault();
-        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-check/",{
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-check",{
             "verificationCode" : Auth
         }).then(response=>{
             if(response.code==200){

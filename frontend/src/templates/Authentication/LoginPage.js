@@ -25,7 +25,7 @@ function LoginPage(){
     const success=(event)=>{
         console.log(name);
         console.log(password);
-        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login/",{
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login",{
             "loginId" : name,
             "password": password,
         })
@@ -42,14 +42,7 @@ function LoginPage(){
             }
         })
         event.preventDefault();
-    //     if(name==1234 && password==1234){
-    //          navigate("/main");
-    //     }
-    //    else{
-    //         alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
-    //         event.preventDefault();
-    //    }
-    }
+    };
     return(
         <div className="container">
             <div style={{paddingTop: 50, justifyContent: 'center', alignItems: 'center', display: 'flex'}}>

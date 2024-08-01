@@ -1,16 +1,16 @@
 import React from "react";
 import "./ChapterMenu.css";
-function ChapterMenu(){
+function ChapterMenu(props){
     return(
         <div className="card">
             <div className="subcard">
                 <div className="title">
-                    <div className="titleFont">CH5. 단어</div>
+                    <div className="titleFont">{props.title}</div>
                     <div className="imgbox">
                         <img className="imgcontent" src="https://via.placeholder.com/276x226" />
                     </div>
                 </div>
-                <button className="studybutton">
+                <button className="studybutton" onClick={props.work}>
                     <div className="buttonbox">
                         <div style={{position: 'relative'}}>
                             <div className="playbox">
