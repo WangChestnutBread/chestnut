@@ -5,9 +5,9 @@ function MainMenu({menu}) {
     return (
         <div className="MainMenu">
             {
-                menu.map((menu , index) => {
+                menu.map((menu, index) => {
                     return (
-                        <IconWithText key={index} text={menu}/>         
+                        <IconWithText key={index} text={menu.name} path={menu.path}/>         
                     )                              
                 })
             }

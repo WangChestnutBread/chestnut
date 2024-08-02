@@ -12,14 +12,14 @@ public class LgoinIdValidator implements ConstraintValidator<LoginId, String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
         if (value == null || value.trim().isEmpty()) {
-            throw new InvalidFormatException("603");
+            throw new InvalidFormatException();
         }
 
         String regex = "^[A-Za-z0-9]{5,15}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(value);
         if (!matcher.matches()) {
-            throw new InvalidFormatException("603");
+            throw new InvalidFormatException();
         }
         return true;
     }

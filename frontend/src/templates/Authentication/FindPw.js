@@ -6,7 +6,7 @@ import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
 import BackButton from "../../atoms/BackButton";
 import { useNavigate } from "react-router-dom";
 import NewInputForm from "../../organisms/Authentication/NewInputForm";
-
+import "./FindPw.css";
 function FindPw() {
     const navigate = useNavigate();
 
@@ -24,6 +24,7 @@ function FindPw() {
     const [isAuth, setIsAuth] = useState(false);
 
     const succes = () => {
+        alert("비밀번호가 변경되었습니다.")
         navigate("/member/login");
     };
 
@@ -85,31 +86,27 @@ function FindPw() {
 
     return (
         <div className="container">
-            <div style={{ paddingTop: 50, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
+            <div className="totalpage">
                 <BackButton work={GotoBack} />
                 <div style={{ width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 22, display: 'flex' }}>
                     <MemberLogo title={'PW 찾기'} />
-                    <div style={{ paddingLeft: 91, paddingRight: 91, paddingTop: 48, paddingBottom: 48, background: '#DCB78F', borderRadius: 25, overflow: 'hidden', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex' }}>
-                        <div style={{ flex: '1 1 0', alignSelf: 'stretch', paddingTop: 56, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-                            <div style={{ alignSelf: 'stretch', background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'flex' }}>
+                    <div className="formlist">
+                            <div className="idbox">
                                 <LoginIdInput title={'ID'} content={'아이디를 입력하세요'} />
                             </div>
-                            <div style={{ alignSelf: 'stretch', padding: 10, background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'inline-flex' }}>
+                            <div className="formbox">
                                 <FindIdForm title={'이메일'} content={'이메일을 입력하세요'} name={'전송'} work={handleSubmit} value={Email} input={inputEmail}/>
                             </div>
-                            <div style={{ alignSelf: 'stretch', padding: 10, background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'inline-flex' }}>
+                            <div className="formbox">
                                 <FindIdForm title={'인증번호'} text={AuthMessage} content={'인증번호를 입력하세요'} name={'확인'}  work={checkAuth} value={Auth} input={inputAuth}/>
                             </div>
-                            <div style={{ alignSelf: 'stretch', padding: 10, background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'inline-flex' }}>
+                            <div className="formbox">
                                 <NewInputForm title={'새 비밀번호'} content={'비밀번호를 입력하세요'} value={Pw} work={createPw}  text={PwMessage}/>
                             </div>
-                            <div style={{ alignSelf: 'stretch',padding: 10, background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'inline-flex' }}>
+                            <div className="formbox">
                                 <NewInputForm title={'비밀번호 확인'} content={'비밀번호를 입력하세요'} value={PwCon} work={createPwCon} text={PwConMessage}/>
                             </div>
-                        </div>
-                        <div style={{ height: 108, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex' }}>
-                            <PasswordButton button={'Pw 찾기'} work={succes} className={"Button"} />
-                        </div>
+                        <PasswordButton button={'Pw 찾기'} work={succes} className={"Button"} />
                     </div>
                 </div>
             </div>
