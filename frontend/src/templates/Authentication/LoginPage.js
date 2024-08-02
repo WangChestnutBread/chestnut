@@ -8,7 +8,7 @@ import BackButton from "../../atoms/BackButton";
 import "../../atoms/Authentication/Page.css";
 import axios from "axios";
 function LoginPage(){
-    const [name, setName] = useState("");
+    const [Id, setName] = useState("");
     const [password, setPassword]= useState("");
     const navigate = useNavigate();
 
@@ -23,10 +23,10 @@ function LoginPage(){
         navigate(-1);
     };
     const success=(event)=>{
-        console.log(name);
+        console.log(Id);
         console.log(password);
         axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login",{
-            "loginId" : name,
+            "loginId" : Id,
             "password": password,
         })
         .then(response =>{
@@ -53,7 +53,7 @@ function LoginPage(){
                 <MemberLogo title={'Login'} />
                     <div style={{paddingLeft: 91, paddingRight: 91, paddingTop: 48, paddingBottom: 48, background: '#DCB78F', borderRadius: 25, overflow: 'hidden', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex'}}>
                         <div style={{height: 246, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 14, display: 'flex'}}>
-                        <LoginIdInput title={'ID'} value={name} content={'아이디를 입력하세요'} work={handleChangeName}/>
+                        <LoginIdInput title={'ID'} value={Id} content={'아이디를 입력하세요'} work={handleChangeName}/>
                         <LoginPwInput title={'PW'} value={password} content={'비밀번호를 입력하세요'} work={handleChangePassword}/>
                         </div>
                         <div style={{paddingTop: 10, paddingBottom: 10, background: '#DCB78F', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'inline-flex'}}>
