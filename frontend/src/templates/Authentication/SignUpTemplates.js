@@ -90,13 +90,13 @@ function SignUPPage() {
                 loginId: currentId // Id 대신 currentId를 사용
             }
         }).then(response => {
-            if (response.data.code === 200) {
+            if (response.data.code == 200) {
                 setIdMessage("사용가능한 아이디 입니다.");
                 setIsId(true);
-            } else if (response.data.code === 601) {
+            } else if (response.data.code == 601) {
                 setIdMessage("이미 사용중인 아이디입니다.");
                 setIsId(false);
-            } else if (response.data.code === 603) {
+            } else if (response.data.code == 603) {
                 setIdMessage("5~15 사이의 대소문자와 숫자로만 작성해주세요.");
                 setIsId(false);
             }
@@ -109,6 +109,15 @@ function SignUPPage() {
     const createPw = (e) => {
         const currentPw = e.target.value;
         setPw(currentPw);
+        const passwordRegExp=/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+        if(!passwordRegExp.test(currentPw)){
+            setPwMessage("숫자, 영문자, 특수문자 조합으로 8자리 이상 입력해주세요.");
+            setIsPw(false);
+        }
+        else{
+            setPwMessage("안전한 비밀번호입니다.");
+            setIsPw(true);
+        }
     };
 
     const createPwCon = (e) => {
