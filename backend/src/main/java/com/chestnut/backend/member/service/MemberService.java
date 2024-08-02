@@ -5,6 +5,7 @@ import com.chestnut.backend.avatar.repository.AvatarRepository;
 import com.chestnut.backend.common.exception.*;
 import com.chestnut.backend.member.dto.FindIdReqDTO;
 import com.chestnut.backend.member.dto.FindIdResDTO;
+import com.chestnut.backend.member.dto.ResetPwdDTO;
 import com.chestnut.backend.member.dto.SignupReqDTO;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MemberRepository;
@@ -34,7 +35,6 @@ public class MemberService {
 
         try {
             String codePwd = bCryptPasswordEncoder.encode(password);
-
             Avatar avatar = avatarRepository.findByAvatarId(1)
                     .orElseThrow(AvatarNotFoundException::new);
 
@@ -76,6 +76,47 @@ public class MemberService {
         if (memberRepository.existsByLoginId(loginId)) {
             throw new DataDuplicatedException();
         }
+    }
+
+    @Transactional
+    public void resetPwd(ResetPwdDTO resetPwdDTO) {
+
+        String password = resetPwdDTO.getPassword();
+        String newPassword = resetPwdDTO.getNewPassword();
+        String newPasswordCheck = resetPwdDTO.getNewPasswordCheck();
+
+        //1. 기존 비번 - 새로운 비번 일치
+        if (password.equals(newPassword)) {
+            throw new NewPwdSameException();
+        }
+
+        //2. 새로운 비번 - 새로운 비번 확인용 일치 여부
+        if (!newPassword.equals(newPasswordCheck)) {
+            throw new PasswordNotEqualException();
+        }
+
+        //3. loginId로 해당 멤버 찾고 -> 그 멤버의 비번과 입력한 현재 비번이 일치한지 확인
+
+        String loginId = resetPwdDTO.getLoginId();
+        Member member = memberRepository.findByLoginId(loginId)
+                .orElseThrow(MemberNotFoundException::new);
+
+        String originalPassword = member.getPassword();
+        if (!bCryptPasswordEncoder.matches(password, originalPassword)) {
+            throw new PasswordNotEqualException();
+        }
+
+        try {
+            String codePwd = bCryptPasswordEncoder.encode(resetPwdDTO.getNewPassword());
+
+            Member updateMember = resetPwdDTO.toEntity(member, codePwd);
+            memberRepository.save(updateMember);
+        } catch (DataAccessException e) {
+            throw new DatabaseException();
+        } catch (Exception e) {
+            throw new UnknownException();
+        }
+
     }
 
 }
