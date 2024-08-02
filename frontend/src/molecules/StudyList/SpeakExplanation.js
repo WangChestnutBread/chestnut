@@ -14,7 +14,8 @@ const SpeakExplanation = ({ data }) => {
             <span className="leaf-text">{saying.word}</span>
           </div>
           <div className="m-2">
-          <p>{saying.pronounceMethod}</p>
+          <p style={{ color: "white" }} className="m-2">{saying.pronounceMethod}</p>
+
           </div>
         </div>
       ))}

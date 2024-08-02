@@ -15,8 +15,8 @@ const CameraOrganism = () => {
         audio={false}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={582}
-        height={356}
+        width={600}
+        height={340}
       />
       {/* <button onClick={capture}>Capture photo</button> */}
     </div>
