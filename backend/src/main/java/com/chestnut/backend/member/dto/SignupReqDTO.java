@@ -1,5 +1,6 @@
 package com.chestnut.backend.member.dto;
 
+import com.chestnut.backend.avatar.entity.Avatar;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.validation.annotation.Email;
 import com.chestnut.backend.member.validation.annotation.LoginId;
@@ -24,7 +25,7 @@ public class SignupReqDTO {
     private String memberName;
     private LocalDate birthday;
 
-    public Member toEntity(String codePassword){
+    public Member toEntity(String codePassword, Avatar SignupAvatar) {
         return Member.builder()
                 .loginId(loginId)
                 .password(codePassword)
@@ -32,6 +33,7 @@ public class SignupReqDTO {
                 .nickname(nickname)
                 .memberName(memberName)
                 .birthday(birthday)
+                .avatar(SignupAvatar)
                 .build();
     }
 

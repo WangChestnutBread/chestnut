@@ -1,5 +1,7 @@
 package com.chestnut.backend.member.service;
 
+import com.chestnut.backend.avatar.entity.Avatar;
+import com.chestnut.backend.avatar.repository.AvatarRepository;
 import com.chestnut.backend.common.exception.*;
 import com.chestnut.backend.member.dto.FindIdReqDTO;
 import com.chestnut.backend.member.dto.FindIdResDTO;
@@ -19,6 +21,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    private final AvatarRepository avatarRepository;
+
     @Transactional
     public void signup(SignupReqDTO signupReqDTO) {
 
@@ -30,7 +34,11 @@ public class MemberService {
 
         try {
             String codePwd = bCryptPasswordEncoder.encode(password);
-            Member member = signupReqDTO.toEntity(codePwd);
+
+            Avatar avatar = avatarRepository.findByAvatarId(2)
+                    .orElseThrow(AvatarNotFoundException::new);
+
+            Member member = signupReqDTO.toEntity(codePwd, avatar);
             memberRepository.save(member);
         } catch (DataAccessException e) {
             throw new DatabaseException();
