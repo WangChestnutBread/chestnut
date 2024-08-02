@@ -23,26 +23,26 @@ function SignUPPage(){
             "birthday": "2024-08-01",
         })
         .then(response=>{
-            if(response.code==200){
+            if(response.data.code==200){
                 alert("회원가입에 성공했습니다.");
                 navigate("/member/login");
             }
-            console.log(response.code);
-        })
-        .catch(error=>{
-            if(error.code==603){
+            else if(response.data.code==603){
                 alert("올바르지 않은 비밀번호 형식입니다.");
             }
-            else if(error.code==604){
+            else if(response.data.code==604){
                 alert("비밀번호가 일치하지 않습니다.");
             }
-            else if(error.code==707){
+            else if(response.data.code==707){
                 alert("MySQL CRUD 실패");
             }
-            else if(error.code==299){
+            else if(response.data.code==299){
                 alert("알 수 없는 오류로 인해 회원가입에 실패했습니다.");
             }
-            console.log(error.code);
+            console.log(response);
+        })
+        .catch(error=>{
+            console.log(error);
         })
         
     };
@@ -95,21 +95,21 @@ function SignUPPage(){
                 "lgoinId": Id
             }
         }).then(response=>{
-            if(response.code==200){
+            if(response.data.code==200){
                 setIdMessage("사용가능한 아이디 입니다.");
                 setIsId(true)
             }
-            console.log(response.code);
-        }).catch(error=>{
-            if(error==601){
+            else if(response.data.code==601){
                 setIdMessage("이미 사용중인 아이디입니다.");
                 setIsId(false);
             }
-            else if(error==603){
+            else if(response.data.code==603){
                 setIdMessage("5~15 사이의 대소문자와 숫자로만 작성해주세요.");
                 setIsId(false);
             }
-            console.log(error.code);
+            console.log(response);
+        }).catch(error=>{
+            console.log(error);
         });
     };
 
@@ -159,30 +159,30 @@ function SignUPPage(){
             "email": Email
         })
         .then(response=>{
-            if(response.code==200){
+            if(response.data.code==200){
                 setEmailMessage("인증번호가 전송되었습니다.");
                 setIsEmail(true);
             }
-            console.log(response.code);
-        })
-        .catch(error=>{
-            if(error.code==601){
+            if(response.data.code==601){
                 setEmailMessage("이미 존재하는 이메일입니다.");
                 setIsEmail(false);
             }
-            else if(error.code==603){
+            else if(response.data.code==603){
                 setEmailMessage("올바르지 않은 이메일 양식입니다.");
                 setIsEmail(false);
             }
-            else if(error.code==606){
+            else if(response.data.code==606){
                 setEmailMessage("인증번호 보내는 데 실패했습니다.");
                 setIsEmail(false);
             }
-            else if(error.code==299){
+            else if(response.data.code==299){
                 setEmailMessage("알 수 없는 오류로 다시 시도하시기 바랍니다.");
                 setIsEmail(false);
             }
-            console.log(error.code);
+            console.log(response);
+        })
+        .catch(error=>{
+            console.log(error);
         })
     };
 
@@ -198,25 +198,25 @@ function SignUPPage(){
         axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-check",{
             "verificationCode" : Auth
         }).then(response=>{
-            if(response.code==200){
+            if(response.data.code==200){
                 setAuthMessage("인증번호가 일치합니다.");
                 setIsAuth(true);
             }
-            console.log(response.code);
-        }).catch(error=>{
-            if(error.code==605){
+            else if(response.data.code==605){
                 setAuthMessage("인증번호가 일치하지 않습니다.");
                 setIsAuth(false);
             }
-            else if(error.code==602){
+            else if(response.data.code==602){
                 setAuthMessage("유효시간 초과로 다시 하셔야 합니다.");
                 setIsAuth(false);
             }
-            else if(error.code==299){
+            else if(response.data.code==299){
                 setAuthMessage("알수 없는 오류로 인해 다시 시도 해주세요.");
                 setIsAuth(false);
             }
-            console.log(error.code);
+            console.log(response);
+        }).catch(error=>{
+            console.log(error);
         })
     };
 
@@ -241,17 +241,17 @@ function SignUPPage(){
         })
         .then(response=>{
             console.log(response);
-            if(response.code==200){
+            if(response.data.code==200){
                 setnickMessage("사용 가능한 닉네임입니다.");
                 setIsNickname(true)
                 
             }
-        })
-        .catch(error=>{
-            if(error.code==710){
+            else if(response.data.code==710){
                 setnickMessage("이미 중복된 닉네임입니다.");
                 setIsNickname(false);
             }
+        })
+        .catch(error=>{
             console.log(error);
         })
     };
