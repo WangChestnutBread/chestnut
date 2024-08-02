@@ -13,10 +13,11 @@ import Button from "../../molecules/Authentication/Button";
 
 function SignUPPage() {
     const navigate = useNavigate();
+    //뒤로가기 버튼
     const GotoBack = () => {
         navigate(-1);
     };
-
+    //회원 가입에 필요한 변수 선언
     const [Id, setId] = useState("");
     const [Pw, setPw] = useState("");
     const [PwCon, setPwCon] = useState("");
@@ -25,6 +26,7 @@ function SignUPPage() {
     const [Auth, setAuth] = useState("");
     const [nickname, setnickname] = useState("");
 
+    //회원에게 보여줄 경고 메시지 변수
     const [IdMessage, setIdMessage] = useState("");
     const [PwMessage, setPwMessage] = useState("");
     const [PwConMessage, setPwConMessage] = useState("");
@@ -32,6 +34,7 @@ function SignUPPage() {
     const [AuthMessage, setAuthMessage] = useState("");
     const [nickMessage, setnickMessage] = useState("");
 
+    //회원정보가 생성된 부분 포함할 변수
     const [isId, setIsId] = useState(false);
     const [isname, setIsName] = useState(false);
     const [isPw, setIsPw] = useState(false);
@@ -40,6 +43,7 @@ function SignUPPage() {
     const [isAuth, setIsAuth] = useState(false);
     const [isNickname, setIsNickname] = useState(false);
 
+    //회원가입 버튼을 눌렀을 때 요청내어줄 회원 정보 전송하는 AXIOS함수
     const succes = () => {
         console.log(Id);
         console.log(Email);
@@ -77,11 +81,12 @@ function SignUPPage() {
 
     };
 
+    //onchange할 때마다 Id변수에 저장시켜줄 기능을 가진 함수
     const inputId = (e) => {
         const currentId = e.target.value;
         setId(currentId);
     };
-
+    //Id 중복검사하는 axios 함수(중복 인증 버튼을 클릭했을 경우)
     const createId = (e) => {
         e.preventDefault(); // 기본 동작 방지
         const currentId = Id;
@@ -106,6 +111,7 @@ function SignUPPage() {
         });
     };
 
+    //비밀번호 생성할 경우 조건(영대소문자, 특수기호, 숫자)를 만족하는 지 체크하는 함수
     const createPw = (e) => {
         const currentPw = e.target.value;
         setPw(currentPw);
@@ -120,6 +126,7 @@ function SignUPPage() {
         }
     };
 
+    //비밀번호 확인해서 일치하는 지 확인하는 함수
     const createPwCon = (e) => {
         const currentPwCon = e.target.value;
         setPwCon(currentPwCon)
@@ -133,7 +140,8 @@ function SignUPPage() {
 
         }
     };
-
+    
+    //이메일을 생성해서 인증번호 전송하는 함수(인증 버튼 클릭했을 때)
     const createEmail = (e) => {
         e.preventDefault();
         const currentEmail = Email;
@@ -165,6 +173,7 @@ function SignUPPage() {
             })
     };
 
+    //인증번호가 보낸 번호와 일치하는 지 확인하는 함수
     const checkAuth = (e) => {
         e.preventDefault();
         if (Auth !== "1234") {
@@ -196,21 +205,25 @@ function SignUPPage() {
         })
     };
 
+    //onchange에 의해 입력되는 인증번호가 Auth변수에 담기는 함수
     const inputAuth = (e) => {
         const currentAuth = e.target.value;
         setAuth(currentAuth);
     };
 
+    //onchange에 의해 입력되는 이름이 Name변수에 담기는 함수
     const inputName = (e) => {
         const inputname = e.target.value;
         setName(inputname);
     };
 
+    //onchange에 의해 입력되는 이메일이 Email변수에 담기는 함수
     const inputEmail = (e) => {
         const inputemail = e.target.value;
         setEmail(inputemail);
     };
 
+    //닉네임 중복 체크 관련 함수
     const checkname = (e) => {
         e.preventDefault();
         axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-nickname", {
@@ -234,11 +247,12 @@ function SignUPPage() {
             })
     };
 
+    //사용자 이름을 onchange에 의해 입력되는 함수
     const inputname = (e) => {
         const currentname = e.target.value;
         setnickname(currentname);
     };
-
+    //본 디자인 프레임
     return (
         <div className="container">
             <div style={{ paddingTop: 50, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
