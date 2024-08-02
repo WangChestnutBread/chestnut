@@ -116,15 +116,15 @@ function SignUPPage(){
     const createPw=(e)=>{
         const currentPw=e.target.value;
         setPw(currentPw);
-        const passwordRegExp=/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-        if(!passwordRegExp.test(currentPw)){
-            setPwMessage("숫자, 영문자, 특수문자 조합으로 8자리 이상 입력해주세요.");
-            setIsPw(false);
-        }
-        else{
-            setPwMessage("안전한 비밀번호입니다.");
-            setIsPw(true);
-        }
+        // const passwordRegExp=/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+        // if(!passwordRegExp.test(currentPw)){
+        //     setPwMessage("숫자, 영문자, 특수문자 조합으로 8자리 이상 입력해주세요.");
+        //     setIsPw(false);
+        // }
+        // else{
+        //     setPwMessage("안전한 비밀번호입니다.");
+        //     setIsPw(true);
+        // }
     };
 
     const createPwCon=(e)=>{
