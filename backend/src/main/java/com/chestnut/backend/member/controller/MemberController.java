@@ -7,7 +7,6 @@ import com.chestnut.backend.member.dto.FindIdReqDTO;
 import com.chestnut.backend.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +20,7 @@ public class MemberController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDTO signupReqDTO) {
-        System.out.println("회원가입 시작");
         memberService.signup(signupReqDTO);
-        System.out.println(signupReqDTO);
-        System.out.println("객체 확인함"+signupReqDTO.getMemberName());
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
