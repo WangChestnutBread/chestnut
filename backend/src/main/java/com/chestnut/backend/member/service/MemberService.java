@@ -35,7 +35,7 @@ public class MemberService {
         try {
             String codePwd = bCryptPasswordEncoder.encode(password);
 
-            Avatar avatar = avatarRepository.findByAvatarId(2)
+            Avatar avatar = avatarRepository.findByAvatarId(1)
                     .orElseThrow(AvatarNotFoundException::new);
 
             Member member = signupReqDTO.toEntity(codePwd, avatar);
