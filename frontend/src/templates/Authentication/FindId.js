@@ -25,7 +25,7 @@ function FindId(){
         })
         .then(response=>{
             if(response.data.code==200){
-                alert(`당신의 아이디는 ${response.data.loginId}`);
+                alert(`당신의 아이디는 ${response.data.data.loginId}`);
             }
             else if(response.data.code==714){
                 alert("멤버 조회에 실패했습니다.")

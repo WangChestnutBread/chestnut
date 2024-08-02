@@ -6,7 +6,6 @@ import LoginPwInput from "../../molecules/Authentication/LoginPwInput";
 import Button from "../../molecules/Authentication/Button";
 import BackButton from "../../atoms/BackButton";
 import "../../atoms/Authentication/Page.css";
-import "./Login.css";
 import axios from "axios";
 function LoginPage(){
     const [Id, setName] = useState("");

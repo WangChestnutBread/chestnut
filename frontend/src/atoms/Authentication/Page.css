@@ -166,3 +166,26 @@
     border: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+.no-underline {
+    text-decoration: none;
+}
+.idcheck{
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-family: 'Jua';
+    font-weight: 400;
+    word-wrap: break-word;
+    text-decoration: none;
+}
+.passwordcheck{
+    width: 108px;
+    height: 25px;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-family: 'Jua';
+    font-weight: 400;
+    word-wrap: break-word;
+    text-decoration: none;
+}
