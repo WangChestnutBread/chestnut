@@ -90,7 +90,7 @@ function SignUPPage(){
             setIsId(true);
         }
         e.preventDefault();
-        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/duplication",{
+        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-loginId",{
             params: {
                 "lgoinId": Id
             }
@@ -234,7 +234,7 @@ function SignUPPage(){
         //     setIsName(true);
         // }
         e.preventDefault();
-        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/duplication", {
+        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-nickname", {
             params: {
                 "nickname": nickname
             }

@@ -1,0 +1,32 @@
+.formbox, .idbox{
+    align-self: stretch;
+    background: rgba(255, 249, 239, 0);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    display: inline-flex;
+}
+.formbox{
+    padding: 10px;;
+}
+.formlist{
+    padding-left: 91px;
+    padding-right: 91px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    background: #DCB78F;
+    border-radius: 25px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 27px;
+    display: flex;
+}
+.totalpage{
+    padding-top: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
