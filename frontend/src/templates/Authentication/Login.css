@@ -34,6 +34,7 @@
     font-family: 'Jua';
     font-weight: 400;
     word-wrap: break-word;
+    text-decoration: none;
 }
 .passwordcheck{
     width: 108px;
@@ -44,4 +45,5 @@
     font-family: 'Jua';
     font-weight: 400;
     word-wrap: break-word;
+    text-decoration: none;
 }
