@@ -43,6 +43,7 @@ public class MemberService {
         } catch (DataAccessException e) {
             throw new DatabaseException();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new UnknownException();
         }
 
