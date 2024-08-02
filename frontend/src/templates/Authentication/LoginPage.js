@@ -30,16 +30,18 @@ function LoginPage(){
             "password": password,
         })
         .then(response =>{
-            if(response.code==200){
+            if(response.data.code==200){
                 navigate("/main");
-                console.log(response.code)
+                
             }
+            else if(response.data.code==706){
+                alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
+              
+            } 
+            console.log(response)
         })
         .catch(error=>{
-            if(error.code==706){
-                alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
-                console.log(error.code);
-            }
+            console.log(error);
         })
         event.preventDefault();
     };
