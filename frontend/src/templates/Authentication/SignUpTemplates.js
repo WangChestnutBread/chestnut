@@ -240,7 +240,7 @@ function SignUPPage(){
             }
         })
         .then(response=>{
-            console.log(response.code);
+            console.log(response);
             if(response.code==200){
                 setnickMessage("사용 가능한 닉네임입니다.");
                 setIsNickname(true)
@@ -252,7 +252,7 @@ function SignUPPage(){
                 setnickMessage("이미 중복된 닉네임입니다.");
                 setIsNickname(false);
             }
-            console.log(error.code);
+            console.log(error);
         })
     };
     const inputname=(e)=>{
