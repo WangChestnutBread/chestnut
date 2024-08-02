@@ -240,10 +240,11 @@ function SignUPPage(){
             }
         })
         .then(response=>{
+            console.log(response.code);
             if(response.code==200){
                 setnickMessage("사용 가능한 닉네임입니다.");
                 setIsNickname(true)
-                console.log(response.code);
+                
             }
         })
         .catch(error=>{
