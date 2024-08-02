@@ -19,13 +19,6 @@ function FindId(){
 
     const navigate=useNavigate();
     const succes=()=>{
-        if(name=="이재혁" && email=="1234@naver.com"){
-            alert("당신의 아이디는 1234입니다.");
-            navigate("/member/login");
-        }
-        else{
-            alert("당신의 정보를 잘못 입력하셨습니다.");
-        }
         axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/find-id",{
             memberName: name,
             email: email
@@ -43,6 +36,7 @@ function FindId(){
             else{
                 alert("알수 없는 오류가 발생했습니다.")
             }
+            console.log(response);
         })
         
     };
