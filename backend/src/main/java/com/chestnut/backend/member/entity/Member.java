@@ -1,10 +1,11 @@
 package com.chestnut.backend.member.entity;
 
-import com.chestnut.backend.avatar.Avatar;
+import com.chestnut.backend.avatar.entity.Avatar;
 import com.chestnut.backend.study.entity.Study;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import static java.time.LocalDateTime.now;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
+@DynamicInsert
 public class Member {
 
     @Id
@@ -52,7 +54,7 @@ public class Member {
     private Avatar avatar;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="study_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name="study_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = true)
     private Study study;
 
     @PrePersist

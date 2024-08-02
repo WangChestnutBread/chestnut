@@ -15,16 +15,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
-@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDTO signupReqDTO) {
-        log.info("로그인 시작");
-        log.info("dto"+signupReqDTO);
-        System.out.println("로그인 시작");
         memberService.signup(signupReqDTO);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
@@ -37,7 +33,6 @@ public class MemberController {
 
     @GetMapping("/check-nickname")
     public ResponseEntity<?> checkNicknameDuplicate(@RequestParam String nickname) {
-        System.out.println("닉네임 체크");
         memberService.checkNicknameDuplicate(nickname);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
