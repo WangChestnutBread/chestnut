@@ -145,7 +145,6 @@ function SignUPPage(){
         //     setEmailMessage("사용 가능한 이메일 입니다.");
         //     setIsEmail(true);
         // }
-        e.preventDefault();
         axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-request",{
             email: Email
         })
@@ -175,8 +174,9 @@ function SignUPPage(){
         .catch(error=>{
             console.log(error);
         })
+        e.preventDefault();
     };
-
+    //Auth에서 인증 버튼을 통해서 
     const checkAuth = (e) => {
         if (Auth !== "1234") {
             setAuthMessage("인증번호가 일치하지 않습니다.");
@@ -210,20 +210,24 @@ function SignUPPage(){
         })
         e.preventDefault();
     };
-
+    //onchange에 Auth변수에 입력
     const inputAuth = (e) => {
         const currentAuth = e.target.value;
         setAuth(currentAuth);
     };
+    //onchange에 name변수에 입력
+    const inputName=(e)=>{
+        const inputname=e.target.value;
+        setName(inputname);
+    };
+    //onchange에 Email변수에 입력
+    const inputEmail=(e)=>{
+        const inputemail=e.target.value;
+        setEmail(inputemail);
 
+    };
+    //닉네임 중복확인
     const checkname=(e)=>{
-        // if (nickname == "ssafy") {
-        //     setNameMessage("이미 사용중인 닉네임입니다.");
-        //     setIsName(false);
-        // } else {
-        //     setNameMessage("사용 가능한 닉네임입니다.");
-        //     setIsName(true);
-        // }
         axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-nickname", {
             params: {
                 nickname: nickname
@@ -262,9 +266,9 @@ function SignUPPage(){
                             <InspectionForm content={'ID'} text={IdMessage} name={'중복인증'} work={createId} value={Id} input={inputId}/>
                             <SignUpPwInput content={'PW'} text={PwMessage} work={createPw} value={Pw}/>
                             <SignUpPwInput content={'PW 재확인'} text={PwConMessage} work={createPwCon} value={PwCon}/>
-                            <InspectionForm content={'이메일'} text={EmailMessage} name={'인증'} work={createEmail}/>
+                            <InspectionForm content={'이메일'} text={EmailMessage} name={'인증'} work={createEmail} input={inputEmail}/>
                             <InspectionForm content={'인증번호'} name={'확인'} text={AuthMessage} work={checkAuth} value={Auth} input={inputAuth}/>
-                            <LoginInputForm content={'이름'} />
+                            <LoginInputForm content={'이름'} name={name} work={inputName}/>
                             <InspectionForm content={'닉네임'} name={'중복확인'} text={nickMessage} work={checkname} value={nickname} input={inputname} />
                             <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'inline-flex'}}>
                                 <Birth year={'년도'}/>
