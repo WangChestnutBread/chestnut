@@ -40,6 +40,12 @@ function SignUPPage(){
     const [isNickname, setIsNickname]=useState(false);
 
     const succes=()=>{
+        console.log(Id);
+        console.log(Email);
+        console.log(Pw);
+        console.log(PwCon);
+        console.log(name);
+        console.log(nickname);
         axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/signup",{
             loginId: Id,
             email: Email,
@@ -101,6 +107,7 @@ function SignUPPage(){
         }).catch(error=>{
             console.log(error);
         });
+        e.preventDefault();
     };
 
     const createPw=(e)=>{
