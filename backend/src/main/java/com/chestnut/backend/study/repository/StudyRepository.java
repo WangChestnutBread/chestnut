@@ -1,10 +1,21 @@
 package com.chestnut.backend.study.repository;
 
+import com.chestnut.backend.study.dto.PronounceMethodDto;
 import com.chestnut.backend.study.entity.Study;
+import com.chestnut.backend.study.entity.SyllableLocation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
 public interface StudyRepository extends JpaRepository<Study, Long> {
     Optional<Study> findByStudyId(Long studyId);
+
+    @Query(
+            "select new com.chestnut.backend.study.dto.PronounceMethodDto(s.word, sr.pronounceMethod) " +
+                    "from Study s join StudyResource sr on s.studyId = sr.studyId " +
+                    "where s.word = :word and sr.syllableLocation = :location"
+    )
+    Optional<PronounceMethodDto> findPronounceMethod(@Param("word") String word, @Param("location") SyllableLocation location);
 }

@@ -2,8 +2,10 @@ package com.chestnut.backend.study.service;
 
 import com.chestnut.backend.member.repository.MemberRepository;
 import com.chestnut.backend.study.dto.*;
+import com.chestnut.backend.study.entity.StudyResource;
 import com.chestnut.backend.study.entity.SyllableLocation;
 import com.chestnut.backend.study.repository.StudyInfoRepository;
+import com.chestnut.backend.study.repository.StudyRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -26,6 +29,9 @@ class StudyServiceTest {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
+    StudyRepository studyRepository;
 
     @Test
     public void 챕터_정보_조회() throws Exception {
@@ -58,10 +64,11 @@ class StudyServiceTest {
     }
 
     @Test
-    public void 학습컨텐츠_단어_발음_조회() throws Exception {
-        WordPronounceDto wordInfo = studyService.getWordInfo(28L);
-        System.out.println(wordInfo);
-        System.out.println("Enum name() 값: " + SyllableLocation.FINAL.name());
+    public void 발음_방법_조회() throws Exception {
+        Optional<PronounceMethodDto> resource = studyRepository.findPronounceMethod("ㄱ", SyllableLocation.INITIAL);
+        System.out.println(resource.get());
     }
+
+
 
 }
