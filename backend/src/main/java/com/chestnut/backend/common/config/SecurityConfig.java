@@ -8,6 +8,7 @@ import com.chestnut.backend.member.repository.RefreshRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -47,7 +48,8 @@ public class SecurityConfig {
                 .httpBasic((auth) -> auth.disable());
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/member/login", "/", "/join", "/member/signup").permitAll() //이 경로에 대해서는 모든 권한 허용
+                        .requestMatchers("/member/login", "/member/find-id","/member/signup").permitAll() //이 경로에 대해서는 모든 권한 허용
+                        .requestMatchers("/member/check-nickname", "/member/check-loginId").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN") //"/admin" 경로는 ADMIN 권한을 가진 사용자만 접근 허용
                         .requestMatchers("/reissue").permitAll()
                         .anyRequest().authenticated()); //그 외는 로그인 한 사용자만 접근 가능

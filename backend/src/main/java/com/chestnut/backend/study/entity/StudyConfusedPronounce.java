@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Entity
 @Table(name="study_confused_pronounce")
-@DiscriminatorValue("confused_pronounce")
+@DiscriminatorValue("CONFUSED_PRONOUNCE")
 @Getter
 public class StudyConfusedPronounce extends Study {
 

@@ -1,0 +1,32 @@
+.ChestNutButton {
+  width: 50px;
+  height: 40px;
+  position: relative;
+  cursor: pointer;
+}
+
+.DropMenu {
+  position: absolute;
+  top: calc(100% + 20px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  width: 280px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.DropMenu > :last-child {
+  border-bottom: none !important;
+}
+
+.DropMenu::after {
+  position: absolute;
+  top: -20px;
+  left: 15px;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: white;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}

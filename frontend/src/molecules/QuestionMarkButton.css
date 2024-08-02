@@ -1,0 +1,44 @@
+.QuestionMarkButton {
+  position: relative;
+  cursor: pointer;
+  height: 40px;
+}
+
+.UserGuide {
+  display: flex;
+  position: absolute;
+  width: 500px;
+  height: 400px;
+  top: calc(100% + 20px);
+  right: -50%;
+}
+
+.UserGuide::after {
+  position: absolute;
+  top: -20px;
+  right: 25px;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: white;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.Guide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px 30px;
+  gap: 15px;
+  border-radius: 25px;
+  background: white;
+  top: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.GuideTitle {
+}
+
+.GuideText {
+}

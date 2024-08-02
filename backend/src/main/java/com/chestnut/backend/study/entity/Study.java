@@ -8,8 +8,9 @@ import lombok.Getter;
 @Table(name="Study")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name="chapter_type")
+@DiscriminatorValue("NONE")
 @Getter
-public abstract class Study {
+public class Study {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int unsigned")
     private Long studyId;

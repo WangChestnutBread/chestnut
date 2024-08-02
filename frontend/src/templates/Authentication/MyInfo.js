@@ -6,7 +6,27 @@ import Button from "../../molecules/Authentication/Button";
 import InfoBox from "../../molecules/Authentication/InfoBox";
 import BirthInfo from "../../atoms/Authentication/MemberBirth/BirthInfo";
 import LoginIdPwFont from "../../atoms/Authentication/LoginIdPwFont";
+import axios from "axios";
 function MyInfo(){
+    axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/info",{
+        params: {
+            "Authorization": `Bearer {accessToken}`,
+        }
+    })
+    .then(response=>{
+        console.log(response);
+    })
+    .catch(error=>{
+        if(error.code==801){
+            alert("유효하지 않는 토큰입니다.");
+        }
+        else if(error.code==710){
+            alert("DB에 저장된 데이터가 없습니다.");
+        }
+        else if(error.code==714){
+            alert("아이디가 없습니다.");
+        }
+    });
     const navigate = useNavigate();
     const navigateToPurchase = ()=>{
         navigate("/myprofile/edit");

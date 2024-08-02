@@ -1,0 +1,14 @@
+.DropItem {
+  display: flex;
+  padding: 15px 25px;
+  /* gap: 10px; */
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  cursor: pointer;
+  transition: 0.2s background;
+}
+
+.DropItem:hover {
+  background: #dcb78f;
+}

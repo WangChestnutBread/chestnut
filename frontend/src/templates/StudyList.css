@@ -1,4 +1,4 @@
-.img{
+.imgsqueez{
     width: 171px;
     height: 183px;
     border-radius: 2px;
@@ -19,4 +19,78 @@
     font-weight: 400;
     line-height: 1;
     word-Wrap: break-word;
+}
+.titleBox{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.textBox{
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+}
+.cardlist{
+    width: 276px;
+    height: 282px;
+    margin-right: 30px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+}
+.cardgroup{
+    width: 1194px;
+    height: 282px;
+    padding-left: 30px;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+.group-box{
+    align-self: stretch;
+    justify-content: center;
+    alignItems: center;
+    gap: 10px;
+    display: inline-flex;
+}
+.chapterlist{
+    flex: 1 1 0;
+    align-self: stretch;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.img-con{
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+}
+.cardgroup-sec{
+    height: 283px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px; 
+    display: flex;
+}
+.chapterTotalBox{
+    width: 1194px;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+.chapterinnerbox{
+    width: 1194px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 79px;
+    display: inline-flex;
 }
