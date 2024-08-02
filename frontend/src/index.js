@@ -29,10 +29,11 @@ import Chapter2Listpage from "./templates/Chapter2Listpage";
 import Chapter3Listpage from "./templates/Chapter3Listpage";
 import Chapter5Listpage from "./templates/Chapter5Listpage";
 import Chapter6Listpage from "./templates/Chapter6Listpage";
+import RankingTemplate from "./templates/RankingTemplate";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/a",
     element: <StartTemplates />
   },
   {
@@ -126,12 +127,17 @@ const router = createBrowserRouter([
   {
     path: "/main",
     element: <MainPage/>
-  }
+  },
+  {
+    path: "/abc",
+    element: <RankingTemplate />
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    {/* <App /> */}
     <RouterProvider router={router} />
   </React.StrictMode>
 );
