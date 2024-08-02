@@ -4,6 +4,7 @@ import MemberLogo from "../../molecules/Authentication/MemberLogo";
 import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
 import Button from "../../molecules/Authentication/Button";
 import BackButton from "../../atoms/BackButton";
+import axios from "axios";
 function FindId(){
     const [name, setName]=useState("");
     const [email, setEmail]=useState("");
