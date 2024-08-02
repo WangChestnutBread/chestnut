@@ -64,10 +64,10 @@ function LoginPage(){
                             <Button button={'로그인'} work={success}/>
                             <div style={{display: 'flex', flexDirection: 'row'}}>
                                 <Link to="/member/find-id">
-                                    <div style={{textAlign: 'center', color: 'black', fontSize: 20, fontFamily: 'Jua', fontWeight: '400', wordWrap: 'break-word'}}>ID 찾기</div>
+                                    <div className="idcheck no-underline">ID 찾기</div>
                                 </Link>
                                 <Link to="/member/password">
-                                    <div style={{width: 108, height: 25, textAlign: 'center', color: 'black', fontSize: 20, fontFamily: 'Jua', fontWeight: '400', wordWrap: 'break-word'}}>/ PW 찾기<br/></div>
+                                    <div className="passwordcheck no-underline">/ PW 찾기<br/></div>
                                 </Link>
                             </div>
                         </div>

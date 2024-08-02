@@ -14,13 +14,13 @@ function SignUPPage(){
     const navigate = useNavigate();
     const succes=()=>{
         axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/signup",{
-            "loginId": Id,
-            "email": Email,
-            "password": Pw,
-            "checkPassword": PwCon,
-            "name": name,
-            "nickname": nickname,
-            "birthday": "2024-08-01",
+            loginId: Id,
+            email: Email,
+            password: Pw,
+            checkPassword: PwCon,
+            name: name,
+            nickname: nickname,
+            birthday: "2024-08-01",
         })
         .then(response=>{
             if(response.data.code==200){
@@ -92,7 +92,7 @@ function SignUPPage(){
         e.preventDefault();
         axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-loginId",{
             params: {
-                "loginId": Id
+                loginId: Id
             }
         }).then(response=>{
             if(response.data.code==200){
@@ -156,7 +156,7 @@ function SignUPPage(){
         // }
         e.preventDefault();
         axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-request",{
-            "email": Email
+            email: Email
         })
         .then(response=>{
             if(response.data.code==200){
@@ -196,7 +196,7 @@ function SignUPPage(){
         }
         e.preventDefault();
         axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-check",{
-            "verificationCode" : Auth
+            verificationCode : Auth
         }).then(response=>{
             if(response.data.code==200){
                 setAuthMessage("인증번호가 일치합니다.");
@@ -236,7 +236,7 @@ function SignUPPage(){
         e.preventDefault();
         axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-nickname", {
             params: {
-                "nickname": nickname
+                nickname: nickname
             }
         })
         .then(response=>{
