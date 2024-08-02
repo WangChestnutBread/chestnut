@@ -8,16 +8,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/study")
 public class StudyController {
 
     private final StudyService studyService;
 
-    @GetMapping("/study/chapter")
+    @GetMapping("/chapter")
     public ResponseEntity<?> chapterInfo() {
         try {
             //loginId 추출 로직 추가
@@ -31,7 +33,7 @@ public class StudyController {
         }
     }
 
-    @GetMapping("/study/chapter/{chapterId}")
+    @GetMapping("/chapter/{chapterId}")
     public ResponseEntity<?> chapterStudyList(@PathVariable("chapterId") Integer chapterId) {
         try {
             //loginId 추출 로직 추가
