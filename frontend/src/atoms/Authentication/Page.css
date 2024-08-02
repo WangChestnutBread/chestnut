@@ -155,8 +155,7 @@
 .MyInfoBox{
     width: 582px;
     height: 50px;
-    padding-top: 9px;
-    padding-bottom: 11px;
+    padding: 10px;
     background: #D9D9D9;
     border-radius: 5px;
     overflow: hidden;
@@ -165,4 +164,27 @@
     display: inline-flex;
     border: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.no-underline {
+    text-decoration: none;
+}
+.idcheck{
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-family: 'Jua';
+    font-weight: 400;
+    word-wrap: break-word;
+    text-decoration: none;
+}
+.passwordcheck{
+    width: 108px;
+    height: 25px;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-family: 'Jua';
+    font-weight: 400;
+    word-wrap: break-word;
+    text-decoration: none;
 }

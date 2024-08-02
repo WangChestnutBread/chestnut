@@ -1,0 +1,14 @@
+.VerticalLine {
+    position: absolute;
+    height: 85%;
+    left: 40%;
+    top: 8%;
+    bottom: 0;
+    width: 5px;
+    background: linear-gradient(to bottom, 
+    transparent 0%, 
+    transparent 10px, 
+    white 10px, 
+    white 20px);
+    background-size: 5px 30px;
+}

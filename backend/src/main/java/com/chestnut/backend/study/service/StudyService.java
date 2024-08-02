@@ -3,15 +3,20 @@ package com.chestnut.backend.study.service;
 import com.chestnut.backend.common.exception.NotFoundException;
 import com.chestnut.backend.member.repository.MemberRepository;
 import com.chestnut.backend.study.dto.ChapterInfoDto;
+import com.chestnut.backend.study.dto.PronounceMethodDto;
 import com.chestnut.backend.study.dto.WordPronounceDto;
 import com.chestnut.backend.study.entity.Study;
+import com.chestnut.backend.study.entity.StudyResource;
+import com.chestnut.backend.study.entity.SyllableLocation;
 import com.chestnut.backend.study.repository.StudyInfoRepository;
 import com.chestnut.backend.study.repository.StudyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -52,8 +57,30 @@ public class StudyService {
     public WordPronounceDto getWordInfo(Long studyId) {
         Study study = studyRepository
                 .findById(studyId)
-                .orElseThrow(() -> new NotFoundException("학습 정보를 찾을 수 없음"));
+                .orElseThrow(NotFoundException::new);
         return new WordPronounceDto(study.getWord(), study.getPronounce());
     }
+
+    /**
+     * 학습 상세 페이지 - 발음 방법
+     */
+    @Transactional(readOnly = true)
+    public List<PronounceMethodDto> getPronounceMethod(Map<String, String> words) {
+        List<PronounceMethodDto> list = new ArrayList<>();
+        SyllableLocation[] locations = SyllableLocation.values();
+        String[] params = new String[]{"initial", "middle", "last"};
+
+        for (int i = 0; i < 3; i++) {
+            String word = words.getOrDefault(params[i], "none");
+            if (word.equals("none")) continue;
+            PronounceMethodDto dto = studyRepository.findPronounceMethod(word, locations[i])
+                    .orElseThrow(NotFoundException::new);
+            list.add(dto);
+        }
+
+        return list;
+    }
+
+
 
 }

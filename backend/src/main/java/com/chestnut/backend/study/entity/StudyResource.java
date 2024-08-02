@@ -2,11 +2,13 @@ package com.chestnut.backend.study.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.ToString;
 
 //읽기 전용 테이블이므로 기본 생성자만 만들고 따로 다른 생성자나 Builder은 만들지 않겠음
 @Entity
 @Table(name="Study_resource")
 @DiscriminatorValue("RESOURCE")
+@ToString
 @Getter
 public class StudyResource extends Study {
 

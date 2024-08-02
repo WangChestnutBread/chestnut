@@ -8,7 +8,7 @@ import BackButton from "../../atoms/BackButton";
 import "../../atoms/Authentication/Page.css";
 import axios from "axios";
 function LoginPage(){
-    const [name, setName] = useState("");
+    const [Id, setName] = useState("");
     const [password, setPassword]= useState("");
     const navigate = useNavigate();
 
@@ -23,33 +23,28 @@ function LoginPage(){
         navigate(-1);
     };
     const success=(event)=>{
-        console.log(name);
+        console.log(Id);
         console.log(password);
-        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login/",{
-            "loginId" : name,
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login",{
+            "loginId" : Id,
             "password": password,
         })
         .then(response =>{
-            if(response.code==200){
+            if(response.data.code==200){
                 navigate("/main");
-                console.log(response.code)
+                
             }
+            else if(response.data.code==706){
+                alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
+              
+            } 
+            console.log(response)
         })
         .catch(error=>{
-            if(error.code==706){
-                alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
-                console.log(error.code);
-            }
+            console.log(error);
         })
         event.preventDefault();
-    //     if(name==1234 && password==1234){
-    //          navigate("/main");
-    //     }
-    //    else{
-    //         alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
-    //         event.preventDefault();
-    //    }
-    }
+    };
     return(
         <div className="container">
             <div style={{paddingTop: 50, justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
@@ -58,7 +53,7 @@ function LoginPage(){
                 <MemberLogo title={'Login'} />
                     <div style={{paddingLeft: 91, paddingRight: 91, paddingTop: 48, paddingBottom: 48, background: '#DCB78F', borderRadius: 25, overflow: 'hidden', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex'}}>
                         <div style={{height: 246, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 14, display: 'flex'}}>
-                        <LoginIdInput title={'ID'} value={name} content={'아이디를 입력하세요'} work={handleChangeName}/>
+                        <LoginIdInput title={'ID'} value={Id} content={'아이디를 입력하세요'} work={handleChangeName}/>
                         <LoginPwInput title={'PW'} value={password} content={'비밀번호를 입력하세요'} work={handleChangePassword}/>
                         </div>
                         <div style={{paddingTop: 10, paddingBottom: 10, background: '#DCB78F', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'inline-flex'}}>
@@ -69,10 +64,10 @@ function LoginPage(){
                             <Button button={'로그인'} work={success}/>
                             <div style={{display: 'flex', flexDirection: 'row'}}>
                                 <Link to="/member/find-id">
-                                    <div style={{textAlign: 'center', color: 'black', fontSize: 20, fontFamily: 'Jua', fontWeight: '400', wordWrap: 'break-word'}}>ID 찾기</div>
+                                    <div className="idcheck no-underline">ID 찾기</div>
                                 </Link>
                                 <Link to="/member/password">
-                                    <div style={{width: 108, height: 25, textAlign: 'center', color: 'black', fontSize: 20, fontFamily: 'Jua', fontWeight: '400', wordWrap: 'break-word'}}>/ PW 찾기<br/></div>
+                                    <div className="passwordcheck no-underline">/ PW 찾기<br/></div>
                                 </Link>
                             </div>
                         </div>

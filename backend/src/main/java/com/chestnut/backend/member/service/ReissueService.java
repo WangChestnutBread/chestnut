@@ -26,32 +26,32 @@ public class ReissueService {
 
         String refresh = null;
         Cookie[] cookies = request.getCookies();
-        for(Cookie cookie : cookies) {
-            if(cookie.getName().equals("refresh")) {
-                refresh = cookie.getValue();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("refresh")) {
+                    refresh = cookie.getValue();
+                }
             }
         }
 
-        if(refresh == null){
-            throw new RefreshTokenException("802");
+        if (refresh == null) {
+            throw new RefreshTokenException();
         }
 
-        if(jwtUtil.isExpired(refresh)){
-            throw new RefreshTokenException("802");
+        if (jwtUtil.isExpired(refresh)) {
+            throw new RefreshTokenException();
         }
 
         String category = jwtUtil.getCategory(refresh);
         if (!category.equals("refresh")) {
-            throw new RefreshTokenException("802");
+            throw new RefreshTokenException();
         }
 
-        //db에 해당 refresh 토큰이 저장되어 있는지 확인
         Boolean isExist = refreshRepository.existsByRefresh(refresh);
-        if(!isExist){
-            throw new RefreshTokenException("802");
+        if (!isExist) {
+            throw new RefreshTokenException();
         }
-
-        //저장되어 있는 경우라면 -> 기존 refresh 삭제 및 새로운 refresh 저장
 
         String loginId = jwtUtil.getLoginId(refresh);
         String role = jwtUtil.getRole(refresh);
@@ -83,6 +83,7 @@ public class ReissueService {
         Cookie cookie = new Cookie(key, value);
         cookie.setMaxAge(24*60*60);
         cookie.setHttpOnly(true);
+        cookie.setPath("/");
 
         return cookie;
     }

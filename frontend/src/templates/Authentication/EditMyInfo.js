@@ -15,23 +15,71 @@ import PasswordButton from "../../molecules/Authentication/PasswordButton";
 import HiddenForm from "../../organisms/Authentication/hiddenForm";
 import NewInputForm from "../../organisms/Authentication/NewInputForm";
 import FindIdForm from "../../organisms/Authentication/FindIdForm";
+import axios from "axios";
+import Swal from 'sweetalert2'
+
 function EditMyInfo(){
     const navigate=useNavigate();
     const GotoBack=()=>{
         navigate(-1);
     };
     const succes=()=>{
-        navigate("/myprofile/myinfo");
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/info",{
+            loginId: Id,
+            nickname: nickname,
+            memberName: name,
+            email: Email,
+            birthday: `${birth[0]}}-${birth[1]}-${birth[2]}`
+        })
+        .then(response=>{
+            if(response.data.code==200){
+                Swal.fire({
+                    icon: "info",
+                    title: "회원정보 수정",
+                    text: "회원 정보수정을 완료했습니다."
+                });
+                navigate("/myprofile/myinfo");
+            }
+            else if(response.data.code==801){
+                alert("유효하지 않은 토큰");
+            }
+            else if(response.data.code==710){
+                alert("DB에 정보 없음");
+            }
+            else if(response.data.code==714){
+                alert("아이디 없음");
+            }
+            else if(response.data.code==299){
+                alert("알 수 없는 오류");
+            }
+            else if(response.data.code==810){
+                alert("계정 권한 없음");
+            }
+            else if(response.data.code==812){
+                alert("계정이 유효하지 않음");
+            }
+            else if(response.data.code==603){
+                alert("부적절한 양식");
+            }
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+        
     };
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    const [Id, setId]=useState("");
+    const [Id, setId]=useState("pingu");
     const [Pw, setPw]=useState("");
     const [PwCon, setPwCon]=useState("");
-    const [name, setName]=useState("");
-    const [Email, setEmail]=useState("");
+    const [name, setName]=useState("김키티");
+    const [Email, setEmail]=useState("124@naver.com");
     const [Auth, setAuth]=useState("");
     const [CurPw, setCurPw]=useState("");
+    const [nickname, setnickname]=useState("밤톨이");
+    const [birthday, setBirthday]=useState("2024-08-02");
+    const birth=birthday.split(["-"])
 
     const [IdMessage, setIdMessage]=useState("");
     const [PwMessage, setPwMessage]=useState("");
@@ -40,6 +88,7 @@ function EditMyInfo(){
     const [AuthMessage, setAuthMessage]=useState("");
     const [EmailMessage, setEmailMessage]=useState("");
     const [CurPwMessage, setCurPwMessage]=useState("");
+    const [nickMessage, setnickMessage]=useState("");
 
     const [isId, setIsId]=useState(false);
     const [isname, setIsName]=useState(false);
@@ -48,6 +97,8 @@ function EditMyInfo(){
     const [isEmail, setIsEmail]=useState(false);
     const [isAuth, setIsAuth]=useState(false);
     const [isCurPw, setIsCurPw]=useState(false);
+    const [isNickname, setIsNickname]=useState(false);
+
     const inputId=(e)=>{
         const currentId=e.target.value;
         setId(currentId);
@@ -61,7 +112,7 @@ function EditMyInfo(){
             setIsId(false);
             console.log(IdMessage)
         }
-        else if(Id == "1234"){
+        else if(Id == "ssafy123"){
             setIdMessage("이미 사용중인 ID입니다.")
             setIsId(false);
         }
@@ -152,23 +203,95 @@ function EditMyInfo(){
     };
 
     const checkname=(e)=>{
-        if (name == "ssafy") {
-            setNameMessage("이미 사용중인 닉네임입니다.");
-            setIsName(false);
+        if (nickname == "ssafy") {
+            setnickMessage("이미 사용중인 닉네임입니다.");
+            setIsNickname(false);
         } else {
-            setNameMessage("사용 가능한 닉네임입니다.");
-            setIsName(true);
+            setnickMessage("사용 가능한 닉네임입니다.");
+            setIsNickname(true);
         }
         e.preventDefault();
     };
     const inputname=(e)=>{
         const currentname=e.target.value;
-        setName(currentname);
+        setnickname(currentname);
     };
     const inputPw=(e)=>{
         const currentPw=e.target.value;
         setCurPw(currentPw);
+    };
+
+    const succesPw=(e)=>{
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/reset-pwd",{
+            password: CurPw,
+            newPassword: Pw,
+            newPasswordCheck: PwCon
+        })
+        .then(response=>{
+            if(response.data.code==200){
+                Swal.fire({
+                    icon: "info",
+                    title: "비밀번호 재설정",
+                    text: "비밀번호 변경을 완료했습니다."
+                });
+                setCurPw(Pw);
+
+            }
+            else{
+                Swal.fire({
+                    icon: "error",
+                    title: "비밀번호 재설정",
+                    text: "올바르지 않은 양식이거나 정보가 없습니다.",
+                });
+            }
+            console.log(response);
+        }).catch(error=>{
+            console.log(error);
+        })
     }
+
+    axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/info",{
+        params: {
+            "Authorization": `Bearer {accessToken}`,
+        }
+    })
+    .then(response=>{
+        if(response.data.code==200){
+            console.log(response);
+            setId(response.data.loginId); 
+            setName(response.data.memberName);
+            setEmail(response.data.email);
+            setBirthday(response.data.birthday);
+            setnickname(response.data.nickname);
+        }
+        else if(response.data.code==801){
+            alert("유용하지 않는 토큰입니다.");
+        }
+        else if(response.data.code==710){
+            alert("db에 정보가 없습니다.");
+        }
+        else if(response.data.code==714){
+            alert("아이디가 존재하지 않습니다.");
+        }
+        else if(response.data.code){
+            alert("계정 권한이 없음");
+        }
+    })
+    .catch(error=>{
+        console.log(error);
+    })
+    .catch(error=>{
+        if(error.code==801){
+            alert("유효하지 않는 토큰입니다.");
+        }
+        else if(error.code==710){
+            alert("DB에 저장된 데이터가 없습니다.");
+        }
+        else if(error.code==714){
+            alert("아이디가 없습니다.");
+        }
+    });
+
     return(
         <div>
             <div className="container">
@@ -178,15 +301,15 @@ function EditMyInfo(){
                     <MemberLogo title={'내 정보 수정'} />
                         <div style={{paddingLeft: 91, paddingRight: 91, paddingTop: 48, paddingBottom: 48, background: '#DCB78F', borderRadius: 25, overflow: 'hidden', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex'}}>
                             <div style={{flex: '1 1 0', alignSelf: 'stretch', paddingTop: 56, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 16, display: 'inline-flex'}}>
-                                <InspectionForm content={'왕밤빵'} name={'중복확인'} text={nameMessage} work={checkname} value={name} input={inputname} />
-                                <LoginInputForm content={'이병헌'} />
+                                <InspectionForm content={'닉네임 입력하세요'} name={'중복확인'} text={nickMessage} work={checkname} value={nickname} input={inputname} />
+                                <LoginInputForm content={'이름을 입력하세요'} name={name}/>
                                 <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'inline-flex'}}>
-                                    <Birth year={1987}/>
-                                    <BirthMonth month={5}/>
-                                    <BirthDay day={21}/>
+                                    <Birth year={birth[0]}/>
+                                    <BirthMonth month={birth[1]}/>
+                                    <BirthDay day={birth[2]}/>
                                 </div>
-                                <InspectionForm content={'1245k'} text={IdMessage} name={'중복인증'} work={createId} value={Id} input={inputId} />
-                                <HiddenForm name={'1234@gmail.com'} input={createEmail} work={handleSubmit} value={Email} value1={Auth} text1={AuthMessage} work1={checkAuth} input1={inputAuth}/>
+                                <InspectionForm content={'ID를 입력하세요'} text={IdMessage} name={'중복인증'} work={createId} value={Id} input={inputId} />
+                                <HiddenForm name={Email} input={createEmail} work={handleSubmit} value={Email} value1={Auth} text1={AuthMessage} work1={checkAuth} input1={inputAuth}/>
                                 <PwResetButton button={'비밀번호 재설정'} work={()=>setModalIsOpen(true)}/>
                                 <Button button={'내 정보 수정'} work={succes}/>
                             </div>
@@ -206,7 +329,7 @@ function EditMyInfo(){
                         <div style={{alignSelf: 'stretch', background: 'rgba(255, 249, 239, 0)', flexDirection: 'flex-start', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
                             <NewInputForm title={'비밀번호 확인'} content={'새 비밀번호를 입력하세요'} value={PwCon} work={createPwCon} text={PwConMessage}/>
                         </div> 
-                        <PasswordButton button={'PW 재설정'} work={succes} classname={"Buttton"}/>
+                        <PasswordButton button={'PW 재설정'} work={succesPw} classname={"Buttton"}/>
                     </div>
                 </div>
             </Modal>

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Pagenation.css"; // 페이지네이션 스타일링을 위한 CSS 파일
+import "../atoms/Authentication/Page.css";
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
   const handlePageChange = (page) => {

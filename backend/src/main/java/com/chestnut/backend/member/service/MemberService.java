@@ -1,5 +1,7 @@
 package com.chestnut.backend.member.service;
 
+import com.chestnut.backend.avatar.entity.Avatar;
+import com.chestnut.backend.avatar.repository.AvatarRepository;
 import com.chestnut.backend.common.exception.*;
 import com.chestnut.backend.member.dto.FindIdReqDTO;
 import com.chestnut.backend.member.dto.FindIdResDTO;
@@ -19,23 +21,29 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    private final AvatarRepository avatarRepository;
+
     @Transactional
     public void signup(SignupReqDTO signupReqDTO) {
 
         String password = signupReqDTO.getPassword();
         String checkPassword = signupReqDTO.getCheckPassword();
         if (!password.equals(checkPassword)) {
-            throw new PasswordNotEqualException("604");
+            throw new PasswordNotEqualException();
         }
 
         try {
             String codePwd = bCryptPasswordEncoder.encode(password);
-            Member member = signupReqDTO.toEntity(codePwd);
+
+            Avatar avatar = avatarRepository.findByAvatarId(1)
+                    .orElseThrow(AvatarNotFoundException::new);
+
+            Member member = signupReqDTO.toEntity(codePwd, avatar);
             memberRepository.save(member);
         } catch (DataAccessException e) {
-            throw new DatabaseException("704");
+            throw new DatabaseException();
         } catch (Exception e) {
-            throw new UnknownException("299");
+            throw new UnknownException();
         }
 
     }
@@ -46,21 +54,27 @@ public class MemberService {
         String memberName = findIdReqDTO.getMemberName();
         String email = findIdReqDTO.getEmail();
 
-        Member findByName = memberRepository.findByMemberName(memberName)
-                .orElseThrow(()-> new MemberNotFoundException("714"));
+        Member member = memberRepository.findByMemberName(memberName)
+                .orElseThrow(MemberNotFoundException::new);
 
-        if(!findByName.getEmail().equals(email)){
-            throw new IdEmailMismatchException("712");
+        if (!member.getEmail().equals(email)) {
+            throw new IdEmailMismatchException();
         }
 
-        FindIdResDTO findIdResDTO = new FindIdResDTO(findByName.getLoginId());
-        return findIdResDTO;
+        return new FindIdResDTO(member.getLoginId());
     }
 
     @Transactional
     public void checkNicknameDuplicate(String nickname) {
-        if(!memberRepository.existsByNickname(nickname)){
-            throw new NotFoundException("714");
+        if (memberRepository.existsByNickname(nickname)) {
+            throw new DataDuplicatedException();
+        }
+    }
+
+    @Transactional
+    public void checkLoginIdDuplicate(String loginId) {
+        if (memberRepository.existsByLoginId(loginId)) {
+            throw new DataDuplicatedException();
         }
     }
 

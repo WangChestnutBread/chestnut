@@ -12,14 +12,14 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
         if (value == null || value.trim().isEmpty()) {
-            throw new InvalidFormatException("603");
+            throw new InvalidFormatException();
         }
 
         String regex = "^[a-zA-Z0-9!@#$%^&*()_+\\[\\]{}|;':\",./<>?~`-]{8,15}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(value);
         if (!matcher.matches()) {
-            throw new InvalidFormatException("603");
+            throw new InvalidFormatException();
         }
         return true;
     }

@@ -48,37 +48,34 @@ public class CustomLogoutFilter extends GenericFilterBean {
         String refresh = null;
         Cookie[] cookies = request.getCookies();
 
-        if(cookies == null) {
-            sendMessage(response, "802, 쿠키널");
-            return;
-        }
-
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("refresh")) {
-                refresh = cookie.getValue();
+        if(cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("refresh")) {
+                    refresh = cookie.getValue();
+                }
             }
         }
 
         if(refresh == null) {
-            sendMessage(response, "802, 리프레시 널");
+            sendMessage(response, "802");
             return;
         }
 
         try {
             jwtUtil.isExpired(refresh);
         } catch (ExpiredJwtException e) {
-            sendMessage(response, "802, 기간 만료");
+            sendMessage(response, "802");
             return;
         }
 
         String category = jwtUtil.getCategory(refresh);
         if (!category.equals("refresh")) {
-            sendMessage(response, "802, 카테고리 오류");
+            sendMessage(response, "802");
             return;
         }
 
         if (!refreshRepository.existsByRefresh(refresh)) {
-            sendMessage(response, "802, 리프레시 존재 안함");
+            sendMessage(response, "802");
             return;
         }
 
@@ -93,12 +90,12 @@ public class CustomLogoutFilter extends GenericFilterBean {
         sendMessage(response, "200");
     }
 
-    private void sendMessage (HttpServletResponse response, String Ecode) throws IOException {
+    private void sendMessage (HttpServletResponse response, String code) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpStatus.OK.value());
 
-        ResponseDto<?> apiResponse = new ResponseDto<>(Ecode, null);
+        ResponseDto<?> apiResponse = new ResponseDto<>(code, null);
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonResponse = objectMapper.writeValueAsString(apiResponse);
         response.getWriter().write(jsonResponse);

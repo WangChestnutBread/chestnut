@@ -12,14 +12,14 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
         if (value == null || value.trim().isEmpty()) {
-            throw new InvalidFormatException("603");
+            throw new InvalidFormatException();
         }
 
         String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(value);
         if (!matcher.matches()) {
-            throw new InvalidFormatException("603");
+            throw new InvalidFormatException();
         }
         return true;
     }
