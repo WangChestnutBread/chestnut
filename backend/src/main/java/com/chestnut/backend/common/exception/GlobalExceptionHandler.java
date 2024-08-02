@@ -14,4 +14,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new ResponseDto<>(e.getMessage(), null), HttpStatus.OK);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleUnknownException(Exception e) {
+        return new ResponseEntity<>(new ResponseDto<>("299", null), HttpStatus.OK);
+    }
+
 }
