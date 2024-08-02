@@ -8,20 +8,27 @@ import BackButton from "../../atoms/BackButton";
 import "../../atoms/Authentication/Page.css";
 import axios from "axios";
 function LoginPage(){
+    //로그인에 정보를 담을 변수
     const [Id, setName] = useState("");
     const [password, setPassword]= useState("");
     const navigate = useNavigate();
 
+    //Id를 저장시키는 함수
     const handleChangeName = (event) => {
         setName(event.target.value);
     };
 
+    //Pw를 password에 담는 함수
     const handleChangePassword =(event)=>{
         setPassword(event.target.value);
     };
+
+    //Backbutton 기능 함수
     const GotoBack=()=>{
         navigate(-1);
     };
+
+    //로그인이 진행되서 axios사용하는 함수
     const success=(event)=>{
         console.log(Id);
         console.log(password);
@@ -45,6 +52,7 @@ function LoginPage(){
         })
         event.preventDefault();
     };
+    
     return(
         <div className="container">
             <div style={{paddingTop: 50, justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
