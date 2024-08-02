@@ -35,7 +35,7 @@ public class MemberController {
         return new ResponseEntity<>(new ResponseDto<>("200", findIdResDTO), HttpStatus.OK);
     }
 
-    @PostMapping("/check-nickname")
+    @GetMapping("/check-nickname")
     public ResponseEntity<?> checkNicknameDuplicate(@RequestParam String nickname) {
         System.out.println("닉네임 체크");
         memberService.checkNicknameDuplicate(nickname);
