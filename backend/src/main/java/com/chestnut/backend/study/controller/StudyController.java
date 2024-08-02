@@ -36,18 +36,4 @@ public class StudyController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/detail/{studyId}/word")
-    public ResponseEntity<?> wordInfo(@PathVariable("studyId") Long studyId) {
-        WordPronounceDto wordInfo = studyService.getWordInfo(studyId);
-        ResponseDto<WordPronounceDto> result = new ResponseDto<>("200", wordInfo);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @GetMapping("/detail/pronunciation")
-    public ResponseEntity<?> pronounceMethods(@RequestParam Map<String, String> params) {
-        List<PronounceMethodDto> pronounceMethods = studyService.getPronounceMethod(params);
-        ResponseDto<List<PronounceMethodDto>> result = new ResponseDto<>("200", pronounceMethods);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
 }
