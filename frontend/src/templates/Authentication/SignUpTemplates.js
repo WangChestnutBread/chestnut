@@ -88,7 +88,7 @@ function SignUPPage(){
         setId(currentId);
         axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-loginId",{
             params: {
-                loginId: Id
+                loginId: currentId
             }
         }).then(response=>{
             if(response.data.code==200){
