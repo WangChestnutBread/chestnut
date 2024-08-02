@@ -101,7 +101,6 @@ function SignUPPage(){
         }).catch(error=>{
             console.log(error);
         });
-        e.preventDefault();
     };
 
     const createPw=(e)=>{
