@@ -1,5 +1,5 @@
 import "./App.css";
-import Chapter2Detail from "./templates/StudyList/Chapter5Detail";
+import Chapter2Detail from "./templates/StudyList/Chapter2Detail";
 
 function App() {
   return (

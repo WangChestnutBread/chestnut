@@ -1,6 +1,7 @@
 import HowSpeak from "../../molecules/StudyList/HowSpeak";
 import SpeakExplanation from "../../molecules/StudyList/SpeakExplanation";
 import './SoundMethod.css'
+import axios from "axios";
 
 const mokData = {
   data: {
@@ -20,6 +21,15 @@ const mokData = {
     ],
   },
 };
+const pronunciation = axios.get("https://i11d107.p.ssafy.io/chestnutApi/study/detail/pronunciation")
+  .then((res) => {
+    console.log(res.data);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  console.log(pronunciation);
+
 
 const SoundMethod = () => {
   return (

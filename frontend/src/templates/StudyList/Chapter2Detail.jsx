@@ -22,7 +22,7 @@ const Chapter2Detail = () => {
           </div>
         </div>
       </div>
-      {/* 표기, 입모양, 혀모양 */}
+      {/* 표기, 소리나는 방법*/}
       <div className="container">
         <div className="row">
           <div className="col-4 mt-2">
@@ -32,7 +32,7 @@ const Chapter2Detail = () => {
             <SoundMethod />
           </div>
         </div>
-        {/* 소리나는 방법, 카메라 */}
+        {/* 발음, 카메라 */}
         <div className="row">
           <div className="col-6 mt-2" >
             <Pronunciation />

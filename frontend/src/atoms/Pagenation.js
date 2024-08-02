@@ -1,10 +1,37 @@
 import React from "react";
-// import "./Page.css";
+import "./Pagenation.css"; // 페이지네이션 스타일링을 위한 CSS 파일
 
-function Pagenation({ currentPage, totalPages, onPageChange }) {
+function Pagination({ currentPage, totalPages, onPageChange }) {
   const handlePageChange = (page) => {
     if (page < 1 || page > totalPages) return;
     onPageChange(page);
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+
+    // 보여줄 페이지 수 설정 (여기서는 5로 설정)
+    const maxPageNumbers = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxPageNumbers / 2));
+    let endPage = Math.min(totalPages, startPage + maxPageNumbers - 1);
+
+    if (endPage - startPage + 1 < maxPageNumbers) {
+      startPage = Math.max(1, endPage - maxPageNumbers + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(
+        <div
+          key={i}
+          className={`NumberBorder ${currentPage === i ? "active" : ""}`}
+          onClick={() => handlePageChange(i)}
+        >
+          <div className="NumberContent">{i}</div>
+        </div>
+      );
+    }
+
+    return pageNumbers;
   };
 
   return (
@@ -14,18 +41,19 @@ function Pagenation({ currentPage, totalPages, onPageChange }) {
           <img src="/pageimage/pageleft.svg" alt="firstpage" />
         </div>
       </div>
-      <div className="NumberBorder" onClick={() => handlePageChange(currentPage - 1)}>
+      <div
+        className="NumberBorder"
+        onClick={() => handlePageChange(currentPage - 1)}
+        style={{ visibility: currentPage > 1 ? "visible" : "hidden" }}
+      >
         <div className="NumberContent">{"<"}</div>
       </div>
-      <div className="NumberBorder" onClick={() => handlePageChange(1)}>
-        <div className="NumberContent">1
-        </div>
-      </div>
-      <div className="NumberBorder" onClick={() => handlePageChange(2)}>
-        <div className="NumberContent">2
-        </div>
-      </div>
-      <div className="NumberBorder" onClick={() => handlePageChange(currentPage + 1)}>
+      {renderPageNumbers()}
+      <div
+        className="NumberBorder"
+        onClick={() => handlePageChange(currentPage + 1)}
+        style={{ visibility: currentPage < totalPages ? "visible" : "hidden" }}
+      >
         <div className="NumberContent">{">"}</div>
       </div>
       <div className="LastBorder" onClick={() => handlePageChange(totalPages)}>
@@ -37,4 +65,4 @@ function Pagenation({ currentPage, totalPages, onPageChange }) {
   );
 }
 
-export default Pagenation;
+export default Pagination;

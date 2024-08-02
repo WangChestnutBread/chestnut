@@ -3,6 +3,7 @@ import "./IconGroup.css"
 import { useNavigate } from "react-router-dom"
 
 function IconGroup({leftIcons}) {
+
     let navigate = useNavigate()
     return (
         <div> 
