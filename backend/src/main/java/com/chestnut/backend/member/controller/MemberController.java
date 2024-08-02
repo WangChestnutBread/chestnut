@@ -7,6 +7,7 @@ import com.chestnut.backend.member.dto.FindIdReqDTO;
 import com.chestnut.backend.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +15,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
+@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDTO signupReqDTO) {
+        log.info("로그인 시작");
+        log.info("dto"+signupReqDTO);
         memberService.signup(signupReqDTO);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
@@ -30,7 +34,7 @@ public class MemberController {
         return new ResponseEntity<>(new ResponseDto<>("200", findIdResDTO), HttpStatus.OK);
     }
 
-    @GetMapping("/check-nickname")
+    @PostMapping("/check-nickname")
     public ResponseEntity<?> checkNicknameDuplicate(@RequestParam String nickname) {
         memberService.checkNicknameDuplicate(nickname);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
