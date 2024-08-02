@@ -1,12 +1,16 @@
 import "./BlackBoardTab.css"
 import Text24 from "../atoms/Text24"
+import { useState } from "react";
 
 
 function BlackBoardTab({tabTitle}) {
+    let [isActive, setIsActive] = useState(false)
     return (
-        <div className="BlackBoardTab" onClick={()=>{}}>
-            <Text24 text="교체"/>
-        </div>
+        <button className={`BlackBoardTab ${
+            isActive ? 'active' : ''
+        }`} onClick={()=>{setIsActive(!isActive)}}>
+            <Text24 text={tabTitle}/>
+        </button>
     )
 }
 

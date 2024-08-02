@@ -20,16 +20,14 @@ import FindId from "./templates/Authentication/FindId";
 import FindPw from "./templates/Authentication/FindPw";
 import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
-import ChapterTitle from "./atoms/ChapterTitle";
 import ChapterList from "./molecules/StudyList/ChapterList";
 import StudyList from "./templates/StudyList";
 import ChapterMenu from "./atoms/ChapterMenu";
 import MainPage from "./pages/MainPage";
-import BlackBoardWithTab from "./organisms/BlackBoardWithTab";
 
 const router = createBrowserRouter([
   {
-    path: "/z",
+    path: "/",
     element: <StartTemplates />
   },
   {
@@ -103,10 +101,6 @@ const router = createBrowserRouter([
   {
     path: "/main",
     element: <MainPage/>
-  },
-  {
-    path: "/example",
-    element: <BlackBoardWithTab/>
   }
 ]);
 

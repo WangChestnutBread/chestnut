@@ -1,14 +1,11 @@
-import React from "react";
-function ChapterTitle(props){
-  return(
-    <div className="container">
-        <div style={{ paddingTop: 100, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end', gap: 10, display: 'flex'}}>
-          <div style={{justifyContent: 'center', alignItems: 'center', gap: 10, display: 'inline-flex'}}>
-              <div style={{textAlign: 'center', color: '#412522', fontSize: 32, fontFamily: 'Jua', fontWeight: '400',wordWrap: 'break-word'}}>{props.title}</div>
-          </div>
-      </div>
+function ChapterTitle(props) {
+  return (
+    <div style={{display: "inline-block",
+      position: "absolute",
+      top: "0%",
+      right: "0%"}}>
+      <div>{props.title}</div>
     </div>
-    
-  ); 
+  );
 }
 export default ChapterTitle;
