@@ -18,7 +18,7 @@ function SignUPPage(){
             email: Email,
             password: Pw,
             checkPassword: PwCon,
-            name: name,
+            memberName: name,
             nickname: nickname,
             birthday: "2024-08-01",
         })
