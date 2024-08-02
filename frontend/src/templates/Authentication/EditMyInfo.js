@@ -67,7 +67,7 @@ function EditMyInfo(){
         })
         
     };
-    
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const [Id, setId]=useState("pingu");

@@ -61,7 +61,6 @@ function SignUPPage(){
     const [IdMessage, setIdMessage]=useState("");
     const [PwMessage, setPwMessage]=useState("");
     const [PwConMessage, setPwConMessage]=useState("");
-    const [nameMessage, setNameMessage]=useState("");
     const [EmailMessage, setEmailMessage]=useState("");
     const [AuthMessage, setAuthMessage]=useState("");
     const [nickMessage, setnickMessage]=useState("");
@@ -80,16 +79,6 @@ function SignUPPage(){
     const createId = (e)=>{
         const currentId=e.target.value;
         setId(currentId);
-        // const idRegExp=/^[a-zA-Z0-9]{5,15}$/;
-        // if(!idRegExp.test(currentId)){
-        //     setIdMessage("5~15 사이의 대소문자와 숫자로만 작성해주세요.");
-        //     setIsId(false);
-        // }
-        // else{
-        //     setIdMessage("사용가능한 아이디 입니다.");
-        //     setIsId(true);
-        // }
-        e.preventDefault();
         axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-loginId",{
             params: {
                 loginId: Id
@@ -111,6 +100,7 @@ function SignUPPage(){
         }).catch(error=>{
             console.log(error);
         });
+        e.preventDefault();
     };
 
     const createPw=(e)=>{
@@ -194,7 +184,6 @@ function SignUPPage(){
             setAuthMessage("인증번호가 일치합니다.");
             setIsAuth(true);
         }
-        e.preventDefault();
         axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-check",{
             verificationCode : Auth
         }).then(response=>{
@@ -218,6 +207,7 @@ function SignUPPage(){
         }).catch(error=>{
             console.log(error);
         })
+        e.preventDefault();
     };
 
     const inputAuth = (e) => {
@@ -233,7 +223,6 @@ function SignUPPage(){
         //     setNameMessage("사용 가능한 닉네임입니다.");
         //     setIsName(true);
         // }
-        e.preventDefault();
         axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-nickname", {
             params: {
                 nickname: nickname
@@ -254,6 +243,7 @@ function SignUPPage(){
         .catch(error=>{
             console.log(error);
         })
+        e.preventDefault();
     };
     const inputname=(e)=>{
         const currentname=e.target.value;
