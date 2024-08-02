@@ -29,6 +29,7 @@ import Chapter2Listpage from "./templates/Chapter2Listpage";
 import Chapter3Listpage from "./templates/Chapter3Listpage";
 import Chapter5Listpage from "./templates/Chapter5Listpage";
 import Chapter6Listpage from "./templates/Chapter6Listpage";
+import Chapter4Detail from "./templates/StudyList/Chapter4Detail";
 
 const router = createBrowserRouter([
   {
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
   {
     path: "/chapter3",
     element: <Chapter3Listpage />
+  },
+  {
+    path: "/chapter4",
+    element: <Chapter4Detail tabTitleList={"CH4. 음운변동"}/>
   },
   {
     path: "/chapter5",
