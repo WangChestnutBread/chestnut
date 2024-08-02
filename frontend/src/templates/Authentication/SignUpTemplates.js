@@ -80,15 +80,15 @@ function SignUPPage(){
     const createId = (e)=>{
         const currentId=e.target.value;
         setId(currentId);
-        const idRegExp=/^[a-zA-Z0-9]{5,15}$/;
-        if(!idRegExp.test(currentId)){
-            setIdMessage("5~15 사이의 대소문자와 숫자로만 작성해주세요.");
-            setIsId(false);
-        }
-        else{
-            setIdMessage("사용가능한 아이디 입니다.");
-            setIsId(true);
-        }
+        // const idRegExp=/^[a-zA-Z0-9]{5,15}$/;
+        // if(!idRegExp.test(currentId)){
+        //     setIdMessage("5~15 사이의 대소문자와 숫자로만 작성해주세요.");
+        //     setIsId(false);
+        // }
+        // else{
+        //     setIdMessage("사용가능한 아이디 입니다.");
+        //     setIsId(true);
+        // }
         e.preventDefault();
         axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-loginId",{
             params: {
