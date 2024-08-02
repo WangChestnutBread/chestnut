@@ -12,6 +12,33 @@ import Button from "../../molecules/Authentication/Button";
 import axios from "axios";
 function SignUPPage(){
     const navigate = useNavigate();
+    const GotoBack=()=>{
+        navigate(-1);
+    };
+
+    const [Id, setId]=useState("");
+    const [Pw, setPw]=useState("");
+    const [PwCon, setPwCon]=useState("");
+    const [name, setName]=useState("");
+    const [Email, setEmail]=useState("");
+    const [Auth, setAuth]=useState("");
+    const [nickname, setnickname]=useState("");
+
+    const [IdMessage, setIdMessage]=useState("");
+    const [PwMessage, setPwMessage]=useState("");
+    const [PwConMessage, setPwConMessage]=useState("");
+    const [EmailMessage, setEmailMessage]=useState("");
+    const [AuthMessage, setAuthMessage]=useState("");
+    const [nickMessage, setnickMessage]=useState("");
+
+    const [isId, setIsId]=useState(false);
+    const [isname, setIsName]=useState(false);
+    const [isPw, setIsPw]=useState(false);
+    const [isPwCon, setIsPwCon]=useState(false);
+    const [isEmail, setIsEmail]=useState(false);
+    const [isAuth, setIsAuth]=useState(false);
+    const [isNickname, setIsNickname]=useState(false);
+
     const succes=()=>{
         axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/signup",{
             loginId: Id,
@@ -43,35 +70,9 @@ function SignUPPage(){
         })
         .catch(error=>{
             console.log(error);
-        })
+        });
         
     };
-    const GotoBack=()=>{
-        navigate(-1);
-    };
-
-    const [Id, setId]=useState("");
-    const [Pw, setPw]=useState("");
-    const [PwCon, setPwCon]=useState("");
-    const [name, setName]=useState("");
-    const [Email, setEmail]=useState("");
-    const [Auth, setAuth]=useState("");
-    const [nickname, setnickname]=useState("");
-
-    const [IdMessage, setIdMessage]=useState("");
-    const [PwMessage, setPwMessage]=useState("");
-    const [PwConMessage, setPwConMessage]=useState("");
-    const [EmailMessage, setEmailMessage]=useState("");
-    const [AuthMessage, setAuthMessage]=useState("");
-    const [nickMessage, setnickMessage]=useState("");
-
-    const [isId, setIsId]=useState(false);
-    const [isname, setIsName]=useState(false);
-    const [isPw, setIsPw]=useState(false);
-    const [isPwCon, setIsPwCon]=useState(false);
-    const [isEmail, setIsEmail]=useState(false);
-    const [isAuth, setIsAuth]=useState(false);
-    const [isNickname, setIsNickname]=useState(false);
     const inputId=(e)=>{
         const currentId=e.target.value;
         setId(currentId);
