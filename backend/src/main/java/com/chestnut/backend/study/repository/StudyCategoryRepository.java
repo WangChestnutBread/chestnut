@@ -12,5 +12,5 @@ public interface StudyCategoryRepository extends JpaRepository<StudyCategory, By
 //    @EntityGraph(attributePaths = "child") //EntityGraph 사용
 //    @Query("SELECT sc FROM StudyCategory sc WHERE sc.studyCategoryId IN :ids")
     @Query("select distinct sc from StudyCategory sc join fetch sc.child where sc.studyCategoryId in :ids") //join fetch 사용
-    public List<StudyCategory> findByStudyCategoryIds(List<Byte> ids);
+    List<StudyCategory> findByStudyCategoryIds(List<Byte> ids);
 }

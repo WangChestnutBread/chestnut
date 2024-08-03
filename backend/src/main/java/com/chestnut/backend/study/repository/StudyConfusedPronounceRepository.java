@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface StudyConfusedPronounceRepository extends JpaRepository<StudyConfusedPronounce, Long> {
     @Query("select s from StudyConfusedPronounce s where s.studyCategory in :categories")
-    public List<StudyConfusedPronounce> findByCategories(@Param("categories") List<StudyCategory> categories);
+    List<StudyConfusedPronounce> findByCategories(@Param("categories") List<StudyCategory> categories);
 }

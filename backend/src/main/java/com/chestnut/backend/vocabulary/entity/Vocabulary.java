@@ -1,13 +1,15 @@
-package com.chestnut.backend.vocabulary;
+package com.chestnut.backend.vocabulary.entity;
 
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.study.entity.Study;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Entity
 @Table(name="Vocabulary")
 @Getter
+@AllArgsConstructor
 @IdClass(VocabularyId.class)
 public class Vocabulary {
 
