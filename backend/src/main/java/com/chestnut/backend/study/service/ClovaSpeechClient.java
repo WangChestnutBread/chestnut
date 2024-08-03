@@ -29,24 +29,33 @@ public class ClovaSpeechClient {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
         headers.set("X-CLOVASPEECH-API-KEY", SECRET);
-
+        // Multipart 요청을 위한 Body 생성
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         try {
-            body.add("media", new ByteArrayResource(file.getBytes()) {
+            // 파일 데이터를 포함한 ByteArrayResource 생성
+            ByteArrayResource resource = new ByteArrayResource(file.getBytes()) {
                 @Override
                 public String getFilename() {
+                    // 파일 이름 제공
                     return file.getOriginalFilename();
                 }
-            });
-        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(
-                INVOKE_URL + "/recognizer/upload",
-                requestEntity,
-                String.class
-        );
+            };
+
+            // 요청 본문 구성
+            body.add("media", resource);
+            body.add("params", "{\"language\":\"ko-KR\",\"completion\":\"sync\"}");
+
+            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+            ResponseEntity<String> response = restTemplate.postForEntity(
+                    INVOKE_URL + "/recognizer/upload",
+                    requestEntity,
+                    String.class
+            );
             return extractTextFromJsonResponse(response.getBody());
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new FileIOException();
+        } catch (Exception ex){
+            throw new SttFailException();
         }
     }
 
