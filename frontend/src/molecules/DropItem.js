@@ -9,7 +9,7 @@ function DropItem({ img, path, menu }) {
     <div
       className="DropItem"
       onClick={() => {
-        navigate({ path });
+        navigate( path );
       }}
     >
       <img src={img} width="40px" />

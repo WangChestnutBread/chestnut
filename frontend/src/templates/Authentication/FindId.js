@@ -5,7 +5,7 @@ import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
 import Button from "../../molecules/Authentication/Button";
 import BackButton from "../../atoms/BackButton";
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 function FindId(){
     const [name, setName]=useState("");
     const [email, setEmail]=useState("");

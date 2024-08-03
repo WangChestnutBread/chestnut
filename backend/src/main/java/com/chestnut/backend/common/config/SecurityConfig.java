@@ -5,6 +5,7 @@ import com.chestnut.backend.common.jwt.JWTFilter;
 import com.chestnut.backend.common.jwt.JWTUtil;
 import com.chestnut.backend.common.jwt.LoginFilter;
 import com.chestnut.backend.member.repository.RefreshRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -40,19 +45,42 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http
+                .cors((corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
+
+                    @Override
+                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+
+                        CorsConfiguration configuration = new CorsConfiguration();
+
+                        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000")); //front에서 정보를 보내니까
+                        configuration.setAllowedMethods(Collections.singletonList("*")); //허용할 메서드
+                        configuration.setAllowCredentials(true); //front에서 credential 설정을 하면 무조건 true로 바꿔줘야 한다.
+                        configuration.setAllowedHeaders(Collections.singletonList("*")); //사용할 헤더
+                        configuration.setMaxAge(3600L); //설정 시간
+
+                        configuration.setExposedHeaders(Collections.singletonList("Authorization")); //백에서 클라이언트에게 헤더를 보내줄 때 Authorization에 JWT을 넣어서 보내준다. -> Authorization 헤더도 허용해주어야 한다.
+
+                        return configuration;
+                    }
+                })));
+
         http
                 .csrf((auth) -> auth.disable());
         http
                 .formLogin((auth) -> auth.disable());
         http
                 .httpBasic((auth) -> auth.disable());
+
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/member/login", "/member/find-id","/member/signup").permitAll() //이 경로에 대해서는 모든 권한 허용
+                        .requestMatchers("/member/login", "/member/find-id","/member/signup").permitAll()
                         .requestMatchers("/member/check-nickname", "/member/check-loginId").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN") //"/admin" 경로는 ADMIN 권한을 가진 사용자만 접근 허용
+                        .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers("/reissue").permitAll()
-                        .anyRequest().authenticated()); //그 외는 로그인 한 사용자만 접근 가능
+                        .anyRequest().authenticated());
+
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
         http
