@@ -96,7 +96,6 @@ public class MemberService {
         }
 
         //3. loginId로 해당 멤버 찾고 -> 그 멤버의 비번과 입력한 현재 비번이 일치한지 확인
-
         String loginId = resetPwdDTO.getLoginId();
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
@@ -106,17 +105,9 @@ public class MemberService {
             throw new PasswordNotEqualException();
         }
 
-        try {
-            String codePwd = bCryptPasswordEncoder.encode(resetPwdDTO.getNewPassword());
+        String codePwd = bCryptPasswordEncoder.encode(resetPwdDTO.getNewPassword());
 
-            Member updateMember = resetPwdDTO.toEntity(member, codePwd);
-            memberRepository.save(updateMember);
-        } catch (DataAccessException e) {
-            throw new DatabaseException();
-        } catch (Exception e) {
-            throw new UnknownException();
-        }
-
+        member.changePassword(codePwd);
     }
 
 }
