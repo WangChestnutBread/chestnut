@@ -60,4 +60,10 @@ public class MemberController {
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
+    @GetMapping("/withdraw")
+    public ResponseEntity<?> withdraw(@AuthenticationPrincipal CustomMemberDetails customMemberDetails){
+        memberService.withdraw(customMemberDetails.getLoginId());
+        return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
+    }
+
 }
