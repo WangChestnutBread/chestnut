@@ -13,13 +13,13 @@ public class RewardType {
 
     @Id
     @Column(columnDefinition = "tinyint", nullable = false)
-    private Integer rewardTypeId;
+    private Byte rewardTypeId;
 
     @Column(columnDefinition = "varchar(10)", nullable = false)
     private String rewardCategory;
 
     @Column(columnDefinition = "tinyint", nullable = false)
-    private int rewardAmount;
+    private byte rewardAmount;
 
     protected RewardType() {}
 }

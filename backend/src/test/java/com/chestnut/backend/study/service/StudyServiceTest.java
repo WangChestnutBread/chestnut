@@ -2,7 +2,6 @@ package com.chestnut.backend.study.service;
 
 import com.chestnut.backend.member.repository.MemberRepository;
 import com.chestnut.backend.study.dto.*;
-import com.chestnut.backend.study.entity.StudyResource;
 import com.chestnut.backend.study.entity.SyllableLocation;
 import com.chestnut.backend.study.repository.StudyInfoRepository;
 import com.chestnut.backend.study.repository.StudyRepository;

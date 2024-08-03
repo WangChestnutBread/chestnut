@@ -13,7 +13,7 @@ public class QnACategory {
 
     @Id
     @Column(columnDefinition = "tinyint", nullable = false)
-    private Integer qnaCategoryId;
+    private Byte qnaCategoryId;
 
     @Column(columnDefinition = "varchar(5)", nullable = false)
     private String qnaCategoryName;
