@@ -1,6 +1,7 @@
 package com.chestnut.backend.member.entity;
 
 import com.chestnut.backend.avatar.entity.Avatar;
+import com.chestnut.backend.member.dto.ChangeInfoReqDTO;
 import com.chestnut.backend.study.entity.Study;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -59,6 +60,13 @@ public class Member {
 
     public void changePassword(String newPassword) {
         password = newPassword;
+    }
+
+    public void changeInfo(ChangeInfoReqDTO changeInfoReqDTO) {
+        nickname = changeInfoReqDTO.getNickname();
+        email = changeInfoReqDTO.getEmail();
+        memberName = changeInfoReqDTO.getMemberName();
+        birthday = changeInfoReqDTO.getBirthday();
     }
 
     @PrePersist

@@ -48,4 +48,16 @@ public class MemberController {
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
+    @GetMapping("/info")
+    public ResponseEntity<?> getInfo(@AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+        GetInfoResDTO getInfoResDTO = memberService.getMemberInfo(customMemberDetails.getLoginId());
+        return new ResponseEntity<>(new ResponseDto<>("200", getInfoResDTO), HttpStatus.OK);
+    }
+
+    @PostMapping("/info")
+    public ResponseEntity<?> changeInfo(@AuthenticationPrincipal CustomMemberDetails customMemberDetails, @Valid @RequestBody ChangeInfoReqDTO changeInfoReqDTO) {
+        memberService.changeMemberInfo(customMemberDetails.getLoginId(), changeInfoReqDTO);
+        return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
+    }
+
 }
