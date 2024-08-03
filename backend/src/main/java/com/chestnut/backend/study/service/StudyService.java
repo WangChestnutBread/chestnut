@@ -1,6 +1,9 @@
 package com.chestnut.backend.study.service;
 
+import com.chestnut.backend.common.exception.MemberNotFoundException;
 import com.chestnut.backend.common.exception.NotFoundException;
+import com.chestnut.backend.member.entity.Member;
+import com.chestnut.backend.member.repository.MemberRepository;
 import com.chestnut.backend.study.dto.*;
 import com.chestnut.backend.study.entity.*;
 import com.chestnut.backend.study.repository.*;
@@ -21,27 +24,29 @@ public class StudyService {
     private final StudyResourceRepository studyResourceRepository;
     private final StudyCategoryRepository studyCategoryRepository;
     private final StudyConfusedPronounceRepository studyConfusedPronounceRepository;
+    private final MemberRepository memberRepository;
 
     /**
      * 챕터명과 챕터 진도율 조회 쿼리
      */
     @Transactional(readOnly = true)
-    public List<ChapterInfoDto> getChapterInfo(Long memberId) {
-//        Long memberId = memberRepository.findMemberIdByLoginId(loginId);
-        return studyInfoRepository.findChapterInfoByMemberId(memberId);
+    public List<ChapterInfoDto> getChapterInfo(String loginId) {
+        Member member = memberRepository.findByLoginId(loginId)
+                .orElseThrow(MemberNotFoundException::new);
+        return studyInfoRepository.findChapterInfoByMemberId(member.getMemberId());
     }
 
     /**
      * 챕터내 학습 목록 조회(1,2,3,5,6 단원용)
      */
     @Transactional(readOnly = true)
-    public List<?> findChapterStudyInfo(Long memberId, int chapterId) {
-
-        //loginId -> memberId로 바꾸는 로직 추가
+    public List<?> findChapterStudyInfo(String loginId, int chapterId) {
+        Member member = memberRepository.findByLoginId(loginId)
+                .orElseThrow(MemberNotFoundException::new);
         return switch (chapterId) {
             case 4 -> this.phonologyGroupInfo();
             case 7 -> this.confusedWordsGroup();
-            default -> studyInfoRepository.findChapterStudyInfo(memberId, chapterId);
+            default -> studyInfoRepository.findChapterStudyInfo(member.getMemberId(), chapterId);
         };
     }
 
