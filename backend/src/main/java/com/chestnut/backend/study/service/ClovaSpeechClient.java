@@ -1,6 +1,8 @@
 package com.chestnut.backend.study.service;
 
 import com.chestnut.backend.common.exception.FileIOException;
+import com.chestnut.backend.common.exception.SttFailException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
@@ -59,9 +61,7 @@ public class ClovaSpeechClient {
         }
     }
 
-    public String extractTextFromJsonResponse(String body){
-        if(body.equals("")) return null;
-        return body;
+    public String extractTextFromJsonResponse(String body) {
+        return new JSONObject(body).optString("text");
     }
-
 }
