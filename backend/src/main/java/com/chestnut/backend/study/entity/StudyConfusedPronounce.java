@@ -13,7 +13,16 @@ import lombok.Getter;
 public class StudyConfusedPronounce extends Study {
 
     @Column(columnDefinition = "tinyint", nullable = false)
-    private int confusedGroupId;
+    private byte confusedGroupId;
 
     protected StudyConfusedPronounce() {}
+
+    @Override
+    public String toString() {
+        return "StudyConfusedPronounce{" +
+                "studyId=" + getStudyId() +
+                "word=" + getWord() +
+                "confusedGroupId=" + confusedGroupId +
+                '}';
+    }
 }

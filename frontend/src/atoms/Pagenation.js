@@ -1,5 +1,5 @@
 import React from "react";
-import "../atoms/Authentication/Page.css";
+import "../atoms/Pagenation.css";
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
   const handlePageChange = (page) => {
@@ -35,7 +35,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
   };
 
   return (
-    <div className="Page">
+    <div className="PagenationPage">
       <div className="FirstBorder" onClick={() => handlePageChange(1)}>
         <div className="PageBorder">
           <img src="/pageimage/pageleft.svg" alt="firstpage" />

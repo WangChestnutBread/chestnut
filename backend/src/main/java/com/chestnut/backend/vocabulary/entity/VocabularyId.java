@@ -1,4 +1,4 @@
-package com.chestnut.backend.vocabulary;
+package com.chestnut.backend.vocabulary.entity;
 
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.study.entity.Study;

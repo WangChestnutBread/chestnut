@@ -2,6 +2,7 @@ package com.chestnut.backend.study.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name="Study_category")
 @Getter
+@ToString(exclude = "child")  //child 필드때문에 순환참조 문제 생김
 public class StudyCategory {
     @Id
     @Column(columnDefinition = "tinyint", nullable = false)

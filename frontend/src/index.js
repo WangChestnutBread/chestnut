@@ -29,6 +29,8 @@ import Chapter2Listpage from "./templates/Chapter2Listpage";
 import Chapter3Listpage from "./templates/Chapter3Listpage";
 import Chapter5Listpage from "./templates/Chapter5Listpage";
 import Chapter6Listpage from "./templates/Chapter6Listpage";
+import RankingTemplate from "./templates/RankingTemplate";
+import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
 import Chapter4Detail from "./templates/StudyList/Chapter4Detail";
 
 const router = createBrowserRouter([
@@ -63,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: "/board/announcement/write/",
     element: <AnnouncementWrite />
+  },
+  {
+    path: "/qqq",
+    element: <Chapter1Detail />
   },
   {
     path: "/member",
@@ -131,12 +137,17 @@ const router = createBrowserRouter([
   {
     path: "/main",
     element: <MainPage/>
-  }
+  },
+  {
+    path: "/abc",
+    element: <RankingTemplate />
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    {/* <App /> */}
     <RouterProvider router={router} />
   </React.StrictMode>
 );

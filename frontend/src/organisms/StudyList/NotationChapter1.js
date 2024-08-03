@@ -11,6 +11,8 @@ const data = {
 };
 
 const NotationChapter1 = () => {
+
+
   return (
     <div className="box">
       <div className="abc">표기[발음]</div>

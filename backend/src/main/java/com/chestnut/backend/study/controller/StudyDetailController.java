@@ -1,6 +1,7 @@
 package com.chestnut.backend.study.controller;
 
 import com.chestnut.backend.common.dto.ResponseDto;
+import com.chestnut.backend.study.dto.ImgUrlDto;
 import com.chestnut.backend.study.dto.PronounceMethodDto;
 import com.chestnut.backend.study.dto.PronunceEvaluateDto;
 import com.chestnut.backend.study.dto.WordPronounceDto;
@@ -30,6 +31,20 @@ public class StudyDetailController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/{studyId}/image")
+    public ResponseEntity<?> pronounceImgUrl(@PathVariable("studyId") Long studyId) {
+        ImgUrlDto imgUrl = studyService.getImgUrl(studyId);
+        ResponseDto<ImgUrlDto> result = new ResponseDto<>("200", imgUrl);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/{studyId}/example-sentences")
+    public ResponseEntity<?> relatedSentences(@PathVariable("studyId") Long studyId) {
+        List<String> sentences = studyService.getSentences(studyId);
+        ResponseDto<List<String>> result = new ResponseDto<>("200", sentences);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @GetMapping("/pronunciation")
     public ResponseEntity<?> pronounceMethods(@RequestParam Map<String, String> params) {
         List<PronounceMethodDto> pronounceMethods = studyService.getPronounceMethod(params);
@@ -43,4 +58,5 @@ public class StudyDetailController {
         PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(word, audioFile);
         return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
     }
+    
 }
