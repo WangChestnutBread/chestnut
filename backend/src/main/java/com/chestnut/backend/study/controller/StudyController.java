@@ -31,7 +31,10 @@ public class StudyController {
     }
 
     @GetMapping("/chapter/{chapterId}")
-    public ResponseEntity<?> chapterStudyList(@PathVariable("chapterId") Integer chapterId, @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+    public ResponseEntity<?> chapterStudyList(
+            @PathVariable("chapterId") Integer chapterId,
+            @AuthenticationPrincipal CustomMemberDetails customMemberDetails
+    ) {
         String loginId = customMemberDetails.getLoginId();
         List<?> chapterStudyInfo = studyService.findChapterStudyInfo(loginId, chapterId);
         ResponseDto<List<?>> result = new ResponseDto<>("200", chapterStudyInfo);
