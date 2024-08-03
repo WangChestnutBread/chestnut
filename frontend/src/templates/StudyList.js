@@ -15,8 +15,8 @@ function StudyList(){
     const setAccessToken = useAuthStore((state) => (state.setAccessToken));
     axios.get("https://i11d107.p.ssafy.io/chestnutApi/study/chapter",{
         headers:{
-            access: setAccessToken
-        }
+            "access": setAccessToken
+        },
     }).then(response=>{
         if(response.data.code==200){
             setdata(response.data.data);
@@ -79,29 +79,29 @@ function StudyList(){
                             <div className="group-box">
                                 <div className="cardgroup">
                                     <div className="cardlist">
-                                        <ChapterMenu title={`CH${data[0].chapterId}. ${data[0].chapterName}`} work={chapter1}/>
+                                        <ChapterMenu title={"ch1"} work={chapter1}/>
                                     </div>
                                     <div className="cardlist">
-                                        <ChapterMenu title={`CH${data[1].chapterId}. ${data[1].chapterName}`} work={chapter2}/>
+                                        <ChapterMenu title={"ch2"} work={chapter2}/>
                                     </div>
                                     <div className="cardlist">
-                                        <ChapterMenu title={`CH${data[2].chapterId}. ${data[2].chapterName}`} work={chapter3}/>
+                                        <ChapterMenu title={"ch3"} work={chapter3}/>
                                     </div>
                                     <div className="cardlist">
-                                        <ChapterMenu title={`CH${data[3].chapterId}. ${data[3].chapterName}`} work={chapter4}/>
+                                        <ChapterMenu title={"ch4"} work={chapter4}/>
                                     </div>
                                 </div>
                             </div>
                             <div className="cardgroup-sec">
                                 <div className="group-box">
                                     <div className="cardlist">
-                                        <ChapterMenu title={`CH${data[4].chapterId}. ${data[4].chapterName}`} work={chapter5}/>
+                                        <ChapterMenu title={"ch5"} work={chapter5}/>
                                     </div>
                                     <div className="cardlist">
-                                        <ChapterMenu title={`CH${data[5].chapterId}. ${data[5].chapterName}`} work={chapter6}/>
+                                        <ChapterMenu title={"ch6"} work={chapter6}/>
                                     </div>
                                     <div className="cardlist">
-                                        <ChapterMenu title={`CH${data[6].chapterId}. ${data[6].chapterName}`}/>
+                                        <ChapterMenu title={"ch7"}/>
                                     </div>
                                 </div>
                             </div>
