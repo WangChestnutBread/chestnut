@@ -23,6 +23,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Collections;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -54,13 +55,15 @@ public class SecurityConfig {
 
                         CorsConfiguration configuration = new CorsConfiguration();
 
-                        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000")); //front에서 정보를 보내니까
+                        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://i11d107.p.ssafy.io")); //front에서 정보를 보내니까
                         configuration.setAllowedMethods(Collections.singletonList("*")); //허용할 메서드
                         configuration.setAllowCredentials(true); //front에서 credential 설정을 하면 무조건 true로 바꿔줘야 한다.
                         configuration.setAllowedHeaders(Collections.singletonList("*")); //사용할 헤더
                         configuration.setMaxAge(3600L); //설정 시간
 
-                        configuration.setExposedHeaders(Collections.singletonList("Authorization")); //백에서 클라이언트에게 헤더를 보내줄 때 Authorization에 JWT을 넣어서 보내준다. -> Authorization 헤더도 허용해주어야 한다.
+                        configuration.setExposedHeaders(Collections.singletonList("access"));
+
+//                        configuration.setExposedHeaders(Collections.singletonList("Authorization")); //백에서 클라이언트에게 헤더를 보내줄 때 Authorization에 JWT을 넣어서 보내준다. -> Authorization 헤더도 허용해주어야 한다.
 
                         return configuration;
                     }
