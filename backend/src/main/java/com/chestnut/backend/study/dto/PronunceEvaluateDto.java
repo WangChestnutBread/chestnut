@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PronunceEvaluateDto {
     private int isPass;
+    private String pronunciation;
     private List<Integer> answerMismatchIndices;
     private List<Integer> userMismatchIndices;
 }
