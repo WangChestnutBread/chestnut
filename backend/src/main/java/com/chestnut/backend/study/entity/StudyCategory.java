@@ -13,7 +13,7 @@ import java.util.List;
 public class StudyCategory {
     @Id
     @Column(columnDefinition = "tinyint", nullable = false)
-    private Long studyCategoryId;
+    private Byte studyCategoryId;
 
     @Column(columnDefinition = "varchar(30)", nullable = false)
     private String categoryContent;

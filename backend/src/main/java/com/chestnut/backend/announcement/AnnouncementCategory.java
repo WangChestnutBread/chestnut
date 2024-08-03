@@ -11,7 +11,7 @@ public class AnnouncementCategory {
 
     @Id
     @Column(columnDefinition = "tinyint", nullable = false)
-    private Integer announceCategoryId;
+    private Byte announceCategoryId;
 
     @Column(columnDefinition = "varchar(5)", nullable = false)
     private String announceCategoryName;

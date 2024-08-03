@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PhonologyStudyInfo {
-    private Long studyCategoryId;
+    private Byte studyCategoryId;
     private Long studyId;
     private String phonologyRule;
     private String phonologyExplanation;

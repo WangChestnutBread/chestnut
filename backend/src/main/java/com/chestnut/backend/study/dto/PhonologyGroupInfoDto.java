@@ -13,6 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 public class PhonologyGroupInfoDto {
     private String categoryContent;
-    private Long studyCategoryId;
+    private Byte studyCategoryId;
     private List<PhonologyStudyInfo> phonology;
 }

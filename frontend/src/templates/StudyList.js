@@ -3,6 +3,9 @@ import NavBar from "../organisms/NavBar";
 import "./StudyList.css"
 import ChapterMenu from "../atoms/ChapterMenu";
 import {useNavigate} from "react-router-dom";
+import "./NavbarExample.css"
+import StudyBackButton from "../molecules/StudyBackButton"
+import ChestNutButton from "../organisms/ChestNutButton"
 function StudyList(){
     const navigate=useNavigate();
     const chapter1=()=>{
@@ -14,6 +17,9 @@ function StudyList(){
     const chapter3=()=>{
         navigate("/chapter3");
     };
+    const chapter4=()=>{
+        navigate("/chapter4");
+    };
     const chapter5=()=>{
         navigate("/chapter5");
     };
@@ -22,7 +28,16 @@ function StudyList(){
     };
     return(
         <div> 
-            <NavBar />
+            <div>
+                <div className="NavbarExample">
+                    <div className="NavbarButton">
+                        <div className="LeftButton">
+                            <StudyBackButton/>
+                            <ChestNutButton/>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="container">
                 <div className="titleBox">
                     <div className="textBox">
@@ -47,7 +62,7 @@ function StudyList(){
                                         <ChapterMenu title={'CH3. 받침글자'} work={chapter3}/>
                                     </div>
                                     <div className="cardlist">
-                                        <ChapterMenu title={'CH4. 음운변동'}/>
+                                        <ChapterMenu title={'CH4. 음운변동'} work={chapter4}/>
                                     </div>
                                 </div>
                             </div>

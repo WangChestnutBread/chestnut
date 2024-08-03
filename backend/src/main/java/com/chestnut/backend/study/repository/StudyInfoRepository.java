@@ -80,7 +80,7 @@ public class StudyInfoRepository {
      * 4단원 챕터내 학습 목록 조회
      * Batch Query 사용 -> 8번의 쿼리 조회를 2번으로 줄임
      */
-    public Map<Long, List<PhonologyStudyInfo>> getPhonologyStudyInfo(List<Long> studyCategoryIds) {
+    public Map<Byte, List<PhonologyStudyInfo>> getPhonologyStudyInfo(List<Byte> studyCategoryIds) {
         String query = "select new com.chestnut.backend.study.dto.PhonologyStudyInfo(s.studyCategory.studyCategoryId, s.studyId, sp.phonologyRule, sp.phonologyExplanation, sp.example) " +
                 "from Study s " +
                 "join StudyPhonology sp " +
@@ -94,7 +94,7 @@ public class StudyInfoRepository {
                 .collect(Collectors.groupingBy(PhonologyStudyInfo::getStudyCategoryId));
     }
 
-    public List<String> getCategoryName(List<Long> studyCategoryId) {
+    public List<String> getCategoryName(List<Byte> studyCategoryId) {
         String query = "select sc.categoryContent from StudyCategory sc where sc.studyCategoryId in :ids";
         return em.createQuery(query, String.class)
                 .setParameter("ids", studyCategoryId)

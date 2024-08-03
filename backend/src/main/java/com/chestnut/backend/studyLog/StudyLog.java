@@ -38,7 +38,7 @@ public class StudyLog {
     private LocalDate studiedDay;
 
     @Column(columnDefinition = "tinyint", nullable = false)
-    private int todayCount;
+    private byte todayCount;
 
     @Column(columnDefinition = "tinyint(1) default 0", nullable = false)
     private boolean isPass;
@@ -53,7 +53,7 @@ public class StudyLog {
             Member member,
             Chapter chapter,
             Study study,
-            int todayCount,
+            byte todayCount,
             boolean isPass,
             boolean passRecord
     ) {

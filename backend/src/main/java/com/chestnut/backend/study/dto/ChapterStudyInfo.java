@@ -11,7 +11,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class ChapterStudyInfo {
     private String categoryContent;
-    private Long studyCategoryId;
+    private Byte studyCategoryId;
     private Long studyId;
     private String word;
     private int isPass;

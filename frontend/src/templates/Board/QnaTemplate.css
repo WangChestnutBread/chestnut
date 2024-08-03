@@ -19,7 +19,7 @@
 }
 
 .announcementbtn{
-
+text-decoration: none;
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -39,6 +39,7 @@ border-radius: 10px;
 }
 
 .qnabtn{
+  text-decoration: none;
 display: flex;
 flex-direction: row;
 justify-content: center;

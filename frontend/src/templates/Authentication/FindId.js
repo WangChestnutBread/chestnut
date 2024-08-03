@@ -5,6 +5,7 @@ import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
 import Button from "../../molecules/Authentication/Button";
 import BackButton from "../../atoms/BackButton";
 import axios from "axios";
+import Swal from 'sweetalert2';
 function FindId(){
     const [name, setName]=useState("");
     const [email, setEmail]=useState("");
@@ -25,17 +26,37 @@ function FindId(){
         })
         .then(response=>{
             if(response.data.code==200){
-                alert(`당신의 아이디는 ${response.data.data.loginId}`);
+                Swal.fire({
+                    icon: "info",
+                    title: "ID 찾기",
+                    text: `당신의 아이디는 ${response.data.data.loginId}입니다.`,
+                    footer: '<a href="/member/password">비밀번호 찾기</a>'
+                  });
                 navigate("/member/login");
             }
             else if(response.data.code==714){
-                alert("멤버 조회에 실패했습니다.")
+                Swal.fire({
+                    icon: "error",
+                    title: "ID 찾기",
+                    text: "멤버 조회에 실패했습니다.",
+                    footer: '<a href="/member/password">비밀번호 찾기</a>'
+                  });
             }
             else if(response.data.code==713){
-                alert("아이디와 이메일이 불일치합니다.");
+                Swal.fire({
+                    icon: "error",
+                    title: "ID 찾기",
+                    text: "아이디와 이메일이 불일치합니다.",
+                    footer: '<a href="/member/password">비밀번호 찾기</a>'
+                  });
             }
             else{
-                alert("알수 없는 오류가 발생했습니다.")
+                Swal.fire({
+                    icon: "error",
+                    title: "ID 찾기",
+                    text: "알수 없는 오류가 발생했습니다.",
+                    footer: '<a href="/member/password">비밀번호 찾기</a>'
+                  });
             }
             console.log(response);
         })

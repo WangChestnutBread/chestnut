@@ -10,9 +10,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConfusedStudyInfo {
-    private Long parentCategoryId;
+    private Byte parentCategoryId;
     private String parentCategory;
-    private Long studyCategoryId;
+    private Byte studyCategoryId;
     private String categoryContent;
     private Long studyId;
     private int confusedGroupId;

@@ -52,9 +52,9 @@ public class StudyService {
      */
     @Transactional(readOnly = true)
     public List<PhonologyGroupInfoDto> phonologyGroupInfo() {
-        List<Long> studyCategoryIds = Arrays.asList(22L, 23L, 24L, 25L);
+        List<Byte> studyCategoryIds = Arrays.asList((byte)22, (byte)23, (byte)24, (byte)25);
         List<String> categoryName = studyInfoRepository.getCategoryName(studyCategoryIds);
-        Map<Long, List<PhonologyStudyInfo>> phonologyStudyInfo = studyInfoRepository.getPhonologyStudyInfo(studyCategoryIds);
+        Map<Byte, List<PhonologyStudyInfo>> phonologyStudyInfo = studyInfoRepository.getPhonologyStudyInfo(studyCategoryIds);
 
         return IntStream.range(0, studyCategoryIds.size())
                 .mapToObj(i -> new PhonologyGroupInfoDto(

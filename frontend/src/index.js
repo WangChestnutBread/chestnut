@@ -20,7 +20,6 @@ import FindId from "./templates/Authentication/FindId";
 import FindPw from "./templates/Authentication/FindPw";
 import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
-import ChapterTitle from "./atoms/ChapterTitle";
 import ChapterList from "./molecules/StudyList/ChapterList";
 import StudyList from "./templates/StudyList";
 import ChapterMenu from "./atoms/ChapterMenu";
@@ -30,6 +29,7 @@ import Chapter2Listpage from "./templates/Chapter2Listpage";
 import Chapter3Listpage from "./templates/Chapter3Listpage";
 import Chapter5Listpage from "./templates/Chapter5Listpage";
 import Chapter6Listpage from "./templates/Chapter6Listpage";
+import Chapter4Detail from "./templates/StudyList/Chapter4Detail";
 
 const router = createBrowserRouter([
   {
@@ -117,6 +117,10 @@ const router = createBrowserRouter([
     element: <Chapter3Listpage />
   },
   {
+    path: "/chapter4",
+    element: <Chapter4Detail tabTitleList={"CH4. 음운변동"}/>
+  },
+  {
     path: "/chapter5",
     element: <Chapter5Listpage />
   },
@@ -133,7 +137,6 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
     <RouterProvider router={router} />
   </React.StrictMode>
 );

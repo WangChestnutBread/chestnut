@@ -13,7 +13,7 @@ public class LogType {
 
     @Id
     @Column(columnDefinition = "tinyint", nullable = false)
-    private Integer logTypeId;
+    private Byte logTypeId;
 
     @Column(columnDefinition = "varchar(6)", nullable = false)
     private String logName;
