@@ -25,10 +25,10 @@ function LoginPage(){
     const success=(event)=>{
         console.log(Id);
         console.log(password);
-        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login",{
-            "loginId" : Id,
-            "password": password,
-        })
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login/",{
+            loginId : "duli123",
+            password: 'duli123!',
+        },)
         .then(response =>{
             if(response.data.code==200){
                 navigate("/main");

@@ -2,7 +2,7 @@ import LogoRank from "../molecules/Board/LogoRank";
 import StudyBackButton from "../molecules/StudyBackButton";
 import ChestNutButton from "../organisms/ChestNutButton";
 import "./RankingTemplate.css"
-
+import axios from "axios";
 const mokData = [
   {
     id: 0,
@@ -26,6 +26,26 @@ const mokData = [
     chestnut: "30개",
   },
 ];
+
+
+axios({
+  method: 'post',
+  url: 'https://i11d107.p.ssafy.io/chestnutApi/member/login',
+  data:{
+    loginId: 'duly123',
+    password: 'duly123!'
+  }
+})
+.then((res) => {
+  console.log(res);
+  console.log('성공');
+  
+})
+.catch((err) => {
+  console.log(err);
+  console.log('실패');
+})
+
 
 const RankingTemplate = () => {
   return (
