@@ -35,7 +35,7 @@ import Chapter4Detail from "./templates/StudyList/Chapter4Detail";
 
 const router = createBrowserRouter([
   {
-    path: "/a",
+    path: "/",
     element: <StartTemplates />
   },
   {

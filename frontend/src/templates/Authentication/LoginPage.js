@@ -26,8 +26,7 @@ function LoginPage() {
     navigate(-1);
   };
   const handleLogin = (event) => {
-    axios
-      .post("https://i11d107.p.ssafy.io/chestnutApi/member/login", {
+    axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login", {
         loginId: "duli123",
         password: "duli123!",
       })
