@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChapterInfoDto {
-    private Integer chapterId;
+    private Byte chapterId;
     private String chapterName;
     private int totalStudies;
     private Long chapterStudyCount;

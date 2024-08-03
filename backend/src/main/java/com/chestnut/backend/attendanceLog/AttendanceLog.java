@@ -24,7 +24,7 @@ public class AttendanceLog {
     private LocalDateTime attendanceAt;
 
     @Column(columnDefinition = "smallint default 1", nullable = false)
-    private int attendanceCount;
+    private Short attendanceCount;
 
     protected AttendanceLog() {}
 
@@ -32,7 +32,7 @@ public class AttendanceLog {
     public AttendanceLog(
         Member member,
         LocalDateTime attendanceAt,
-        int attendanceCount
+        Short attendanceCount
     ) {
         this.member = member;
         this.attendanceAt = attendanceAt;
