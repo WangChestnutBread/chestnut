@@ -30,6 +30,7 @@ import Chapter3Listpage from "./templates/Chapter3Listpage";
 import Chapter5Listpage from "./templates/Chapter5Listpage";
 import Chapter6Listpage from "./templates/Chapter6Listpage";
 import RankingTemplate from "./templates/RankingTemplate";
+import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
   {
     path: "/board/announcement/write/",
     element: <AnnouncementWrite />
+  },
+  {
+    path: "/qqq",
+    element: <Chapter1Detail />
   },
   {
     path: "/member",
