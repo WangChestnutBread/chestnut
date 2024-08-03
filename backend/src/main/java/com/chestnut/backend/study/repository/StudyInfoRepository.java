@@ -104,23 +104,25 @@ public class StudyInfoRepository {
 
     /**
      * 7단원 챕터내 학습 목록 조회
+     * 간단한 쿼리 2번 날리고 서비스 클래스에서 데이터 가공함
+     * 4단원도 이런 식으로 고칠 것
      */
-    public List<ConfusedStudyInfo> getConfusedStudyInfo() {
-        String query = "select new com.chestnut.backend.study.dto.ConfusedStudyInfo(parent.studyCategoryId, parent.categoryContent, " +
-                            "sc.studyCategoryId, sc.categoryContent, " +
-                            "s.studyId, scp.confusedGroupId, " +
-                            "s.word, s.pronounce) " +
-                    "from Study s " +
-                    "join StudyCategory sc " +
-                    "on s.studyCategory.studyCategoryId = sc.studyCategoryId " +
-                    "join StudyConfusedPronounce scp " +
-                    "on scp.studyId = s.studyId " +
-                    "join StudyCategory parent " +
-                    "on parent.studyCategoryId = sc.parent.studyCategoryId";
-
-        return em.createQuery(query, ConfusedStudyInfo.class)
-                .getResultList();
-    }
+//    public List<ConfusedStudyInfo> getConfusedStudyInfo() {
+//        String query = "select new com.chestnut.backend.study.dto.ConfusedStudyInfo(parent.studyCategoryId, parent.categoryContent, " +
+//                            "sc.studyCategoryId, sc.categoryContent, " +
+//                            "s.studyId, scp.confusedGroupId, " +
+//                            "s.word, s.pronounce) " +
+//                    "from Study s " +
+//                    "join StudyCategory sc " +
+//                    "on s.studyCategory.studyCategoryId = sc.studyCategoryId " +
+//                    "join StudyConfusedPronounce scp " +
+//                    "on scp.studyId = s.studyId " +
+//                    "join StudyCategory parent " +
+//                    "on parent.studyCategoryId = sc.parent.studyCategoryId";
+//
+//        return em.createQuery(query, ConfusedStudyInfo.class)
+//                .getResultList();
+//    }
 
 
 

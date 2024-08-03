@@ -2,12 +2,8 @@ package com.chestnut.backend.study.service;
 
 import com.chestnut.backend.common.exception.NotFoundException;
 import com.chestnut.backend.study.dto.*;
-import com.chestnut.backend.study.entity.Study;
-import com.chestnut.backend.study.entity.StudyResource;
-import com.chestnut.backend.study.entity.SyllableLocation;
-import com.chestnut.backend.study.repository.StudyInfoRepository;
-import com.chestnut.backend.study.repository.StudyRepository;
-import com.chestnut.backend.study.repository.StudyResourceRepository;
+import com.chestnut.backend.study.entity.*;
+import com.chestnut.backend.study.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +19,8 @@ public class StudyService {
     private final StudyInfoRepository studyInfoRepository;
     private final StudyRepository studyRepository;
     private final StudyResourceRepository studyResourceRepository;
+    private final StudyCategoryRepository studyCategoryRepository;
+    private final StudyConfusedPronounceRepository studyConfusedPronounceRepository;
 
     /**
      * 챕터명과 챕터 진도율 조회 쿼리
@@ -41,8 +39,8 @@ public class StudyService {
 
         //loginId -> memberId로 바꾸는 로직 추가
         return switch (chapterId) {
-            case 4 -> phonologyGroupInfo();
-            case 7 -> studyInfoRepository.getConfusedStudyInfo();
+            case 4 -> this.phonologyGroupInfo();
+            case 7 -> this.confusedWordsGroup();
             default -> studyInfoRepository.findChapterStudyInfo(memberId, chapterId);
         };
     }
@@ -63,6 +61,74 @@ public class StudyService {
                         phonologyStudyInfo.getOrDefault(studyCategoryIds.get(i), Collections.emptyList())
                 ))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 챕터내 학습 목록 조회 (7단원)
+     */
+    @Transactional(readOnly = true)
+    public List<ParentDto> confusedWordsGroup() {
+        List<StudyCategory> parents = studyCategoryRepository.findByStudyCategoryIds(Arrays.asList((byte) 1, (byte) 2)); //parent 카테고리
+        List<StudyCategory> collectedChildren = collectChildCategories(parents); //parent 카테고리들의 child를 하나의 리스트로 합침
+        List<StudyConfusedPronounce> confusedWords = studyConfusedPronounceRepository.findByCategories(collectedChildren); //각 child 카테고리에 속한 학습 목록을 가져옴
+        Map<Byte, List<StudyConfusedPronounce>> wordsMappedByCategory = groupWords(confusedWords); //학습 목록을 child 카테고리를 기준으로 묶음 (키: child 카테고리 id, 값: 학습목록)
+
+        return parents.stream()
+                .map(parent -> mapToParentDto(parent, wordsMappedByCategory))
+                .toList();
+    }
+
+    //parent 카테고리들의 child를 하나의 리스트로 합침
+    private List<StudyCategory> collectChildCategories(List<StudyCategory> parents) {
+        return parents.stream()
+                .flatMap(parent -> parent.getChild().stream())
+                .toList();
+    }
+
+    //학습 목록을 child 카테고리를 기준으로 묶음 (키: child 카테고리 id, 값: 학습목록)
+    private Map<Byte, List<StudyConfusedPronounce>> groupWords(List<StudyConfusedPronounce> confusedWords) {
+        return confusedWords.stream()
+                .collect(Collectors.groupingBy(item -> item.getStudyCategory().getStudyCategoryId()));
+    }
+
+    //ParentDto 생성
+    private ParentDto mapToParentDto(StudyCategory studyCategory, Map<Byte, List<StudyConfusedPronounce>> collect) {
+        //childCategory에 들어갈 객체 생성
+        List<ChildDto> childs = studyCategory.getChild().stream()
+                .map(childCategory -> mapToChildDto(childCategory, collect))
+                .toList();
+
+        return ParentDto.builder()
+                .parentCategoryId(studyCategory.getStudyCategoryId())
+                .parentCategory(studyCategory.getCategoryContent())
+                .childCategory(childs)
+                .build();
+    }
+
+    //ChildDto 생성
+    private ChildDto mapToChildDto(StudyCategory studyCategory, Map<Byte, List<StudyConfusedPronounce>> collect) {
+        //맵에서 해당 카테고리에 속하는 학습 목록 가져오기
+        List<StudyConfusedPronounce> studyInfos = collect.getOrDefault(studyCategory.getStudyCategoryId(), Collections.emptyList());
+        //해당 학습 목록을 dto에 맞게 변환
+        List<ConfusedStudyInfo> confusedWords = studyInfos.stream()
+                .map(this::makeStudyInfo)
+                .toList();
+        //ChildDto 생성
+        return ChildDto.builder()
+                .studyCategoryId(studyCategory.getStudyCategoryId())
+                .categoryContent(studyCategory.getCategoryContent())
+                .grandChildCategory(confusedWords)
+                .build();
+    }
+
+    //학습 목록을 dto에 맞게 변환하는 메서드
+    private ConfusedStudyInfo makeStudyInfo(StudyConfusedPronounce word) {
+        return ConfusedStudyInfo.builder()
+                .studyId(word.getStudyId())
+                .confusedGroupId(word.getConfusedGroupId())
+                .word(word.getWord())
+                .pronounce(word.getPronounce())
+                .build();
     }
 
 
