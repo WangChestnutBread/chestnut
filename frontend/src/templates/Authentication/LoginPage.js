@@ -37,6 +37,7 @@ function LoginPage() {
         } else if (response.data.code == 706) {
           alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
         }
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
