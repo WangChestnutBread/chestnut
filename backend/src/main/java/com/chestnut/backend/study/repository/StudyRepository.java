@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface StudyRepository extends JpaRepository<Study, Long> {
@@ -18,4 +19,9 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
                     "where s.word = :word and sr.syllableLocation = :location"
     )
     Optional<PronounceMethodDto> findPronounceMethod(@Param("word") String word, @Param("location") SyllableLocation location);
+
+    @Query("select s.word from Study s where s.chapter.chapterId = 6 and s.word like concat('%', :word, '%')")
+    Optional<List<String>> findSentences(@Param("word") String word);
+
+
 }
