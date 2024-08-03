@@ -21,10 +21,6 @@ public class Study {
     @Column(columnDefinition = "varchar(70)")
     private String pronounce;
 
-//    @Enumerated(EnumType.STRING)
-//    @Column(nullable = false)
-//    private ChapterType chapterType;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="chapter_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Chapter chapter;

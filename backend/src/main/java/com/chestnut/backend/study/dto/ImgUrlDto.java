@@ -9,10 +9,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class PhonologyStudyInfo {
-    private Byte studyCategoryId;
-    private Long studyId;
-    private String phonologyRule;
-    private String phonologyExplanation;
-    private String example;
+public class ImgUrlDto {
+    private String tongueImg;
+    private String mouthImg;
 }
