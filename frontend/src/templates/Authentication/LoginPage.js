@@ -39,6 +39,7 @@ function LoginPage(){
         .then(response =>{
             if(response.data.code==200){
                 navigate("/main");
+                console.log(response);
                 
             }
             else if(response.data.code==706){

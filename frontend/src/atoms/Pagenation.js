@@ -1,14 +1,13 @@
 import React from "react";
-import "../atoms/Authentication/Page.css";
+import "../atoms/Pagenation.css";
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
   const handlePageChange = (page) => {
     if (page < 1 || page > totalPages) return;
     onPageChange(page);
   };
-
+  const pageNumbers = [];
   const renderPageNumbers = () => {
-    const pageNumbers = [];
 
     // 보여줄 페이지 수 설정 (여기서는 5로 설정)
     const maxPageNumbers = 5;
@@ -31,11 +30,10 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       );
     }
 
-    return pageNumbers;
   };
 
   return (
-    <div className="Page">
+    <div className="PagenationPage">
       <div className="FirstBorder" onClick={() => handlePageChange(1)}>
         <div className="PageBorder">
           <img src="/pageimage/pageleft.svg" alt="firstpage" />
@@ -49,6 +47,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         <div className="NumberContent">{"<"}</div>
       </div>
       {renderPageNumbers()}
+      {pageNumbers}
       <div
         className="NumberBorder"
         onClick={() => handlePageChange(currentPage + 1)}

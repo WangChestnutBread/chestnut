@@ -1,11 +1,11 @@
-.Page {
+.PagenationPage {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
 }
-
-.NumberBorder, .FirstBorder, .LastBorder {
+/* 
+.NumberBorder, .FirstpageBorder, .LastBorder {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +16,7 @@
   cursor: pointer;
   background-color: #f0f0f0;
   transition: background-color 0.2s;
-}
+} */
 
 .NumberBorder.active {
   background-color: #007bff;
@@ -27,7 +27,48 @@
   background-color: #e0e0e0;
 }
 
-.PageBorder img {
+/* .PageBorder img {
+  width: 20px;
+  height: 20px;
+} */
+.NumberContent {
+  color: black;
+  font-size: 1.5rem;
+  font-family: 'Jua';
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.FirstBorder, .LastBorder, .NumberBorder {
+  width: 53px;
+  height: 53px;
+  padding: 10px;
+  background: #D9D9D9;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.FirstBorder {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  border: 1px black solid;
+}
+
+.NumberBorder {
+  border-top: 1px black solid;
+  border-right: 1px black solid;
+  border-bottom: 1px black solid;
+}
+
+.LastBorder {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 1px black solid;
+}
+
+.PageBorder {
   width: 20px;
   height: 20px;
 }
