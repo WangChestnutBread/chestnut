@@ -14,7 +14,7 @@ public class Chapter {
 
     @Id
     @Column(columnDefinition = "tinyint", nullable = false)
-    private Integer chapterId;
+    private Byte chapterId;
 
     @Column(columnDefinition = "varchar(10)", nullable = false)
     private String chapterName;

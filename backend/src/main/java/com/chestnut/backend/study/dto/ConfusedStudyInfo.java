@@ -1,19 +1,11 @@
 package com.chestnut.backend.study.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 public class ConfusedStudyInfo {
-    private Long parentCategoryId;
-    private String parentCategory;
-    private Long studyCategoryId;
-    private String categoryContent;
     private Long studyId;
     private int confusedGroupId;
     private String word;

@@ -18,7 +18,6 @@ public class CustomMemberDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collection = new ArrayList<>();
 
-        // Boolean 값을 기반으로 권한을 설정
         if (member.isAdmin()) {
             collection.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         } else {
@@ -27,7 +26,6 @@ public class CustomMemberDetails implements UserDetails {
 
         return collection;
     }
-
 
     @Override
     public String getPassword() {
@@ -39,9 +37,9 @@ public class CustomMemberDetails implements UserDetails {
         return member.getLoginId();
     }
 
-//    public String getLoginId() {
-//        return member.getLoginId();
-//    }
+    public String getLoginId() {
+        return member.getLoginId();
+    }
 
     @Override
     public boolean isAccountNonExpired() {

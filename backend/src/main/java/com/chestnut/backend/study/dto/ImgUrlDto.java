@@ -9,9 +9,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChapterInfoDto {
-    private Byte chapterId;
-    private String chapterName;
-    private int totalStudies;
-    private Long chapterStudyCount;
+public class ImgUrlDto {
+    private String tongueImg;
+    private String mouthImg;
 }

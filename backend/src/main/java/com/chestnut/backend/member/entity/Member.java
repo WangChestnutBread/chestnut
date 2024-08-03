@@ -57,6 +57,10 @@ public class Member {
     @JoinColumn(name="study_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), nullable = true)
     private Study study;
 
+    public void changePassword(String newPassword) {
+        password = newPassword;
+    }
+
     @PrePersist
     protected void onCreate() {
         if (this.joinAt == null) {

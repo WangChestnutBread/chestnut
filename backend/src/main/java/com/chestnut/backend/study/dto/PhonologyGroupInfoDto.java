@@ -5,16 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChapterStudyInfo {
+public class PhonologyGroupInfoDto {
     private String categoryContent;
     private Byte studyCategoryId;
-    private Long studyId;
-    private String word;
-    private int isPass;
-    private int isStudy;
-    private int isVocabList;
+    private List<PhonologyStudyInfo> phonology;
 }

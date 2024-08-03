@@ -9,6 +9,8 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class StudyInfoRepository {
@@ -76,38 +78,51 @@ public class StudyInfoRepository {
 
     /**
      * 4단원 챕터내 학습 목록 조회
+     * Batch Query 사용 -> 8번의 쿼리 조회를 2번으로 줄임
      */
-    public List<PhonologyStudyInfo> getPhonologyStudyInfo() {
-        String query = "select new com.chestnut.backend.study.dto.PhonologyStudyInfo(sc.categoryContent, sc.studyCategoryId, s.studyId, s.word, sp.phonologyExplanation, sp.example) " +
+    public Map<Byte, List<PhonologyStudyInfo>> getPhonologyStudyInfo(List<Byte> studyCategoryIds) {
+        String query = "select new com.chestnut.backend.study.dto.PhonologyStudyInfo(s.studyCategory.studyCategoryId, s.studyId, sp.phonologyRule, sp.phonologyExplanation, sp.example) " +
                 "from Study s " +
                 "join StudyPhonology sp " +
                 "on s.studyId = sp.studyId " +
-                "join StudyCategory sc " +
-                "on s.studyCategory.studyCategoryId = sc.studyCategoryId";
+                "where s.studyCategory.studyCategoryId in :studyCategoryIds";
 
         return em.createQuery(query, PhonologyStudyInfo.class)
+                .setParameter("studyCategoryIds", studyCategoryIds)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(PhonologyStudyInfo::getStudyCategoryId));
+    }
+
+    public List<String> getCategoryName(List<Byte> studyCategoryId) {
+        String query = "select sc.categoryContent from StudyCategory sc where sc.studyCategoryId in :ids";
+        return em.createQuery(query, String.class)
+                .setParameter("ids", studyCategoryId)
                 .getResultList();
     }
+
 
     /**
      * 7단원 챕터내 학습 목록 조회
+     * 간단한 쿼리 2번 날리고 서비스 클래스에서 데이터 가공함
+     * 4단원도 이런 식으로 고칠 것
      */
-    public List<ConfusedStudyInfo> getConfusedStudyInfo() {
-        String query = "select new com.chestnut.backend.study.dto.ConfusedStudyInfo(parent.studyCategoryId, parent.categoryContent, " +
-                            "sc.studyCategoryId, sc.categoryContent, " +
-                            "s.studyId, scp.confusedGroupId, " +
-                            "s.word, s.pronounce) " +
-                    "from Study s " +
-                    "join StudyCategory sc " +
-                    "on s.studyCategory.studyCategoryId = sc.studyCategoryId " +
-                    "join StudyConfusedPronounce scp " +
-                    "on scp.studyId = s.studyId " +
-                    "join StudyCategory parent " +
-                    "on parent.studyCategoryId = sc.parent.studyCategoryId";
-
-        return em.createQuery(query, ConfusedStudyInfo.class)
-                .getResultList();
-    }
+//    public List<ConfusedStudyInfo> getConfusedStudyInfo() {
+//        String query = "select new com.chestnut.backend.study.dto.ConfusedStudyInfo(parent.studyCategoryId, parent.categoryContent, " +
+//                            "sc.studyCategoryId, sc.categoryContent, " +
+//                            "s.studyId, scp.confusedGroupId, " +
+//                            "s.word, s.pronounce) " +
+//                    "from Study s " +
+//                    "join StudyCategory sc " +
+//                    "on s.studyCategory.studyCategoryId = sc.studyCategoryId " +
+//                    "join StudyConfusedPronounce scp " +
+//                    "on scp.studyId = s.studyId " +
+//                    "join StudyCategory parent " +
+//                    "on parent.studyCategoryId = sc.parent.studyCategoryId";
+//
+//        return em.createQuery(query, ConfusedStudyInfo.class)
+//                .getResultList();
+//    }
 
 
 

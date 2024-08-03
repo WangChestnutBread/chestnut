@@ -19,11 +19,11 @@ function ChestNutButton() {
 
 function DropMenu() {
   let [itemList, setitemList] = useState([
-    { img: "/icons/LastStudyButton.svg", path: "", menu: "메인 화면" },
-    { img: "/icons/LastStudyButton.svg", path: "", menu: "학습 목록" },
+    { img: "/icons/LastStudyButton.svg", path: "/main", menu: "메인 화면" },
+    { img: "/icons/LastStudyButton.svg", path: "/study", menu: "학습 목록" },
     { img: "/icons/LastStudyButton.svg", path: "", menu: "대화 연습" },
     { img: "/icons/LastStudyButton.svg", path: "", menu: "단어장" },
-    { img: "/icons/LastStudyButton.svg", path: "", menu: "게시판" },
+    { img: "/icons/LastStudyButton.svg", path: "/board/qna", menu: "게시판" },
   ]);
   return (
     <div className="DropMenu">
