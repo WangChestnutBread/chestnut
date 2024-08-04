@@ -17,7 +17,7 @@ function StudyList() {
   useEffect(() => {
     if (!accessToken) {
       // accessToken이 없으면 로그인 페이지로 이동 또는 다른 처리
-      navigate('/login'); // 예시: 로그인 페이지로 이동
+      navigate("/login"); // 예시: 로그인 페이지로 이동
       return;
     }
 
@@ -47,7 +47,7 @@ function StudyList() {
   const handleChapterNavigation = (chapter) => {
     navigate(`/chapter${chapter}`);
   };
-  console.log(data);
+
   return (
     <div>
       <div>
@@ -74,31 +74,26 @@ function StudyList() {
             <div className="chapterinnerbox">
               <div className="group-box">
                 <div className="cardgroup">
-                  <div className="cardlist">
-                    <ChapterMenu title={`CH${data[0].chapterId}. ${data[0].chapterName}`} work={() => handleChapterNavigation(1)} />
-                  </div>
-                  <div className="cardlist">
-                    <ChapterMenu title={`CH${data[1].chapterId}. ${data[1].chapterName}`} work={() => handleChapterNavigation(2)} />
-                  </div>
-                  <div className="cardlist">
-                    <ChapterMenu title={`CH${data[2].chapterId}. ${data[2].chapterName}`} work={() => handleChapterNavigation(3)} />
-                  </div>
-                  <div className="cardlist">
-                    <ChapterMenu title={`CH${data[3].chapterId}. ${data[3].chapterName}`} work={() => handleChapterNavigation(4)} />
-                  </div>
+                  {data.slice(0, 4).map((chapter, index) => (
+                    <div className="cardlist" key={chapter.chapterId}>
+                      <ChapterMenu
+                        title={`CH${chapter.chapterId}. ${chapter.chapterName}`}
+                        work={() => handleChapterNavigation(chapter.chapterId)}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="cardgroup-sec">
                 <div className="group-box">
-                  <div className="cardlist">
-                    <ChapterMenu title={`CH${data[4].chapterId}. ${data[4].chapterName}`} work={() => handleChapterNavigation(5)} />
-                  </div>
-                  <div className="cardlist">
-                    <ChapterMenu title={`CH${data[5].chapterId}. ${data[5].chapterName}`} work={() => handleChapterNavigation(6)} />
-                  </div>
-                  <div className="cardlist">
-                    <ChapterMenu title={`CH${data[6].chapterId}. ${data[6].chapterName}`} />
-                  </div>
+                  {data.slice(4).map((chapter, index) => (
+                    <div className="cardlist" key={chapter.chapterId}>
+                      <ChapterMenu
+                        title={`CH${chapter.chapterId}. ${chapter.chapterName}`}
+                        work={() => handleChapterNavigation(chapter.chapterId)}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -110,3 +105,4 @@ function StudyList() {
 }
 
 export default StudyList;
+
