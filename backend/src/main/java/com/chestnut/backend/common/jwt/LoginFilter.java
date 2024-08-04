@@ -4,8 +4,7 @@ import com.chestnut.backend.common.dto.ResponseDto;
 import com.chestnut.backend.member.dto.CustomMemberDetails;
 import com.chestnut.backend.member.dto.LoginReqDTO;
 import com.chestnut.backend.member.dto.LoginResDTO;
-import com.chestnut.backend.member.entity.RefreshEntity;
-import com.chestnut.backend.member.repository.RefreshRepository;
+import com.chestnut.backend.member.service.RefreshService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletInputStream;
@@ -24,19 +23,18 @@ import org.springframework.util.StreamUtils;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
-    private final RefreshRepository refreshRepository;
+    private final RefreshService refreshService;
 
-    public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, RefreshRepository refreshRepository) {
+    public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, RefreshService refreshService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
-        this.refreshRepository = refreshRepository;
+        this.refreshService = refreshService;
         setFilterProcessesUrl("/member/login");
     }
 
@@ -81,7 +79,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String access = jwtUtil.createJwt("access", loginId, role, 86400000L);
         String refresh = jwtUtil.createJwt("refresh", loginId, role, 86400000L);
 
-        addRefreshEntity(loginId, refresh, 86400000L);
+        refreshService.saveRefresh(loginId, refresh, 86400000L);
 
         response.setHeader("access", access);
         response.addCookie(createCookie("refresh", refresh));
@@ -93,18 +91,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonResponse = objectMapper.writeValueAsString(apiResponse);
         response.getWriter().write(jsonResponse);
-    }
-
-    private void addRefreshEntity(String loginId, String refresh, Long expiredMs) {
-
-        Date date = new Date(System.currentTimeMillis()+expiredMs);
-
-        RefreshEntity refreshEntity = new RefreshEntity();
-        refreshEntity.setLoginId(loginId);
-        refreshEntity.setRefresh(refresh);
-        refreshEntity.setExpiration(date.toString());
-
-        refreshRepository.save(refreshEntity);
     }
 
     private Cookie createCookie(String key, String value) {

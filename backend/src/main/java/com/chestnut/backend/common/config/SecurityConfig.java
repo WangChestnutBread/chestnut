@@ -4,12 +4,12 @@ import com.chestnut.backend.common.jwt.CustomLogoutFilter;
 import com.chestnut.backend.common.jwt.JWTFilter;
 import com.chestnut.backend.common.jwt.JWTUtil;
 import com.chestnut.backend.common.jwt.LoginFilter;
-import com.chestnut.backend.member.repository.RefreshRepository;
+import com.chestnut.backend.common.service.RedisService;
+import com.chestnut.backend.member.service.RefreshService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,7 +32,8 @@ public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JWTUtil jwtUtil;
-    private final RefreshRepository refreshRepository;
+    private final RefreshService refreshService;
+    private final RedisService redisService;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
@@ -63,8 +64,6 @@ public class SecurityConfig {
 
                         configuration.setExposedHeaders(Collections.singletonList("access"));
 
-//                        configuration.setExposedHeaders(Collections.singletonList("Authorization")); //백에서 클라이언트에게 헤더를 보내줄 때 Authorization에 JWT을 넣어서 보내준다. -> Authorization 헤더도 허용해주어야 한다.
-
                         return configuration;
                     }
                 })));
@@ -81,15 +80,15 @@ public class SecurityConfig {
                         .requestMatchers("/member/login", "/member/find-id","/member/signup").permitAll()
                         .requestMatchers("/member/check-nickname", "/member/check-loginId").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/reissue").permitAll()
+                        .requestMatchers("/member/reissue").permitAll()
                         .anyRequest().authenticated());
 
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, refreshRepository), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, refreshService), UsernamePasswordAuthenticationFilter.class);
         http
-                .addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshRepository), LogoutFilter.class);
+                .addFilterBefore(new CustomLogoutFilter(jwtUtil, redisService), LogoutFilter.class);
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

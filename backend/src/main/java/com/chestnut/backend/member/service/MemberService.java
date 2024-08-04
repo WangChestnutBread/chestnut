@@ -3,10 +3,10 @@ package com.chestnut.backend.member.service;
 import com.chestnut.backend.avatar.entity.Avatar;
 import com.chestnut.backend.avatar.repository.AvatarRepository;
 import com.chestnut.backend.common.exception.*;
+import com.chestnut.backend.common.service.RedisService;
 import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MemberRepository;
-import com.chestnut.backend.member.repository.RefreshRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,7 +21,7 @@ public class MemberService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private final AvatarRepository avatarRepository;
-    private final RefreshRepository refreshRepository;
+    private final RedisService redisService;
 
     @Transactional
     public void signup(SignupReqDTO signupReqDTO) {
@@ -138,7 +138,7 @@ public class MemberService {
 
         member.withdraw();
 
-        refreshRepository.deleteByLoginId(loginId);
+        redisService.deleteData("Refresh:"+loginId);
     }
 
 }
