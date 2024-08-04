@@ -78,7 +78,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         }
 
         //loginId, role 사용해서 JWTUtil에서 토큰을 만든다.
-        String access = jwtUtil.createJwt("access", loginId, role, 600000L);
+        String access = jwtUtil.createJwt("access", loginId, role, 86400000L);
         String refresh = jwtUtil.createJwt("refresh", loginId, role, 86400000L);
 
         addRefreshEntity(loginId, refresh, 86400000L);
