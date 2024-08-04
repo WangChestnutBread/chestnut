@@ -70,7 +70,6 @@ public class Member {
     }
 
     public void withdraw() {
-        loginId = "-";
         password = "-";
         email = "-";
         memberName = "-";
