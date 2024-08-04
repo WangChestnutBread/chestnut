@@ -35,7 +35,7 @@ import Chapter4Detail from "./templates/StudyList/Chapter4Detail";
 
 const router = createBrowserRouter([
   {
-    path: "/a",
+    path: "/",
     element: <StartTemplates />
   },
   {
@@ -63,11 +63,11 @@ const router = createBrowserRouter([
     element: <AnnouncementDetail />
   },
   {
-    path: "/board/announcement/write/",
+    path: "/board/announcement/write",
     element: <AnnouncementWrite />
   },
   {
-    path: "/qqq",
+    path: "/study/detail/:studyId/word",
     element: <Chapter1Detail />
   },
   {
