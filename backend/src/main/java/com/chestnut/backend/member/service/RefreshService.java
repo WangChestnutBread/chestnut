@@ -2,24 +2,20 @@ package com.chestnut.backend.member.service;
 
 import com.chestnut.backend.common.exception.*;
 import com.chestnut.backend.common.jwt.JWTUtil;
-import com.chestnut.backend.member.entity.RefreshEntity;
-import com.chestnut.backend.member.repository.RefreshRepository;
+import com.chestnut.backend.common.service.RedisService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-
 @Service
 @RequiredArgsConstructor
-public class ReissueService {
+public class RefreshService {
 
     private final JWTUtil jwtUtil;
-    private final RefreshRepository refreshRepository;
+    private final RedisService redisService;
 
     @Transactional
     public void reissue(HttpServletRequest request, HttpServletResponse response) {
@@ -48,34 +44,30 @@ public class ReissueService {
             throw new RefreshTokenException();
         }
 
-        Boolean isExist = refreshRepository.existsByRefresh(refresh);
+        String loginId = jwtUtil.getLoginId(refresh);
+        String role = jwtUtil.getRole(refresh);
+
+        boolean isExist = redisService.existData(createPrefixKey(loginId));
         if (!isExist) {
             throw new RefreshTokenException();
         }
 
-        String loginId = jwtUtil.getLoginId(refresh);
-        String role = jwtUtil.getRole(refresh);
-
         String newAccess = jwtUtil.createJwt("access", loginId, role, 86400000L);
         String newRefresh = jwtUtil.createJwt("refresh", loginId, role, 86400000L);
 
-        refreshRepository.deleteByRefresh(refresh);
-        addRefreshEntity(loginId, newRefresh, 86400000L);
+        redisService.deleteData(createPrefixKey(loginId));
+        saveRefresh(loginId, newRefresh, 86400000L);
 
         response.setHeader("access", newAccess);
         response.addCookie(createCookie("refresh", newRefresh));
     }
 
-    private void addRefreshEntity(String loginId, String refresh, Long expiredMs) {
+    public void saveRefresh(String loginId, String refresh, Long expired) {
+        redisService.setDataExpire(createPrefixKey(loginId), refresh, expired);
+    }
 
-        Date date = new Date(System.currentTimeMillis() + expiredMs);
-
-        RefreshEntity refreshEntity = new RefreshEntity();
-        refreshEntity.setLoginId(loginId);
-        refreshEntity.setRefresh(refresh);
-        refreshEntity.setExpiration(date.toString());
-
-        refreshRepository.save(refreshEntity);
+    private String createPrefixKey(String loginId) {
+        return "Refresh:" + loginId;
     }
 
     private Cookie createCookie(String key, String value) {
