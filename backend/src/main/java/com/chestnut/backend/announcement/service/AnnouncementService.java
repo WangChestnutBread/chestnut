@@ -106,7 +106,7 @@ public class AnnouncementService {
         Member member = memberRepository.findByLoginId(announcementDto.getLoginId()).orElseThrow(MemberNotFoundException::new);
         if(!member.isAdmin()) throw new AdminPermissionDeniedException();
         if(member.isWithdraw()) throw new InvalidMemberException();
-        AnnouncementCategory announcementCategory = announcementCategoryRepository.findById(announcementDto.getAnnounceCategoryId()).orElseThrow(NotFoundException::new);
+        announcementCategoryRepository.findById(announcementDto.getAnnounceCategoryId()).orElseThrow(NotFoundException::new);
         try {
             if(announcementRepository.updateAnnouncement(
                     announcementDto.getAnnounceCategoryId(),

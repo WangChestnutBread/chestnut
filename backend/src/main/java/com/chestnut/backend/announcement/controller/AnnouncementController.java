@@ -35,7 +35,7 @@ public class AnnouncementController {
     public ResponseEntity<?> getAnnouncementDetail(@PathVariable("announceId") Long announceId,
                                       @AuthenticationPrincipal CustomMemberDetails customMemberDetails){
         String loginId = customMemberDetails.getLoginId();
-        AnnouncementDto announcementDto = announcementService.getAnnouncementDetail(loginId, announceId);;
+        AnnouncementDto announcementDto = announcementService.getAnnouncementDetail(loginId, announceId);
         return new ResponseEntity<>(new ResponseDto<>("200", announcementDto), HttpStatus.OK);
     }
 
