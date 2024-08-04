@@ -1,10 +1,16 @@
 import React from "react";
 import "./BlackBoard.css";
-function BlackBoard() {
+function BlackBoard(props) {
   return (
     <div className="container">
       <div className="BlackBoardBox">
         <div className="BoardBox">
+          <div className="ChapterContent">
+            {props.word}
+          </div>
+          <div className="ChapterContent">
+            {props.content}
+          </div>
           <div className="greenBox">
             <img className="pencil" src="/image/pencil.png" />
             <img className="eraser" src="/image/ERASER.png" />
