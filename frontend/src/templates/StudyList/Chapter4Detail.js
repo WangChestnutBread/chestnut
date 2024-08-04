@@ -1,14 +1,19 @@
 import "./Chapter4Detail.css"
 import BlackBoardWithTab from "../../organisms/BlackBoardWithTab";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function Chapter4Detail() {
-    let tabTitleList = ['교체', '축약']
-
+function Chapter4Detail({data}) {
+    let [content, setContent] = useState(null)
+    useEffect(()=>{
+        setContent(data)
+    }, [])
+    
     return (
         <div>
             <div>
-                <BlackBoardWithTab tabTitleList={tabTitleList}/>
+                {
+                    content ? <BlackBoardWithTab content={content}/> : <p>로딩중입니다</p>
+                }
             </div>
 
         </div>
