@@ -1,21 +1,17 @@
-import axios from "axios";
 import MainTemplate from "../templates/MainTemplate";
 import "./MainPage.css";
 import useAuthStore from "../stores/authStore";
+import baseApi from "../api/fetchAPI";
 function MainPage() {
   const { accessToken, setAccessToken } = useAuthStore((state) => ({
     ...state,
   }));
   const reissueToken = () => {
-    axios({
-      url: "https://i11d107.p.ssafy.io/chestnutApi/member/reissue",
-      method: "post",
-      withCredentials: true,
-    });
+    baseApi.post('/member/reissue')
   };
   return (
     <div className="MainPage">
-      {/* <button onClick={reissueToken}>토큰 재발급 테스트</button> */}
+      <button onClick={reissueToken}>토큰 재발급 테스트</button>
       <MainTemplate />
     </div>
   );
