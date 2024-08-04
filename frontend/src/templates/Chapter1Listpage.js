@@ -15,7 +15,7 @@ function Chapter1Listpage(){
         }
        console.log(response) 
     })
-    .cathc(error=>{
+    .catch(error=>{
         console.log(error);
     });
     return(

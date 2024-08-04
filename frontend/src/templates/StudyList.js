@@ -75,29 +75,29 @@ function StudyList() {
               <div className="group-box">
                 <div className="cardgroup">
                   <div className="cardlist">
-                    <ChapterMenu title={"ch1"} work={() => handleChapterNavigation(1)} />
+                    <ChapterMenu title={`CH${data[0].chapterId}. ${data[0].chapterName}`} work={() => handleChapterNavigation(1)} />
                   </div>
                   <div className="cardlist">
-                    <ChapterMenu title={"ch2"} work={() => handleChapterNavigation(2)} />
+                    <ChapterMenu title={`CH${data[1].chapterId}. ${data[1].chapterName}`} work={() => handleChapterNavigation(2)} />
                   </div>
                   <div className="cardlist">
-                    <ChapterMenu title={"ch3"} work={() => handleChapterNavigation(3)} />
+                    <ChapterMenu title={`CH${data[2].chapterId}. ${data[2].chapterName}`} work={() => handleChapterNavigation(3)} />
                   </div>
                   <div className="cardlist">
-                    <ChapterMenu title={"ch4"} work={() => handleChapterNavigation(4)} />
+                    <ChapterMenu title={`CH${data[3].chapterId}. ${data[3].chapterName}`} work={() => handleChapterNavigation(4)} />
                   </div>
                 </div>
               </div>
               <div className="cardgroup-sec">
                 <div className="group-box">
                   <div className="cardlist">
-                    <ChapterMenu title={"ch5"} work={() => handleChapterNavigation(5)} />
+                    <ChapterMenu title={`CH${data[4].chapterId}. ${data[4].chapterName}`} work={() => handleChapterNavigation(5)} />
                   </div>
                   <div className="cardlist">
-                    <ChapterMenu title={"ch6"} work={() => handleChapterNavigation(6)} />
+                    <ChapterMenu title={`CH${data[5].chapterId}. ${data[5].chapterName}`} work={() => handleChapterNavigation(6)} />
                   </div>
                   <div className="cardlist">
-                    <ChapterMenu title={"ch7"} />
+                    <ChapterMenu title={`CH${data[6].chapterId}. ${data[6].chapterName}`} />
                   </div>
                 </div>
               </div>
