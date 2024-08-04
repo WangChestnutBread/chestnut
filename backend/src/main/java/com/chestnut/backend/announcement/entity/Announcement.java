@@ -1,4 +1,4 @@
-package com.chestnut.backend.announcement;
+package com.chestnut.backend.announcement.entity;
 
 import com.chestnut.backend.member.entity.Member;
 import jakarta.persistence.*;
@@ -45,29 +45,21 @@ public class Announcement {
     public Announcement(
         String title,
         String content,
-        int hit,
         Member member,
         AnnouncementCategory announcementCategory
     ) {
         this.title = title;
         this.content = content;
-        this.hit = hit;
         this.member = member;
         this.announcementCategory = announcementCategory;
     }
 
-    @PostPersist
+    @PrePersist
     private void onCreate() {
         if (this.createdAt == null) {
             this.createdAt = LocalDateTime.now();
         }
-        if (this.updatedAt == null) {
-            this.updatedAt = LocalDateTime.now();
-        }
-    }
-
-    @PostUpdate
-    private void onUpdate() {
         this.updatedAt = LocalDateTime.now();
+        this.hit = 0;
     }
 }
