@@ -28,9 +28,9 @@ function Chapter4Detail({data}) {
             </div>
 
             {/* 칠판 콘텐츠 전체 */}
-            <div>
+            <div className="container">
                 {
-                    content ? <BlackBoardWithTab content={content}/> : <p>로딩중입니다</p>
+                    content ? <BlackBoardWithTab content={content} tabTitle=""/> : <p>로딩중입니다</p>
                 }
             </div>
 
