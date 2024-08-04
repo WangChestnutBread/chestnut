@@ -134,7 +134,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/chapter4",
-    element: <Chapter4Detail tabTitleList={"CH4. 음운변동"}/>
+    element: <Ch4DetailPage/>
   },
   {
     path: "/chapter5",

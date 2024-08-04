@@ -1,9 +1,15 @@
 import "./BlackBoardWithTab.css";
 import ChapterList from "../molecules/StudyList/ChapterList";
 import BlackBoardTab from "../molecules/BlackBoardTab";
+import { useState } from "react";
 
-function BlackBoardWithTab({ tabTitleList }) {
-    // let [ch4Tab, setch4Tab] = useState(0)
+function BlackBoardWithTab({ content }) {
+    let [currentTab, setCurrentTab] = useState(0)
+
+    const handleTabClick = (index) => {
+      setCurrentTab(index)
+    }
+
 
   return (
     <div className="container BlackBoardWithTab">
@@ -11,8 +17,8 @@ function BlackBoardWithTab({ tabTitleList }) {
         <div className="BlackBoardBody">
           <ChapterList title="Ch4. 음운변동" />
           <div className="TabButton">
-            {tabTitleList.map((tabTitle, i) => {
-              return <BlackBoardTab tabTitle={tabTitle} key={i} />;
+            {content.map((item, i) => {
+              return <BlackBoardTab key={i} tabTitle={item.categoryContent} isActive={currentTab === i} onClick={()=>{handleTabClick(i)}}/>;
             })}
           </div>
         </div>
