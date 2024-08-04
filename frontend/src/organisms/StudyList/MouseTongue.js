@@ -10,24 +10,21 @@ const MouseTongue = () => {
   const [tongueData, setTongueData] = useState("");
   const { studyId } = useParams();
   useEffect(() => {
-      baseApi.get(`/study/detail/1/image`).then((res) => {
-      setMouthData(res.data.mouthImg);
-      setTongueData(res.data.tongueImg);
-      console.log(res.data.data.tongueImg);
-      
-      
-    });
-  }, []);
+    baseApi.get(`/study/detail/${studyId}/image`).then((res) => {
+      setMouthData(res.data.data.mouthImg);
+      setTongueData(res.data.data.tongueImg);
+    })
+  }, [])
 
   return (
     <div className="d-flex m-t-box">
       <div className="face-box rounded-3 shadow m-2">
         {/* 입모양 영역 */}
-        <Mouse />
+        <Mouse mouthData={mouthData} />
       </div>
       <div className="face-box rounded-3 shadow m-2">
         {/* 혀모양 영역 */}
-        <Tongue />
+        <Tongue tongueData={tongueData} />
       </div>
     </div>
   );
