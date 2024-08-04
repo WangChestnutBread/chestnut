@@ -1,6 +1,7 @@
 package com.chestnut.backend.member.entity;
 
 import com.chestnut.backend.avatar.entity.Avatar;
+import com.chestnut.backend.member.dto.ChangeInfoReqDTO;
 import com.chestnut.backend.study.entity.Study;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -61,12 +62,29 @@ public class Member {
         password = newPassword;
     }
 
+    public void changeInfo(ChangeInfoReqDTO changeInfoReqDTO) {
+        nickname = changeInfoReqDTO.getNickname();
+        email = changeInfoReqDTO.getEmail();
+        memberName = changeInfoReqDTO.getMemberName();
+        birthday = changeInfoReqDTO.getBirthday();
+    }
+
+    public void withdraw() {
+        password = "-";
+        email = "-";
+        memberName = "-";
+        nickname = "알수 없음";
+        birthday = LocalDate.of(9999,12,31);
+        withdrawAt = now();
+        isWithdraw = true;
+        ranking = 0;
+    }
+
     @PrePersist
     protected void onCreate() {
         if (this.joinAt == null) {
             this.joinAt = now();
         }
-        //나머지 boolean, long등 primitive 타입 필드들은 값이 배정되지 않았을 때 default로 false, 0의 값을 가짐
     }
 
     public void addReward(byte reward) {

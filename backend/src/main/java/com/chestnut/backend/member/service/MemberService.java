@@ -3,12 +3,10 @@ package com.chestnut.backend.member.service;
 import com.chestnut.backend.avatar.entity.Avatar;
 import com.chestnut.backend.avatar.repository.AvatarRepository;
 import com.chestnut.backend.common.exception.*;
-import com.chestnut.backend.member.dto.FindIdReqDTO;
-import com.chestnut.backend.member.dto.FindIdResDTO;
-import com.chestnut.backend.member.dto.ResetPwdDTO;
-import com.chestnut.backend.member.dto.SignupReqDTO;
+import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MemberRepository;
+import com.chestnut.backend.member.repository.RefreshRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,6 +21,7 @@ public class MemberService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private final AvatarRepository avatarRepository;
+    private final RefreshRepository refreshRepository;
 
     @Transactional
     public void signup(SignupReqDTO signupReqDTO) {
@@ -108,6 +107,38 @@ public class MemberService {
         String codePwd = bCryptPasswordEncoder.encode(resetPwdDTO.getNewPassword());
 
         member.changePassword(codePwd);
+    }
+
+    @Transactional
+    public GetInfoResDTO getMemberInfo(String loginId) {
+        Member member = memberRepository.findByLoginId(loginId)
+                .orElseThrow(MemberNotFoundException::new);
+
+        return GetInfoResDTO.toDto(member);
+    }
+
+    @Transactional
+    public void changeMemberInfo(String loginId, ChangeInfoReqDTO changeInfoReqDTO) {
+
+        if(!loginId.equals(changeInfoReqDTO.getLoginId())){
+            throw new IncorrectAccessException();
+        }
+
+        Member member = memberRepository.findByLoginId(loginId)
+                .orElseThrow(MemberNotFoundException::new);
+
+        member.changeInfo(changeInfoReqDTO);
+    }
+
+    @Transactional
+    public void withdraw(String loginId) {
+
+        Member member = memberRepository.findByLoginId(loginId)
+                .orElseThrow(MemberNotFoundException::new);
+
+        member.withdraw();
+
+        refreshRepository.deleteByLoginId(loginId);
     }
 
 }

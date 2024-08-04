@@ -21,14 +21,7 @@ const mokData = {
     ],
   },
 };
-const pronunciation = axios.get("https://i11d107.p.ssafy.io/chestnutApi/study/detail/pronunciation")
-  .then((res) => {
-    console.log(res.data);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  console.log(pronunciation);
+
 
 
 const SoundMethod = () => {

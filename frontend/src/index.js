@@ -63,11 +63,11 @@ const router = createBrowserRouter([
     element: <AnnouncementDetail />
   },
   {
-    path: "/board/announcement/write/",
+    path: "/board/announcement/write",
     element: <AnnouncementWrite />
   },
   {
-    path: "/qqq",
+    path: "/study/detail/:studyId/word",
     element: <Chapter1Detail />
   },
   {
