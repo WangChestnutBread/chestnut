@@ -6,8 +6,8 @@ import "./SoundMethod.css";
 
 const SoundMethod = (hangeul) => {
   console.log(hangeul);
-  console.log(hangeul.hangeul);
-  const distinction = parseInt(hangeul.hangeul.studyId);
+  console.log(hangeul.hangeul.studyId);
+  const distinction = parseInt(hangeul.hangeulstudyId);
   console.log(distinction);
 
   function getConstantVowel(kor) {
@@ -101,7 +101,7 @@ const SoundMethod = (hangeul) => {
       t: t[tn],
     };
   }
-  const a = getConstantVowel("가");
+  const a = getConstantVowel(hangeul.hangeul);
   console.log(a);
 
   const [word, setWord] = useState("");
@@ -136,7 +136,24 @@ const SoundMethod = (hangeul) => {
         .catch((err) => {
           console.log(err);
         });
-    } else {
+    } else if (a.t) {
+      baseApi
+        .get(`/study/detail/pronunciation`, {
+          params: {
+            initial: `${a.f}`,
+            middle: `${a.s}`,
+            last: `${a.t}`
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setWord(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    else {
       baseApi
         .get(`/study/detail/pronunciation`, {
           params: {
