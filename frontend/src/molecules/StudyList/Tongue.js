@@ -1,4 +1,5 @@
-const Tongue = () => {
+const Tongue = (tongueData) => {
+  console.log(tongueData);
   return (
     <div className="tongue">
       <div className="d-flex align-items-center">
@@ -6,7 +7,7 @@ const Tongue = () => {
         <span>혀모양</span>
       </div>
       <div>
-        <img src="/image/tongue.png" alt="tongue" style={{marginBottom:63}}/>
+        <img src={tongueData.tongueData} alt="tongue" style={{marginBottom:63}}/>
       </div>
     </div>
   );
