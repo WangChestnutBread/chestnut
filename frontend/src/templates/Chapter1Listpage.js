@@ -12,8 +12,10 @@ function Chapter1Listpage(){
     }).then(response=>{
         if(response.data.code==200){
             setdata(response.data.data);
+            
         }
-       console.log(response) 
+       console.log(response)
+       console.log(data);
     })
     .catch(error=>{
         console.log(error);
