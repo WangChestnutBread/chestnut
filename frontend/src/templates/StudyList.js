@@ -1,115 +1,112 @@
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../organisms/NavBar";
-import "./StudyList.css"
+import "./StudyList.css";
 import ChapterMenu from "../atoms/ChapterMenu";
-import {useNavigate} from "react-router-dom";
-import "./NavbarExample.css"
-import StudyBackButton from "../molecules/StudyBackButton"
-import ChestNutButton from "../organisms/ChestNutButton"
+import { useNavigate } from "react-router-dom";
+import "./NavbarExample.css";
+import StudyBackButton from "../molecules/StudyBackButton";
+import ChestNutButton from "../organisms/ChestNutButton";
 import useAuthStore from "../stores/authStore";
 import axios from "axios";
 
-function StudyList(){
-    const navigate=useNavigate();
-    const [data, setdata]=useState();
-    const setAccessToken = useAuthStore((state) => (state.setAccessToken));
-    axios.get("https://i11d107.p.ssafy.io/chestnutApi/study/chapter",{
-        headers:{
-            "access": setAccessToken
+function StudyList() {
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const accessToken = useAuthStore((state) => state.accessToken); // accessToken 가져오기
+
+  useEffect(() => {
+    if (!accessToken) {
+      // accessToken이 없으면 로그인 페이지로 이동 또는 다른 처리
+      navigate('/login'); // 예시: 로그인 페이지로 이동
+      return;
+    }
+
+    axios
+      .get("https://i11d107.p.ssafy.io/chestnutApi/study/chapter", {
+        headers: {
+          access: accessToken, // accessToken을 헤더에 넣기
         },
-    }).then(response=>{
-        if(response.data.code==200){
-            setdata(response.data.data);
-        }
-        else if(response.data.code==801){
-            alert("유효하지 않은 토큰입니다.");
-        }
-        else if(response.data.code==710){
-            alert("DB에 없는 정보입니다.");
-        }
-        else if(response.data.code==299){
-            alert("알 수 없는 오류입니다.");
+      })
+      .then((response) => {
+        if (response.data.code === 200) {
+          setData(response.data.data);
+        } else if (response.data.code === 801) {
+          alert("유효하지 않은 토큰입니다.");
+        } else if (response.data.code === 710) {
+          alert("DB에 없는 정보입니다.");
+        } else if (response.data.code === 299) {
+          alert("알 수 없는 오류입니다.");
         }
         console.log(response);
-    }).catch(error=>{
+      })
+      .catch((error) => {
         console.log(error);
-    })
-    const chapter1=()=>{
-        navigate("/chapter1");
-    };
-    const chapter2=()=>{
-        navigate("/chapter2");
-    };
-    const chapter3=()=>{
-        navigate("/chapter3");
-    };
-    const chapter4=()=>{
-        navigate("/chapter4");
-    };
-    const chapter5=()=>{
-        navigate("/chapter5");
-    };
-    const chapter6=()=>{
-        navigate("/chapter6");
-    };
-    return(
-        <div> 
-            <div>
-                <div className="NavbarExample">
-                    <div className="NavbarButton">
-                        <div className="LeftButton">
-                            <StudyBackButton/>
-                            <ChestNutButton/>
-                        </div>
-                    </div>
-                </div>
+      });
+  }, [accessToken, navigate]);
+
+  const handleChapterNavigation = (chapter) => {
+    navigate(`/chapter${chapter}`);
+  };
+
+  return (
+    <div>
+      <div>
+        <div className="NavbarExample">
+          <div className="NavbarButton">
+            <div className="LeftButton">
+              <StudyBackButton />
+              <ChestNutButton />
             </div>
-            <div className="container">
-                <div className="titleBox">
-                    <div className="textBox">
-                        <div className="titleFont">무엇을 학습할까??</div>
-                    </div>
-                    <div className="img-con">
-                        <img className="imgsqueez" src="/image/squeez.png" />
-                    </div>
-                </div>
-                <div className="chapterlist">
-                    <div className="chapterTotalBox">
-                        <div className="chapterinnerbox">
-                            <div className="group-box">
-                                <div className="cardgroup">
-                                    <div className="cardlist">
-                                        <ChapterMenu title={"ch1"} work={chapter1}/>
-                                    </div>
-                                    <div className="cardlist">
-                                        <ChapterMenu title={"ch2"} work={chapter2}/>
-                                    </div>
-                                    <div className="cardlist">
-                                        <ChapterMenu title={"ch3"} work={chapter3}/>
-                                    </div>
-                                    <div className="cardlist">
-                                        <ChapterMenu title={"ch4"} work={chapter4}/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="cardgroup-sec">
-                                <div className="group-box">
-                                    <div className="cardlist">
-                                        <ChapterMenu title={"ch5"} work={chapter5}/>
-                                    </div>
-                                    <div className="cardlist">
-                                        <ChapterMenu title={"ch6"} work={chapter6}/>
-                                    </div>
-                                    <div className="cardlist">
-                                        <ChapterMenu title={"ch7"}/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-            </div>
+          </div>
         </div>
-    );
+      </div>
+      <div className="container">
+        <div className="titleBox">
+          <div className="textBox">
+            <div className="titleFont">무엇을 학습할까??</div>
+          </div>
+          <div className="img-con">
+            <img className="imgsqueez" src="/image/squeez.png" alt="squeez" />
+          </div>
+        </div>
+        <div className="chapterlist">
+          <div className="chapterTotalBox">
+            <div className="chapterinnerbox">
+              <div className="group-box">
+                <div className="cardgroup">
+                  <div className="cardlist">
+                    <ChapterMenu title={"ch1"} work={() => handleChapterNavigation(1)} />
+                  </div>
+                  <div className="cardlist">
+                    <ChapterMenu title={"ch2"} work={() => handleChapterNavigation(2)} />
+                  </div>
+                  <div className="cardlist">
+                    <ChapterMenu title={"ch3"} work={() => handleChapterNavigation(3)} />
+                  </div>
+                  <div className="cardlist">
+                    <ChapterMenu title={"ch4"} work={() => handleChapterNavigation(4)} />
+                  </div>
+                </div>
+              </div>
+              <div className="cardgroup-sec">
+                <div className="group-box">
+                  <div className="cardlist">
+                    <ChapterMenu title={"ch5"} work={() => handleChapterNavigation(5)} />
+                  </div>
+                  <div className="cardlist">
+                    <ChapterMenu title={"ch6"} work={() => handleChapterNavigation(6)} />
+                  </div>
+                  <div className="cardlist">
+                    <ChapterMenu title={"ch7"} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+
 export default StudyList;
