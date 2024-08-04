@@ -1,10 +1,11 @@
 import React,{useState} from "react";
 import ChapterList from "../molecules/StudyList/ChapterList";
+import Text24 from "../atoms/Text24";
 import useAuthStore from "../stores/authStore";
 import axios from "axios";
 function Chapter1Listpage(){
-    const accessToken = useAuthStore((state) => (state.setAccessToken))
-    const [data, setdata] =useState();
+    const accessToken = useAuthStore((state) => (state.accessToken))
+    const [data, setdata] =useState([]);
     axios.get("https://i11d107.p.ssafy.io/chestnutApi/study/chapter/1",{
         headers:{
             access: accessToken
@@ -14,14 +15,23 @@ function Chapter1Listpage(){
             setdata(response.data.data);
             
         }
-       console.log(response)
-       console.log(data);
     })
     .catch(error=>{
         console.log(error);
     });
     return(
-        <ChapterList title={'CH1. 자음 / 모음'} />
+        <div>
+            <ChapterList title={'CH1. 자음 / 모음'} word={"자음"} content={"r"}/>
+            {
+                data.map(function(i){
+                    <div>
+                        
+                        console.log(i.word)
+                    </div>
+                })
+            }
+        </div>
+
     );
 }
 export default Chapter1Listpage;

@@ -1,7 +1,7 @@
 package com.chestnut.backend.common.jwt;
 
 import com.chestnut.backend.common.dto.ResponseDto;
-import com.chestnut.backend.member.repository.RefreshRepository;
+import com.chestnut.backend.common.service.RedisService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -21,8 +21,8 @@ import java.io.IOException;
 public class CustomLogoutFilter extends GenericFilterBean {
 
     private final JWTUtil jwtUtil;
-    private final RefreshRepository refreshRepository;
     private final String logoutUrl = "/member/logout";
+    private final RedisService redisService;
 
     @Override
     public void doFilter (ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
@@ -74,12 +74,13 @@ public class CustomLogoutFilter extends GenericFilterBean {
             return;
         }
 
-        if (!refreshRepository.existsByRefresh(refresh)) {
+        String loginId = jwtUtil.getLoginId(refresh);
+        if(!redisService.existData("Refresh:"+loginId)) {
             sendMessage(response, "802");
             return;
         }
 
-        refreshRepository.deleteByRefresh(refresh);
+        redisService.deleteData("Refresh:"+loginId);
 
         Cookie cookie = new Cookie("refresh", null);
         cookie.setMaxAge(0);

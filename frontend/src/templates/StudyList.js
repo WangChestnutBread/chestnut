@@ -11,14 +11,13 @@ import axios from "axios";
 
 function StudyList() {
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
-  const[data1, setData1] = useState([]);
+  const [listdata, setlistData] = useState([]);
   const accessToken = useAuthStore((state) => state.accessToken); // accessToken 가져오기
-  let i=0;
+
   useEffect(() => {
     if (!accessToken) {
       // accessToken이 없으면 로그인 페이지로 이동 또는 다른 처리
-      navigate("/login"); // 예시: 로그인 페이지로 이동
+      navigate('/login'); // 예시: 로그인 페이지로 이동
       return;
     }
 
@@ -29,16 +28,17 @@ function StudyList() {
         },
       })
       .then((response) => {
-        if (response.data.code === 200) {
-          setData([response.data.data]);
-        } else if (response.data.code === 801) {
+        if (response.data.code == 200) {
+          setlistData(response.data.data)
+        } else if (response.data.code == 801) {
           alert("유효하지 않은 토큰입니다.");
-        } else if (response.data.code === 710) {
+        } else if (response.data.code == 710) {
           alert("DB에 없는 정보입니다.");
-        } else if (response.data.code === 299) {
+        } else if (response.data.code == 299) {
           alert("알 수 없는 오류입니다.");
         }
-        console.log(response);
+        console.log(response.data.data[0]);
+        console.log(listdata)
       })
       .catch((error) => {
         console.log(error);
@@ -48,7 +48,7 @@ function StudyList() {
   const handleChapterNavigation = (chapter) => {
     navigate(`/chapter${chapter}`);
   };
-  console.log(data);
+  console.log(listdata);
   return (
     <div>
       <div>
@@ -75,26 +75,26 @@ function StudyList() {
             <div className="chapterinnerbox">
               <div className="group-box">
                 <div className="cardgroup">
-                  {data.slice(0, 4).map((chapter, index) => (
-                    <div className="cardlist" key={chapter.chapterId}>
-                      <ChapterMenu
-                        title={`CH${chapter.chapterId}. ${chapter.chapterName}`}
-                        work={() => handleChapterNavigation(chapter.chapterId)}
-                      />
-                    </div>
-                  ))}
+                    {listdata.slice(0, 4).map((chapter) => (
+                        <div className="cardlist" key={chapter.chapterId}>
+                          <ChapterMenu
+                            title={`CH${chapter.chapterId}. ${chapter.chapterName}`}
+                            work={() => handleChapterNavigation(chapter.chapterId)}
+                          />
+                        </div>
+                      ))}
                 </div>
               </div>
               <div className="cardgroup-sec">
                 <div className="group-box">
-                  {data.slice(4).map((chapter, index) => (
-                    <div className="cardlist" key={chapter.chapterId}>
-                      <ChapterMenu
-                        title={`CH${chapter.chapterId}. ${chapter.chapterName}`}
-                        work={() => handleChapterNavigation(chapter.chapterId)}
-                      />
-                    </div>
-                  ))}
+                    {listdata.slice(4).map((chapter) => (
+                        <div className="cardlist" key={chapter.chapterId}>
+                          <ChapterMenu
+                            title={`CH${chapter.chapterId}. ${chapter.chapterName}`}
+                            work={() => handleChapterNavigation(chapter.chapterId)}
+                          />
+                        </div>
+                    ))}
                 </div>
               </div>
             </div>
