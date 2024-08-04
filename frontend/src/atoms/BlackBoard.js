@@ -6,7 +6,11 @@ function BlackBoard(props) {
       <div className="BlackBoardBox">
         <div className="BoardBox">
           <div className="ChapterContent">
-            {props.word}
+            {props.work.map(
+              (number, idx)=>{
+                <div>{number.data.word}</div>
+              }
+            )}
           </div>
           <div className="ChapterContent">
             {props.content}

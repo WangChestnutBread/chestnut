@@ -21,7 +21,7 @@ function Chapter1Listpage(){
     });
     return(
         <div>
-            <ChapterList title={'CH1. 자음 / 모음'} word={"자음"} content={"r"}/>
+            <ChapterList title={'CH1. 자음 / 모음'} word={data} content={"r"}/>
             {
                 data.map(function(i){
                     <div>
