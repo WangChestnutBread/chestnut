@@ -1,3 +1,10 @@
+.Chapter4Detail{
+    display: flex;
+    flex-direction: column;
+    gap: 30px
+}
+
+
 .VerticalLine {
     position: absolute;
     height: 85%;
