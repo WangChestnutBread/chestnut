@@ -133,7 +133,7 @@ const router = createBrowserRouter([
     element: <Chapter3Listpage />
   },
   {
-    path: "/chapter4",
+    path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage/>
   },
   {
@@ -143,6 +143,10 @@ const router = createBrowserRouter([
   {
     path: "/chapter6",
     element: <Chapter6Listpage />
+  },
+  {
+    path: "/chapter7",
+    element: <Ch4n7DetailPage />
   },
   {
     path: "/main",

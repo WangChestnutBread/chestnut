@@ -1,6 +1,6 @@
 import "./Chapter4Detail.css"
 import "../NavbarExample.css"
-import BlackBoardWithTab from "../../organisms/BlackBoardWithTab";
+import BlackBoardWithTab from "../../organisms/Ch4BlackBoardWithTab";
 import { useEffect, useState } from "react";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";

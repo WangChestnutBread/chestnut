@@ -1,9 +1,8 @@
 import "./BlackBoardWithTab.css";
 import ChapterList from "../molecules/StudyList/ChapterList";
 import BlackBoardTab from "../molecules/BlackBoardTab";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Text32 from "../atoms/Text32";
-import { useNavigate } from "react-router-dom";
 
 function BlackBoardWithTab({ content }) {
 
