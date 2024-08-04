@@ -1,5 +1,5 @@
 const Tongue = (tongueData) => {
-  console.log(tongueData);
+  // console.log(tongueData);
   return (
     <div className="tongue">
       <div className="d-flex align-items-center">

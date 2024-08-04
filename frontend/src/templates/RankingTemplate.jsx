@@ -28,23 +28,23 @@ const mokData = [
 ];
 
 
-axios({
-  method: 'post',
-  url: 'https://i11d107.p.ssafy.io/chestnutApi/member/login',
-  data:{
-    loginId: 'duly123',
-    password: 'duly123!'
-  }
-})
-.then((res) => {
-  console.log(res);
-  console.log('성공');
+// axios({
+//   method: 'post',
+//   url: 'https://i11d107.p.ssafy.io/chestnutApi/member/login',
+//   data:{
+//     loginId: 'duly123',
+//     password: 'duly123!'
+//   }
+// })
+// .then((res) => {
+//   console.log(res);
+//   console.log('성공');
   
-})
-.catch((err) => {
-  console.log(err);
-  console.log('실패');
-})
+// })
+// .catch((err) => {
+//   console.log(err);
+//   console.log('실패');
+// })
 
 
 const RankingTemplate = () => {

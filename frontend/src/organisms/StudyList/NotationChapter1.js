@@ -50,10 +50,10 @@ const data = {
       word: "ㅆ",
       pronounce: "ㅆ",
     },
-    {
-      word: "ㅇ",
-      pronounce: "ㅇ",
-    },
+    // {
+    //   word: "ㅇ",
+    //   pronounce: "ㅇ",
+    // },
     {
       word: "ㅈ",
       pronounce: "ㅈ",
@@ -169,14 +169,14 @@ const data = {
   ],
 };
 
-const NotationChapter1 = () => {
-  const { studyId } = useParams();
+const NotationChapter1 = (word) => {
+  // console.log(word);
 
   return (
     <div className="box">
       <div className="abc">표기[발음]</div>
-      <div className="data1">{data.data[studyId - 1].word}</div>
-      <div className="data2">{`[${data.data[studyId - 1].pronounce}]`}</div>
+      <div className="data1">{word.word}</div>
+      <div className="data2">{`[${word.word}]`}</div>
     </div>
   );
 };
