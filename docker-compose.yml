@@ -43,6 +43,7 @@ services:
       - CLOVA_SPEECH_SECRET=${CLOVA_SPEECH_SECRET}
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
     expose:
       - ${BACKEND_PORT}
     networks:
