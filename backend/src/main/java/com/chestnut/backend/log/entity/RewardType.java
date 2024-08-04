@@ -1,4 +1,4 @@
-package com.chestnut.backend.rewardLog;
+package com.chestnut.backend.log.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

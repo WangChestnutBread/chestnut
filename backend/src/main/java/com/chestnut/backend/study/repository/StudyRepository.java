@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StudyRepository extends JpaRepository<Study, Long> {
+
     Optional<Study> findByStudyId(Long studyId);
 
     @Query(
@@ -23,5 +24,6 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
     @Query("select s.word from Study s where s.chapter.chapterId = 6 and s.word like concat('%', :word, '%')")
     Optional<List<String>> findSentences(@Param("word") String word);
 
-
+    @Query("select s from Study s join fetch s.chapter where s.studyId = :studyId")
+    Optional<Study> findByStudyIdWithChapter(Long studyId);
 }

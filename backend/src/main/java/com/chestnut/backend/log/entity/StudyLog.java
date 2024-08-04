@@ -1,4 +1,4 @@
-package com.chestnut.backend.studyLog;
+package com.chestnut.backend.log.entity;
 
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.study.entity.Chapter;
