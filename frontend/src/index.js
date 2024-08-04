@@ -33,7 +33,7 @@ import RankingTemplate from "./templates/RankingTemplate";
 import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
 import Chapter2Detail from "./templates/StudyList/Chapter2Detail";
 import Chapter3Detail from './templates/StudyList/Chapter3Detail';
-import Chapter4Detail from "./templates/StudyList/Chapter4Detail";
+import Ch4DetailPage from "./pages/StudyDetail/Ch4DetailPage";
 
 const router = createBrowserRouter([
   {
