@@ -12,8 +12,9 @@ import axios from "axios";
 function StudyList() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const[data1, setData1] = useState([]);
   const accessToken = useAuthStore((state) => state.accessToken); // accessToken 가져오기
-
+  let i=0;
   useEffect(() => {
     if (!accessToken) {
       // accessToken이 없으면 로그인 페이지로 이동 또는 다른 처리
@@ -29,7 +30,7 @@ function StudyList() {
       })
       .then((response) => {
         if (response.data.code === 200) {
-          setData(response.data.data);
+          setData([response.data.data]);
         } else if (response.data.code === 801) {
           alert("유효하지 않은 토큰입니다.");
         } else if (response.data.code === 710) {

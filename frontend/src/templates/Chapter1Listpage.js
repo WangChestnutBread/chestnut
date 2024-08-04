@@ -3,11 +3,11 @@ import ChapterList from "../molecules/StudyList/ChapterList";
 import useAuthStore from "../stores/authStore";
 import axios from "axios";
 function Chapter1Listpage(){
-    const setAccessToken = useAuthStore((state) => (state.setAccessToken))
-    const [data, setdata] =useState([]);
+    const accessToken = useAuthStore((state) => (state.setAccessToken))
+    const [data, setdata] =useState();
     axios.get("https://i11d107.p.ssafy.io/chestnutApi/study/chapter/1",{
         headers:{
-            access: setAccessToken
+            access: accessToken
         },
     }).then(response=>{
         if(response.data.code==200){
