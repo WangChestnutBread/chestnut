@@ -2,7 +2,10 @@ package com.chestnut.backend.member.controller;
 
 import com.chestnut.backend.common.dto.ResponseDto;
 import com.chestnut.backend.member.dto.*;
+import com.chestnut.backend.member.service.MailAuthService;
 import com.chestnut.backend.member.service.MemberService;
+import com.chestnut.backend.member.validation.annotation.Email;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,10 +19,11 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final MemberService memberService;
+    private final MailAuthService mailAuthService;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDTO signupReqDTO) {
-        memberService.signup(signupReqDTO);
+    public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDTO signupReqDTO, HttpSession session) {
+        memberService.signup(signupReqDTO, session);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
@@ -38,6 +42,13 @@ public class MemberController {
     @GetMapping("/check-loginId")
     public ResponseEntity<?> checkLoginIdDuplicate(@RequestParam String loginId) {
         memberService.checkLoginIdDuplicate(loginId);
+        return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
+    }
+
+    @GetMapping("/check-email")
+    public ResponseEntity<?> checkEmailDuplicate(@Email @RequestParam String email, HttpSession session) {
+        memberService.checkEmailDuplicate(email);
+        session.setAttribute("CheckEmailDuplication:", email);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
@@ -63,6 +74,19 @@ public class MemberController {
     @GetMapping("/withdraw")
     public ResponseEntity<?> withdraw(@AuthenticationPrincipal CustomMemberDetails customMemberDetails){
         memberService.withdraw(customMemberDetails.getLoginId());
+        return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
+    }
+
+    @PostMapping("/email/code-request")
+    public ResponseEntity<?> sendMail(@RequestBody SendMailReqDTO sendMailReqDTO) {
+        mailAuthService.sendMail(sendMailReqDTO);
+        return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
+    }
+
+    @PostMapping("/email/code-check")
+    public ResponseEntity<?> checkMail(@RequestBody MailAuthDto mailAuthDto, HttpSession session){
+        mailAuthService.verifyEmailCode(mailAuthDto);
+        session.setAttribute("CheckEmailCode:", mailAuthDto.getEmail());
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 

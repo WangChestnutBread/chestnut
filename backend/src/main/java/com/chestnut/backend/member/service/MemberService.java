@@ -7,6 +7,7 @@ import com.chestnut.backend.common.service.RedisService;
 import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MemberRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,19 +25,41 @@ public class MemberService {
     private final RedisService redisService;
 
     @Transactional
-    public void signup(SignupReqDTO signupReqDTO) {
+    public void signup(SignupReqDTO signupReqDTO, HttpSession session) {
+
+        //DTO에서의 이메일 꺼내기 -> session에서 중복 검사 이메일과 같은지 확인 / 코드 검사 이메일과 같은지 확인
+        String email = signupReqDTO.getEmail();
+        String checkDuplicationEmail = (String) session.getAttribute("CheckEmailDuplication:");
+        String checkCodeEmail = (String) session.getAttribute("CheckEmailCode:");
+
+        System.out.println("email: " + email);
+        System.out.println("checkDuplicationEmail: " + checkDuplicationEmail);
+        System.out.println("checkCodeEmail: " + checkCodeEmail);
+
+        //1. checkDuplicationEmail이 null인지 확인 ->
+        //2. checkCodeEmail이 null인지 확인
+        //3. DTO의 이메일과 해당 값들이 같은지 확인
+        if(checkDuplicationEmail == null) {
+            throw new MailSessionNotFoundException();
+        }
+
+        if(checkCodeEmail == null) {
+            throw new MailSessionNotFoundException();
+        }
+
+        if(!checkDuplicationEmail.equals(email) || !checkCodeEmail.equals(email)) {
+            throw new EmailSessionException();
+        }
 
         String password = signupReqDTO.getPassword();
         String checkPassword = signupReqDTO.getCheckPassword();
         if (!password.equals(checkPassword)) {
             throw new PasswordNotEqualException();
         }
-
         try {
             String codePwd = bCryptPasswordEncoder.encode(password);
             Avatar avatar = avatarRepository.findByAvatarId(1)
                     .orElseThrow(AvatarNotFoundException::new);
-
             Member member = signupReqDTO.toEntity(codePwd, avatar);
             memberRepository.save(member);
         } catch (DataAccessException e) {
@@ -44,7 +67,6 @@ public class MemberService {
         } catch (Exception e) {
             throw new UnknownException();
         }
-
     }
 
     @Transactional
@@ -73,6 +95,13 @@ public class MemberService {
     @Transactional
     public void checkLoginIdDuplicate(String loginId) {
         if (memberRepository.existsByLoginId(loginId)) {
+            throw new DataDuplicatedException();
+        }
+    }
+
+    @Transactional
+    public void checkEmailDuplicate(String email) {
+        if(memberRepository.existsByEmail(email)) {
             throw new DataDuplicatedException();
         }
     }
@@ -120,7 +149,7 @@ public class MemberService {
     @Transactional
     public void changeMemberInfo(String loginId, ChangeInfoReqDTO changeInfoReqDTO) {
 
-        if(!loginId.equals(changeInfoReqDTO.getLoginId())){
+        if (!loginId.equals(changeInfoReqDTO.getLoginId())) {
             throw new IncorrectAccessException();
         }
 
