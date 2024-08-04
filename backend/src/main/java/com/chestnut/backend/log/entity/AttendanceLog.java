@@ -1,10 +1,11 @@
-package com.chestnut.backend.attendanceLog;
+package com.chestnut.backend.log.entity;
 
 import com.chestnut.backend.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -31,11 +32,16 @@ public class AttendanceLog {
     @Builder
     public AttendanceLog(
         Member member,
-        LocalDateTime attendanceAt,
         Short attendanceCount
     ) {
         this.member = member;
-        this.attendanceAt = attendanceAt;
         this.attendanceCount = attendanceCount;
+    }
+
+    @PrePersist
+    private void onCreate() {
+        if (this.attendanceAt == null) {
+            this.attendanceAt = LocalDateTime.now();
+        }
     }
 }

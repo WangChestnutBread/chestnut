@@ -1,7 +1,8 @@
-package com.chestnut.backend.rewardLog;
+package com.chestnut.backend.log.entity;
 
 import com.chestnut.backend.member.entity.Member;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
