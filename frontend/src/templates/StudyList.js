@@ -47,7 +47,7 @@ function StudyList() {
   const handleChapterNavigation = (chapter) => {
     navigate(`/chapter${chapter}`);
   };
-
+  console.log(data);
   return (
     <div>
       <div>
