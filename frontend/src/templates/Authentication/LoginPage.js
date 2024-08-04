@@ -26,9 +26,10 @@ function LoginPage() {
     navigate(-1);
   };
   const handleLogin = (event) => {
+    event.preventDefault();
     axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login", {
-        loginId: "duli123",
-        password: "duli123!",
+        loginId: Id,
+        password: password,
       })
       .then((response) => {
         if (response.data.code == 200) {
@@ -42,7 +43,6 @@ function LoginPage() {
       .catch((error) => {
         console.log(error);
       });
-    event.preventDefault();
   };
   return (
     <div className="container">
