@@ -92,6 +92,7 @@
 
 .RightBoard {
   display: flex;
+  flex-direction: column;
   position: absolute;
   color: white;
   width: 50%;
@@ -105,4 +106,8 @@
   font-size: 2rem;
   align-items: center;
   line-height: 200%;
+}
+
+.RightBoardWord {
+  display: flex;
 }

@@ -131,30 +131,30 @@ const router = createBrowserRouter([
     path: "/study",
     element: <StudyList />
   },
-  {
-    path: "/chapter/:chapterId",
-    element: <Chapter1Listpage />
-  },
-  {
-    path: "/chapter/:chapterId",
-    element: <Chapter2Listpage />
-  },
-  {
-    path: "/chapter/:chapterId",
-    element: <Chapter3Listpage />
-  },
-  {
-    path: "/chapter/:chapterId",
-    element: <Ch4n7DetailPage/>
-  },
-  {
-    path: "/chapter/:chapterId",
-    element: <Chapter5Listpage />
-  },
-  {
-    path: "/chapter/:chapterId",
-    element: <Chapter6Listpage />
-  },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Chapter1Listpage />
+  // },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Chapter2Listpage />
+  // },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Chapter3Listpage />
+  // },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Ch4n7DetailPage/>
+  // },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Chapter5Listpage />
+  // },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Chapter6Listpage />
+  // },
   {
     path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage />

@@ -5,6 +5,7 @@ import { useState } from "react";
 import Text32 from "../atoms/Text32";
 
 function Ch7BlackBoardWithTab({ content }) {
+  // console.log(content)
   const handleTabClick = (index) => {
     setCurrentTab(index);
   };
@@ -16,7 +17,6 @@ function Ch7BlackBoardWithTab({ content }) {
     <div className="BlackBoardWithTab">
       <div className="BlackBoardWithLine">
         <div className="BlackBoardBody">
-
           {/* 칠판 위 탭 버튼 */}
           <div className="TabButton">
             {content.map((item, i) => {
@@ -27,7 +27,7 @@ function Ch7BlackBoardWithTab({ content }) {
                   isActive={currentTab === i}
                   onClick={() => {
                     handleTabClick(i);
-                    setCurrentRule(0)
+                    setCurrentRule(0);
                   }}
                 />
               );
@@ -36,7 +36,6 @@ function Ch7BlackBoardWithTab({ content }) {
 
           {/* 칠판 안 */}
           <div className="BoardInside">
-            
             {/* 칠판 왼쪽 내용 */}
             <div className="LeftBoardList">
               {content[currentTab].childCategory.map((item, i) => {
@@ -64,7 +63,21 @@ function Ch7BlackBoardWithTab({ content }) {
             <div className="RightBoard">
               {content[currentTab].childCategory[
                 currentRule
-              ].grandChildCategory.map((item, i) => {})}
+              ].grandChildCategory.map((item, i) => {
+                return (
+                  item.map((pair, j) => {
+                    return (
+                      <div key={j} className="RightBoardText">
+                        <div className="RightBoardWord">
+                          <p>{pair.word}</p>
+                          <span>|</span>
+                          <p>{pair.pronounce}</p>
+                        </div> 
+                      </div>
+                    );
+                  })
+                )
+              })}
             </div>
           </div>
 

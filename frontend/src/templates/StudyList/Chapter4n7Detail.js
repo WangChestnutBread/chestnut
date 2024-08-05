@@ -11,7 +11,7 @@ function Chapter4n7Detail({ data, chapterId }) {
   let [content, setContent] = useState(null);
   useEffect(() => {
     setContent(data);
-  }, [data]);
+  }, []);
 
   return (
     <div className="Chapter4n7Detail">
