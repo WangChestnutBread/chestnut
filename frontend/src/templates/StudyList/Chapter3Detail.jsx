@@ -30,16 +30,16 @@ const Chapter3Detail = () => {
       <div className="container">
         <div className="row">
           <div className="col-4 mt-2">
-            <Notation word={params.word} />
+            <Notation word={params} />
           </div>
           <div className="col-8 mt-2">
-            <SoundMethod hangeul={word}/>
+            <SoundMethod hangeul={params}/>
           </div>
         </div>
         {/* 소리나는 방법, 카메라 */}
         <div className="row">
           <div className="col-6 mt-2" >
-            <Pronunciation />
+            <Pronunciation saying={params} />
           </div>
           <div className="col-6 mt-2 mb-3">
             <CameraOrganism />
