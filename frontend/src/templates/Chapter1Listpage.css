@@ -6,14 +6,17 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    flex-direction: column;
 }
 .chapter1{
     z-index: 1000;
-    width: calc(100%-40px);
+    width: calc(100%-70px);
     top: 100px;
-    display: flex;
+    padding-left: 100px;
+    padding-right: 200px;
+    display: inline-flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     position: absolute;
 }
@@ -23,8 +26,9 @@
     font-family: 'Jua';
     font-weight: 400;
     word-wrap: break-word;
-    margin-left: 10px;
+    margin-left: 40px;
     margin-right: 30px;
+    line-height: 60px;
 
 }
 .chapter1subTitle{
@@ -34,7 +38,16 @@
     font-weight: 400;
     padding-left: 50px;
     word-wrap: break-word;
+    margin-bottom: 20px;
+    margin-top: 70px;
 
 }
+.customLink {
+    text-decoration: none;
+    color: inherit;
+    font: inherit;
+  }
 
-
+.chapter1Font:hover{
+    color: #FFCC4D;
+}
