@@ -6,31 +6,31 @@ import Button from "../../molecules/Authentication/Button";
 import InfoBox from "../../molecules/Authentication/InfoBox";
 import BirthInfo from "../../atoms/Authentication/MemberBirth/BirthInfo";
 import LoginIdPwFont from "../../atoms/Authentication/LoginIdPwFont";
+import useAuthStore from "../../stores/authStore";
 import axios from "axios";
+import baseApi from "../../api/fetchAPI";
 function MyInfo(){
-    const [Id, setId]=useState("pingu");
+    const [Id, setId]=useState("");
     const [Pw, setPw]=useState("");
     const [PwCon, setPwCon]=useState("");
-    const [name, setName]=useState("김키티");
-    const [Email, setEmail]=useState("124@naver.com");
+    const [name, setName]=useState("");
+    const [Email, setEmail]=useState("");
     const [Auth, setAuth]=useState("");
-    const [nickname, setnickname]=useState("밤톨이");
-    const [birthday, setBirthday]=useState("2024-08-02");
-    const birth=birthday.split(["-"])
-    
-    axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/info",{
-        params: {
-            "Authorization": `Bearer {accessToken}`,
-        }
-    })
+    const [nickname, setnickname]=useState("");
+    const [birthday, setBirthday]=useState("");
+    baseApi({
+        method: "get",
+        url: "/member/info",
+      })
     .then(response=>{
         if(response.data.code==200){
             console.log(response);
-            setId(response.data.loginId); 
-            setName(response.data.memberName);
-            setEmail(response.data.email);
-            setBirthday(response.data.birthday);
-            setnickname(response.data.nickname);
+            setId(response.data.data.loginId); 
+            setName(response.data.data.memberName);
+            setEmail(response.data.data.email);
+            setBirthday(response.data.data.birthday);
+            setnickname(response.data.data.nickname);
+            
         }
         else if(response.data.code==801){
             alert("유용하지 않는 토큰입니다.");
@@ -47,18 +47,9 @@ function MyInfo(){
     })
     .catch(error=>{
         console.log(error);
-    })
-    .catch(error=>{
-        if(error.code==801){
-            alert("유효하지 않는 토큰입니다.");
-        }
-        else if(error.code==710){
-            alert("DB에 저장된 데이터가 없습니다.");
-        }
-        else if(error.code==714){
-            alert("아이디가 없습니다.");
-        }
     });
+    console.log(birthday)
+    const birth =birthday.split("-");
     const navigate = useNavigate();
     const navigateToPurchase = ()=>{
         navigate("/myprofile/edit");
