@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./BlackBoard.css";
+
+
+
 function BlackBoard(props) {
+
+  
   return (
     <div className="container">
       <div className="BlackBoardBox">
@@ -11,8 +16,8 @@ function BlackBoard(props) {
             {props.content}
           </div>
           <div className="greenBox">
-            <img className="pencil" src="/image/pencil.png" />
-            <img className="eraser" src="/image/ERASER.png" />
+            <img className="pencil" src="/image/pencil.png" alt="Pencil" />
+            <img className="eraser" src="/image/ERASER.png" alt="Eraser" />
           </div>
           <div className="brownBar" />
         </div>
@@ -20,4 +25,5 @@ function BlackBoard(props) {
     </div>
   );
 }
+
 export default BlackBoard;

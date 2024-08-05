@@ -19,7 +19,7 @@ function MainCalendar() {
       <Calendar
         onChange={onChange}
         value={value}
-        minDetail="year"
+        minDetail="month"
         minDate={new Date('2024-01-01')}
         maxDate={new Date('2024-12-31')}
         next2Label={null}

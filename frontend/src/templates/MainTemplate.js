@@ -1,31 +1,40 @@
-import { useState } from "react"
-import MainMenu from "../organisms/Main/MainMenu"
-import "./MainTemplate.css"
-import LastStudy from "../organisms/Main/LastStudy"
-import MainProfile from "../organisms/Main/MainProfile"
-import MainCalendar from "../organisms/Main/MainCalendar"
-
+import { useState } from "react";
+import MainMenu from "../organisms/Main/MainMenu";
+import "./MainTemplate.css";
+import LastStudy from "../organisms/Main/LastStudy";
+import MainProfile from "../organisms/Main/MainProfile";
+import MainCalendar from "../organisms/Main/MainCalendar";
 
 const MainTemplate = () => {
-    let [menu, setMenu] = useState([
-        {'name': '학습', 'path': "/study"}, 
-        {'name': '대화연습', 'path': ""}, 
-        {'name': '단어장', 'path': ""},
-        {'name': '게시판', 'path': "/board/qna"}])
+  // 메뉴 밤
+  let [menu, setMenu] = useState([
+    { name: "학습", path: "/study" },
+    { name: "대화연습", path: "" },
+    { name: "단어장", path: "" },
+    { name: "게시판", path: "/board/qna" },
+  ]);
 
-    return (
-        <div className="MainTemplate">
-            <div className="Logo">
-                <img src="/image/Logo.png" className="LogoImage"/>
-            </div>
-            <MainMenu menu={menu}/>
-            <div className="MainStatus">
-                <MainProfile/>
-                <LastStudy chapter="자/모" word="나는 사과를 먹는다"/>
-            </div>
-            <MainCalendar/>
-        </div>
-    )
-}
+  return (
+    <div className="MainTemplate">
+      {/* 메인 로고 */}
+      <div className="Logo">
+        <img src="/image/Logo.png" className="LogoImage" />
+      </div>
+
+      {/* 밤 메뉴 */}
+      <MainMenu menu={menu} />
+      <div className="MainStatus">
+        {/* 프로필 */}
+        <MainProfile />
+
+        {/* 마지막 학습 */}
+        <LastStudy chapter="자/모" word="나는 사과를 먹는다" />
+      </div>
+
+      {/* 출석 캘린더 */}
+      <MainCalendar />
+    </div>
+  );
+};
 
 export default MainTemplate;

@@ -1,20 +1,38 @@
 .BlackBoardTab {
-    display: inline-block;
-    padding: 10px 50px 20px 50px ;
-    color: white;
-    border-radius: 25px 25px 0 0;
-    background: #6B3906;
-    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
-    border: none;
-
+  display: inline-block;
+  padding: 10px 50px 20px 50px;
+  color: white;
+  border-radius: 25px 25px 0 0;
+  background: #6b3906;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: 0.2s;
 }
 
 .BlackBoardTab:hover {
-    background: #C5813D;
-    transform: translateY(-5px);
+  background: #c5813d;
+  transform: translateY(-5px);
 }
 
 .BlackBoardTab.active {
-    background: #C5813D;
-    transform: translateY(-5px);
+  background: #c5813d;
+  transform: translateY(-5px);
+}
+
+@media (max-width: 1200px) {
+  .BlackBoardTab {
+    padding: 10px 40px 20px 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  .BlackBoardTab {
+    padding: 10px 30px 20px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .BlackBoardTab {
+    padding: 10px 20px 20px 20px;
+  }
 }
