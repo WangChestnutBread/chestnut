@@ -16,6 +16,7 @@ function Ch7BlackBoardWithTab({ content }) {
     <div className="BlackBoardWithTab">
       <div className="BlackBoardWithLine">
         <div className="BlackBoardBody">
+
           {/* 칠판 위 탭 버튼 */}
           <div className="TabButton">
             {content.map((item, i) => {
@@ -35,6 +36,7 @@ function Ch7BlackBoardWithTab({ content }) {
 
           {/* 칠판 안 */}
           <div className="BoardInside">
+            
             {/* 칠판 왼쪽 내용 */}
             <div className="LeftBoardList">
               {content[currentTab].childCategory.map((item, i) => {
