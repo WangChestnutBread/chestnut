@@ -221,4 +221,17 @@ public class MemberService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public AttendanceLogDto getAttendanceLog(String loginId, int year){
+        Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
+        if(member.isWithdraw()) throw new InvalidMemberException();
+        try {
+            return new AttendanceLogDto(attendanceLogRepository.findByMemberIdandYear(member.getMemberId(), year));
+        }catch (PersistenceException e){
+            throw new DatabaseException();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new UnknownException();
+        }
+    }
 }
