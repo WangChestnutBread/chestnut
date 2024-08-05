@@ -9,6 +9,7 @@
   position: absolute;
   top: calc(100% + 20px);
   display: flex;
+  padding: 5px;
   flex-direction: column;
   border-radius: 15px;
   width: 280px;
