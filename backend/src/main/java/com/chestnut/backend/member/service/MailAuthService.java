@@ -83,11 +83,9 @@ public class MailAuthService {
             redisService.deleteData(generatePrefixedKey(sendMailReqDTO.getEmail(), sendMailReqDTO.getPurpose()));
         }
 
-        //purpose가 signup, changeEmail인 경우 -> 아래 로직 수행 (code 발급)
         MimeMessage emailForm = createEmailForm(sendMailReqDTO.getEmail(), sendMailReqDTO.getPurpose());
         javaMailSender.send(emailForm);
 
-        //purpose가 changePassword인 경우 -> 링크 보내기
     }
 
     public Boolean verifyEmailCode(MailAuthDto mailAuthDto) {

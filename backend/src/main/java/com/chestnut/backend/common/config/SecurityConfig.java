@@ -80,7 +80,7 @@ public class SecurityConfig {
                         .requestMatchers("/member/login", "/member/find-id","/member/signup").permitAll()
                         .requestMatchers("/member/check-nickname", "/member/check-loginId", "/member/check-email").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/member/reissue", "member/email/code-request", "/member/email/code-check").permitAll()
+                        .requestMatchers("/member/reissue", "member/email/code-request", "/member/email/code-check", "/member/reset-pwd/unknown").permitAll()
                         .anyRequest().authenticated());
 
         http

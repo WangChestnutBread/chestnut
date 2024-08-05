@@ -1,6 +1,7 @@
 package com.chestnut.backend.member.controller;
 
 import com.chestnut.backend.common.dto.ResponseDto;
+import com.chestnut.backend.common.exception.NotVerifiedEmailException;
 import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.service.MailAuthService;
 import com.chestnut.backend.member.service.MemberService;
@@ -52,10 +53,20 @@ public class MemberController {
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
-    @PostMapping("/reset-pwd")
+    @PostMapping("/reset-pwd/known")
     public ResponseEntity<?> resetPwd(@AuthenticationPrincipal CustomMemberDetails customMemberDetails, @Valid @RequestBody ResetPwdReqDTO resetPwdReqDTO) {
         ResetPwdDTO resetPwdDTO = new ResetPwdDTO(customMemberDetails.getLoginId(), resetPwdReqDTO);
         memberService.resetPwd(resetPwdDTO);
+        return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
+    }
+
+    @PostMapping("/reset-pwd/unknown")
+    public ResponseEntity<?> resetPwdUknown(@Valid @RequestBody ResetPwdUnknownReqDTO resetPwdUnknownReqDTO,
+                                            @SessionAttribute(name = "CheckEmailCode:", required = false) String authEmail) {
+        if(authEmail == null || !resetPwdUnknownReqDTO.getEmail().equals(authEmail)) {
+            throw new NotVerifiedEmailException();
+        }
+        memberService.resetPwdUnknown(resetPwdUnknownReqDTO.toDto());
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 

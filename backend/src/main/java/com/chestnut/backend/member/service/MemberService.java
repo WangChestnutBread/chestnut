@@ -32,10 +32,6 @@ public class MemberService {
         String checkDuplicationEmail = (String) session.getAttribute("CheckEmailDuplication:");
         String checkCodeEmail = (String) session.getAttribute("CheckEmailCode:");
 
-        System.out.println("email: " + email);
-        System.out.println("checkDuplicationEmail: " + checkDuplicationEmail);
-        System.out.println("checkCodeEmail: " + checkCodeEmail);
-
         //1. checkDuplicationEmail이 null인지 확인 ->
         //2. checkCodeEmail이 null인지 확인
         //3. DTO의 이메일과 해당 값들이 같은지 확인
@@ -67,6 +63,11 @@ public class MemberService {
         } catch (Exception e) {
             throw new UnknownException();
         }
+
+        //체크 필요
+        redisService.deleteData("checkDuplicationEmail: " +checkDuplicationEmail);
+        redisService.deleteData("checkCodeEmail: "+checkCodeEmail);
+
     }
 
     @Transactional
@@ -134,6 +135,35 @@ public class MemberService {
         }
 
         String codePwd = bCryptPasswordEncoder.encode(resetPwdDTO.getNewPassword());
+
+        member.changePassword(codePwd);
+    }
+
+    @Transactional
+    public void resetPwdUnknown(ResetPwdUnknownDTO resetPwdUnknownDTO) {
+        String loginId = resetPwdUnknownDTO.getLoginId();
+        String newPassword = resetPwdUnknownDTO.getNewPassword();
+        String newPasswordConfirm = resetPwdUnknownDTO.getNewPasswordConfirm();
+
+        //로그인 아이디로 해당 멤버 찾고
+        //기존 패스워드와 새로운 패스워드가 같은지 여부 체크 하고
+        //패스워드끼리 같은지 체크 하고
+
+        Member member = memberRepository.findByLoginId(loginId)
+                .orElseThrow(MemberNotFoundException::new);
+
+        String password = member.getPassword();
+
+        if (bCryptPasswordEncoder.matches(newPassword, password)) {
+            throw new NewPwdSameException();
+        }
+
+        if (!newPassword.equals(newPasswordConfirm)) {
+            throw new PasswordNotEqualException();
+        }
+
+        //newPassword로 업데이트 하기
+        String codePwd = bCryptPasswordEncoder.encode(newPasswordConfirm);
 
         member.changePassword(codePwd);
     }
