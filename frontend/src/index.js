@@ -131,15 +131,15 @@ const router = createBrowserRouter([
     element: <StudyList />
   },
   {
-    path: "/chapter1",
+    path: "/chapter/:chapterId",
     element: <Chapter1Listpage />
   },
   {
-    path: "/chapter2",
+    path: "/chapter/:chapterId",
     element: <Chapter2Listpage />
   },
   {
-    path: "/chapter3",
+    path: "/chapter/:chapterId",
     element: <Chapter3Listpage />
   },
   {
@@ -147,15 +147,15 @@ const router = createBrowserRouter([
     element: <Ch4n7DetailPage/>
   },
   {
-    path: "/chapter5",
+    path: "/chapter/:chapterId",
     element: <Chapter5Listpage />
   },
   {
-    path: "/chapter6",
+    path: "/chapter/:chapterId",
     element: <Chapter6Listpage />
   },
   {
-    path: "/chapter7",
+    path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage />
   },
   {

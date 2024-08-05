@@ -222,7 +222,7 @@ function EditMyInfo(){
     };
 
     const succesPw=(e)=>{
-        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/reset-pwd",{
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/reset-pwd/known",{
             password: CurPw,
             newPassword: Pw,
             newPasswordCheck: PwCon

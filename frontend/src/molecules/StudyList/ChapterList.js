@@ -6,7 +6,7 @@ function ChapterList(props) {
   return (
     <div className="ChapterList">
       <div className="BoardBody">
-        <BlackBoard word={props.word}/>
+        <BlackBoard />
         <div className="ChapterTitle">
           <Text32 text={props.title} />
         </div>
