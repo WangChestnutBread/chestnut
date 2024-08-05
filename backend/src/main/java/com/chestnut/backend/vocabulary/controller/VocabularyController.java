@@ -49,11 +49,12 @@ public class VocabularyController {
     @GetMapping
     public ResponseEntity<?> getVocabularyList(
             @AuthenticationPrincipal CustomMemberDetails customMemberDetails,
+            @RequestParam("chapter") Byte chapter,
             @RequestParam("page") Integer page,
             @RequestParam("size") Integer size
     ) {
         String loginId = customMemberDetails.getLoginId();
-        Page<VocabularyDto> vocabularyListPage = vocabularyService.getVocabularyList(loginId, page, size);
+        Page<VocabularyDto> vocabularyListPage = vocabularyService.getVocabularyList(loginId, chapter, page, size);
         ResponseDto<Page<VocabularyDto>> result = new ResponseDto<>("200", vocabularyListPage);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
