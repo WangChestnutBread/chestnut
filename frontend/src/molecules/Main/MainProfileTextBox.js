@@ -74,7 +74,7 @@ function MainProfileTextBox() {
             navigate('/')
           })
           .catch((err)=>{
-            console.log("로그아웃에 실패했습니다")
+            console.log(err)
           })
         }}>
           <Text20 text="로그아웃"/>
