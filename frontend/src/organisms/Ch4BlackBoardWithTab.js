@@ -4,9 +4,7 @@ import BlackBoardTab from "../molecules/BlackBoardTab";
 import { useState } from "react";
 import Text32 from "../atoms/Text32";
 
-function BlackBoardWithTab({ content }) {
-
-  
+function Ch4BlackBoardWithTab({ content }) {
   const handleTabClick = (index) => {
     setCurrentTab(index)}
     
@@ -61,4 +59,4 @@ function BlackBoardWithTab({ content }) {
   );
 }
 
-export default BlackBoardWithTab;
+export default Ch4BlackBoardWithTab;
