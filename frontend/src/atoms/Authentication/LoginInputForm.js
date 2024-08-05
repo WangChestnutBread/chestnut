@@ -14,7 +14,7 @@ function LoginInputForm(props){
     };
     return(
 
-        <form className="FormBorder LoginFormFont"  onSubmit={handleSubmit}>
+        <form className="FormBorder LoginFormFont"  >
             <input className="LoginFormBorder LoginFormFont" type="text" value={props.name} onChange={props.work} placeholder={props.content}/>
         </form>
     );
