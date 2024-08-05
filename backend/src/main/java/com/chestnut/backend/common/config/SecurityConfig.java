@@ -77,6 +77,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/open-chatting","/index.html","/app.js","main.css").permitAll()
                         .requestMatchers("/member/login", "/member/find-id","/member/signup").permitAll()
                         .requestMatchers("/member/check-nickname", "/member/check-loginId").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
