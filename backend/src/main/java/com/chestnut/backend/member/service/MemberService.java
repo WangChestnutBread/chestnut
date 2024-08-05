@@ -11,7 +11,6 @@ import com.chestnut.backend.member.repository.MemberRepository;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,9 +27,6 @@ public class MemberService {
     private final RedisService redisService;
 
     private final MainMemberRepository mainMemberRepository;
-
-//    @Value(${})
-    private String hostUrl;
 
     @Transactional
     public void signup(SignupReqDTO signupReqDTO) {
@@ -155,9 +151,7 @@ public class MemberService {
         Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
         if(member.isWithdraw()) throw new InvalidMemberException();
         try {
-            MainMemberInfoDto mainMemberInfoDto = mainMemberRepository.findMainMemberInfo(member.getMemberId());
-            mainMemberInfoDto.addHostUrl(hostUrl);
-            return mainMemberInfoDto;
+            return  mainMemberRepository.findMainMemberInfo(member.getMemberId());
         }catch (NoResultException e){
             throw new NotFoundException();
         }catch (PersistenceException e){
