@@ -69,7 +69,7 @@ function Ch7BlackBoardWithTab({ content }) {
           </div>
 
           {/* 칠판 */}
-          <ChapterList title="Ch4. 음운변동" />
+          <ChapterList title="Ch7. 헷갈리는 발음" />
         </div>
       </div>
     </div>
