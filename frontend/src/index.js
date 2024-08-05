@@ -31,7 +31,11 @@ import Chapter5Listpage from "./templates/Chapter5Listpage";
 import Chapter6Listpage from "./templates/Chapter6Listpage";
 import RankingTemplate from "./templates/RankingTemplate";
 import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
-import Chapter4Detail from "./templates/StudyList/Chapter4Detail";
+import Chapter2Detail from "./templates/StudyList/Chapter2Detail";
+import Chapter3Detail from './templates/StudyList/Chapter3Detail';
+import Chapter5Detail from './templates/StudyList/Chapter5Detail';
+import Chapter6Detail from './templates/StudyList/Chapter6Detail';
+import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
 
 const router = createBrowserRouter([
   {
@@ -67,8 +71,24 @@ const router = createBrowserRouter([
     element: <AnnouncementWrite />
   },
   {
-    path: "/study/detail/:studyId/word",
+    path: "/study/detail1/:studyId/:word",
     element: <Chapter1Detail />
+  },
+  {
+    path: "/study/detail2/:studyId/:word",
+    element: <Chapter2Detail />
+  },
+  {
+    path: "/study/detail3/:studyId/:word",
+    element: <Chapter3Detail />
+  },
+  {
+    path: "/study/detail5/:studyId/:word",
+    element: <Chapter5Detail />
+  },
+  {
+    path: "/study/detail6/:studyId/:word",
+    element: <Chapter6Detail />
   },
   {
     path: "/member",
@@ -123,8 +143,8 @@ const router = createBrowserRouter([
     element: <Chapter3Listpage />
   },
   {
-    path: "/chapter4",
-    element: <Chapter4Detail tabTitleList={"CH4. 음운변동"}/>
+    path: "/chapter/:chapterId",
+    element: <Ch4n7DetailPage/>
   },
   {
     path: "/chapter5",
@@ -133,6 +153,10 @@ const router = createBrowserRouter([
   {
     path: "/chapter6",
     element: <Chapter6Listpage />
+  },
+  {
+    path: "/chapter7",
+    element: <Ch4n7DetailPage />
   },
   {
     path: "/main",
@@ -147,7 +171,6 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <App /> */}
     <RouterProvider router={router} />
   </React.StrictMode>
 );

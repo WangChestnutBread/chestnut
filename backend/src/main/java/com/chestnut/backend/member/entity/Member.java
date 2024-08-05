@@ -87,4 +87,16 @@ public class Member {
         }
     }
 
+    public void addReward(byte reward) {
+        this.reward += (long)reward;
+    }
+
+    public void recentStudy(Study study) {
+        this.study = study;
+    }
+
+    public void updateAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
 }

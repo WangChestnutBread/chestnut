@@ -11,6 +11,7 @@
   height: 400px;
   top: calc(100% + 20px);
   right: -50%;
+  z-index: 1000;
 }
 
 .UserGuide::after {

@@ -9,8 +9,14 @@ import SoundMethod from "../../organisms/StudyList/SoundMethod";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
 import Pronunciation from "../../organisms/StudyList/Pronunciations"
+import { useParams } from 'react-router-dom';
+
 
 const Chapter2Detail = () => {
+  const params = useParams()
+  const word = params.word
+  console.log(params);
+
   return (
     <div>
       {/* 헤더 */}
@@ -26,16 +32,16 @@ const Chapter2Detail = () => {
       <div className="container">
         <div className="row">
           <div className="col-4 mt-2">
-            <Notation />
+            <Notation word={params}/>
           </div>
           <div className="col-8 mt-2">
-            <SoundMethod />
+            <SoundMethod hangeul={params}/>
           </div>
         </div>
         {/* 발음, 카메라 */}
         <div className="row">
           <div className="col-6 mt-2" >
-            <Pronunciation />
+            <Pronunciation saying={params} />
           </div>
           <div className="col-6 mt-2 mb-3">
             <CameraOrganism />

@@ -2,6 +2,7 @@ import "./SpeakExplanation.css";
 
 const SpeakExplanation = ({ data }) => {
   console.log(data);
+  console.log('sadfa');
   return (
     <div>
       {data.map((saying, index) => (
