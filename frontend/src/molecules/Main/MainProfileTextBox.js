@@ -2,8 +2,14 @@ import "./MainProfileTextBox.css";
 import MainProfileLine from "../../atoms/MainProfileLine";
 import Text24 from "../../atoms/Text24";
 import Text20 from "../../atoms/Text20";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import baseApi from "../../api/fetchAPI"
 
 function MainProfileTextBox() {
+
+  let navigate = useNavigate()
+
   return (
     <div className="MainProfileTextBox">
       {/* 첫번째 줄 - 환영인사 & 닉네임 */}
@@ -58,8 +64,20 @@ function MainProfileTextBox() {
         </div>
 
         {/* 2. 로그아웃 */}
-        <div>
-          <Text20 text="로그아웃" />
+        <div className="Logout" onClick={()=>{
+          baseApi({
+            method: 'post',
+            url: '/member/logout'
+          })
+          .then((res)=>{
+            console.log(res)
+            navigate('/')
+          })
+          .catch((err)=>{
+            console.log("로그아웃에 실패했습니다")
+          })
+        }}>
+          <Text20 text="로그아웃"/>
         </div>
       </div>
     </div>
