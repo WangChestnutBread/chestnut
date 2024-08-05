@@ -19,8 +19,4 @@ public class MainMemberInfoDto {
     private String word;
     private String chapterName;
     private Short attendanceCount;
-
-    public void addHostUrl(String hostUrl){
-        this.avatarImgUrl = new StringBuilder().append(hostUrl).append(this.avatarImgUrl).toString();
-    }
 }
