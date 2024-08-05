@@ -9,11 +9,15 @@ import "../../atoms/Authentication/Page.css";
 import axios from "axios";
 import useAuthStore from "../../stores/authStore";
 function LoginPage() {
+  //ID설정하는 부분에 대한 변수
   const [Id, setName] = useState("");
+  //Password 설정하는 부분에 대한 변수
   const [password, setPassword] = useState("");
+  //navigate=> 이동함수
   const navigate = useNavigate();
-
+  // 액세스 토큰을 선언하는 변수
   const setAccessToken = useAuthStore((state) => (state.setAccessToken))
+  const setUserId = useAuthStore((state) => (state.setUserId))
 
   const handleChangeName = (event) => {
     setName(event.target.value);
@@ -39,6 +43,7 @@ function LoginPage() {
           alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
         }
         console.log(response);
+        setUserId(Id)
       })
       .catch((error) => {
         console.log(error);

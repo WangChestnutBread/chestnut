@@ -10,7 +10,7 @@ import Birth from "../../atoms/Authentication/MemberBirth/Birth";
 import BirthMonth from "../../atoms/Authentication/MemberBirth/BirthMonth";
 import BirthDay from "../../atoms/Authentication/MemberBirth/BirthDay";
 import Button from "../../molecules/Authentication/Button";
-
+import baseApi from "../../api/fetchAPI";
 function SignUPPage() {
     const navigate = useNavigate();
     //뒤로가기 버튼
@@ -145,47 +145,60 @@ function SignUPPage() {
     const createEmail = (e) => {
         e.preventDefault();
         const currentEmail = Email;
-        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-request", {
-            email: currentEmail
+        axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/check-email",{
+            params: {
+                email: currentEmail,
+            }
         })
-            .then(response => {
-                if (response.data.code == 200) {
-                    setEmailMessage("인증번호가 전송되었습니다.");
-                    setIsEmail(true);
-                }
-                if (response.data.code == 601) {
-                    setEmailMessage("이미 존재하는 이메일입니다.");
-                    setIsEmail(false);
-                } else if (response.data.code == 603) {
-                    setEmailMessage("올바르지 않은 이메일 양식입니다.");
-                    setIsEmail(false);
-                } else if (response.data.code == 606) {
-                    setEmailMessage("인증번호 보내는 데 실패했습니다.");
-                    setIsEmail(false);
-                } else if (response.data.code == 299) {
-                    setEmailMessage("알 수 없는 오류로 다시 시도하시기 바랍니다.");
-                    setIsEmail(false);
-                }
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        .then(response=>{
+            if (response.data.code == 200) {
+                axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/code-request", {
+                    email: currentEmail,
+                    purpose: "signup",
+                })
+                    .then(response => {
+                        if (response.data.code == 200) {
+                            alert("인증번호가 전송되었습니다.");
+                            setIsEmail(true);
+                        }
+                        if (response.data.code == 601) {
+                            alert("이미 존재하는 이메일입니다.");
+                            setIsEmail(false);
+                        } else if (response.data.code == 603) {
+                            alert("올바르지 않은 이메일 양식입니다.");
+                            setIsEmail(false);
+                        } else if (response.data.code == 606) {
+                            alert("인증번호 보내는 데 실패했습니다.");
+                            setIsEmail(false);
+                        } else if (response.data.code == 299) {
+                            alert("알 수 없는 오류로 다시 시도하시기 바랍니다.");
+                            setIsEmail(false);
+                        }
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                setEmailMessage("사용 가능한 이메일 입니다.");
+                setIsEmail(true);
+            }
+            else if (response.data.code == 601) {
+                setEmailMessage("이미 존재하는 이메일입니다.");
+                setIsEmail(false);
+            }
+            console.log(response);
+        }).catch(error=>{
+            console.log(error);
+        })
     };
 
     //인증번호가 보낸 번호와 일치하는 지 확인하는 함수
     const checkAuth = (e) => {
         e.preventDefault();
-        if (Auth !== "1234") {
-            setAuthMessage("인증번호가 일치하지 않습니다.");
-            setIsAuth(false);
-        } else {
-            setAuthMessage("인증번호가 일치합니다.");
-            setIsAuth(true);
-        }
-        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/verification-check", {
-            verificationCode: Auth
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/email/code-check", {
+            verificationCode: Auth,
         }).then(response => {
+            console.log(Auth);
             if (response.data.code == 200) {
                 setAuthMessage("인증번호가 일치합니다.");
                 setIsAuth(true);
@@ -209,6 +222,7 @@ function SignUPPage() {
     const inputAuth = (e) => {
         const currentAuth = e.target.value;
         setAuth(currentAuth);
+        console.log(Auth);
     };
 
     //onchange에 의해 입력되는 이름이 Name변수에 담기는 함수

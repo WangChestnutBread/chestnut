@@ -17,6 +17,7 @@ import NewInputForm from "../../organisms/Authentication/NewInputForm";
 import FindIdForm from "../../organisms/Authentication/FindIdForm";
 import axios from "axios";
 import Swal from 'sweetalert2'
+import baseApi from "../../api/fetchAPI";
 
 function EditMyInfo(){
     const navigate=useNavigate();
@@ -99,6 +100,10 @@ function EditMyInfo(){
     const [isCurPw, setIsCurPw]=useState(false);
     const [isNickname, setIsNickname]=useState(false);
 
+    const inputEmail=(e)=>{
+        const currentEmail=e.target.value;
+        setEmail(currentEmail);
+    }
     const inputId=(e)=>{
         const currentId=e.target.value;
         setId(currentId);
@@ -168,10 +173,8 @@ function EditMyInfo(){
     };
 
     const createEmail=(e) =>{
-        const currentEmail=e.target.value;
-        setEmail(currentEmail);
         const emailRegExp=/^[A-Za-z0-9_]*[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
-        if(!emailRegExp.test(currentEmail)){
+        if(!emailRegExp.test(Email)){
             setEmailMessage("이메일 형식이 올바르지 않습니다.")
             setIsEmail(false);
         }
@@ -222,7 +225,7 @@ function EditMyInfo(){
     };
 
     const succesPw=(e)=>{
-        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/reset-pwd",{
+        axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/reset-pwd/known",{
             password: CurPw,
             newPassword: Pw,
             newPasswordCheck: PwCon
@@ -250,19 +253,18 @@ function EditMyInfo(){
         })
     }
 
-    axios.get("https://i11d107.p.ssafy.io/chestnutApi/member/info",{
-        params: {
-            "Authorization": `Bearer {accessToken}`,
-        }
+    baseApi({
+        method: 'get',
+        url: "/member/info"
     })
     .then(response=>{
         if(response.data.code==200){
             console.log(response);
-            setId(response.data.loginId); 
-            setName(response.data.memberName);
-            setEmail(response.data.email);
-            setBirthday(response.data.birthday);
-            setnickname(response.data.nickname);
+            setId(response.data.data.loginId); 
+            setName(response.data.data.memberName);
+            setEmail(response.data.data.email);
+            setBirthday(response.data.data.birthday);
+            setnickname(response.data.data.nickname);
         }
         else if(response.data.code==801){
             alert("유용하지 않는 토큰입니다.");
@@ -309,7 +311,7 @@ function EditMyInfo(){
                                     <BirthDay day={birth[2]}/>
                                 </div>
                                 <InspectionForm content={'ID를 입력하세요'} text={IdMessage} name={'중복인증'} work={createId} value={Id} input={inputId} />
-                                <HiddenForm name={Email} input={createEmail} work={handleSubmit} value={Email} value1={Auth} text1={AuthMessage} work1={checkAuth} input1={inputAuth}/>
+                                <HiddenForm name={Email} input={inputEmail} work={createEmail} value={Email} value1={Auth} text1={AuthMessage} work1={checkAuth} input1={inputAuth}/>
                                 <PwResetButton button={'비밀번호 재설정'} work={()=>setModalIsOpen(true)}/>
                                 <Button button={'내 정보 수정'} work={succes}/>
                             </div>

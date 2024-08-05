@@ -20,20 +20,18 @@ import FindId from "./templates/Authentication/FindId";
 import FindPw from "./templates/Authentication/FindPw";
 import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
-import ChapterList from "./molecules/StudyList/ChapterList";
+import ChapterListpage from "./pages/StudyDetail/ChapterListpage";
 import StudyList from "./templates/StudyList";
 import ChapterMenu from "./atoms/ChapterMenu";
 import MainPage from "./pages/MainPage";
-import Chapter1Listpage from "./templates/Chapter1Listpage";
-import Chapter2Listpage from "./templates/Chapter2Listpage";
-import Chapter3Listpage from "./templates/Chapter3Listpage";
-import Chapter5Listpage from "./templates/Chapter5Listpage";
-import Chapter6Listpage from "./templates/Chapter6Listpage";
 import RankingTemplate from "./templates/RankingTemplate";
 import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
 import Chapter2Detail from "./templates/StudyList/Chapter2Detail";
 import Chapter3Detail from './templates/StudyList/Chapter3Detail';
+import Chapter5Detail from './templates/StudyList/Chapter5Detail';
+import Chapter6Detail from './templates/StudyList/Chapter6Detail';
 import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
+import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +63,10 @@ const router = createBrowserRouter([
     element: <AnnouncementDetail />
   },
   {
+    path: "/board/announcement/manager/write",
+    element: <AnnouncementManagerWrite />
+  },
+  {
     path: "/board/announcement/write",
     element: <AnnouncementWrite />
   },
@@ -73,12 +75,20 @@ const router = createBrowserRouter([
     element: <Chapter1Detail />
   },
   {
-    path: "/study/detail2/:word",
+    path: "/study/detail2/:studyId/:word",
     element: <Chapter2Detail />
   },
   {
-    path: "/study/detail3/:word",
+    path: "/study/detail3/:studyId/:word",
     element: <Chapter3Detail />
+  },
+  {
+    path: "/study/detail5/:studyId/:word",
+    element: <Chapter5Detail />
+  },
+  {
+    path: "/study/detail6/:studyId/:word",
+    element: <Chapter6Detail />
   },
   {
     path: "/member",
@@ -121,32 +131,16 @@ const router = createBrowserRouter([
     element: <StudyList />
   },
   {
-    path: "/chapter1",
-    element: <Chapter1Listpage />
-  },
-  {
-    path: "/chapter2",
-    element: <Chapter2Listpage />
-  },
-  {
-    path: "/chapter3",
-    element: <Chapter3Listpage />
-  },
-  {
     path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage/>
   },
   {
-    path: "/chapter5",
-    element: <Chapter5Listpage />
-  },
-  {
-    path: "/chapter6",
-    element: <Chapter6Listpage />
-  },
-  {
-    path: "/chapter7",
+    path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage />
+  },
+  {
+    path: "/chapter/:listId",
+    element: <ChapterListpage />
   },
   {
     path: "/main",
@@ -155,6 +149,10 @@ const router = createBrowserRouter([
   {
     path: "/abc",
     element: <RankingTemplate />
+  },
+  {
+    path: "/myVocabulary",
+    element: <VocabularyListPage />
   },
 ]);
 
