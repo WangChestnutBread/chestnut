@@ -60,6 +60,12 @@ public class MemberController {
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
+    @GetMapping("/info/main")
+    public ResponseEntity<?> getMainMemberInfo(@AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+        MainMemberInfoDto mainMemberInfoDto = memberService.getMainMemberInfo(customMemberDetails.getLoginId());
+        return new ResponseEntity<>(new ResponseDto<>("200", mainMemberInfoDto), HttpStatus.OK);
+    }
+
     @GetMapping("/withdraw")
     public ResponseEntity<?> withdraw(@AuthenticationPrincipal CustomMemberDetails customMemberDetails){
         memberService.withdraw(customMemberDetails.getLoginId());
