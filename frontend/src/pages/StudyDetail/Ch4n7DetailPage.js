@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Chapter4Detail from "../../templates/StudyList/Chapter4Detail";
-import NavbarExample from "../../templates/NavbarExample"
+import Chapter4n7Detail from "../../templates/StudyList/Chapter4n7Detail";
 import baseApi from "../../api/fetchAPI";
 import { useParams } from "react-router-dom";
 
@@ -10,7 +9,7 @@ function Ch4n7DetailPage() {
     
     let {chapterId} = useParams();
 
-    // console.log(chapterId)
+    console.log(chapterId)
     useEffect(()=>{
         baseApi({
             method: 'get',
@@ -28,7 +27,7 @@ function Ch4n7DetailPage() {
     return (
         <div>
             {
-                data && (chapterId == 4) ? <Chapter4Detail data={data}/> : <p>로딩중입니다</p>
+                data ? <Chapter4n7Detail data={data} chapterId={chapterId}/> : <p>로딩중입니다</p>
             }
         </div>
     )
