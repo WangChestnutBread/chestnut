@@ -7,21 +7,23 @@ function ChestNutButton() {
   return (
     <div className="ChestNutButton">
       <img
-        src="/icons/ChestNut.svg" width="100%" height="100%"
+        src="/icons/ChestNut.svg"
+        width="100%"
+        height="100%"
         onClick={() => {
           setShowMenu(!showMenu);
         }}
       />
-      {showMenu ? <DropMenu /> : null}
+      {showMenu && <DropMenu />}
     </div>
   );
 }
 
 function DropMenu() {
   let [itemList, setitemList] = useState([
-    { img: "/icons/LastStudyButton.svg", path: "/main", menu: "메인 화면" },
-    { img: "/icons/LastStudyButton.svg", path: "/study", menu: "학습 목록" },
-    { img: "/icons/LastStudyButton.svg", path: "", menu: "대화 연습" },
+    { img: "/image/Squirrel.png", path: "/main", menu: "메인 화면" },
+    { img: "/image/List.png", path: "/study", menu: "학습 목록" },
+    { img: "/image/AITalk.png", path: "", menu: "대화 연습" },
     { img: "/icons/LastStudyButton.svg", path: "", menu: "단어장" },
     { img: "/icons/LastStudyButton.svg", path: "/board/qna", menu: "게시판" },
   ]);
