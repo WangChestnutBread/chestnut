@@ -14,6 +14,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const setAccessToken = useAuthStore((state) => (state.setAccessToken))
+  const setUserId = useAuthStore((state) => (state.setUserId))
 
   const handleChangeName = (event) => {
     setName(event.target.value);
@@ -39,6 +40,7 @@ function LoginPage() {
           alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
         }
         console.log(response);
+        setUserId(Id)
       })
       .catch((error) => {
         console.log(error);
