@@ -14,7 +14,7 @@ function LoginInputPwForm(props){
     };
     return(
 
-        <form className="FormBorder LoginFormFont"  onSubmit={handleSubmit}>
+        <form className="FormBorder LoginFormFont" >
             <input className="LoginFormBorder LoginFormFont" type="password" value={props.value} onChange={props.work} placeholder={props.content}/>
         </form>
     );

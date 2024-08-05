@@ -33,7 +33,10 @@ import RankingTemplate from "./templates/RankingTemplate";
 import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
 import Chapter2Detail from "./templates/StudyList/Chapter2Detail";
 import Chapter3Detail from './templates/StudyList/Chapter3Detail';
+import Chapter5Detail from './templates/StudyList/Chapter5Detail';
+import Chapter6Detail from './templates/StudyList/Chapter6Detail';
 import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
+import VocabularyListPage from "./pages/VocabularyListPage";
 
 const router = createBrowserRouter([
   {
@@ -73,12 +76,20 @@ const router = createBrowserRouter([
     element: <Chapter1Detail />
   },
   {
-    path: "/study/detail2/:word",
+    path: "/study/detail2/:studyId/:word",
     element: <Chapter2Detail />
   },
   {
-    path: "/study/detail3/:word",
+    path: "/study/detail3/:studyId/:word",
     element: <Chapter3Detail />
+  },
+  {
+    path: "/study/detail5/:studyId/:word",
+    element: <Chapter5Detail />
+  },
+  {
+    path: "/study/detail6/:studyId/:word",
+    element: <Chapter6Detail />
   },
   {
     path: "/member",
@@ -121,15 +132,15 @@ const router = createBrowserRouter([
     element: <StudyList />
   },
   {
-    path: "/chapter1",
+    path: "/chapter/:chapterId",
     element: <Chapter1Listpage />
   },
   {
-    path: "/chapter2",
+    path: "/chapter/:chapterId",
     element: <Chapter2Listpage />
   },
   {
-    path: "/chapter3",
+    path: "/chapter/:chapterId",
     element: <Chapter3Listpage />
   },
   {
@@ -137,15 +148,15 @@ const router = createBrowserRouter([
     element: <Ch4n7DetailPage/>
   },
   {
-    path: "/chapter5",
+    path: "/chapter/:chapterId",
     element: <Chapter5Listpage />
   },
   {
-    path: "/chapter6",
+    path: "/chapter/:chapterId",
     element: <Chapter6Listpage />
   },
   {
-    path: "/chapter7",
+    path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage />
   },
   {
@@ -155,6 +166,10 @@ const router = createBrowserRouter([
   {
     path: "/abc",
     element: <RankingTemplate />
+  },
+  {
+    path: "/myVocabulary",
+    element: <VocabularyListPage />
   },
 ]);
 

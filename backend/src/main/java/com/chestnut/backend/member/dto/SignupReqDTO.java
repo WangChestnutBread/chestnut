@@ -6,11 +6,15 @@ import com.chestnut.backend.member.validation.annotation.Email;
 import com.chestnut.backend.member.validation.annotation.LoginId;
 import com.chestnut.backend.member.validation.annotation.Nickname;
 import com.chestnut.backend.member.validation.annotation.Password;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SignupReqDTO {
 
     @LoginId
