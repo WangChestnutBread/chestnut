@@ -33,6 +33,8 @@ import RankingTemplate from "./templates/RankingTemplate";
 import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
 import Chapter2Detail from "./templates/StudyList/Chapter2Detail";
 import Chapter3Detail from './templates/StudyList/Chapter3Detail';
+import Chapter5Detail from './templates/StudyList/Chapter5Detail';
+import Chapter6Detail from './templates/StudyList/Chapter6Detail';
 import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
 
 const router = createBrowserRouter([
@@ -73,12 +75,20 @@ const router = createBrowserRouter([
     element: <Chapter1Detail />
   },
   {
-    path: "/study/detail2/:word",
+    path: "/study/detail2/:studyId/:word",
     element: <Chapter2Detail />
   },
   {
-    path: "/study/detail3/:word",
+    path: "/study/detail3/:studyId/:word",
     element: <Chapter3Detail />
+  },
+  {
+    path: "/study/detail5/:studyId/:word",
+    element: <Chapter5Detail />
+  },
+  {
+    path: "/study/detail6/:studyId/:word",
+    element: <Chapter6Detail />
   },
   {
     path: "/member",

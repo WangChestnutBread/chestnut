@@ -31,7 +31,7 @@ const Chapter1Detail = () => {
       <div className="container">
         <div className="row">
           <div className="col-4 mt-2 ">
-            <Notation  word={word}/>
+            <Notation  word={params}/>
           </div>
           <div className="col-8">
             <MouseTongue />

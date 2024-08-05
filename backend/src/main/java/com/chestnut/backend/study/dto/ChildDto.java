@@ -3,6 +3,7 @@ package com.chestnut.backend.study.dto;
 import lombok.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @ToString
@@ -10,5 +11,5 @@ import java.util.List;
 public class ChildDto {
     private Byte studyCategoryId;
     private String categoryContent;
-    private List<ConfusedStudyInfo> grandChildCategory;
+    private List<List<ConfusedStudyInfo>> grandChildCategory;
 }

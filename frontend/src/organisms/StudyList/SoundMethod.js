@@ -6,9 +6,11 @@ import "./SoundMethod.css";
 
 const SoundMethod = (hangeul) => {
   console.log(hangeul);
+  console.log(hangeul.hangeul);
+  // console.log("sadfasdf");
   console.log(hangeul.hangeul.studyId);
-  const distinction = parseInt(hangeul.hangeulstudyId);
-  console.log(distinction);
+  const distinction = parseInt(hangeul.hangeul.studyId);
+  // console.log(distinction);
 
   function getConstantVowel(kor) {
     const f = [
@@ -101,14 +103,51 @@ const SoundMethod = (hangeul) => {
       t: t[tn],
     };
   }
-  const a = getConstantVowel(hangeul.hangeul);
-  console.log(a);
+  console.log(distinction);
 
+  // const a = getConstantVowel(hangeul.hangeul);
+  // console.log(a);z
   const [word, setWord] = useState("");
 
   useEffect(() => {
+    if (distinction > 40) {
+      const a = getConstantVowel(hangeul.hangeul.word);
+      console.log(a);
+      if (a.t) {
+        baseApi
+          .get(`/study/detail/pronunciation`, {
+            params: {
+              initial: `${a.f}`,
+              middle: `${a.s}`,
+              last: `${a.t}`,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            setWord(res.data.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        baseApi
+          .get(`/study/detail/pronunciation`, {
+            params: {
+              initial: `${a.f}`,
+              middle: `${a.s}`,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            setWord(res.data.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
     // distinction이 19보다 작을 때만 API 호출
-    if (distinction < 19) {
+    else if (distinction < 19) {
       baseApi
         .get(`/study/detail/pronunciation`, {
           params: {
@@ -122,7 +161,8 @@ const SoundMethod = (hangeul) => {
         .catch((err) => {
           console.log(err);
         });
-    } else if (distinction > 18) {
+    } 
+    else if (distinction > 18) {
       baseApi
         .get(`/study/detail/pronunciation`, {
           params: {
@@ -136,39 +176,7 @@ const SoundMethod = (hangeul) => {
         .catch((err) => {
           console.log(err);
         });
-    } else if (a.t) {
-      baseApi
-        .get(`/study/detail/pronunciation`, {
-          params: {
-            initial: `${a.f}`,
-            middle: `${a.s}`,
-            last: `${a.t}`
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          setWord(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    else {
-      baseApi
-        .get(`/study/detail/pronunciation`, {
-          params: {
-            initial: `${a.f}`,
-            middle: `${a.s}`,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          setWord(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    } 
   }, []);
   return (
     <div className="qwer rounded-3 shadow ">

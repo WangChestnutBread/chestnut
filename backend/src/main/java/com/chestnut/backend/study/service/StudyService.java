@@ -118,11 +118,19 @@ public class StudyService {
         List<ConfusedStudyInfo> confusedWords = studyInfos.stream()
                 .map(this::makeStudyInfo)
                 .toList();
+        //confusedWords를 confusedGroupId를 키로 묶기
+        Map<Integer, List<ConfusedStudyInfo>> groupedWords = confusedWords.stream()
+                .collect(Collectors.groupingBy(item -> item.getConfusedGroupId()));
+
+        List<List<ConfusedStudyInfo>> groupedWordsList = groupedWords.keySet().stream()
+                .map(key -> groupedWords.get(key))
+                .toList();
+
         //ChildDto 생성
         return ChildDto.builder()
                 .studyCategoryId(studyCategory.getStudyCategoryId())
                 .categoryContent(studyCategory.getCategoryContent())
-                .grandChildCategory(confusedWords)
+                .grandChildCategory(groupedWordsList)
                 .build();
     }
 

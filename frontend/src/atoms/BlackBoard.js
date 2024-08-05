@@ -26,10 +26,6 @@ function BlackBoard(props) {
       <div className="BlackBoardBox">
         <div className="BoardBox">
           <div className="ChapterContent">
-            {/* <div>자음</div>
-            {data1.map((number, idx) => (
-              <Word number={number} key={idx} />
-            ))} */}
           </div>
           <div className="ChapterContent">
             {props.content}
