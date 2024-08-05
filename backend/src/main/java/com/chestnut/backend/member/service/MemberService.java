@@ -6,7 +6,10 @@ import com.chestnut.backend.common.exception.*;
 import com.chestnut.backend.common.service.RedisService;
 import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.entity.Member;
+import com.chestnut.backend.member.repository.MainMemberRepository;
 import com.chestnut.backend.member.repository.MemberRepository;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -23,6 +26,8 @@ public class MemberService {
 
     private final AvatarRepository avatarRepository;
     private final RedisService redisService;
+
+    private final MainMemberRepository mainMemberRepository;
 
     @Transactional
     public void signup(SignupReqDTO signupReqDTO, HttpSession session) {
@@ -198,6 +203,22 @@ public class MemberService {
         member.withdraw();
 
         redisService.deleteData("Refresh:"+loginId);
+    }
+
+    @Transactional
+    public MainMemberInfoDto getMainMemberInfo (String loginId){
+        Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
+        if(member.isWithdraw()) throw new InvalidMemberException();
+        try {
+            return  mainMemberRepository.findMainMemberInfo(member.getMemberId());
+        }catch (NoResultException e){
+            throw new NotFoundException();
+        }catch (PersistenceException e){
+            throw new DatabaseException();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new UnknownException();
+        }
     }
 
 }
