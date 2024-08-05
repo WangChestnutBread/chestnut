@@ -4,6 +4,8 @@ import com.chestnut.backend.avatar.entity.Avatar;
 import com.chestnut.backend.avatar.repository.AvatarRepository;
 import com.chestnut.backend.common.exception.*;
 import com.chestnut.backend.common.service.RedisService;
+import com.chestnut.backend.log.dto.AttendanceLogDto;
+import com.chestnut.backend.log.repository.AttendanceLogRepository;
 import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MainMemberRepository;
@@ -28,6 +30,7 @@ public class MemberService {
     private final RedisService redisService;
 
     private final MainMemberRepository mainMemberRepository;
+    private final AttendanceLogRepository attendanceLogRepository;
 
     @Transactional
     public void signup(SignupReqDTO signupReqDTO, HttpSession session) {
@@ -205,7 +208,7 @@ public class MemberService {
         redisService.deleteData("Refresh:"+loginId);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public MainMemberInfoDto getMainMemberInfo (String loginId){
         Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
         if(member.isWithdraw()) throw new InvalidMemberException();
