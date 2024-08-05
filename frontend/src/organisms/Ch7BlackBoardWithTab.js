@@ -26,6 +26,7 @@ function Ch7BlackBoardWithTab({ content }) {
                   isActive={currentTab === i}
                   onClick={() => {
                     handleTabClick(i);
+                    setCurrentRule(0)
                   }}
                 />
               );
@@ -34,7 +35,6 @@ function Ch7BlackBoardWithTab({ content }) {
 
           {/* 칠판 안 */}
           <div className="BoardInside">
-            
             {/* 칠판 왼쪽 내용 */}
             <div className="LeftBoardList">
               {content[currentTab].childCategory.map((item, i) => {
