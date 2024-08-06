@@ -3,6 +3,7 @@ import ChapterList from "../molecules/StudyList/ChapterList";
 import BlackBoardTab from "../molecules/BlackBoardTab";
 import { useState } from "react";
 import Text32 from "../atoms/Text32";
+import VocaModal from "./VocaModal";
 
 function Ch7BlackBoardWithTab({ content }) {
   // console.log(content)
@@ -12,6 +13,21 @@ function Ch7BlackBoardWithTab({ content }) {
 
   let [currentTab, setCurrentTab] = useState(0);
   let [currentRule, setCurrentRule] = useState(0);
+  let [showModal, setShowModal] = useState(false)
+  let [modalWord, setModalWord] = useState()
+  let [modalPronounce, setModalPronounce] = useState()
+  
+  const handleWordClick = (word, pronounce) => {
+    setModalWord(word);
+    setModalPronounce(pronounce);
+    setShowModal(true);
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setModalWord(null);
+    setModalPronounce(null);
+  };
 
   return (
     <div className="BlackBoardWithTab">
@@ -60,30 +76,52 @@ function Ch7BlackBoardWithTab({ content }) {
             <div className="VerticalLine"></div>
 
             {/* 칠판 오른쪽 내용 */}
-            <div className="RightBoard">
-              {content[currentTab].childCategory[
-                currentRule
-              ].grandChildCategory.map((item, i) => {
-                return (
-                  item.map((pair, j) => {
-                    return (
-                      <div key={j} className="RightBoardText">
-                        <div className="RightBoardWord">
-                          <p>{pair.word}</p>
-                          <span>|</span>
-                          <p>{pair.pronounce}</p>
-                        </div> 
-                      </div>
-                    );
-                  })
-                )
-              })}
+
+            <div className="RightBoardFor7">
+              <div className="RightBoardTextFor7">
+                {content[currentTab].childCategory[
+                  currentRule
+                ].grandChildCategory.map((item, i) => {
+                  return (
+                    <div className="RightBoardBox">
+                      {
+                        item.map((pair, j) => {
+                          return (
+                              <div key={j} className="RightBoardPair">
+                                <div className="RightBoardWord">
+                                  <p onClick={()=>{
+                                    handleWordClick(pair.word, pair.pronounce)
+                                  }}>{pair.word}</p>
+                                  <p>[{pair.pronounce}]</p>  
+                                </div>
+                                <div className="Vs">
+                                  {
+                                  j !== (item.length-1) ? <span>vs</span> : null 
+                                }
+                                </div>
+                                
+                              </div>
+                          );
+                        })
+                      }
+                    </div>
+                  )
+                })}
+              </div>
+
             </div>
           </div>
 
           {/* 칠판 */}
           <ChapterList title="Ch7. 헷갈리는 발음" />
         </div>
+      </div>
+
+      {/* 모달 */}
+      <div className="FlyingModal">
+        {
+          showModal ? <VocaModal word={modalWord} pronounce={modalPronounce} onClose={handleCloseModal}/> : null
+        }
       </div>
     </div>
   );
