@@ -58,6 +58,8 @@ public class StudyDetailController {
     public ResponseEntity<?> checkPronunciation(@RequestParam("word") String word,
                                                 @RequestParam("audio") MultipartFile audioFile,
                                                 @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+        System.out.println("STT 태그 "+word);
+        System.out.println("STT 태그 "+audioFile);
         PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, audioFile);
         return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
     }
