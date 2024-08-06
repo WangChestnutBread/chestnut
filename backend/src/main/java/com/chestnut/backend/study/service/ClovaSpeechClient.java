@@ -55,6 +55,7 @@ public class ClovaSpeechClient {
                     requestEntity,
                     String.class
             );
+            System.out.println("STT 태그"+response.getBody());
             return extractTextFromJsonResponse(response.getBody());
         } catch (IOException e) {
             throw new FileIOException();

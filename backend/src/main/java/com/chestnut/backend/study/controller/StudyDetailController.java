@@ -60,8 +60,15 @@ public class StudyDetailController {
                                                 @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
         System.out.println("STT 태그 "+word);
         System.out.println("STT 태그 "+audioFile);
-        PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, audioFile);
-        return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
+        try {
+            System.out.println("STT 태그 "+audioFile.getBytes());
+            System.out.println("STT 태그 "+audioFile.getBytes().length);
+            PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, audioFile);
+            return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println("STT 에러 태그 getBytes() 실패");
+            return new ResponseEntity<>(new ResponseDto<>("902", e.getMessage()), HttpStatus.OK);
+        }
     }
     
 }
