@@ -1,6 +1,8 @@
 .BlackBoardWithTab {
   display: flex;
+  width: 100%;
   flex-direction: column;
+  position: relative;
 }
 
 .BlackBoardWithLine {
@@ -121,7 +123,7 @@
   line-height: 200%;
 }
 
-.RightBoardTextFor7{
+.RightBoardTextFor7 {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -142,7 +144,6 @@
 
 .RightBoardPair {
   display: flex;
-  
 }
 
 .RightBoardWord {
@@ -152,5 +153,13 @@
 
 .Vs {
   margin-left: 10px;
-  color: #74A6FD;
+  color: #74a6fd;
+}
+
+.FlyingModal {
+  position: absolute;
+  /* top: 50%; */
+  /* left: 50%; */
+  z-index: 2000;
+  /* transform: translate(-50%, -50%); */
 }
