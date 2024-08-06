@@ -1,4 +1,4 @@
-package com.chestnut.backend.qna;
+package com.chestnut.backend.qna.entity;
 
 import com.chestnut.backend.member.entity.Member;
 import jakarta.persistence.*;
