@@ -1,13 +1,9 @@
 package com.chestnut.backend.qna.service;
 
-import com.chestnut.backend.common.exception.ArticleNotFoundException;
-import com.chestnut.backend.common.exception.IncorrectAccessException;
-import com.chestnut.backend.common.exception.MemberNotFoundException;
+import com.chestnut.backend.common.exception.*;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MemberRepository;
-import com.chestnut.backend.qna.dto.QnADetailResDTO;
-import com.chestnut.backend.qna.dto.QnAListDTO;
-import com.chestnut.backend.qna.dto.QnAResDTO;
+import com.chestnut.backend.qna.dto.*;
 import com.chestnut.backend.qna.entity.QnA;
 import com.chestnut.backend.qna.entity.QnACategory;
 import com.chestnut.backend.qna.repository.QnACategoryRepository;
@@ -16,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +25,7 @@ public class QnAService {
     private final QnACategoryRepository qnACategoryRepository;
     private final MemberRepository memberRepository;
 
+    @Transactional
     public QnAResDTO getQnAList(String loginId, String role, Pageable pageable) {
 
         Member member = memberRepository.findByLoginId(loginId)
@@ -77,6 +75,7 @@ public class QnAService {
 
     }
 
+    @Transactional
     public QnADetailResDTO getQnADetail(String loginId, Long qnaId) {
         // 받아온 qnaId로 해당 QnA 찾고 -> QnA의 memberId와 loginId을 이용한 memberId가 같은지 여부 확인 -> 멤버 여부 확인! -> MemberNotFound
         // qnaId에 해당하는 qna 게시글이 있는지 확인 -> ArticleNotFound
@@ -97,4 +96,49 @@ public class QnAService {
         return qnADetailResDTO;
 
     }
+
+    @Transactional
+    public void writeQuestion(WriteQuestionDTO writeQuestionDTO) {
+
+        // loginId로 member 찾고 -> memberId 을 활용하기
+        Member member = memberRepository.findByLoginId(writeQuestionDTO.getLoginId())
+                .orElseThrow(MemberNotFoundException::new);
+
+        QnACategory qnACategory = qnACategoryRepository.findById(writeQuestionDTO.getQnaCategoryId())
+                .orElseThrow(CategoryNotFoundException::new);
+
+        QnA qna = writeQuestionDTO.toEntity(member, qnACategory);
+        qnARepository.save(qna);
+    }
+
+    @Transactional
+    public void writeAnswer(WriteAnswerDTO writeAnswerDTO) {
+
+        // 관리자인지 여부 확인
+        String loginId = writeAnswerDTO.getLoginId();
+        String role = writeAnswerDTO.getRole();
+
+        Member member = memberRepository.findByLoginId(loginId)
+                .orElseThrow(MemberNotFoundException::new);
+
+        if (!role.equals("ROLE_ADMIN") || !member.isAdmin()) {
+            throw new AdminPermissionDeniedException();
+        }
+
+        // 질문이 존재하는지 확인
+        Long qnaId = writeAnswerDTO.getQnaId();
+        QnA qnA = qnARepository.findByqnaId(qnaId)
+                .orElseThrow(ArticleNotFoundException::new);
+
+        // 아직 답변하지 않은 글이 맞는지 확인 (이미 존재하면 안됨)
+        if (qnA.isAnswer()) {
+            throw new AlreadyAnsweredException();
+        }
+
+        String answer = writeAnswerDTO.getAnswer();
+        qnA.writeAns(answer);
+        qnARepository.save(qnA);
+
+    }
+
 }

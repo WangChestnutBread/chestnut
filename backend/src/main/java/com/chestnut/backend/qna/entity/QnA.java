@@ -69,4 +69,8 @@ public class QnA {
         }
     }
 
+    public void writeAns(String answer) {
+        this.answer = answer;
+    }
+
 }

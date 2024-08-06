@@ -4,7 +4,10 @@ import com.chestnut.backend.common.dto.ResponseDto;
 import com.chestnut.backend.member.dto.CustomMemberDetails;
 import com.chestnut.backend.qna.dto.QnADetailResDTO;
 import com.chestnut.backend.qna.dto.QnAResDTO;
+import com.chestnut.backend.qna.dto.WriteAnswerDTO;
+import com.chestnut.backend.qna.dto.WriteQuestionDTO;
 import com.chestnut.backend.qna.service.QnAService;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,5 +37,23 @@ public class QnAController {
                                           @PathVariable Long qnaId) {
         QnADetailResDTO qnADetailResDTO = qnAService.getQnADetail(customMemberDetails.getLoginId(), qnaId);
         return new ResponseEntity<>(new ResponseDto<>("200", qnADetailResDTO), HttpStatus.OK);
+    }
+
+    @PostMapping("/qna")
+    public ResponseEntity<?> writeQuestion(@AuthenticationPrincipal CustomMemberDetails customMemberDetails,
+                                      @RequestBody WriteQuestionReqDTO writeqnaReqDTO) {
+        WriteQuestionDTO writeQuestionDTO = writeqnaReqDTO.toDTO(customMemberDetails.getLoginId());
+        qnAService.writeQuestion(writeQuestionDTO);
+        return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
+    }
+
+    @PostMapping("/qna/{qnaId}/answer")
+    public ResponseEntity<?> writeAnswer(@AuthenticationPrincipal CustomMemberDetails customMemberDetails,
+                                         @RequestBody WriteAnswerReqDTO writeAnswerReqDTO,
+                                         @PathVariable Long qnaId) {
+
+        WriteAnswerDTO writeAnswerDTO = writeAnswerReqDTO.toDTO(customMemberDetails.getLoginId(), customMemberDetails.getRole(), writeAnswerReqDTO.getAnswer(), qnaId);
+        qnAService.writeAnswer(writeAnswerDTO);
+        return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 }
