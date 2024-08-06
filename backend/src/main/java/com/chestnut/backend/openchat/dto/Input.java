@@ -12,8 +12,5 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Input {
-
-    String loginId;
-    String nickname;
     String content;
 }

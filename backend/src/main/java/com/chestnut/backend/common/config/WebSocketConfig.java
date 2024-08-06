@@ -1,14 +1,18 @@
 package com.chestnut.backend.common.config;
 
+import com.chestnut.backend.common.interceptor.WebSocketInterceptor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
-import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.config.annotation.*;
 
 @Configuration
 @EnableWebSocketMessageBroker
+@RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
+    private final WebSocketInterceptor webSocketInterceptor;
 
     /**
      * enable a simple memory-based message broker
@@ -32,4 +36,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/open-chatting")  //ws://localhost:8080/open-chatting에서 웹소켓 연결
                 .setAllowedOriginPatterns("*");
     }
+
+    //클라이언트에게 오는 메세지 처리
+    @Override
+    public void configureClientInboundChannel(ChannelRegistration registration) {
+        //ChannelRegistration에 ChannelInterceptor을 상속받아서 preSend를 구현한 후 인터셉터로 등록
+        //Socket connection, message send 전에 헤더에 등록된 jwt 토큰 검증
+        registration.interceptors(webSocketInterceptor);
+    }
+
 }

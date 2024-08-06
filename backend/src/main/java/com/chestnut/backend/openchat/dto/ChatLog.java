@@ -21,9 +21,9 @@ public class ChatLog {
     public String content;
     public LocalDateTime sendAt;
 
-    public ChatLog(Input input) {
-        this.loginId = HtmlUtils.htmlEscape(input.getLoginId());
-        this.nickname = HtmlUtils.htmlEscape(input.getNickname());
+    public ChatLog(Input input, String loginId, String nickname) {
+        this.loginId = loginId;
+        this.nickname = nickname;
         this.content = HtmlUtils.htmlEscape(input.getContent());
         this.sendAt = LocalDateTime.now();
     }

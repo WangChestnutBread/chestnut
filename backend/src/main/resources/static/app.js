@@ -1,5 +1,14 @@
+let token
+    = 'eyJhbGciOiJIUzI1NiJ9.eyJjYXRlZ29yeSI6ImFjY2VzcyIsImxvZ2luSWQiOiJkdWxpMTIzIiwicm9sZSI6IlJPTEVfQURNSU4iLCJpYXQiOjE3MjI5MDM2NzIsImV4cCI6MTcyMjk5MDA3Mn0.IE65GeABxgZPMxlwYkcBG_5Nh5BXfaF0pVsm37jjKtw'
+let userId = 'duli123'
+let userNickname = ''
+
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8081/open-chatting'
+    brokerURL: 'ws://localhost:8081/open-chatting',
+    connectHeaders: {
+        access: token,
+        nickname: ''
+    }
 });
 
 stompClient.onConnect = (frame) => { //connect되었을 때
@@ -8,7 +17,8 @@ stompClient.onConnect = (frame) => { //connect되었을 때
     //Upon a successful connection, the client subscribes to the /topic/greetings destination, where the server will publish greeting messages.
     stompClient.subscribe('/topic/chat-room', (broadcast) => {
         let body = JSON.parse(broadcast.body);
-        showChatting(body.nickname, body.content, body.sendAt);
+        userNickname = body.nickname;
+        showChatting(body.nickname, body.content, body.sendAt, body.loginId);
     });
 };
 
@@ -19,6 +29,8 @@ stompClient.onWebSocketError = (error) => {
 stompClient.onStompError = (frame) => {
     console.error('Broker reported error: ' + frame.headers['message']);
     console.error('Additional details: ' + frame.body);
+    alert("소켓 연결 실패");
+    disconnect();
 }
 
 
@@ -34,8 +46,18 @@ function setConnected(connected) {
     $("#greetings").html(""); //greetings 내용을 공백으로 바꿈
 }
 
-function showChatting(name, content, sendAt) {
-    $("#greetings").append("<tr><td>"+name+"</td><td>"+content+"</td><td>"+sendAt+"</td></tr>") //문자 받을 때 표에 메세지 내용 추가
+function showChatting(nickname, content, sendAt, loginId) {
+    var $row = $("<tr>")
+        .append($("<td>").text(loginId))
+        .append($("<td>").text(nickname))
+        .append($("<td>").text(content))
+        .append($("<td>").text(sendAt));
+
+    if (loginId === userId) {
+        $row.css('background-color', 'skyblue');
+    }
+
+    $("#greetings").append($row);
 }
 
 function connect() {
@@ -54,10 +76,12 @@ function send() {
     stompClient.publish({
         destination: "/app/chat-center",
         body: JSON.stringify({
-            'loginId': $("#loginId").val(),
-            'nickname': $("#nickname").val(),
             'content': $("#content").val()
-        })
+        }),
+        headers: {
+            access: token,
+            nickname: userNickname
+        },
     });
 }
 

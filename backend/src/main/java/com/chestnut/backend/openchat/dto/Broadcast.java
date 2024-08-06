@@ -11,11 +11,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Broadcast {
 
+    String loginId;
     String nickname;
     String content;
     LocalDateTime sendAt;
 
     public Broadcast(ChatLog chatLog) {
+        this.loginId = chatLog.getLoginId();
         this.nickname = chatLog.getNickname();
         this.content = chatLog.getContent();
         this.sendAt = chatLog.getSendAt();
