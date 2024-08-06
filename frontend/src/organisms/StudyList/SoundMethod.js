@@ -5,12 +5,11 @@ import SpeakExplanation from "../../molecules/StudyList/SpeakExplanation";
 import "./SoundMethod.css";
 
 const SoundMethod = (hangeul) => {
-  console.log(hangeul);
-  console.log(hangeul.hangeul);
-  // console.log("sadfasdf");
-  console.log(hangeul.hangeul.studyId);
+
+
   const distinction = parseInt(hangeul.hangeul.studyId);
-  // console.log(distinction);
+  const [hangeulData, setHangeulData] = useState();
+
 
   function getConstantVowel(kor) {
     const f = [
@@ -103,81 +102,108 @@ const SoundMethod = (hangeul) => {
       t: t[tn],
     };
   }
-  console.log(distinction);
+  
+  // console.log(distinction);
 
   // const a = getConstantVowel(hangeul.hangeul);
   // console.log(a);z
   const [word, setWord] = useState("");
 
   useEffect(() => {
-    if (distinction > 40) {
-      const a = getConstantVowel(hangeul.hangeul.word);
-      console.log(a);
-      if (a.t) {
-        baseApi
-          .get(`/study/detail/pronunciation`, {
-            params: {
-              initial: `${a.f}`,
-              middle: `${a.s}`,
-              last: `${a.t}`,
-            },
-          })
-          .then((res) => {
-            console.log(res);
-            setWord(res.data.data);
-          })
-          .catch((err) => {
+    const fetchData = async () => {
+      // console.log(hangeul.hangeul.chapterId);
+      if (parseInt(hangeul.hangeul.chapterId) === 1) {
+        // console.log(distinction);
+        // distinction이 19보다 작을 때만 API 호출
+        if (distinction < 20) {
+          try {
+            // 첫 번째 axios 호출
+            const firstResponse = await baseApi.get(`/study/chapter/1`);
+            const word = firstResponse.data.data[distinction - 1].word;
+            // console.log(word);
+            setHangeulData(word);
+            // 두 번째 axios 호출
+            const pronunciationResponse = await baseApi.get(
+              `/study/detail/pronunciation`,
+              {
+                params: {
+                  initial: `${word}`, // 상태 대신 바로 변수 word 사용
+                },
+              }
+            );
+            // console.log(pronunciationResponse);
+            setWord(pronunciationResponse.data.data);
+          } catch (err) {
             console.log(err);
-          });
-      } else {
-        baseApi
-          .get(`/study/detail/pronunciation`, {
-            params: {
-              initial: `${a.f}`,
-              middle: `${a.s}`,
-            },
-          })
-          .then((res) => {
-            console.log(res);
-            setWord(res.data.data);
-          })
-          .catch((err) => {
+          }
+        } else if (distinction > 19) {
+          try {
+            // 첫 번째 axios 호출
+            const firstResponse = await baseApi.get(`/study/chapter/1`);
+            const word = firstResponse.data.data[distinction - 1].word;
+            console.log(word);
+            setHangeulData(word);
+            // 두 번째 axios 호출
+            const pronunciationResponse = await baseApi.get(
+              `/study/detail/pronunciation`,
+              {
+                params: {
+                  middle: `${word}`, // 상태 대신 바로 변수 word 사용
+                },
+              }
+            );
+            // console.log(pronunciationResponse);
+            setWord(pronunciationResponse.data.data);
+          } catch (err) {
             console.log(err);
-          });
+          }
+        }
+      } 
+      else  {
+
+        const response = await baseApi.get(`/study/detail/${distinction}/word`);
+
+        const word = response.data.data.word;
+        const a = getConstantVowel(word);
+      
+          if (a.t) {
+            baseApi
+              .get(`/study/detail/pronunciation`, {
+                params: {
+                  initial: `${a.f}`,
+                  middle: `${a.s}`,
+                  last: `${a.t}`,
+                },
+              })
+              .then((res) => {
+                console.log(res);
+                setWord(res.data.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          } else {
+            baseApi
+              .get(`/study/detail/pronunciation`, {
+                params: {
+                  initial: `${a.f}`,
+                  middle: `${a.s}`,
+                },
+              })
+              .then((res) => {
+                console.log(res);
+                setWord(res.data.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        
       }
-    }
-    // distinction이 19보다 작을 때만 API 호출
-    else if (distinction < 19) {
-      baseApi
-        .get(`/study/detail/pronunciation`, {
-          params: {
-            initial: `${hangeul.hangeul.word}`,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          setWord(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } 
-    else if (distinction > 18) {
-      baseApi
-        .get(`/study/detail/pronunciation`, {
-          params: {
-            middle: `${hangeul.hangeul.word}`,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          setWord(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } 
+    };
+    fetchData();
   }, []);
+
   return (
     <div className="qwer rounded-3 shadow ">
       <HowSpeak />

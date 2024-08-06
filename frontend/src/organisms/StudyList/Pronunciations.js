@@ -15,8 +15,8 @@ const Pronunciations = (saying) => {
   //   data: data
   // }
   useEffect(() => {
-    baseApi.get(`study/detail/${saying.saying.studyId}/word`).then((res) => {
-      console.log(res.data.data.word);
+    baseApi.get(`/study/detail/${saying.saying.studyId}/word`).then((res) => {
+      console.log(res);
       setWrod(res.data.data.word);
       setPronounce(res.data.data.pronounce);
     });

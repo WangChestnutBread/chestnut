@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 
 const Chapter1Detail = () => {
   const params = useParams()
-  const word = params.word
+  
   // console.log(word);
 
   return (
