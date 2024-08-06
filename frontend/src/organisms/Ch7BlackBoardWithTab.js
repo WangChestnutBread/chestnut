@@ -60,24 +60,35 @@ function Ch7BlackBoardWithTab({ content }) {
             <div className="VerticalLine"></div>
 
             {/* 칠판 오른쪽 내용 */}
-            <div className="RightBoard">
-              {content[currentTab].childCategory[
-                currentRule
-              ].grandChildCategory.map((item, i) => {
-                return (
-                  item.map((pair, j) => {
-                    return (
-                      <div key={j} className="RightBoardText">
-                        <div className="RightBoardWord">
-                          <p>{pair.word}</p>
-                          <span>|</span>
-                          <p>{pair.pronounce}</p>
-                        </div> 
-                      </div>
-                    );
-                  })
-                )
-              })}
+            <div className="RightBoardFor7">
+              <div className="RightBoardTextFor7">
+                {content[currentTab].childCategory[
+                  currentRule
+                ].grandChildCategory.map((item, i) => {
+                  return (
+                    <div className="RightBoardBox">
+                      {
+                        item.map((pair, j) => {
+                          return (
+                              <div key={j} className="RightBoardPair">
+                                <div className="RightBoardWord">
+                                  <p>{pair.word}</p>
+                                  <p>[{pair.pronounce}]</p>  
+                                </div>
+                                <div className="Vs">
+                                  {
+                                  j !== (item.length-1) ? <span>vs</span> : null 
+                                }
+                                </div>
+                                
+                              </div>
+                          );
+                        })
+                      }
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           </div>
 
