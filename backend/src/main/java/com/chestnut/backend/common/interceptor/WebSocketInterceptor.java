@@ -7,6 +7,7 @@ import com.chestnut.backend.member.repository.MemberRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.stomp.StompCommand;
@@ -15,7 +16,7 @@ import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 
 @RequiredArgsConstructor
@@ -25,6 +26,7 @@ public class WebSocketInterceptor implements ChannelInterceptor {
 
     private final JWTUtil jwtUtil;
     private final MemberRepository memberRepository;
+    private final RedisTemplate<String, String> redisTemplate;
 
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
@@ -71,7 +73,7 @@ public class WebSocketInterceptor implements ChannelInterceptor {
         String userId = jwtUtil.getLoginId(token);
         accessor.setUser(() -> userId);
 
-        //커넥션 시도일 때 헤더에 닉네임 저장
+        //헤더에 닉네임 저장
         String nickname = getNickname(userId);
         accessor.setNativeHeader("nickname", nickname);
 
@@ -79,12 +81,24 @@ public class WebSocketInterceptor implements ChannelInterceptor {
     }
 
     private String getNickname(String loginId) {
-        //레디스에서 꺼내오는 것 시도
-        //있으면 그거 반환
-        //없으면 memberRepository가서 꺼내오고 레디스에 저장(2시간 후 만료) 후 반환
-        Member member = memberRepository.findByLoginId(loginId)
-                .orElseThrow(MemberNotFoundException::new);
-        return member.getNickname();
+        String key = "nickname"+loginId;
+        log.info("레디스 진입 전");
+        String nickname = redisTemplate.opsForValue().get(key);
+        log.info("nickname: " + nickname);
+
+        if (nickname == null) {
+            Member member = memberRepository.findByLoginId(loginId)
+                    .orElseThrow(MemberNotFoundException::new);
+            nickname = member.getNickname();
+            log.info("db에서 조회한 nickname: " + nickname);
+            log.info("레디스에 저장");
+            redisTemplate.opsForValue().set(key, nickname, 1, TimeUnit.HOURS);
+
+            return member.getNickname();
+        } else {
+            return nickname;
+        }
+
     }
 
 
