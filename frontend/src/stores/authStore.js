@@ -6,11 +6,14 @@ const useAuthStore = create(
     (set) => ({
       accessToken: undefined,
       setAccessToken: (accessToken) => set({ accessToken }),
+      userId : undefined,
+      setUserId : (userId) => set({userId})
     }),
     {
       name: "chestNut",
       storage: createJSONStorage(() => sessionStorage),
-    }
+    },
+
   )
 );
 

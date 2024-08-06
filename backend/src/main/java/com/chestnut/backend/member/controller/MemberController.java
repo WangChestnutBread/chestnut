@@ -2,6 +2,7 @@ package com.chestnut.backend.member.controller;
 
 import com.chestnut.backend.common.dto.ResponseDto;
 import com.chestnut.backend.common.exception.NotVerifiedEmailException;
+import com.chestnut.backend.log.dto.AttendanceLogDto;
 import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.service.MailAuthService;
 import com.chestnut.backend.member.service.MemberService;
@@ -82,6 +83,12 @@ public class MemberController {
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
+    @GetMapping("/info/main")
+    public ResponseEntity<?> getMainMemberInfo(@AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+        MainMemberInfoDto mainMemberInfoDto = memberService.getMainMemberInfo(customMemberDetails.getLoginId());
+        return new ResponseEntity<>(new ResponseDto<>("200", mainMemberInfoDto), HttpStatus.OK);
+    }
+
     @GetMapping("/withdraw")
     public ResponseEntity<?> withdraw(@AuthenticationPrincipal CustomMemberDetails customMemberDetails){
         memberService.withdraw(customMemberDetails.getLoginId());
@@ -99,6 +106,13 @@ public class MemberController {
         mailAuthService.verifyEmailCode(mailAuthDto);
         session.setAttribute("CheckEmailCode:", mailAuthDto.getEmail());
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
+    }
+
+    @GetMapping("/attendance")
+    public ResponseEntity<?> getAttendanceLog(@RequestParam("year") int year,
+                                 @AuthenticationPrincipal CustomMemberDetails customMemberDetails){
+        AttendanceLogDto attendanceLogDto = memberService.getAttendanceLog(customMemberDetails.getLoginId(), year);
+        return new ResponseEntity<>(new ResponseDto<>("200", attendanceLogDto), HttpStatus.OK);
     }
 
 }

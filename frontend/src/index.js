@@ -20,15 +20,10 @@ import FindId from "./templates/Authentication/FindId";
 import FindPw from "./templates/Authentication/FindPw";
 import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
-import ChapterList from "./molecules/StudyList/ChapterList";
+import ChapterListpage from "./pages/StudyDetail/ChapterListpage";
 import StudyList from "./templates/StudyList";
 import ChapterMenu from "./atoms/ChapterMenu";
 import MainPage from "./pages/MainPage";
-import Chapter1Listpage from "./templates/Chapter1Listpage";
-import Chapter2Listpage from "./templates/Chapter2Listpage";
-import Chapter3Listpage from "./templates/Chapter3Listpage";
-import Chapter5Listpage from "./templates/Chapter5Listpage";
-import Chapter6Listpage from "./templates/Chapter6Listpage";
 import RankingTemplate from "./templates/RankingTemplate";
 import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
 import Chapter2Detail from "./templates/StudyList/Chapter2Detail";
@@ -36,7 +31,7 @@ import Chapter3Detail from './templates/StudyList/Chapter3Detail';
 import Chapter5Detail from './templates/StudyList/Chapter5Detail';
 import Chapter6Detail from './templates/StudyList/Chapter6Detail';
 import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
-import VocabularyListPage from "./pages/VocabularyListPage";
+import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +61,10 @@ const router = createBrowserRouter([
   {
     path: "/board/announcement/detail/:id",
     element: <AnnouncementDetail />
+  },
+  {
+    path: "/board/announcement/manager/write",
+    element: <AnnouncementManagerWrite />
   },
   {
     path: "/board/announcement/write",
@@ -133,31 +132,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/chapter/:chapterId",
-    element: <Chapter1Listpage />
-  },
-  {
-    path: "/chapter/:chapterId",
-    element: <Chapter2Listpage />
-  },
-  {
-    path: "/chapter/:chapterId",
-    element: <Chapter3Listpage />
-  },
-  {
-    path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage/>
   },
   {
     path: "/chapter/:chapterId",
-    element: <Chapter5Listpage />
-  },
-  {
-    path: "/chapter/:chapterId",
-    element: <Chapter6Listpage />
-  },
-  {
-    path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage />
+  },
+  {
+    path: "/chapter/:listId",
+    element: <ChapterListpage />
   },
   {
     path: "/main",
