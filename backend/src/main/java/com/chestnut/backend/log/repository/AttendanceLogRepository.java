@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public interface AttendanceLogRepository extends JpaRepository<AttendanceLog, Long> {
@@ -16,4 +18,9 @@ public interface AttendanceLogRepository extends JpaRepository<AttendanceLog, Lo
             "and al.member = :member")
     Optional<Short> findYesterdayLog(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end, @Param("member")Member member);
 
+    @Query("SELECT CAST(DATE(al.attendanceAt) AS java.time.LocalDate) " +
+            "FROM AttendanceLog al " +
+            "right join al.member m " +
+            "WHERE YEAR(al.attendanceAt) = :year and m.memberId=:memberId")
+    List<LocalDate> findByMemberIdandYear(@Param("memberId") Long memberId, @Param("year") int year);
 }
