@@ -59,7 +59,7 @@ public class ClovaSpeechClient {
         } catch (IOException e) {
             throw new FileIOException();
         } catch (Exception ex){
-            log.info("STT 에러 태그"+ ex.getMessage());
+            System.out.println("STT 에러 태그"+ ex.getMessage());
             throw new SttFailException();
         }
     }

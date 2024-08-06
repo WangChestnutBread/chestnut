@@ -23,7 +23,7 @@ public class PronounceEvaluateService {
         if(member.isWithdraw()) throw new InvalidMemberException();
         try {
             String sttResult = clovaSpeechClient.upload(audioFile);
-            log.debug("STT 태그 + "+ sttResult);
+            System.out.println("STT 태그 + "+ sttResult);
             if (sttResult.isEmpty()) throw new SttFailException();
             StringComparator.ComparisonResult compareStrings = StringComparator.compareStrings(answer, sttResult);
             return new PronunceEvaluateDto(compareStrings.getIsPass(), sttResult, compareStrings.getAnswerMismatchIndices(), compareStrings.getInputMismatchIndices());
