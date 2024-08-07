@@ -31,7 +31,10 @@ import Chapter3Detail from './templates/StudyList/Chapter3Detail';
 import Chapter5Detail from './templates/StudyList/Chapter5Detail';
 import Chapter6Detail from './templates/StudyList/Chapter6Detail';
 import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
+
 import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite";
+import VocabularyListPage from "./pages/VocabularyListPage"
+
 
 const router = createBrowserRouter([
   {
@@ -130,10 +133,37 @@ const router = createBrowserRouter([
     path: "/study",
     element: <StudyList />
   },
+
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Chapter1Listpage />
+  // },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Chapter2Listpage />
+  // },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Chapter3Listpage />
+  // },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Ch4n7DetailPage/>
+  // },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Chapter5Listpage />
+  // },
+  // {
+  //   path: "/chapter/:chapterId",
+  //   element: <Chapter6Listpage />
+  // },
+
   {
     path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage/>
   },
+
   {
     path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage />
@@ -150,6 +180,7 @@ const router = createBrowserRouter([
     path: "/abc",
     element: <RankingTemplate />
   },
+
   // {
   //   path: "/myVocabulary",
   //   element: <VocabularyListPage />

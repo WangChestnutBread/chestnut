@@ -17,6 +17,7 @@ function LoginPage() {
   const navigate = useNavigate();
   // 액세스 토큰을 선언하는 변수
   const setAccessToken = useAuthStore((state) => (state.setAccessToken))
+
   const setUserId = useAuthStore((state) => (state.setUserId))
 
   const handleChangeName = (event) => {
