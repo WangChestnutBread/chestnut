@@ -20,7 +20,12 @@ public class QnADetailResDTO {
     private String answer;
     private LocalDateTime answerAt;
 
-    public QnADetailResDTO from(QnA qna) {
-        return new QnADetailResDTO(qna.getTitle(), qna.getTitle(), qna.getCreatedAt(), qna.getMember().getNickname(), qna.getAnswer(), qna.getAnswerAt());
+    public void from(QnA qna) {
+        this.title = qna.getTitle();
+        this.content = qna.getContent();
+        this.createdAt = qna.getCreatedAt();
+        this.nickname = qna.getMember().getNickname();
+        this.answer = qna.getAnswer();
+        this.answerAt = qna.getAnswerAt();
     }
 }

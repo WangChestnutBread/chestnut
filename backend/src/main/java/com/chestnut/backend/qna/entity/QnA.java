@@ -71,6 +71,8 @@ public class QnA {
 
     public void writeAns(String answer) {
         this.answer = answer;
+        this.isAnswer = true;
+        this.answerAt = LocalDateTime.now();
     }
 
 }

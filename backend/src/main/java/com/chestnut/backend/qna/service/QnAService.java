@@ -25,7 +25,7 @@ public class QnAService {
     private final QnACategoryRepository qnACategoryRepository;
     private final MemberRepository memberRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public QnAResDTO getQnAList(String loginId, String role, Pageable pageable) {
 
         Member member = memberRepository.findByLoginId(loginId)
@@ -39,43 +39,24 @@ public class QnAService {
             throw new IncorrectAccessException();
         }
 
-        // 검증 끝
-
         List<QnACategory> categories = qnACategoryRepository.findAll();
 
-        List<QnAListDTO> qnaList = new ArrayList<>();
-        Page<QnA> lists = null;
-
+        Page<QnA> qnaList = null;
         if (member.isAdmin()) {
-            //관리자 -> 전체 조회
-//            try{
-                lists = qnARepository.findAll(pageable);
-//            }
-
-
+            qnaList = qnARepository.findAll(pageable);
         }
 
         if (!member.isAdmin()) {
-            lists = qnARepository.findAllByMemberMemberId(member.getMemberId(), pageable);
+            String nickname = member.getNickname();
+            qnaList = qnARepository.findByMemberNickname(nickname, pageable);
         }
 
-        for (QnA qna : lists) {
-            QnACategory category = qna.getQnaCategory();
-            Member qnaMember = qna.getMember();
-
-            qnaList.add(new QnAListDTO(qna.getQnaId(), category.getQnaCategoryId(), category.getQnaCategoryName(),
-                    qna.getTitle(), qnaMember.getNickname(), qna.getCreatedAt(), qna.isAnswer()));
-
-           /* qnaList.add(new QnAListDTO(qna.getQnaId(), qna.getQnaCategory().getQnaCategoryId(), qna.getQnaCategory().getQnaCategoryName(),
-                    qna.getTitle(), qna.getMember().getNickname(), qna.getCreatedAt(), qna.isAnswer()));*/
-        }
-
-        QnAResDTO qna = new QnAResDTO(categories, qnaList, pageable);
+        QnAResDTO qna = new QnAResDTO(categories, qnaList);
         return qna;
 
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public QnADetailResDTO getQnADetail(String loginId, Long qnaId) {
         // 받아온 qnaId로 해당 QnA 찾고 -> QnA의 memberId와 loginId을 이용한 memberId가 같은지 여부 확인 -> 멤버 여부 확인! -> MemberNotFound
         // qnaId에 해당하는 qna 게시글이 있는지 확인 -> ArticleNotFound

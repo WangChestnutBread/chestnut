@@ -7,7 +7,6 @@ import com.chestnut.backend.qna.dto.QnAResDTO;
 import com.chestnut.backend.qna.dto.WriteAnswerDTO;
 import com.chestnut.backend.qna.dto.WriteQuestionDTO;
 import com.chestnut.backend.qna.service.QnAService;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
