@@ -1,4 +1,4 @@
-package com.chestnut.backend.qna;
+package com.chestnut.backend.qna.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
