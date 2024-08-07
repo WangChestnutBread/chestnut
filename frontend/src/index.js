@@ -32,6 +32,7 @@ import Chapter5Detail from './templates/StudyList/Chapter5Detail';
 import Chapter6Detail from './templates/StudyList/Chapter6Detail';
 import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
 import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite";
+import OpenChat from "./pages/OpenChat";
 
 const router = createBrowserRouter([
   {
@@ -144,12 +145,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/main",
-    element: <MainPage/>
+    element: <MainPage/>,
   },
   {
     path: "/abc",
     element: <RankingTemplate />
   },
+  {
+    path: "/openchat",
+    element: <OpenChat/>
+  }
   // {
   //   path: "/myVocabulary",
   //   element: <VocabularyListPage />
