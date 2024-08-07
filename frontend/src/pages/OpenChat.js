@@ -27,7 +27,7 @@ const OpenChat = () => {
     useEffect(() => {
         //컴포넌트가 마운트될 때 실행되는 함수들
         const client = new StompJs.Client({
-            brokerURL: 'ws://localhost:8081/open-chatting',
+            brokerURL: 'wss://i11d107.p.ssafy.io/chestnutApi/open-chatting',
             connectHeaders: {
                 access: token,
                 nickname: ''
