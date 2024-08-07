@@ -31,8 +31,10 @@ import Chapter3Detail from './templates/StudyList/Chapter3Detail';
 import Chapter5Detail from './templates/StudyList/Chapter5Detail';
 import Chapter6Detail from './templates/StudyList/Chapter6Detail';
 import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
-import VocabularyListPage from "./pages/VocabularyListPage";
+
 import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite";
+import VocabularyListPage from "./pages/VocabularyListPage"
+
 
 const router = createBrowserRouter([
   {
@@ -180,7 +182,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/myVocabulary",
-    element: <VocabularyListPage />
+    element: <VocabularyListPage/>
   },
 ]);
 

@@ -10,6 +10,8 @@ import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MainMemberRepository;
 import com.chestnut.backend.member.repository.MemberRepository;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceException;
 import jakarta.servlet.http.HttpSession;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;

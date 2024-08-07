@@ -76,7 +76,6 @@ function Ch7BlackBoardWithTab({ content }) {
             <div className="VerticalLine"></div>
 
             {/* 칠판 오른쪽 내용 */}
-
             <div className="RightBoardFor7">
               <div className="RightBoardTextFor7">
                 {content[currentTab].childCategory[
@@ -108,7 +107,6 @@ function Ch7BlackBoardWithTab({ content }) {
                   )
                 })}
               </div>
-
             </div>
           </div>
 
