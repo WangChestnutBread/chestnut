@@ -235,7 +235,6 @@ public class MemberService {
         }catch (PersistenceException e){
             throw new DatabaseException();
         }catch (Exception e){
-            System.out.println(e.getMessage());
             throw new UnknownException();
         }
     }

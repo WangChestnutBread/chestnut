@@ -1,6 +1,7 @@
 package com.chestnut.backend.study.controller;
 
 import com.chestnut.backend.common.dto.ResponseDto;
+import com.chestnut.backend.member.dto.CustomMemberDetails;
 import com.chestnut.backend.study.dto.ImgUrlDto;
 import com.chestnut.backend.study.dto.PronounceMethodDto;
 import com.chestnut.backend.study.dto.PronunceEvaluateDto;
@@ -10,6 +11,7 @@ import com.chestnut.backend.study.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,9 +56,19 @@ public class StudyDetailController {
 
     @PostMapping("/pronunciation/evaluate")
     public ResponseEntity<?> checkPronunciation(@RequestParam("word") String word,
-                                                @RequestParam("audio") MultipartFile audioFile) {
-        PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(word, audioFile);
-        return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
+                                                @RequestParam("audio") MultipartFile audioFile,
+                                                @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+        System.out.println("STT 태그 "+word);
+        System.out.println("STT 태그 "+audioFile);
+        try {
+            System.out.println("STT 태그 "+audioFile.getBytes());
+            System.out.println("STT 태그 "+audioFile.getBytes().length);
+            System.out.println("STT 태그 "+audioFile.getResource());
+            PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, audioFile);
+            return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ResponseDto<>("902", e.getMessage()), HttpStatus.OK);
+        }
     }
     
 }
