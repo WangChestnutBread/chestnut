@@ -23,14 +23,16 @@ public class PronounceEvaluateService {
         if(member.isWithdraw()) throw new InvalidMemberException();
         try {
             String sttResult = clovaSpeechClient.upload(audioFile);
-            System.out.println("STT 태그 + "+ sttResult);
-            if (sttResult.isEmpty()) throw new SttFailException();
+            log.debug("STT 태그 : STT 결과 = "+ sttResult);
+            if (sttResult.isEmpty()) throw new NullSTTException();
             StringComparator.ComparisonResult compareStrings = StringComparator.compareStrings(answer, sttResult);
             return new PronunceEvaluateDto(compareStrings.getIsPass(), sttResult, compareStrings.getAnswerMismatchIndices(), compareStrings.getInputMismatchIndices());
         }catch (FileIOException e){
             throw new FileIOException();
         }catch (SttFailException e){
             throw new SttFailException();
+        }catch (NullSTTException e){
+            throw new NullSTTException();
         }catch (Exception e){
             throw new UnknownException();
         }
