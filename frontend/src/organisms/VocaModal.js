@@ -1,52 +1,60 @@
-import Notation from "../organisms/StudyList/NotationChapter1";
+import { Modal, Container, Stack } from "react-bootstrap";
 import RecordData from "../organisms/StudyList/Record";
 import "../organisms/StudyList/NotationChapter1.css";
-import PronunciationLeft from "../molecules/StudyList/PronunciationLeft";
-import PronunciationRight from "../molecules/StudyList/PronunciationRight";
 import "./VocaModal.css";
+import Text24 from "../atoms/Text24";
+import Text32 from "../atoms/Text32";
 
 const VocaModal = ({ word, pronounce, onClose }) => {
-
   return (
-    <div className="Modal VocaModal">
-      {/* x버튼 */}
-      <div className="CloseModal">
-        <span onClick={onClose}>
-          &times;
-        </span>
-      </div>
-
+    <div>
       {/* 모달 */}
-      <div className="ContentModal">
-        {/* 표기, 카메라 */}
-        <div className="row">
-          <div className="col-6 mt-2">
-            <div className="box">
-              <div className="abc">표기</div>
-              <div className="data1">{word}</div>
-            </div>
-        </div>
+      <Modal size="lg" show onHide={onClose} centered>
+        {/* x버튼 */}
+        <Modal.Header closeButton></Modal.Header>
 
-        </div>
-        
-      {/* 발음 */}
-      <div className="row">
-        <div className="PronounceBoxes">
-          <div className="d-flex">
-            <PronunciationLeft data={"발음"} />
-            {word ? <PronunciationRight data={word} /> : <></>}
-          </div>
-          <div className="d-flex">
-            <PronunciationLeft data={"내 발음"} />
+        <Modal.Body>
+          <Container fluid className="ContentModal">
+            {/* 표기 */}
+            <Stack direction="horizontal" className="ShowBox">
+              <div className="col-12 col-lg-6 p-2">
+                <div className="box">
+                  <div className="abc">표기</div>
+                  <div className="data1" style={{fontSize: "2rem"}}>{word}</div>
+                </div>
+              </div>
+              
+            </Stack>
 
-            {pronounce ? <PronunciationRight data={pronounce} /> : <></>}
-          </div>
-        </div>
-      </div>
-        <div className="col-6 mt-2 mb-3"></div>
-      </div>
-      {/* 마이크 */}
-      <RecordData />
+            {/* 발음 */}
+            <Stack direction="horizontal" className="PronunciationStack">
+              <div className="col-12 col-lg-6 PronunciationGroup">
+                <div className="LeftSide">
+                  <Text24 text="발음"/>
+                </div>
+                  {word ? <div className="RightSide">
+                    <Text32 text={pronounce} />
+                    </div> : null}
+              </div>
+              <Stack direction="horizontal" className=" PronunciationGroup">
+                <div className="col-12 col-lg-6 PronunciationGroup">
+                  <div className="LeftSide">
+                    <Text24 text="내 발음"/>
+                  </div>
+                    {word ? <div className="RightSide">
+                      <Text32 text={pronounce} />
+                      </div> : null}
+                </div>
+              </Stack>
+            </Stack>
+          </Container>
+        </Modal.Body>
+
+        {/* 마이크 */}
+        <Modal.Footer className="ModalFooter">
+          <RecordData />
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
