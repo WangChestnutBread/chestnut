@@ -10,10 +10,16 @@ import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
 import Pronunciation from "../../organisms/StudyList/Pronunciations"
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 const Chapter3Detail = () => {
   const params = useParams()
-  const word = params.word
+  const [realData, setRealData] = useState("내발음😎")
+  
+  const moveData = (value) => {
+    console.log(value);
+    setRealData(value)
+  }
 
   return (
     <div>
@@ -38,15 +44,15 @@ const Chapter3Detail = () => {
         </div>
         {/* 소리나는 방법, 카메라 */}
         <div className="row">
-          <div className="col-6 mt-2" >
-            <Pronunciation saying={params} />
+          <div className="col-6 mt-2">
+            <Pronunciation saying={params} realData={realData} />
           </div>
           <div className="col-6 mt-2 mb-3">
             <CameraOrganism />
           </div>
         </div>
         {/* 마이크 */}
-        <RecordData/>
+        <RecordData  func={moveData}/>
       </div>
     </div>
   );

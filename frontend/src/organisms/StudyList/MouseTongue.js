@@ -5,7 +5,8 @@ import Tongue from "../../molecules/StudyList/Tongue";
 import { json, useParams } from "react-router-dom";
 import useAuthStore from "../../stores/authStore";
 
-const MouseTongue = () => {
+const MouseTongue = ({params}) => {
+  console.log(params);
   const [mouthData, setMouthData] = useState("");
   const [tongueData, setTongueData] = useState("");
   const { studyId } = useParams();
@@ -14,7 +15,7 @@ const MouseTongue = () => {
       setMouthData(res.data.data.mouthImg);
       setTongueData(res.data.data.tongueImg);
     })
-  }, [])
+  }, [params.studyId])
 
   return (
     <div className="d-flex m-t-box">

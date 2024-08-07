@@ -204,6 +204,7 @@ const AnnouncementManagerWrite = () => {
             <option value="1">랭킹</option>
             <option value="2">오픈채팅</option>
             <option value="3">학습</option>
+            
             <option value="4">게시판</option>
             <option value="5">공지사항</option>
           </select>
