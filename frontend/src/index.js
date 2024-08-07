@@ -33,6 +33,9 @@ import Chapter6Detail from './templates/StudyList/Chapter6Detail';
 import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
 
 import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite";
+
+import OpenChat from "./pages/OpenChat";
+
 import VocabularyListPage from "./pages/VocabularyListPage"
 
 
@@ -174,12 +177,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/main",
-    element: <MainPage/>
+    element: <MainPage/>,
   },
   {
     path: "/abc",
     element: <RankingTemplate />
   },
+
+  {
+    path: "/openchat",
+    element: <OpenChat/>
+  }
 
   // {
   //   path: "/myVocabulary",

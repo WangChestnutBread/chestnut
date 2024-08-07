@@ -82,16 +82,12 @@ public class WebSocketInterceptor implements ChannelInterceptor {
 
     private String getNickname(String loginId) {
         String key = "nickname"+loginId;
-        log.info("레디스 진입 전");
         String nickname = redisTemplate.opsForValue().get(key);
-        log.info("nickname: " + nickname);
 
         if (nickname == null) {
             Member member = memberRepository.findByLoginId(loginId)
                     .orElseThrow(MemberNotFoundException::new);
             nickname = member.getNickname();
-            log.info("db에서 조회한 nickname: " + nickname);
-            log.info("레디스에 저장");
             redisTemplate.opsForValue().set(key, nickname, 1, TimeUnit.HOURS);
 
             return member.getNickname();
