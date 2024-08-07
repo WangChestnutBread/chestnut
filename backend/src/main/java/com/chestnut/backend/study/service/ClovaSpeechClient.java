@@ -55,12 +55,12 @@ public class ClovaSpeechClient {
                     requestEntity,
                     String.class
             );
-            System.out.println("STT 태그"+response.getBody());
+            log.debug("STT 태그 : 클로바 응답 body : "+response.getBody());
             return extractTextFromJsonResponse(response.getBody());
         } catch (IOException e) {
             throw new FileIOException();
         } catch (Exception ex){
-            System.out.println("STT 에러 태그"+ ex.getMessage());
+            log.debug("STT 태그 : STT 실패(에러) : "+ ex.getMessage());
             throw new SttFailException();
         }
     }
