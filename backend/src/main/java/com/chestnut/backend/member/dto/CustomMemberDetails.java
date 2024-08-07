@@ -27,6 +27,10 @@ public class CustomMemberDetails implements UserDetails {
         return collection;
     }
 
+    public String getRole() {
+        return getAuthorities().iterator().next().getAuthority();
+    }
+
     @Override
     public String getPassword() {
         return member.getPassword();

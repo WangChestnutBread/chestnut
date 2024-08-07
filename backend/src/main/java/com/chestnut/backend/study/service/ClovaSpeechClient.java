@@ -2,6 +2,7 @@ package com.chestnut.backend.study.service;
 
 import com.chestnut.backend.common.exception.FileIOException;
 import com.chestnut.backend.common.exception.SttFailException;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Service
+@Slf4j
 public class ClovaSpeechClient {
 
     @Value("${clova.speech.secret}")
@@ -53,10 +55,12 @@ public class ClovaSpeechClient {
                     requestEntity,
                     String.class
             );
+            log.debug("STT 태그 : 클로바 응답 body : "+response.getBody());
             return extractTextFromJsonResponse(response.getBody());
         } catch (IOException e) {
             throw new FileIOException();
         } catch (Exception ex){
+            log.debug("STT 태그 : STT 실패(에러) : "+ ex.getMessage());
             throw new SttFailException();
         }
     }

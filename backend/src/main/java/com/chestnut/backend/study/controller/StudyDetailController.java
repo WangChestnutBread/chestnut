@@ -1,6 +1,7 @@
 package com.chestnut.backend.study.controller;
 
 import com.chestnut.backend.common.dto.ResponseDto;
+import com.chestnut.backend.member.dto.CustomMemberDetails;
 import com.chestnut.backend.study.dto.ImgUrlDto;
 import com.chestnut.backend.study.dto.PronounceMethodDto;
 import com.chestnut.backend.study.dto.PronunceEvaluateDto;
@@ -8,8 +9,10 @@ import com.chestnut.backend.study.dto.WordPronounceDto;
 import com.chestnut.backend.study.service.PronounceEvaluateService;
 import com.chestnut.backend.study.service.StudyService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +22,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/study/detail")
+@Slf4j
 public class StudyDetailController {
 
     private final StudyService studyService;
@@ -54,9 +58,11 @@ public class StudyDetailController {
 
     @PostMapping("/pronunciation/evaluate")
     public ResponseEntity<?> checkPronunciation(@RequestParam("word") String word,
-                                                @RequestParam("audio") MultipartFile audioFile) {
-        PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(word, audioFile);
+                                                @RequestParam("audio") MultipartFile audioFile,
+                                                @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+        log.debug("STT 태그 : 요청 body 내용 "+word+" "+audioFile.getOriginalFilename());
+        log.debug("STT 태그 : audio file resource "+audioFile.getResource());
+        PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, audioFile);
         return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
     }
-    
 }
