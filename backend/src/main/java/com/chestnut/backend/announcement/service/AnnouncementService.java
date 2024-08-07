@@ -67,6 +67,7 @@ public class AnnouncementService {
         Member member = memberRepository.findByLoginId(announcementDto.getLoginId()).orElseThrow(MemberNotFoundException::new);
         if(!member.isAdmin()) throw new AdminPermissionDeniedException();
         if(member.isWithdraw()) throw new InvalidMemberException();
+        if(announcementDto.getTitle().length() > 100) throw new InvalidFormatException();
         AnnouncementCategory announcementCategory = announcementCategoryRepository.findById(announcementDto.getAnnounceCategoryId()).orElseThrow(NotFoundException::new);
         try {
             // Announcement 엔티티 생성
@@ -106,6 +107,7 @@ public class AnnouncementService {
         Member member = memberRepository.findByLoginId(announcementDto.getLoginId()).orElseThrow(MemberNotFoundException::new);
         if(!member.isAdmin()) throw new AdminPermissionDeniedException();
         if(member.isWithdraw()) throw new InvalidMemberException();
+        if(announcementDto.getTitle().length() > 100) throw new InvalidFormatException();
         announcementCategoryRepository.findById(announcementDto.getAnnounceCategoryId()).orElseThrow(NotFoundException::new);
         try {
             if(announcementRepository.updateAnnouncement(
