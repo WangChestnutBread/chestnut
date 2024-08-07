@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./Reset.css";
 import "./index.css";
-import App from "./App";
 import QNApage from "./templates/Board/QnaTemplate";
 import QNAWritePage from "./templates/Board/QnaWriteTemplate";
 import QnaDetailTemplate from "./templates/Board/QnaDetailTemplate";
@@ -82,11 +81,11 @@ const router = createBrowserRouter([
     element: <Chapter3Detail />
   },
   {
-    path: "/study/detail5/:studyId/:word",
+    path: "/study/detail5/:chapterId/:studyId",
     element: <Chapter5Detail />
   },
   {
-    path: "/study/detail6/:studyId/:word",
+    path: "/study/detail6/:studyId/:studyId",
     element: <Chapter6Detail />
   },
   {

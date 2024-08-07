@@ -11,9 +11,11 @@ const useAuthStore = create(
       manager: undefined,
       setManager: (manager) => set({ manager }),
       id: undefined,
-      setId: (id) => set({id}),
+      setId: (id) => set({ id }),
       pw: undefined,
-      setPw: (pw) => set({pw})
+      setPw: (pw) => set({ pw }),
+      pronunciation: "발음해 보세요",
+      setPronunciation: (pronunciation) => set({ pronunciation }),
     }),
     {
       name: "chestNut",

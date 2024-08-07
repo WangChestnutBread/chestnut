@@ -202,7 +202,7 @@ const SoundMethod = (hangeul) => {
       }
     };
     fetchData();
-  }, []);
+  }, [hangeul.hangeul.studyId]);
 
   return (
     <div className="qwer rounded-3 shadow ">
