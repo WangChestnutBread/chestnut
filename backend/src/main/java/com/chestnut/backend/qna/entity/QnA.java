@@ -1,4 +1,4 @@
-package com.chestnut.backend.qna;
+package com.chestnut.backend.qna.entity;
 
 import com.chestnut.backend.member.entity.Member;
 import jakarta.persistence.*;
@@ -67,6 +67,12 @@ public class QnA {
         if (this.createdAt == null) {
             this.createdAt = LocalDateTime.now();
         }
+    }
+
+    public void writeAns(String answer) {
+        this.answer = answer;
+        this.isAnswer = true;
+        this.answerAt = LocalDateTime.now();
     }
 
 }
