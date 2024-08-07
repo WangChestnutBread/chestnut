@@ -46,6 +46,7 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
       - EMAIL_PASSWORD=${EMAIL_PASSWORD}
       - EMAIL_ADDRESS=${EMAIL_ADDRESS}
+      - MONGODB_URL=${MONGODB_URL}
     expose:
       - ${BACKEND_PORT}
     networks:
