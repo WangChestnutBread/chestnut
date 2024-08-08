@@ -16,12 +16,11 @@ const SpeakExplanation = ({ data }) => {
           </div>
           <div className="m-2">
           <p style={{ color: "white" }} className="m-2">{saying.pronounceMethod}</p>
-
           </div>
         </div>
       ))}
-    </div>
-  );
-};
+      </div>
+  )
+}
 
 export default SpeakExplanation;

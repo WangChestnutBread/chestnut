@@ -1,16 +1,66 @@
-import React, { useState, useRef } from "react";
-import axios from "axios"; // axios import
+import React, { useState, useRef, useEffect } from "react";
 import "./Record.css";
 import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
+import { fetchFile } from "@ffmpeg/util";
+import baseApi from "../../api/fetchAPI";
+import { useNavigate, useParams } from "react-router-dom";
+import useAuthStore from "../../stores/authStore";
 
-const UPLOAD_URL = "https://i11d107.p.ssafy.io/chestnutApi/study/detail/pronounciation/evaluate/"; // 서버 업로드 URL을 이곳에 입력
-
-const Record = () => {
+const Record = ({func}) => {
   const [isRecording, setIsRecording] = useState(false);
   const [showIcons, setShowIcons] = useState(false);
-  const [audioURL, setAudioURL] = useState(""); // 녹음된 오디오 URL을 저장할 state
+  const [audioBlob, setAudioBlob] = useState(null);
+  const [wavBlob, setWavBlob] = useState(null);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
+  const ffmpeg = new FFmpeg();
+  const navigate = useNavigate();
+  const { studyId, chapterId } = useParams();
+  const [data, setData] = useState("");
+  const setPronunciation = useAuthStore((state) => state.setPronunciation)
+
+
+  const upPage = () => {
+    if (studyId < 41) {
+      navigate(`/study/detail${chapterId}/${chapterId}/${+studyId + 1}`);
+    }
+    else if (studyId > 40 && studyId < 439){
+      navigate(`/study/detail2/2/${+studyId + 1}`);
+    }
+    else if (studyId > 438 && studyId < 446){
+      navigate(`/study/detail3/3/${+studyId + 1}`);
+    }
+    else if (studyId < 1381 && studyId > 445){
+      navigate(`/study/detail5/5/${+studyId + 1}`);
+    }
+    else if (studyId < 2367 && studyId > 1380){
+      navigate(`/study/detail6/6/${+studyId + 1}`);
+    }
+    
+  };
+  const downPage = () => {
+    if (studyId < 2){
+      alert('첫 학습페이지 입니다.')
+      
+    } 
+    else if (studyId > 0 && studyId < 41) {
+      navigate(`/study/detail${chapterId}/${chapterId}/${studyId - 1}`);
+    }
+    else if (studyId > 40 && studyId < 441){
+      navigate(`/study/detail2/2/${studyId - 1}`);
+    }
+    else if (studyId > 438 && studyId < 447){
+      navigate(`/study/detail3/3/${studyId - 1}`);
+    }
+    else if (studyId < 1382 && studyId > 445){
+      navigate(`/study/detail5/5/${studyId - 1}`);
+    }
+    else if (studyId < 2367 && studyId > 1381){
+      navigate(`/study/detail6/6/${studyId - 1}`);
+    }
+    
+  };
 
   // 녹음 시작/정지 토글
   const handleToggle = async () => {
@@ -25,19 +75,18 @@ const Record = () => {
         const stream = await navigator.mediaDevices.getUserMedia({
           audio: true,
         });
-        mediaRecorderRef.current = new MediaRecorder(stream);
-
+        mediaRecorderRef.current = new MediaRecorder(stream, {
+          mimeType: "audio/webm",
+        });
         mediaRecorderRef.current.ondataavailable = (event) => {
           audioChunksRef.current.push(event.data);
         };
 
         mediaRecorderRef.current.onstop = () => {
-          const audioBlob = new Blob(audioChunksRef.current, {
-            type: "audio/wav",
-          });
-          const audioUrl = URL.createObjectURL(audioBlob);
-          setAudioURL(audioUrl);
+          const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
+          setAudioBlob(blob);
           audioChunksRef.current = [];
+          convertToWav(blob); // 녹음이 완료되면 WAV로 변환
         };
 
         mediaRecorderRef.current.start();
@@ -48,42 +97,78 @@ const Record = () => {
     }
   };
 
+  // webm을 wav로 변환
+  const convertToWav = async (webmBlob) => {
+    try {
+      await ffmpeg.load();
+      await ffmpeg.writeFile("input.webm", await fetchFile(webmBlob));
+      await ffmpeg.exec(["-i", "input.webm", "output.wav"]);
+      const wavData = await ffmpeg.readFile("output.wav");
+      const wavBlob = new Blob([wavData.buffer], { type: "audio/wav" });
+      setWavBlob(wavBlob);
+    } catch (error) {
+      console.error("Error converting to WAV:", error);
+    }
+  };
+
+  const checkWavFile = (blob) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const data = new Uint8Array(e.target.result);
+      const riff = String.fromCharCode(...data.slice(0, 4));
+      const wave = String.fromCharCode(...data.slice(8, 12));
+
+      if (riff === "RIFF" && wave === "WAVE") {
+        console.log("Valid WAV file");
+      } else {
+        console.error("Invalid WAV file");
+      }
+    };
+    reader.readAsArrayBuffer(blob);
+  };
+
   // 데이터 서버 전송
   const handleUpload = async () => {
-    const accessToken = "asdfasdf"
+    if (!wavBlob) return;
 
-    if (!audioURL) return;
-
-    const audioBlob = await fetch(audioURL).then((response) => response.blob());
-    console.log(audioBlob);
-
+    const formData = new FormData();
+    formData.append("word", data);
+    formData.append("audio", wavBlob, "audio.wav");
+    console.log(wavBlob);
+    console.log(formData);
+    checkWavFile(wavBlob);
     try {
-      const formData = new FormData();
-      formData.append("word", "햄버거")
-      formData.append("audio", audioBlob, "recording.wav");
-
-
-      const response = await axios.post(UPLOAD_URL, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization : `Bearer ${accessToken}`
-        },
-      });
-
-      console.log("File uploaded successfully:", response.data);
-    } catch (uploadError) {
-      console.error("Error uploading file:", uploadError);
+      baseApi
+        .post("/study/detail/pronunciation/evaluate", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          }
+        })
+        .then((res) => {
+          // console.log(res);
+          // console.log(res.data.data.pronunciation);
+          setPronunciation(res.data.data.pronunciation)
+          func(res.data.data.pronunciation)
+        }).catch((err) => {
+          alert("다시 말좀...")
+          console.log(err);
+        })
+        
+    } catch (error) {
+      console.error("Error uploading file:", error);
     }
 
     // 초기화
     setShowIcons(false);
-    setAudioURL("");
+    setAudioBlob(null);
+    setWavBlob(null);
   };
 
   // 녹음 초기화
   const handleCancel = () => {
     setShowIcons(false);
-    setAudioURL("");
+    setAudioBlob(null);
+    setWavBlob(null);
   };
 
   return (
@@ -95,7 +180,7 @@ const Record = () => {
         </div>
       )}
       <div className="record">
-        <img src="/image/left.png" alt="left" />
+        <img src="/image/left.png" alt="left" onClick={downPage} />
         <div>
           <img
             src={isRecording ? "/image/stop.png" : "/image/record.png"}
@@ -104,12 +189,17 @@ const Record = () => {
             onClick={handleToggle}
           />
         </div>
-        <img src="/image/right.png" alt="right" />
+        <img src="/image/right.png" alt="right" onClick={upPage} />
       </div>
-      {audioURL && !showIcons && (
+
+      {wavBlob && !showIcons && (
         <div className="audio-container">
           <h3>Recorded Audio</h3>
-          <audio controls src={audioURL}></audio>
+          <audio controls src={URL.createObjectURL(wavBlob)}></audio>
+          {/* 파일 다운로드 링크 */}
+          <a href={URL.createObjectURL(wavBlob)} download="audio.wav">
+            Download Audio
+          </a>
         </div>
       )}
     </div>
@@ -117,120 +207,3 @@ const Record = () => {
 };
 
 export default Record;
-
-
-// import React, { useState, useRef } from "react";
-// import axios from "axios";
-// import "./Record.css";
-// import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
-
-// const UPLOAD_URL = ""; // 서버 업로드 URL을 이곳에 입력
-
-// const Record = () => {
-//   const [isRecording, setIsRecording] = useState(false);
-//   const [showIcons, setShowIcons] = useState(false);
-//   const [audioBlob, setAudioBlob] = useState(null); // Blob 데이터를 저장할 state
-//   const [audioURL, setAudioURL] = useState(""); // 녹음된 오디오 URL을 저장할 state
-//   const mediaRecorderRef = useRef(null);
-//   const audioChunksRef = useRef([]);
-
-//   // 녹음 시작/정지 토글
-//   const handleToggle = async () => {
-//     if (isRecording) {
-//       // 녹음 중지
-//       mediaRecorderRef.current.stop();
-//       setIsRecording(false);
-//       setShowIcons(true); // O/X 버튼 표시
-//     } else {
-//       // 녹음 시작
-//       try {
-//         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-//         mediaRecorderRef.current = new MediaRecorder(stream);
-
-//         mediaRecorderRef.current.ondataavailable = (event) => {
-//           audioChunksRef.current.push(event.data);
-//         };
-
-//         mediaRecorderRef.current.onstop = () => {
-//           const audioBlob = new Blob(audioChunksRef.current, { type: "audio/wav" });
-//           setAudioBlob(audioBlob); // Blob 데이터를 상태로 저장
-//           setAudioURL(URL.createObjectURL(audioBlob)); // 오디오 URL 생성
-//           audioChunksRef.current = [];
-//         };
-
-//         mediaRecorderRef.current.start();
-//         setIsRecording(true);
-//       } catch (error) {
-//         console.error("Error accessing microphone:", error);
-//       }
-//     }
-//   };
-
-//   // 데이터 서버 전송
-//   const handleUpload = async () => {
-//     if (!audioBlob) return;
-
-//     try {
-//       const formData = new FormData();
-//       formData.append("word", "햄버거");
-//       formData.append("recordfile", audioBlob, "recording.wav");
-
-//       const response = await axios.post(UPLOAD_URL, formData, {
-//         headers: {
-//           "Content-Type": "multipart/form-data",
-//         },
-//       });
-
-//       console.log("File uploaded successfully:", response.data);
-//     } catch (uploadError) {
-//       console.error("Error uploading file:", uploadError);
-//     }
-
-//     // 초기화
-//     setShowIcons(false);
-//     setAudioBlob(null);
-//     setAudioURL(""); // 오디오 URL 초기화
-//   };
-
-//   // 녹음 초기화
-//   const handleCancel = () => {
-//     setShowIcons(false);
-//     setAudioBlob(null);
-//     setAudioURL(""); // 오디오 URL 초기화
-//   };
-
-//   return (
-//     <div className="d-flex row justify-content-center">
-//       {showIcons && (
-//         <div className="d-flex justify-content-center">
-//           <FaRegCircleCheck className="icon-check" onClick={handleUpload} />
-//           <FaRegCircleXmark className="icon-xmark" onClick={handleCancel} />
-//         </div>
-//       )}
-//       <div className="record">
-//         <img src="/image/left.png" alt="left" />
-//         <div>
-//           <img
-//             src={isRecording ? "/image/stop.png" : "/image/record.png"}
-//             alt={isRecording ? "stop" : "record"}
-//             className={isRecording ? "stop" : "continue"}
-//             onClick={handleToggle}
-//           />
-//         </div>
-//         <img src="/image/right.png" alt="right" />
-//       </div>
-//       {audioURL && (
-//         <div className="audio-container">
-//           <h3>Recorded Audio</h3>
-//           <audio controls src={audioURL}></audio>
-//           {/* 파일 다운로드 링크 */}
-//           <a href={audioURL} download="recording.wav">
-//             Download Audio
-//           </a>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Record;

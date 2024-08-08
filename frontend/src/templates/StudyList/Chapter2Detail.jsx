@@ -1,6 +1,3 @@
-import NavBar from "../../organisms/NavBar";
-import MouseTongue from "../../organisms/StudyList/MouseTongue";
-import Record from "../../organisms/StudyList/Record";
 import "../NavbarExample.css";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
@@ -10,12 +7,17 @@ import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
 import Pronunciation from "../../organisms/StudyList/Pronunciations"
 import { useParams } from 'react-router-dom';
+import { useState } from "react";
 
 
 const Chapter2Detail = () => {
   const params = useParams()
   const word = params.word
-  console.log(params);
+  const [realData, setRealData] = useState("내발음😎")
+
+  const moveData = (value) => {
+    setRealData(value)
+  }
 
   return (
     <div>
@@ -41,7 +43,7 @@ const Chapter2Detail = () => {
         {/* 발음, 카메라 */}
         <div className="row">
           <div className="col-6 mt-2" >
-            <Pronunciation saying={params} />
+            <Pronunciation saying={params} realData={realData} />
           </div>
           <div className="col-6 mt-2 mb-3">
             <CameraOrganism />

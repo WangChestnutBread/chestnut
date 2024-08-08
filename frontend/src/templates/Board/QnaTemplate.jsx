@@ -284,14 +284,14 @@ const QnaPage = () => {
           <div className="btn-container d-flex gap-3">
             <NavLink
               to="/board/announcement"
-              className={({ isActive }) => (isActive ? "active" : "")}
+              className={({ isActive }) => (isActive ? "active" : "no-active")}
               onClick={() => setIsAnnouncement(true)}
             >
               <button className="announcementbtn">공지사항</button>
             </NavLink>
             <NavLink
               to="/board/qna"
-              className={({ isActive }) => (isActive ? "active" : "")}
+              className={({ isActive }) => (isActive ? "active" : "no-active")}
               onClick={() => setIsAnnouncement(false)}
             >
               <button className="qnabtn">Q & A</button>
@@ -353,7 +353,7 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
               </td>
               <td className="col-2 d-flex align-items-center ">
                 <div>
-               <img src="/image/eye.png" alt="눈" className="m-2" /></div> <div>{Math.floor(hit / 2)}</div> 
+               <img src="/image/eye.png" alt="눈" className="m-2" /></div> <div>{Math.floor(hit / 4)}</div> 
               </td>
             </tr>
           )

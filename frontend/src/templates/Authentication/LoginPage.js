@@ -16,40 +16,48 @@ function LoginPage() {
   //navigate=> 이동함수
   const navigate = useNavigate();
   // 액세스 토큰을 선언하는 변수
-  const setAccessToken = useAuthStore((state) => (state.setAccessToken))
+  const setAccessToken = useAuthStore((state) => state.setAccessToken);
+  const setUserId = useAuthStore((state) => state.setUserId);
+  const setManager = useAuthStore((state) => state.setManager);
+  const setId = useAuthStore((state) => state.setId);
+  const setPw = useAuthStore((state) => state.setPw)
 
-  const setUserId = useAuthStore((state) => (state.setUserId))
 
   const handleChangeName = (event) => {
+    setId(event.target.value)
     setName(event.target.value);
   };
 
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
+    setPw(event.target.value)
   };
   const GotoBack = () => {
     navigate(-1);
   };
   const handleLogin = (event) => {
-    event.preventDefault();
-    axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/login", {
-        loginId: Id,
-        password: password,
-      })
-      .then((response) => {
-        if (response.data.code == 200) {
-          setAccessToken(response.headers["access"]);
-          navigate("/main");
-        } else if (response.data.code == 706) {
-          alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
-        }
-        console.log(response);
-        setUserId(Id)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    console.log(event);
+      event.preventDefault();
+      axios
+        .post("https://i11d107.p.ssafy.io/chestnutApi/member/login", {
+          loginId: Id,
+          password: password,
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            setAccessToken(response.headers["access"]);
+            setManager(response.data.data.admin);
+            navigate("/main");
+          } else if (response.data.code == 706) {
+            alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
+          }
+          console.log(response);
+          setUserId(Id);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   return (
     <div className="container">
       <div

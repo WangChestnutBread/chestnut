@@ -1,22 +1,72 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import LoginButton from "./LoginButton";
 import "./Page.css";
-function LoginInputPwForm(props){
-    const [name, setName] = useState("");
+import axios from "axios";
+import baseApi from "../../api/fetchAPI";
+import useAuthStore from "../../stores/authStore";
+import { useNavigate } from 'react-router-dom';
 
-    const handleChangeName = (event) => {
-        setName(event.target.value);
-    };
+function LoginInputPwForm(props) {
+//   console.log(props);
+  const [name, setName] = useState("");
+  const Id = useAuthStore.getState().id
+  const password = useAuthStore.getState().pw
+  const setAccessToken = useAuthStore((state) => state.setAccessToken);
+  const setUserId = useAuthStore((state) => state.setUserId);
+  const setManager = useAuthStore((state) => state.setManager);
+  const navigate = useNavigate()
 
-    const handleSubmit = (event) =>{
-        alert(`이름: ${name}`);
+  const activeEnter = (event) => {
+    console.log(useAuthStore.getState());
+    console.log(Id)
+    console.log(password);
+    
+    if (event.key === "Enter") {
+        console.log('성공');
         event.preventDefault();
-    };
-    return(
+        console.log(Id);
+        console.log(password);
+        axios
+        .post("https://i11d107.p.ssafy.io/chestnutApi/member/login", {
+          loginId: Id,
+          password: password,
+        })
+        .then((response) => {
+          if (response.data.code == 200) {
+            setAccessToken(response.headers["access"]);
+            setManager(response.data.data.admin);
+            navigate("/main");
+          } else if (response.data.code == 706) {
+            alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
+          }
+          console.log(response);
+          setUserId(Id);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
-        <form className="FormBorder LoginFormFont" >
-            <input className="LoginFormBorder LoginFormFont" type="password" value={props.value} onChange={props.work} placeholder={props.content}/>
-        </form>
-    );
+  const handleChangeName = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    alert(`이름: ${name}`);
+    event.preventDefault();
+  };
+  return (
+    <form className="FormBorder LoginFormFont">
+      <input
+        className="LoginFormBorder LoginFormFont"
+        type="password"
+        value={props.value}
+        onChange={props.work}
+        placeholder={props.content}
+        onKeyDown={(e) => activeEnter(e)}
+      />
+    </form>
+  );
 }
 export default LoginInputPwForm;

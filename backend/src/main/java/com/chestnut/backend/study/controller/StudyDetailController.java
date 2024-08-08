@@ -65,4 +65,17 @@ public class StudyDetailController {
         PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, audioFile);
         return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
     }
+
+    @PostMapping("/pronunciation/evaluate/test/fail")
+    public ResponseEntity<?> checkPronunciationTestFail(@RequestParam("word") String word,
+                                                @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+        PronunceEvaluateDto evaluation = new PronunceEvaluateDto(0, "그리고 안녕하시오", List.of(1, 2, 8), List.of(1, 2, 7));
+        return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
+    }
+    @PostMapping("/pronunciation/evaluate/test/success")
+    public ResponseEntity<?> checkPronunciationTestSuccess(@RequestParam("word") String word,
+                                                    @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+        PronunceEvaluateDto evaluation = new PronunceEvaluateDto(1, "그러나 안녕하세요", List.of(), List.of());
+        return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
+    }
 }
