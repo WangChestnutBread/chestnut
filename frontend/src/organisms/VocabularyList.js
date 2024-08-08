@@ -1,8 +1,10 @@
+import "./VocabularyList.css"
 import ChapterList from "../molecules/StudyList/ChapterList";
 import BlackBoardTab from "../molecules/BlackBoardTab";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import BlackBoardTabDropDown from "../molecules/BlackBoardTabDropDown";
 
-function VocabularyList({ content }) {
+function VocabularyList({ chapterTitle, content }) {
   const handleTabClick = (index) => {
     setCurrentTab(index);
   };
@@ -10,11 +12,18 @@ function VocabularyList({ content }) {
   let [currentTab, setCurrentTab] = useState(0);
 
   return (
-    <div>
-      {/* 칠판 위 탭 버튼 */}
-      
-      {/* 칠판 */}
-      <ChapterList title="나의 단어장" />
+    <div className="BlackBoardWithTab">
+      <div className="BlackBoardWithLine">
+        <div className="BlackBoardBody">
+          {/* 칠판 위 탭 버튼 */}
+          <BlackBoardTabDropDown chapterTitle={chapterTitle}/>
+
+          {/* 칠판 */}
+          <div className="B">
+            <ChapterList title="나의 단어장" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
