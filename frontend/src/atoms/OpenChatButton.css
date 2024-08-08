@@ -1,0 +1,12 @@
+.OpenChatButton {
+    position: sticky;
+    width: 70px;
+    height: 70px;
+    top: 100%;
+    left: 100%;
+    border-radius: 50%;
+    border: none;
+    padding: 10px;
+    color: #6B3906;
+    background: #DCB78F;
+}
