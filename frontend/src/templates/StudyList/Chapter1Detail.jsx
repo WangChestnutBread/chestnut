@@ -9,10 +9,34 @@ import SoundMethod from "../../organisms/StudyList/SoundMethod";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
+import baseApi from "../../api/fetchAPI";
 
 const Chapter1Detail = () => {
   const params = useParams()
+  const [realData, setRealData] = useState("내발음😎")
+  const [answerData, setAnswerData] = useState([100000])
+  const [show, isShow] = useState(false)
   
+
+  const moveData = (value) => {
+    setRealData(value)
+  }
+  const answer = (value) => {
+    setAnswerData(value)
+    console.log(value);
+    if (value.length === 0) {
+      isShow(true)
+      baseApi.get('/log/study',{
+        params:{
+          studyId: params.studyId,
+          isPass: 1
+        }
+      }).then((res) => {
+        console.log(res);
+      })
+    }
+  }
   return (
     <div>
       {/* 헤더 */}
@@ -44,7 +68,7 @@ const Chapter1Detail = () => {
           </div>
         </div>
         {/* 마이크 */}
-        <RecordData />
+        <RecordData func={moveData} func2={answer}/>
       </div>
     </div>
   );
