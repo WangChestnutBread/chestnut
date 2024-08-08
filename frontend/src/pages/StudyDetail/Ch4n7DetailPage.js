@@ -8,7 +8,7 @@ function Ch4n7DetailPage() {
 
   let { chapterId } = useParams();
 
-  console.log(chapterId);
+  // console.log(chapterId);
   useEffect(() => {
     baseApi({
       method: "get",
