@@ -23,10 +23,10 @@ public class LogController {
     public ResponseEntity<?> saveStudyLog(
             @AuthenticationPrincipal CustomMemberDetails customMemberDetails,
             @RequestParam("studyId") Long studyId,
-            @RequestParam("isPass") boolean isPass
+            @RequestParam("isPass") int isPass
     ) {
         String loginId = customMemberDetails.getLoginId();
-        logService.saveStudyLog(loginId, studyId, isPass);
+        logService.saveStudyLog(loginId, studyId, isPass == 1);
         ResponseDto<Object> result = new ResponseDto<>("200", null);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
