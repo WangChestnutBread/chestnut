@@ -4,6 +4,7 @@ import "./MainTemplate.css";
 import LastStudy from "../organisms/Main/LastStudy";
 import MainProfile from "../organisms/Main/MainProfile";
 import MainCalendar from "../organisms/Main/MainCalendar";
+import OpenChatButton from "../atoms/OpenChatButton"
 
 const MainTemplate = ({ profile, attendance }) => {
   // 메뉴 밤
@@ -38,6 +39,7 @@ const MainTemplate = ({ profile, attendance }) => {
 
       {/* 출석 캘린더 */}
       <MainCalendar attendance={attendance.attendanceAt}/>
+
     </div>
   );
 };

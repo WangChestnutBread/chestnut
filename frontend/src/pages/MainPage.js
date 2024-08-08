@@ -5,6 +5,7 @@ import baseApi from "../api/fetchAPI";
 import axios from "axios";
 import { get } from "jquery";
 import { useEffect, useState } from "react";
+import OpenChatButton from "../atoms/OpenChatButton";
 function MainPage() {
   const { accessToken, setAccessToken } = useAuthStore((state) => ({
     ...state,
@@ -79,6 +80,9 @@ function MainPage() {
           <p>새로고침을 한 번만 눌러주세요^-^</p>
         )
       )}
+
+      {/* 오픈 채팅 버튼 */}
+      <OpenChatButton/>
     </div>
   );
 }
