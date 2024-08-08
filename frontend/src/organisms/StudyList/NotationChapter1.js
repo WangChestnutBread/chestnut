@@ -4,9 +4,9 @@ import "./NotationChapter1.css";
 
 
 
-const NotationChapter1 = ({word, realData}) => {
+const NotationChapter1 = ({word}) => {
   // console.log(word.word);
-  console.log(realData);
+  
   const [data, setData] = useState()
   useEffect(() => {
     baseApi.get(`/study/detail/${word.studyId}/word`).then((res) => {

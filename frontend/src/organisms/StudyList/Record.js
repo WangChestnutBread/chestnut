@@ -7,7 +7,7 @@ import baseApi from "../../api/fetchAPI";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuthStore from "../../stores/authStore";
 
-const Record = ({func}) => {
+const Record = ({func, func2}) => {
   const [isRecording, setIsRecording] = useState(false);
   const [showIcons, setShowIcons] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
@@ -22,6 +22,8 @@ const Record = ({func}) => {
 
 
   const upPage = () => {
+    func("내발음😎")
+    func2([10000])
     if (studyId < 41) {
       navigate(`/study/detail${chapterId}/${chapterId}/${+studyId + 1}`);
     }
@@ -36,13 +38,13 @@ const Record = ({func}) => {
     }
     else if (studyId < 2367 && studyId > 1380){
       navigate(`/study/detail6/6/${+studyId + 1}`);
-    }
-    
-  };
+    } 
+  }
   const downPage = () => {
+    func("내발음😎")
+    func2([1000000])
     if (studyId < 2){
       alert('첫 학습페이지 입니다.')
-      
     } 
     else if (studyId > 0 && studyId < 41) {
       navigate(`/study/detail${chapterId}/${chapterId}/${studyId - 1}`);
@@ -139,16 +141,17 @@ const Record = ({func}) => {
     checkWavFile(wavBlob);
     try {
       baseApi
-        .post("/study/detail/pronunciation/evaluate", formData, {
+        .post("/study/detail/pronunciation/evaluate/test/fail", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           }
         })
         .then((res) => {
-          // console.log(res);
-          // console.log(res.data.data.pronunciation);
+          console.log(res.data.data.answerMismatchIndices);
           setPronunciation(res.data.data.pronunciation)
+          console.log(res.data.data.pronunciation);
           func(res.data.data.pronunciation)
+          func2(res.data.data.answerMismatchIndices)
         }).catch((err) => {
           alert("다시 말좀...")
           console.log(err);
@@ -189,7 +192,7 @@ const Record = ({func}) => {
             onClick={handleToggle}
           />
         </div>
-        <img src="/image/right.png" alt="right" onClick={upPage} />
+        <img src="/image/right.png" alt="right" onClick={upPage}/>
       </div>
 
       {wavBlob && !showIcons && (

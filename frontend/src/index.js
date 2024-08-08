@@ -181,10 +181,6 @@ const router = createBrowserRouter([
     path: "/abc",
     element: <RankingTemplate />
   },
-  {
-    path: "/myVocabulary",
-    element: <VocabularyListPage />
-  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
