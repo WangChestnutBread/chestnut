@@ -31,7 +31,7 @@ const MainTemplate = ({ profile }) => {
         <LastStudy
           chapter={profile.chapterName}
           word={profile.word}
-          chapterId={""}
+          chapterId={profile.chapterId}
           studyId={profile.studyId}
         />
       </div>
