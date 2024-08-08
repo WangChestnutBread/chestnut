@@ -12,7 +12,7 @@ function MainCalendar({ attendance }) {
     const result = attendDay.map((attends) => {
       if (new Date(attends).toDateString() === date.toDateString()) {
         return(
-          <img key={new Date(attends)} src="/image/Stamp.png" width="70%"/>
+          <img key={new Date(attends)} src="/image/Stamp.png" className="Stamp"/>
         )
       } else {
         return(null)

@@ -20,8 +20,6 @@ function MainPage() {
   
   let [profile, setProfile] = useState(null);
   let [attendance, setAttendance] = useState(null)
-  const [loading, setLoading] = useState(true);  // 로딩 상태 추가
-
   
   const getProfile = () => {
     return (
@@ -56,33 +54,38 @@ function MainPage() {
   //axios 요청
   useEffect(()=>{
     const fetchData = async () => {
-      try {
-        await Promise.all([getProfile(), getAttendance()]);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);  // 모든 요청이 완료되면 로딩 상태를 false로 설정
+      if (accessToken) {
+        try {
+          await Promise.all([getProfile(), getAttendance()]);
+        } catch (err) {
+          console.error(err);
+        } 
       }
+      
     };
-
     fetchData();
-  }, [loading])
+  }, [])
 
   return (
     <div className="MainPage">
       <button onClick={reissueToken}>토큰 재발급 테스트</button>
-      {loading ? (
-        <p>로딩중입니다</p>
-      ) : (
+      {
         profile && attendance ? (
           <MainTemplate profile={profile} attendance={attendance} />
         ) : (
           <p>새로고침을 한 번만 눌러주세요^-^</p>
         )
-      )}
+      }
 
-      {/* 오픈 채팅 버튼 */}
-      <OpenChatButton/>
+      <div>
+        {/* 오픈 채팅 버튼 */}
+        <OpenChatButton/>
+
+        {/* 챗봇 버튼 */}
+
+      </div>
+      
+
     </div>
   );
 }
