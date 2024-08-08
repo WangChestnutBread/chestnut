@@ -16,31 +16,69 @@ function MainPage() {
       console.log(res);
     });
   };
-
-  //axios 요청
+  
   let [profile, setProfile] = useState(null);
-  useEffect(() => {
-    // 프로필 정보 요청
-    baseApi({
-      method: "get",
-      url: "/member/info/main",
-    })
-      .then((res) => {
-        setProfile(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  let [attendance, setAttendance] = useState(null)
+  const [loading, setLoading] = useState(true);  // 로딩 상태 추가
 
-    return () => {
-      setProfile(null);
+  
+  const getProfile = () => {
+    return (
+      baseApi({
+        method: "get",
+        url: "/member/info/main",
+      })
+        .then((res) => {
+          setProfile(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    )
+    }
+
+  const getAttendance = () => {
+    return(
+      baseApi({
+        method: "get",
+        url: `/member/attendance?year=${new Date().getFullYear()}`,
+      })
+      .then((res) => {
+          setAttendance(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    )
+  }
+  
+  //axios 요청
+  useEffect(()=>{
+    const fetchData = async () => {
+      try {
+        await Promise.all([getProfile(), getAttendance()]);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);  // 모든 요청이 완료되면 로딩 상태를 false로 설정
+      }
     };
-  }, []);
+
+    fetchData();
+  }, [loading])
 
   return (
     <div className="MainPage">
       <button onClick={reissueToken}>토큰 재발급 테스트</button>
-      {profile ? <MainTemplate profile={profile} /> : <p>로딩중입니다</p>}
+      {loading ? (
+        <p>로딩중입니다</p>
+      ) : (
+        profile && attendance ? (
+          <MainTemplate profile={profile} attendance={attendance} />
+        ) : (
+          <p>새로고침을 한 번만 눌러주세요^-^</p>
+        )
+      )}
     </div>
   );
 }

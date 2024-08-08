@@ -5,7 +5,7 @@ import LastStudy from "../organisms/Main/LastStudy";
 import MainProfile from "../organisms/Main/MainProfile";
 import MainCalendar from "../organisms/Main/MainCalendar";
 
-const MainTemplate = ({ profile }) => {
+const MainTemplate = ({ profile, attendance }) => {
   // 메뉴 밤
   let [menu, setMenu] = useState([
     { name: "학습", path: "/study" },
@@ -37,7 +37,7 @@ const MainTemplate = ({ profile }) => {
       </div>
 
       {/* 출석 캘린더 */}
-      <MainCalendar />
+      <MainCalendar attendance={attendance.attendanceAt}/>
     </div>
   );
 };
