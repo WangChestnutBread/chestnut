@@ -5,16 +5,18 @@ import Text20 from "../../atoms/Text20";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import baseApi from "../../api/fetchAPI"
+import useAuthStore from "../../stores/authStore";
 
-function MainProfileTextBox() {
-
+function MainProfileTextBox({profile}) {
+  console.log(profile)
   let navigate = useNavigate()
+  const clearAccessToken = useAuthStore((state) => state.clearAccessToken);
 
   return (
     <div className="MainProfileTextBox">
       {/* 첫번째 줄 - 환영인사 & 닉네임 */}
       <div className="First">
-        <p style={{ fontSize: "2rem", color: "#6B3906" }}>밤톨이</p>
+        <p style={{ fontSize: "2rem", color: "#6B3906" }}>{profile.nickname}</p>
         <Text24 text="님 오늘도 힘내요!" />
       </div>
       <MainProfileLine />
@@ -23,7 +25,9 @@ function MainProfileTextBox() {
       <div className="Second">
         <div className="Mine">
           <img src="/icons/MyChestNut.svg" height="31px" />
-          <Text24 text="10" />
+          <Text24 text={profile.reward} />
+          <span>/</span>
+          <Text24 text={profile.lowerLimit}/>
         </div>
       </div>
       <MainProfileLine />
@@ -34,7 +38,7 @@ function MainProfileTextBox() {
         <div className="Attend">
           <img src="/icons/Fire.svg" />
           <Text20 text="연속" />
-          <p style={{ color: "#337AF7", fontSize: "1.5rem" }}>10</p>
+          <p style={{ color: "#337AF7", fontSize: "1.5rem" }}>{profile.attendanceCount}</p>
           <Text20 text="일 출석!" />
         </div>
 
@@ -46,7 +50,7 @@ function MainProfileTextBox() {
         <div className="Ranking">
           <img src="/image/Ranking.png" height="31px" />
           <Text20 text="내 랭킹" />
-          <Text24 text="2" />
+          <Text24 text={profile.ranking} />
           <Text24 text="위" />
         </div>
       </div>
@@ -66,11 +70,12 @@ function MainProfileTextBox() {
         {/* 2. 로그아웃 */}
         <div className="Logout" onClick={()=>{
           baseApi({
-            method: 'post',
+            method: 'POST',
             url: '/member/logout'
           })
           .then((res)=>{
             console.log(res)
+            clearAccessToken()
             navigate('/')
           })
           .catch((err)=>{
