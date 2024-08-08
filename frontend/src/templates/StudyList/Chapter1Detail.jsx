@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 
 const Chapter1Detail = () => {
   const params = useParams()
-  const word = params.word
+  
   // console.log(word);
 
   return (
@@ -31,10 +31,10 @@ const Chapter1Detail = () => {
       <div className="container">
         <div className="row">
           <div className="col-4 mt-2 ">
-            <Notation  word={params}/>
+            <Notation word={params}/>
           </div>
           <div className="col-8">
-            <MouseTongue />
+            <MouseTongue params={params}/>
           </div>
         </div>
         {/* 소리나는 방법, 카메라 */}
