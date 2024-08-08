@@ -1,0 +1,9 @@
+.ranking-logo-image {
+    width: 15%;
+}
+
+.ranking-logo {
+    display: flex;
+    justify-content: center;
+    margin-top:20px;
+}
