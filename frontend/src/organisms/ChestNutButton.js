@@ -24,8 +24,8 @@ function DropMenu() {
     { img: "/image/Squirrel.png", path: "/main", menu: "메인 화면" },
     { img: "/image/List.png", path: "/study", menu: "학습 목록" },
     { img: "/image/AITalk.png", path: "", menu: "대화 연습" },
-    { img: "/icons/LastStudyButton.svg", path: "", menu: "단어장" },
-    { img: "/icons/LastStudyButton.svg", path: "/board/qna", menu: "게시판" },
+    { img: "/image/Board.png", path: "", menu: "단어장" },
+    { img: "/image/BookMarkImage.png", path: "/board/qna", menu: "게시판" },
   ]);
   return (
     <div className="DropMenu">
