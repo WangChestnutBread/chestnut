@@ -73,3 +73,16 @@
 .react-calendar__tile--active.react-calendar__month-view__days__day--weekend {
   color: #d10000 !important;
 }
+
+.react-calendar__tile {
+  position: relative; 
+}
+
+.Stamp {
+  position: absolute;
+  width: 70%;
+  opacity: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
