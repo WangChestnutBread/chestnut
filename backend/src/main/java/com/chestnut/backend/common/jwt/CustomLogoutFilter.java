@@ -12,6 +12,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -20,8 +21,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class CustomLogoutFilter extends GenericFilterBean {
 
+    private final Environment env;
+
     private final JWTUtil jwtUtil;
-    private final String logoutUrl = "/member/logout";
     private final RedisService redisService;
 
     @Override
@@ -39,6 +41,9 @@ public class CustomLogoutFilter extends GenericFilterBean {
     private boolean shouldFilter(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         String requestMethod = request.getMethod();
+
+        String path = env.getProperty("server.servlet.context-path");
+        String logoutUrl = path+"/member/logout";
 
         return requestURI.equals(logoutUrl) && requestMethod.equals("POST");
     }
