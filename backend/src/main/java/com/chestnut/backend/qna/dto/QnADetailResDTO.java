@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class QnADetailResDTO {
 
+    private byte qnaCategoryId;
     private String title;
     private String content;
     private LocalDateTime createdAt;
@@ -20,12 +21,8 @@ public class QnADetailResDTO {
     private String answer;
     private LocalDateTime answerAt;
 
-    public void from(QnA qna) {
-        this.title = qna.getTitle();
-        this.content = qna.getContent();
-        this.createdAt = qna.getCreatedAt();
-        this.nickname = qna.getMember().getNickname();
-        this.answer = qna.getAnswer();
-        this.answerAt = qna.getAnswerAt();
+    public static QnADetailResDTO from(QnA qna) {
+        return new QnADetailResDTO(qna.getQnaCategory().getQnaCategoryId(), qna.getTitle(), qna.getContent(),
+                qna.getCreatedAt(), qna.getMember().getNickname(), qna.getAnswer(), qna.getAnswerAt());
     }
 }

@@ -72,9 +72,7 @@ public class QnAService {
             throw new IncorrectAccessException();
         }
 
-        QnADetailResDTO qnADetailResDTO = new QnADetailResDTO();
-        qnADetailResDTO.from(qna);
-        return qnADetailResDTO;
+        return QnADetailResDTO.from(qna);
 
     }
 
