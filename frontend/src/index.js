@@ -91,7 +91,7 @@ const router = createBrowserRouter([
     element: <Chapter5Detail />
   },
   {
-    path: "/study/detail6/:studyId/:studyId",
+    path: "/study/detail6/:chapterId/:studyId",
     element: <Chapter6Detail />
   },
   {
@@ -180,10 +180,6 @@ const router = createBrowserRouter([
   {
     path: "/abc",
     element: <RankingTemplate />
-  },
-  {
-    path: "/myVocabulary",
-    element: <VocabularyListPage />
   },
 ]);
 

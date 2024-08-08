@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import PronunciationLeft from "../../molecules/StudyList/PronunciationLeft";
 import PronunciationRight from "../../molecules/StudyList/PronunciationRight";
 import baseApi from "../../api/fetchAPI";
-import useAuthStore from "../../stores/authStore";
 
-const Pronunciations = ({saying, realData}) => {
+const Pronunciations = ({saying, realData, location}) => {
 
-  console.log(realData);
+  console.log(location);
   const [word, setWrod] = useState("")
   const [pronounce, setPronounce] = useState("")
-
-  
 
   useEffect(() => {
     baseApi.get(`/study/detail/${saying.studyId}/word`).then((res) => {
@@ -20,8 +17,6 @@ const Pronunciations = ({saying, realData}) => {
     });
   });
 
-  // console.log(word);
-  // console.log(pronounce);
 
   return (
     <div>
@@ -31,7 +26,7 @@ const Pronunciations = ({saying, realData}) => {
         </div>
         {word ? (
           <div>
-            <PronunciationRight data={word} />
+            <PronunciationRight data={word} location={location} />
           </div>
         ) : (
           <></>
@@ -43,7 +38,7 @@ const Pronunciations = ({saying, realData}) => {
         </div>
         {pronounce ? (
           <div>
-            <PronunciationRight data={realData} />
+            <PronunciationRight data={realData} location={[]}/>
           </div>
         ) : (
           <></>

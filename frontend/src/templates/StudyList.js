@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "../organisms/NavBar";
 import "./StudyList.css";
 import ChapterMenu from "../atoms/ChapterMenu";
 import { useNavigate } from "react-router-dom";

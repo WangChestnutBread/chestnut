@@ -8,14 +8,11 @@ import Notation from "../../organisms/StudyList/NotationChapter1";
 import SoundMethod from "../../organisms/StudyList/SoundMethod";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 const Chapter1Detail = () => {
   const params = useParams()
   
-  // console.log(word);
-
   return (
     <div>
       {/* 헤더 */}

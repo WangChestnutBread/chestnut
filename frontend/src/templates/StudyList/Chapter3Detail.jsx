@@ -8,18 +8,38 @@ import Notation from "../../organisms/StudyList/NotationChapter1";
 import SoundMethod from "../../organisms/StudyList/SoundMethod";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
-import Pronunciation from "../../organisms/StudyList/Pronunciations"
+import Pronunciation from "../../organisms/StudyList/Pronunciations";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import baseApi from "../../api/fetchAPI";
 
 const Chapter3Detail = () => {
-  const params = useParams()
-  const [realData, setRealData] = useState("내발음😎")
-  
+  const params = useParams();
+  const [realData, setRealData] = useState("내발음😎");
+  const [answerData, setAnswerData] = useState([100000]);
+  const [show, isShow] = useState(false);
+
   const moveData = (value) => {
     console.log(value);
-    setRealData(value)
-  }
+    setRealData(value);
+  };
+
+  const answer = (value) => {
+    setAnswerData(value);
+    if (value.length === 0) {
+      isShow(true);
+      baseApi
+        .get("/log/study", {
+          params: {
+            studyId: params.studyId,
+            isPass: 1,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    }
+  };
 
   return (
     <div>
@@ -39,20 +59,24 @@ const Chapter3Detail = () => {
             <Notation word={params} />
           </div>
           <div className="col-8 mt-2">
-            <SoundMethod hangeul={params}/>
+            <SoundMethod hangeul={params} />
           </div>
         </div>
         {/* 소리나는 방법, 카메라 */}
         <div className="row">
           <div className="col-6 mt-2">
-            <Pronunciation saying={params} realData={realData} />
+            <Pronunciation
+              saying={params}
+              realData={realData}
+              location={answerData}
+            />
           </div>
           <div className="col-6 mt-2 mb-3">
             <CameraOrganism />
           </div>
         </div>
         {/* 마이크 */}
-        <RecordData  func={moveData}/>
+        <RecordData func={moveData} func2={answer} />
       </div>
     </div>
   );
