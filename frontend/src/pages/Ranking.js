@@ -65,44 +65,49 @@ const Ranking = () => {
                     <img src={logo} className='ranking-logo-image'/>
                 </div>
                 {/* 표 */}
-                <table>
-                    <thead>
-                        <td>순위</td>
-                        <td>
-                            <img src={userImage} style={{width:15, height:15, marginRight: 4}}/>
-                            유저
-                        </td>
-                        <td>
-                            <img src={calendarImage} style={{width:15, height:15, marginRight: 4}}/>
-                            가입일자
-                        </td>
-                        <td>
-                            <img src={ratImage} style={{width:15, height:15, marginRight: 4}}/>
-                            캐릭터
-                        </td>
-                        <td>
-                            <img src={chestnut} style={{width:15, height:15, marginRight: 4}}/>
-                            밤송이
-                        </td>
-                    </thead>
-                    <tbody>
-                        {data&&data.length > 0 ? (
-                            data.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.rank}</td>
-                                    <td>{item.nickname}</td>
-                                    <td>{convertToDate(item.joinAt)}</td>
-                                    <td><img src={convertToImgPath(item.avatarThumbnailUrl)} alt="Character" /></td>
-                                    <td>{item.reward}</td>
-                                </tr>
-                            ))
-                        ) : (
+                <div className='ranking-table-container'>
+                    <table className='ranking-table'>
+                        <thead className='ranking-thead'>
                             <tr>
-                                <td colSpan="5">데이터가 없습니다.</td>
+                                <td>순위</td>
+                                <td>
+                                    <img src={userImage} style={{width:15, height:15, marginRight: 4}}/>
+                                    유저
+                                </td>
+                                <td>
+                                    <img src={calendarImage} style={{width:15, height:15, marginRight: 4}}/>
+                                    가입일자
+                                </td>
+                                <td>
+                                    <img src={ratImage} style={{width:15, height:15, marginRight: 4}}/>
+                                    캐릭터
+                                </td>
+                                <td>
+                                    <img src={chestnut} style={{width:15, height:15, marginRight: 4}}/>
+                                    밤송이
+                                </td>
                             </tr>
-                        )}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {data&&data.length > 0 ? (
+                                data.map((item, index) => (
+                                    <tr key={index} className='ranking-table-row'>
+                                        <td>{item.rank}</td>
+                                        <td>{item.nickname}</td>
+                                        <td>{convertToDate(item.joinAt)}</td>
+                                        <td><img src={convertToImgPath(item.avatarThumbnailUrl)} alt="Character" className='rank-thumbnail'/></td>
+                                        <td>{item.reward}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="5">데이터가 없습니다.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+                
             </div>
         </div>
         //html 문서 작성
