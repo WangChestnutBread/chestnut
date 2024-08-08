@@ -34,4 +34,14 @@ public class MainMemberRepository {
 
         return typedQuery.getSingleResult();
     }
+
+    public void updateRanking() {
+        String query = "UPDATE member m " +
+                "JOIN (SELECT member_id, RANK() OVER (ORDER BY reward DESC) AS ranking FROM member) r " +
+                "ON r.member_id = m.member_id " +
+                "SET m.ranking = r.ranking";
+
+        entityManager.createNativeQuery(query).executeUpdate();
+    }
+
 }
