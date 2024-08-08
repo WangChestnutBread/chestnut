@@ -1,5 +1,14 @@
-.mouse {
-  width: 377px;
-  height: 355px;
+.mouth {
+  width: 100%;
+  height: 100%;
+}
+
+
+.mouth-box {
+  width: 420px;
+  height: 240px;
+}
+
+.face-box {
   background-color: violet;
 }

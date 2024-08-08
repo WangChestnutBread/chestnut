@@ -24,10 +24,10 @@ const Record = ({func, func2}) => {
   const upPage = () => {
     func("내발음😎")
     func2([10000])
-    if (studyId < 41) {
-      navigate(`/study/detail${chapterId}/${chapterId}/${+studyId + 1}`);
+    if (studyId < 40) {
+      navigate(`/study/detail1/1/${+studyId + 1}`);
     }
-    else if (studyId > 40 && studyId < 439){
+    else if (studyId > 39 && studyId < 439){
       navigate(`/study/detail2/2/${+studyId + 1}`);
     }
     else if (studyId > 438 && studyId < 446){
@@ -46,13 +46,13 @@ const Record = ({func, func2}) => {
     if (studyId < 2){
       alert('첫 학습페이지 입니다.')
     } 
-    else if (studyId > 0 && studyId < 41) {
-      navigate(`/study/detail${chapterId}/${chapterId}/${studyId - 1}`);
+    else if (studyId > 0 && studyId < 42) {
+      navigate(`/study/detail1/1/${studyId - 1}`);
     }
     else if (studyId > 40 && studyId < 441){
       navigate(`/study/detail2/2/${studyId - 1}`);
     }
-    else if (studyId > 438 && studyId < 447){
+    else if (studyId > 438 && studyId < 448){
       navigate(`/study/detail3/3/${studyId - 1}`);
     }
     else if (studyId < 1382 && studyId > 445){
