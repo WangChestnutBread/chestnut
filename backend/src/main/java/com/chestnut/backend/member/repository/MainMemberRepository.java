@@ -17,7 +17,7 @@ public class MainMemberRepository {
                 "a.avatarId, a.avatarName, a.avatarImgUrl, " +
                 "COALESCE(nextA.lowerLimit, a.lowerLimit), " +
                 "m.nickname, m.reward, m.ranking, " +
-                "s.studyId, s.word, c.chapterName, " +
+                "s.studyId, s.word, c.chapterId, c.chapterName, " +
                 "COALESCE(al.attendanceCount, 0)) " +
                 "FROM Member m " +
                 "LEFT JOIN m.avatar a " +
