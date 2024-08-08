@@ -35,6 +35,7 @@ import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite
 import OpenChat from "./pages/OpenChat";
 
 import VocabularyListPage from "./pages/VocabularyListPage"
+import Ranking from "./pages/Ranking";
 
 
 const router = createBrowserRouter([
@@ -133,6 +134,10 @@ const router = createBrowserRouter([
   {
     path: "/study",
     element: <StudyList />
+  },
+  {
+    path: "/ranking",
+    element: <Ranking/>
   },
 
   // {
