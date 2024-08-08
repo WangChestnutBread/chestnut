@@ -1,25 +1,40 @@
-import NavBar from "../../organisms/NavBar";
-import MouseTongue from "../../organisms/StudyList/MouseTongue";
-import Record from "../../organisms/StudyList/Record";
 import "../NavbarExample.css";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
 import Notation from "../../organisms/StudyList/NotationChapter1";
-import SoundMethod from "../../organisms/StudyList/SoundMethod";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
-import Pronunciation from "../../organisms/StudyList/Pronunciations"
+import Pronunciation from "../../organisms/StudyList/Pronunciations";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import baseApi from "../../api/fetchAPI";
 
 const Chapter6Detail = () => {
-  const params = useParams()
-  const [realData, setRealData] = useState("내발음😎")
+  const params = useParams();
+  const [realData, setRealData] = useState("내발음😎");
+  const [answerData, setAnswerData] = useState([100000]);
+  const [show, isShow] = useState(false);
 
   const moveData = (value) => {
-    console.log(value);
-    setRealData(value)
-  }
+    setRealData(value);
+  };
+
+  const answer = (value) => {
+    setAnswerData(value);
+    if (value.length === 0) {
+      isShow(true);
+      baseApi
+        .get("/log/study", {
+          params: {
+            studyId: params.studyId,
+            isPass: 1,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    }
+  };
 
   return (
     <div>
@@ -44,15 +59,17 @@ const Chapter6Detail = () => {
         </div>
         {/* 소리나는 방법, ???(우승다람쥐) */}
         <div className="row">
-          <div className="col-6 mt-2" >
-            <Pronunciation saying={params} realData={realData}/>
+          <div className="col-6 mt-2">
+            <Pronunciation
+              saying={params}
+              realData={realData}
+              location={answerData}
+            />
           </div>
-          <div className="col-6 mt-2 mb-3">
-            
-          </div>
+          <div className="col-6 mt-2 mb-3"></div>
         </div>
         {/* 마이크 */}
-        <RecordData func={moveData}/>
+        <RecordData func={moveData} func2={answer} />
       </div>
     </div>
   );
