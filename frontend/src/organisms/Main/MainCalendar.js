@@ -8,9 +8,19 @@ function MainCalendar({ attendance }) {
   const [value, onChange] = useState(new Date());
 
   const stamp = ({ date, view }) => {
-    const result = attendDay.filter(
-      (attends) => new Date(attends).toDateString() === date.toDateString()
-    );
+    const result = attendDay.map((attends) => {
+      if (new Date(attends).toDateString() === date.toDateString()) {
+        return(
+          <img key={new Date(attends)} src="/image/Stamp.png" width="70%"/>
+        )
+      } else {
+        return(null)
+      }
+    }
+    )
+    return (
+      <>{result}</>
+    )  
   };
 
   return (
