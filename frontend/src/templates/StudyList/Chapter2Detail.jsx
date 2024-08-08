@@ -1,6 +1,3 @@
-import NavBar from "../../organisms/NavBar";
-import MouseTongue from "../../organisms/StudyList/MouseTongue";
-import Record from "../../organisms/StudyList/Record";
 import "../NavbarExample.css";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
@@ -10,12 +7,37 @@ import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
 import Pronunciation from "../../organisms/StudyList/Pronunciations"
 import { useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import baseApi from "../../api/fetchAPI";
 
 
 const Chapter2Detail = () => {
   const params = useParams()
-  const word = params.word
   console.log(params);
+  const [realData, setRealData] = useState("내발음😎")
+  const [answerData, setAnswerData] = useState([100000])
+  const [show, isShow] = useState(false)
+  console.log();
+
+  const moveData = (value) => {
+    setRealData(value)
+  }
+  const answer = (value) => {
+    setAnswerData(value)
+    console.log(value);
+    if (value.length === 0) {
+      isShow(true)
+      baseApi.get('/log/study',{
+        params:{
+          studyId: params.studyId,
+          isPass: 1
+        }
+      }).then((res) => {
+        console.log(res);
+      })
+    }
+  }
+
 
   return (
     <div>
@@ -41,14 +63,14 @@ const Chapter2Detail = () => {
         {/* 발음, 카메라 */}
         <div className="row">
           <div className="col-6 mt-2" >
-            <Pronunciation saying={params} />
+            <Pronunciation saying={params} realData={realData} location={answerData} />
           </div>
           <div className="col-6 mt-2 mb-3">
             <CameraOrganism />
           </div>
         </div>
         {/* 마이크 */}
-        <RecordData/>
+        <RecordData func={moveData} func2={answer}/>
       </div>
     </div>
   );

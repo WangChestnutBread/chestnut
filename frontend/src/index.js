@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./Reset.css";
 import "./index.css";
-import App from "./App";
 import QNApage from "./templates/Board/QnaTemplate";
 import QNAWritePage from "./templates/Board/QnaWriteTemplate";
 import QnaDetailTemplate from "./templates/Board/QnaDetailTemplate";
@@ -22,7 +21,6 @@ import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
 import ChapterListpage from "./pages/StudyDetail/ChapterListpage";
 import StudyList from "./templates/StudyList";
-import ChapterMenu from "./atoms/ChapterMenu";
 import MainPage from "./pages/MainPage";
 import RankingTemplate from "./templates/RankingTemplate";
 import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
@@ -77,23 +75,23 @@ const router = createBrowserRouter([
     element: <AnnouncementWrite />
   },
   {
-    path: "/study/detail1/:studyId/:word",
+    path: "/study/detail1/:chapterId/:studyId",
     element: <Chapter1Detail />
   },
   {
-    path: "/study/detail2/:studyId/:word",
+    path: "/study/detail2/:chapterId/:studyId",
     element: <Chapter2Detail />
   },
   {
-    path: "/study/detail3/:studyId/:word",
+    path: "/study/detail3/:chapterId/:studyId",
     element: <Chapter3Detail />
   },
   {
-    path: "/study/detail5/:studyId/:word",
+    path: "/study/detail5/:chapterId/:studyId",
     element: <Chapter5Detail />
   },
   {
-    path: "/study/detail6/:studyId/:word",
+    path: "/study/detail6/:chapterId/:studyId",
     element: <Chapter6Detail />
   },
   {
@@ -183,16 +181,6 @@ const router = createBrowserRouter([
     path: "/abc",
     element: <RankingTemplate />
   },
-
-  {
-    path: "/openchat",
-    element: <OpenChat/>
-  }
-
-  // {
-  //   path: "/myVocabulary",
-  //   element: <VocabularyListPage />
-  // },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

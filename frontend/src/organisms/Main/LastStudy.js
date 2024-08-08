@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import Text20 from "../../atoms/Text20"
 import Text24 from "../../atoms/Text24"
 import Text32 from "../../atoms/Text32"
@@ -5,7 +6,13 @@ import LastStudyButton from "../../molecules/Main/LastStudyButton"
 
 import "./LastStudy.css"
 
-function LastStudy({chapter, word}) {
+function LastStudy({chapter, word, chapterId, studyId}) {
+    
+    let navigate = useNavigate()
+    const handleOnClick = () => {
+        navigate(`/study/detail${chapterId}/${chapterId}/${studyId}`)
+    }
+
     return (
         <div className="LastStudy">
             <div className="LastStudyHead">
@@ -22,7 +29,7 @@ function LastStudy({chapter, word}) {
                 <div>
                     <Text32 text={word}/>
                 </div>
-                <LastStudyButton/>
+                <LastStudyButton onClick={handleOnClick}/>
             </div>
 
         </div>

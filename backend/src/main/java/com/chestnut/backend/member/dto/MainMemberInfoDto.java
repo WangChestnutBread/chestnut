@@ -17,6 +17,7 @@ public class MainMemberInfoDto {
     private int ranking;
     private Long studyId;
     private String word;
+    private Byte chapterId;
     private String chapterName;
     private Short attendanceCount;
 }

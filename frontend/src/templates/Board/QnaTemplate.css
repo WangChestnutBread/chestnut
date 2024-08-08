@@ -96,6 +96,13 @@ border-radius: 10px;
 
 }
 
+.active {
+  text-decoration: none;
+}
+.no-active {
+  text-decoration: none;
+}
+
 .writebtn{
 display: flex;
 flex-direction: row;

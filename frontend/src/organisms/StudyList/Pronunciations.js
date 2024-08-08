@@ -3,27 +3,20 @@ import PronunciationLeft from "../../molecules/StudyList/PronunciationLeft";
 import PronunciationRight from "../../molecules/StudyList/PronunciationRight";
 import baseApi from "../../api/fetchAPI";
 
-const Pronunciations = (saying) => {
-  // console.log(saying);
-  // console.log(123123);
-  const [word, setWrod] = useState("");
-  const [pronounce, setPronounce] = useState("");
-  // const mokData1 = {
-  //   data: "[가]",
-  //   }
-  // const mokData2 = {
-  //   data: data
-  // }
+const Pronunciations = ({saying, realData, location}) => {
+
+  console.log(location);
+  const [word, setWrod] = useState("")
+  const [pronounce, setPronounce] = useState("")
+
   useEffect(() => {
-    baseApi.get(`study/detail/${saying.saying.studyId}/word`).then((res) => {
-      console.log(res.data.data.word);
+    baseApi.get(`/study/detail/${saying.studyId}/word`).then((res) => {
+      console.log(res);
       setWrod(res.data.data.word);
       setPronounce(res.data.data.pronounce);
     });
   });
 
-  console.log(word);
-  console.log(pronounce);
 
   return (
     <div>
@@ -33,7 +26,7 @@ const Pronunciations = (saying) => {
         </div>
         {word ? (
           <div>
-            <PronunciationRight data={word} />
+            <PronunciationRight data={word} location={location} />
           </div>
         ) : (
           <></>
@@ -45,7 +38,7 @@ const Pronunciations = (saying) => {
         </div>
         {pronounce ? (
           <div>
-            <PronunciationRight data={pronounce} />
+            <PronunciationRight data={realData} location={[]}/>
           </div>
         ) : (
           <></>
