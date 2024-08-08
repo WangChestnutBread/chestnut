@@ -23,6 +23,7 @@ public interface QnARepository extends JpaRepository<QnA, Long> {
             countQuery = "select count(q) from QnA q")
     Page<QnA> findByMemberNickname(String nickname, Pageable pageable);
 
+    @Query("select q from QnA q join fetch q.member join fetch q.qnaCategory where q.qnaId = :qnaId")
     Optional<QnA> findByqnaId(Long qnaId);
 
 }
