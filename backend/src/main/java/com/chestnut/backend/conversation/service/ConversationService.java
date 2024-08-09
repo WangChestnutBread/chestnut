@@ -13,12 +13,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -46,6 +49,7 @@ public class ConversationService {
         initializeConversation(loginId);
     }
 
+    @Transactional
     public ConversationDto chatMessage(String loginId,
 //                            MultipartFile audioFile,
                                        String sttResult) {
@@ -75,13 +79,14 @@ public class ConversationService {
                 String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 long millisUntilMidnight = LocalTime.now().until(LocalTime.MIDNIGHT, ChronoUnit.MILLIS);
                 if (millisUntilMidnight < 0) { millisUntilMidnight += TimeUnit.DAYS.toMillis(1);}
+                log.debug("대화 태그 : 보상 시간 "+millisUntilMidnight);
                 redisService.setDataExpire(generatePrefixedKey(REWARD_PURPOSE, loginId), todayDate, millisUntilMidnight);
                 log.debug("대화 태그 : 보상 부여 완료");
             }
             redisService.setListDataExpire(generatePrefixedKey(HISTORY_PURPOSE, loginId),
                     chatHistory,
                     EXPIRATION_TIME_MILLIS);
-            redisService.setDataExpire(generatePrefixedKey(TOKEN_SIZE_PURPOSE, loginId), String.valueOf(chatReposeJsonDto.getTotalTokens()), EXPIRATION_TIME_MILLIS);
+            log.debug(String.valueOf(chatReposeJsonDto.getTotalTokens()));
             redisService.setDataExpire(generatePrefixedKey(TOKEN_SIZE_PURPOSE, loginId),
                     String.valueOf(chatReposeJsonDto.getTotalTokens()),
                     EXPIRATION_TIME_MILLIS);
