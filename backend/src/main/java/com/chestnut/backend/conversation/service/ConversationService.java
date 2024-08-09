@@ -52,7 +52,8 @@ public class ConversationService {
     @Transactional
     public ConversationDto chatMessage(String loginId,
 //                            MultipartFile audioFile,
-                                       String sttResult) {
+                                       String sttResult
+    ) {
         Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
         if(member.isWithdraw()) throw new InvalidMemberException();
         try {
@@ -69,7 +70,8 @@ public class ConversationService {
             //CHATGPT 전달
             chatHistory.add(new ChatMessageDto("user", sttResult));
             log.debug("대화 태그 : 새로운 질문 포함 = "+chatHistory);
-            ChatReposeJsonDto chatReposeJsonDto = openAIChatClient.sendMessage(chatHistory);
+//            ChatReposeJsonDto chatReposeJsonDto = openAIChatClient.sendMessage(chatHistory);
+            ChatReposeJsonDto chatReposeJsonDto = new ChatReposeJsonDto("안녕하세요"+Math.random(),18);
             log.debug("대화 태그 : ai 대답 = "+chatReposeJsonDto.getAiMessage());
             // 대화 기록 업데이트
             chatHistory.add(new ChatMessageDto("system", chatReposeJsonDto.getAiMessage()));
