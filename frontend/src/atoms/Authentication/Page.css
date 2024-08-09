@@ -130,19 +130,18 @@
     word-wrap: break-word;
 }
 .InspectionButton{
-    width: 100px;
     height: 35px;
     padding: 10px;
+    margin-right: 10px;
     background: #6B3906;
     border-radius: 20px;
     overflow: hidden;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 10;
     display: inline-flex;
 }
 .InspectionButtonFont{
-    width: 60px;
+    width: 70px;
     height: 20px;
     text-align: center;
     color: white;

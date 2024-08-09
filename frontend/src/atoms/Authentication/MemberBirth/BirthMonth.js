@@ -1,42 +1,38 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Birth.css";
-function Birth(props) {
-  const birthMontEl = useRef(null);
+
+function BirthMonth({ onChange }) {
+  const [selectedMonth, setSelectedMonth] = useState("");
 
   useEffect(() => {
-    const Month =birthMontEl.current;
-    let isMonthOptionExisted =false;
-
-    const handleFocus = () => {
-      if(!isMonthOptionExisted){
-        for(let j= 1; j<13;j++){
-            const monthOption =document.createElement('option');
-            monthOption.setAttribute('value', j);
-            monthOption.innerText=j;
-            Month.appendChild(monthOption);
-        }
-      }
-    };
-
-    if (Month) {
-      Month.addEventListener('focus', handleFocus);
-    }
-
-    return () => {
-      if (Month) {
-        Month.removeEventListener('focus', handleFocus);
-      }
-    };
   }, []);
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setSelectedMonth(value);
+    if (onChange) {
+      onChange(value);
+    }
+  };
 
   return (
     <div className="info" id="info__birth">
-      <select className="box year" id="birth-month" ref={birthMontEl}>
-        <option disabled selected className="Font">{props.month}</option>
+      <select 
+        className="year" 
+        id="birth-month" 
+        value={selectedMonth} 
+        onChange={handleChange}
+      >
+        <option value="" disabled>월</option>
+        {[...Array(12)].map((_, i) => (
+          <option key={i + 1} value={i + 1}>
+            {i + 1}
+          </option>
+        ))}
       </select>
       <span className="Font"> 월</span>
     </div>
   );
 }
 
-export default Birth;
+export default BirthMonth;
