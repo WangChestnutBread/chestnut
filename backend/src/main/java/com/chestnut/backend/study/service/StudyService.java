@@ -58,7 +58,8 @@ public class StudyService {
     public List<ChapterStudyInfoParentDto> convertData(Long memberId, int chapterId) {
         List<ChapterStudyInfo> list = studyInfoRepository.findChapterStudyInfo(memberId, chapterId);
         Map<String, List<ChapterStudyInfo>> collect = list.stream()
-                .collect(Collectors.groupingBy(item -> item.getCategoryContent()));
+                .collect(Collectors.groupingBy(item -> item.getCategoryContent(),
+                        TreeMap::new, Collectors.toList()));
         Set<String> keys = collect.keySet();
         return keys.stream()
                 .map(item -> mapToParent(item, collect))
