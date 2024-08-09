@@ -28,7 +28,8 @@ public class ConversationController {
     }
 
     @PostMapping("/message")
-    public ResponseEntity<?> chatMessage(@RequestParam("audio") String audioFile,
+    public ResponseEntity<?> chatMessage(
+            @RequestParam("audio") String audioFile,
 //                            @RequestParam("audio") MultipartFile audioFile,
                             @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
         log.debug("STT 태그 : 요청 body 내용 "+audioFile);
