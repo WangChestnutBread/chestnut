@@ -173,15 +173,6 @@ const router = createBrowserRouter([
     path: "/chapter/:chapterId",
     element: <Ch4n7DetailPage/>
   },
-
-  {
-    path: "/chapter/:chapterId",
-    element: <Ch4n7DetailPage />
-  },
-  {
-    path: "/chapter/:listId",
-    element: <ChapterListpage />
-  },
   {
     path: "/main",
     element: <MainPage/>,

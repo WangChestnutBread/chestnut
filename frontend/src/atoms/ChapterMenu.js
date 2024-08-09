@@ -1,6 +1,7 @@
 import React from "react";
 import "./ChapterMenu.css";
 function ChapterMenu(props) {
+  console.log(props.chapterId);
   return (
     <div className="card">
       <div className="subcard">
@@ -9,7 +10,7 @@ function ChapterMenu(props) {
           <div className="imgbox">
             <img
               className="imgcontent"
-              src="https://via.placeholder.com/276x226"
+              src={`/image/Chapter${props.chapterId}.png`}
             />
           </div>
         </div>
