@@ -24,7 +24,7 @@ function LandingPage() {
   return (
     <div className="landing-page">
       <div className="content">
-        <div className="logo-container">
+        <div className="start-logo-container">
           <img src="/image/Logo.png" alt="Logo" className="logo" />
         </div>
         <div className={`button-container ${showButtons ? 'show' : ''}`}>

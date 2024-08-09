@@ -31,7 +31,7 @@ function Birth(props) {
 
   return (
     <div className="info" id="info__birth">
-      <select className="box year" id="birth-day" ref={birthDayEl}>
+      <select className="year" id="birth-day" ref={birthDayEl}>
         <option disabled selected>{props.day}</option>
       </select>
       <span className="Font"> 일</span>
