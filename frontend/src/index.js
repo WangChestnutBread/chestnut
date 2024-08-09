@@ -139,6 +139,10 @@ const router = createBrowserRouter([
     path: "/ranking",
     element: <Ranking/>
   },
+  {
+    path: "/myVocabulary",
+    element: <VocabularyListPage/>
+  },
 
   // {
   //   path: "/chapter/:chapterId",
