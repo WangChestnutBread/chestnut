@@ -103,7 +103,7 @@ public class LogService {
      *        1: 출석로그, 2: AI대화로그, 3: 문제로그
      * @throws IllegalArgumentException 유효하지 않은 인자 입력
      */
-    private void getReward(Member member, byte rewardTypeId, byte logTypeId) {
+    public void getReward(Member member, byte rewardTypeId, byte logTypeId) {
         RewardType rewardType = rewardTypeRepository.findByRewardTypeId(rewardTypeId);
         LogType logType = logTypeRepository.findByLogTypeId(logTypeId);
 
