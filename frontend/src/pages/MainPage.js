@@ -54,14 +54,8 @@ function MainPage() {
   //axios 요청
   useEffect(() => {
     const fetchData = async () => {
-      // console.log(accessToken);
-      // if (accessToken) {
       try {
-        const profileResponse = await getProfile();
-        const attendanceResponse = await getAttendance();
-
-        console.log(profileResponse);
-        console.log(attendanceResponse);
+        const promiseResult = Promise.all([getProfile(), getAttendance()])
       } catch (err) {
         console.error(err);
       }
