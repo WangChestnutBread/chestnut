@@ -59,4 +59,5 @@
 .ContentWord:hover {
   color: #ffcc4d;
   text-decoration: underline;
+  transition: color 0.1s ease, text-decoration 0.2s ease;
 }

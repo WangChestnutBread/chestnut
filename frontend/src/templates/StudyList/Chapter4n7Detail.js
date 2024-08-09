@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
 import Chapter1List from "../Chapter1List";
+import Chapter2List from "../Chapter2List";
 
 function Chapter4n7Detail({ data, chapterId }) {
   let [content, setContent] = useState(null);
@@ -30,7 +31,7 @@ function Chapter4n7Detail({ data, chapterId }) {
         {content && chapterId == 1 ? (
           <Chapter1List content={content} chapterId={chapterId}/>
         ) : content && chapterId == 2 ? (
-          <Ch7BlackBoardWithTab content={content} />
+          <Chapter2List content={content} />
         ) : content && chapterId == 3 ? (
           <Ch7BlackBoardWithTab content={content} />
         ) : content && chapterId == 4 ? (
