@@ -35,7 +35,7 @@ public class ConversationService {
     private final LogService logService;
 
     @Value("${openai.max-token.limit:500}")
-    private short MAX_TOKEN_LIMIT; // ChatGPT API의 토큰 제한
+    private short MAX_TOKEN_LIMIT; // ChatGPT API 토큰 제한
     @Value("${openai.expiration-time.millis:300000}")
     private long EXPIRATION_TIME_MILLIS; // 대화 기록 만료 시간 (5분)
     private final String REWARD_PURPOSE = "DailyConversationReward:";
@@ -67,14 +67,16 @@ public class ConversationService {
             log.debug("대화 태그 : 기존 대화 = "+chatHistory);
             // 대화 시간 만료 = 새로운 대화 시작 유도
             if (chatHistory == null) throw new TimeOutException();
+            ChatMessageDto userMessage = new ChatMessageDto("user", sttResult);
             //CHATGPT 전달
-            chatHistory.add(new ChatMessageDto("user", sttResult));
+            chatHistory.add(userMessage);
             log.debug("대화 태그 : 새로운 질문 포함 = "+chatHistory);
 //            ChatReposeJsonDto chatReposeJsonDto = openAIChatClient.sendMessage(chatHistory);
             ChatReposeJsonDto chatReposeJsonDto = new ChatReposeJsonDto("안녕하세요"+Math.random(),18);
             log.debug("대화 태그 : ai 대답 = "+chatReposeJsonDto.getAiMessage());
+            ChatMessageDto aiMessage = new ChatMessageDto("system", chatReposeJsonDto.getAiMessage());
             // 대화 기록 업데이트
-            chatHistory.add(new ChatMessageDto("system", chatReposeJsonDto.getAiMessage()));
+            chatHistory.add(aiMessage);
             // 보상 로직 첫 대화 시 보상
             if (!redisService.existData(generatePrefixedKey(REWARD_PURPOSE, loginId))) {
                 logService.getReward(member, (byte) 5, (byte) 2);
@@ -95,7 +97,11 @@ public class ConversationService {
                     String.valueOf(chatReposeJsonDto.getTotalTokens()),
                     EXPIRATION_TIME_MILLIS);
             byte isLimit = chatReposeJsonDto.getTotalTokens() >= MAX_TOKEN_LIMIT? (byte) 1 : (byte) 0 ;
-            return new ConversationDto(sttResult,chatReposeJsonDto.getAiMessage(), isLimit);
+            return new ConversationDto(List.of(
+                        userMessage,
+                        aiMessage
+                    ),
+                    isLimit);
         }catch (FileIOException e){
             throw new FileIOException();
         }catch (SttFailException e){
