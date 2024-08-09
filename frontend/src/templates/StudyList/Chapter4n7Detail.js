@@ -22,16 +22,23 @@ function Chapter4n7Detail({ data, chapterId }) {
             <StudyBackButton />
             <ChestNutButton />
           </div>
-          <div className="RightButton">
-            <QuestionMarkButton />
-          </div>
         </div>
       </div>
 
       {/* 칠판 콘텐츠 전체 */}
       <div className="container">
-        {content && chapterId == 4 ? (
+        {content && chapterId == 1 ? (
           <Ch4BlackBoardWithTab content={content} />
+        ) : content && chapterId == 2 ? (
+          <Ch7BlackBoardWithTab content={content} />
+        ) : content && chapterId == 3 ? (
+          <Ch7BlackBoardWithTab content={content} />
+        ) : content && chapterId == 4 ? (
+          <Ch4BlackBoardWithTab content={content} />
+        ) : content && chapterId == 5 ? (
+          <Ch7BlackBoardWithTab content={content} />
+        ) : content && chapterId == 6 ? (
+          <Ch7BlackBoardWithTab content={content} />
         ) : content && chapterId == 7 ? (
           <Ch7BlackBoardWithTab content={content} />
         ) : (
