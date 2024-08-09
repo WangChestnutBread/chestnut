@@ -57,6 +57,7 @@ public class ConversationService {
         Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
         if(member.isWithdraw()) throw new InvalidMemberException();
         try {
+            if(!redisService.existData(generatePrefixedKey(HISTORY_PURPOSE, loginId))) throw new TimeOutException();
 //            String sttResult = clovaSpeechClient.upload(audioFile);
             log.debug("STT 태그 : STT 결과 = "+ sttResult);
             if (sttResult.isEmpty()) throw new NullSTTException();
