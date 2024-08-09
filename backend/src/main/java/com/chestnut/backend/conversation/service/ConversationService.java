@@ -56,7 +56,6 @@ public class ConversationService {
             log.debug("STT 태그 : STT 결과 = "+ sttResult);
             if (sttResult.isEmpty()) throw new NullSTTException();
             // 글자 수 확인
-            if(!redisService.existData(generatePrefixedKey(HISTORY_PURPOSE, loginId))) throw new TokenLenException();
             if (Integer.parseInt(redisService.getData(generatePrefixedKey(TOKEN_SIZE_PURPOSE, loginId))) + sttResult.length() > MAX_TOKEN_LIMIT) throw new TokenLenException();
             // 기존 대화 이어서 처리
             List<ChatMessageDto> chatHistory = redisService.getListData(generatePrefixedKey(HISTORY_PURPOSE, loginId));
@@ -75,6 +74,7 @@ public class ConversationService {
                 logService.getReward(member, (byte) 5, (byte) 2);
                 String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 long millisUntilMidnight = LocalTime.now().until(LocalTime.MIDNIGHT, ChronoUnit.MILLIS);
+                if (millisUntilMidnight < 0) { millisUntilMidnight += TimeUnit.DAYS.toMillis(1);}
                 redisService.setDataExpire(generatePrefixedKey(REWARD_PURPOSE, loginId), todayDate, millisUntilMidnight);
                 log.debug("대화 태그 : 보상 부여 완료");
             }
@@ -82,6 +82,9 @@ public class ConversationService {
                     chatHistory,
                     EXPIRATION_TIME_MILLIS);
             redisService.setDataExpire(generatePrefixedKey(TOKEN_SIZE_PURPOSE, loginId), String.valueOf(chatReposeJsonDto.getTotalTokens()), EXPIRATION_TIME_MILLIS);
+            redisService.setDataExpire(generatePrefixedKey(TOKEN_SIZE_PURPOSE, loginId),
+                    String.valueOf(chatReposeJsonDto.getTotalTokens()),
+                    EXPIRATION_TIME_MILLIS);
             byte isLimit = chatReposeJsonDto.getTotalTokens() >= MAX_TOKEN_LIMIT? (byte) 1 : (byte) 0 ;
             return new ConversationDto(sttResult,chatReposeJsonDto.getAiMessage(), isLimit);
         }catch (FileIOException e){
