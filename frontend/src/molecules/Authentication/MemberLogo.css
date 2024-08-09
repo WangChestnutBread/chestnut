@@ -10,7 +10,7 @@
 }
 .SubTitle{
    width: 445px;
-   height: 107px;
+   /* height: 107px; */
    text-align: center;
    color: #939393;
    font-size: 2rem;
@@ -20,8 +20,9 @@
 }
 .TitleBox{
     width: 445px;
-    height: 107px;
+    /* height: 107px; */
     padding: 10px;
+    margin-bottom: 10px;
     justify-content: center;
     align-items: center;
     gap: 10px;
