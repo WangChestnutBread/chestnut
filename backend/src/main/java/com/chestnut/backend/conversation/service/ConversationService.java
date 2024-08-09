@@ -79,12 +79,14 @@ public class ConversationService {
             // 보상 로직 첫 대화 시 보상
             if (!redisService.existData(generatePrefixedKey(REWARD_PURPOSE, loginId))) {
                 logService.getReward(member, (byte) 5, (byte) 2);
+                log.debug("대화 태그 : 보상 부여 완료");
                 String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                log.debug("대화 태그 : 보상 날짜 "+todayDate);
                 long millisUntilMidnight = LocalTime.now().until(LocalTime.MIDNIGHT, ChronoUnit.MILLIS);
                 if (millisUntilMidnight < 0) { millisUntilMidnight += TimeUnit.DAYS.toMillis(1);}
                 log.debug("대화 태그 : 보상 시간 "+millisUntilMidnight);
                 redisService.setDataExpire(generatePrefixedKey(REWARD_PURPOSE, loginId), todayDate, millisUntilMidnight);
-                log.debug("대화 태그 : 보상 부여 완료");
+                log.debug("대화 태그 : 보상 부여 기록 완료");
             }
             redisService.setListDataExpire(generatePrefixedKey(HISTORY_PURPOSE, loginId),
                     chatHistory,
@@ -112,7 +114,7 @@ public class ConversationService {
         }catch (ChatApiFailException e){
             throw new ChatApiFailException();
         }catch (Exception e){
-            log.debug(e.getMessage());
+            log.debug("대화 태그 : 에러 발생 "+e.getMessage());
             throw new UnknownException();
         }
     }
