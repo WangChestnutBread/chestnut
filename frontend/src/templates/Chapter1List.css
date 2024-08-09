@@ -1,0 +1,63 @@
+.Chapter1List {
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Chapter1Board {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.Chapter1Content {
+  display: flex;
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  padding: 30px;
+  bottom: 10%;
+  flex-direction: column;
+  z-index: 100;
+  gap: 100px;
+  /* justify-content: space-evenly; */
+  /* align-items: center; */
+}
+
+.Chapter1Group {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 50px;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.ContentTitle {
+  display: flex;
+  color: #dcb78f;
+}
+
+.ContentBox {
+  display: flex;
+  color: white;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.ContentWord {
+  display: flex;
+  cursor: pointer;
+}
+
+.ContentWord:hover {
+  color: #ffcc4d;
+  text-decoration: underline;
+  transition: color 0.1s ease, text-decoration 0.2s ease;
+}
