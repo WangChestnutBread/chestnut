@@ -74,7 +74,7 @@ function MainPage() {
 
   return (
     <div className="MainPage">
-      <button onClick={reissueToken}>토큰 재발급 테스트</button>
+      {/* <button onClick={reissueToken}>토큰 재발급 테스트</button> */}
       {profile && attendance ? (
         <MainTemplate profile={profile} attendance={attendance} />
       ) : (
