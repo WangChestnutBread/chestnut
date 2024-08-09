@@ -88,7 +88,7 @@ function FindPw() {
         <div className="container">
             <div className="totalpage">
                 <BackButton work={GotoBack} />
-                <div style={{ width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 22, display: 'flex' }}>
+                <div style={{ width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                     <MemberLogo title={'PW 찾기'} />
                     <div className="formlist">
                             <div className="idbox">

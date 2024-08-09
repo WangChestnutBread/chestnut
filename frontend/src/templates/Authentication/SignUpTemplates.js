@@ -11,6 +11,7 @@ import BirthMonth from "../../atoms/Authentication/MemberBirth/BirthMonth";
 import BirthDay from "../../atoms/Authentication/MemberBirth/BirthDay";
 import Button from "../../molecules/Authentication/Button";
 import baseApi from "../../api/fetchAPI";
+import BirthCalendar from "../../atoms/Authentication/MemberBirth/BirthCalendar";
 function SignUPPage() {
     const navigate = useNavigate();
     //뒤로가기 버튼
@@ -25,6 +26,7 @@ function SignUPPage() {
     const [Email, setEmail] = useState("");
     const [Auth, setAuth] = useState("");
     const [nickname, setnickname] = useState("");
+    const [selectedDate, setSelectedDate] = useState(null);
 
     //회원에게 보여줄 경고 메시지 변수
     const [IdMessage, setIdMessage] = useState("");
@@ -58,7 +60,7 @@ function SignUPPage() {
             checkPassword: PwCon,
             memberName: name,
             nickname: nickname,
-            birthday: "2024-08-01",
+            birthday: selectedDate,
         })
             .then(response => {
                 if (response.data.code == 200) {
@@ -80,6 +82,13 @@ function SignUPPage() {
             });
 
     };
+
+    //생년월일
+    const handleDateClick = (date) => {
+        setSelectedDate(date);
+        console.log("선택된 날짜: ", date);
+    }
+
 
     //onchange할 때마다 Id변수에 저장시켜줄 기능을 가진 함수
     const inputId = (e) => {
@@ -273,19 +282,22 @@ function SignUPPage() {
                 <BackButton work={GotoBack} />
                 <div style={{ width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 22, display: 'flex' }}>
                     <MemberLogo title={'회원가입'} />
-                    <div style={{ paddingLeft: 91, paddingRight: 91, paddingTop: 48, paddingBottom: 48, background: '#DCB78F', borderRadius: 25, overflow: 'hidden', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex' }}>
-                        <div style={{ flex: '1 1 0', alignSelf: 'stretch', paddingTop: 56, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 16, display: 'inline-flex' }}>
+                    <div style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 40, paddingBottom: 20, background: '#DCB78F', borderRadius: 25, overflow: 'visible', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex' }}>
+                        <div style={{ flex: '1 1 0', alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'inline-flex' }}>
                             <InspectionForm content={'ID'} text={IdMessage} name={'중복인증'} work={createId} value={Id} input={inputId} />
                             <SignUpPwInput content={'PW'} text={PwMessage} work={createPw} value={Pw} />
                             <SignUpPwInput content={'PW 재확인'} text={PwConMessage} work={createPwCon} value={PwCon} />
                             <InspectionForm content={'이메일'} text={EmailMessage} name={'인증'} work={createEmail} input={inputEmail} />
                             <InspectionForm content={'인증번호'} name={'확인'} text={AuthMessage} work={checkAuth} value={Auth} input={inputAuth} />
-                            <LoginInputForm content={'이름'} name={name} work={inputName} />
+                            <div style={{marginBottom: 25}}>
+                                <LoginInputForm content={'이름'} name={name} work={inputName}/>
+                            </div>
                             <InspectionForm content={'닉네임'} name={'중복확인'} text={nickMessage} work={checkname} value={nickname} input={inputname} />
                             <div style={{ alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'inline-flex' }}>
-                                <Birth year={'년도'} />
-                                <BirthMonth month={'월'} />
-                                <BirthDay day={'일'} />
+                                {/* <Birth year={'년도'} />
+                                <BirthMonth onChange={handleMonthChange} />
+                                <BirthDay day={'일'} /> */}
+                                <BirthCalendar clickDate={handleDateClick} value={selectedDate}/>
                             </div>
                             <Button button={'회원 가입'} work={succes} />
                         </div>
