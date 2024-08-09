@@ -111,6 +111,8 @@ public class ConversationService {
             throw new TokenLenException();
         }catch (DatabaseException e){
             throw new DatabaseException();
+        }catch (ChatApiRefusalException e){
+            throw new ChatApiRefusalException();
         }catch (ChatApiFailException e){
             throw new ChatApiFailException();
         }catch (Exception e){

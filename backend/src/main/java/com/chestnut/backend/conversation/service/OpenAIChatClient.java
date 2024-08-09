@@ -1,6 +1,7 @@
 package com.chestnut.backend.conversation.service;
 
 import com.chestnut.backend.common.exception.ChatApiFailException;
+import com.chestnut.backend.common.exception.ChatApiRefusalException;
 import com.chestnut.backend.conversation.dto.ChatCompletionDto;
 import com.chestnut.backend.conversation.dto.ChatMessageDto;
 import com.chestnut.backend.conversation.dto.ChatReposeJsonDto;
@@ -53,10 +54,14 @@ public class OpenAIChatClient {
             Map<String, Object> resultMap = om.readValue(response.getBody(), new TypeReference<>() {
             });
             log.debug("대화 태그 : ai 답변 response 역직렬화"+resultMap);
+            String isRefusal = (String) ((Map<String, Object>) ((List<Map<String, Object>>) resultMap.get("choices")).get(0).get("message")).get("refusal");
+            if(isRefusal != null) throw new ChatApiRefusalException();
             String content = (String) ((Map<String, Object>) ((List<Map<String, Object>>) resultMap.get("choices")).get(0).get("message")).get("content");
             int totalToken = (int)((Map<String, Object>) resultMap.get("usage")).get("total_tokens");
             log.debug("대화 태그 : 현재 총 토큰 수 "+totalToken);
             return new ChatReposeJsonDto(content,totalToken);
+        } catch (ChatApiRefusalException e) {
+            throw new ChatApiRefusalException();
         } catch (Exception e) {
             log.debug("대화 태그 : gpt api 에러 = "+e.getMessage());
             throw new ChatApiFailException();
