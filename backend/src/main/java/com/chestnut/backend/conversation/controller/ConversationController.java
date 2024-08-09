@@ -28,13 +28,10 @@ public class ConversationController {
     }
 
     @PostMapping("/message")
-    public ResponseEntity<?> chatMessage(
-            @RequestParam("audio") String audioFile,
-//                            @RequestParam("audio") MultipartFile audioFile,
-                            @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
-        log.debug("STT 태그 : 요청 body 내용 "+audioFile);
-//        log.debug("STT 태그 : 요청 body 내용 "+audioFile.getOriginalFilename());
-//        log.debug("STT 태그 : audio file resource "+audioFile.getResource());
+    public ResponseEntity<?> chatMessage( @RequestParam("audio") MultipartFile audioFile,
+                                          @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+        log.debug("STT 태그 : 요청 body 내용 "+audioFile.getOriginalFilename());
+        log.debug("STT 태그 : audio file resource "+audioFile.getResource());
         ConversationDto conversationDto = conversationService.chatMessage(customMemberDetails.getLoginId(), audioFile);
         return new ResponseEntity<>(new ResponseDto<>("200", conversationDto), HttpStatus.OK);
     }
