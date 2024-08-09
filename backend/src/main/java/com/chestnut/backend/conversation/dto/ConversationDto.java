@@ -12,5 +12,5 @@ import lombok.ToString;
 public class ConversationDto {
     private String userMessage;
     private String chatbotMessage;
-    private short maxTokenLimit;
+    private short isTotalTokenLimit;
 }
