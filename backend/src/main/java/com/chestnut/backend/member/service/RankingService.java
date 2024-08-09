@@ -31,8 +31,7 @@ public class RankingService {
     private final String RANKINGKEY = "RANKINGLIST";
 
 
-//    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
-    @Scheduled(fixedDelay = 10000000)
+    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
     @Transactional
     public void updateRank() {
         log.info("updateRank 시작");
