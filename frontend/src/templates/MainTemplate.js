@@ -11,7 +11,7 @@ const MainTemplate = ({ profile, attendance }) => {
   let [menu, setMenu] = useState([
     { name: "학습", path: "/study" },
     { name: "대화연습", path: "" },
-    { name: "단어장", path: "" },
+    { name: "단어장", path: "/myVocabulary" },
     { name: "게시판", path: "/board/qna" },
   ]);
 
