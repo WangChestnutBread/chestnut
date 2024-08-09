@@ -5,7 +5,7 @@ import Ch7BlackBoardWithTab from "../../organisms/Ch7BlackBoardWithTab";
 import { useEffect, useState } from "react";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
-import QuestionMarkButton from "../../molecules/QuestionMarkButton";
+import Chapter1List from "../Chapter1List";
 
 function Chapter4n7Detail({ data, chapterId }) {
   let [content, setContent] = useState(null);
@@ -28,7 +28,7 @@ function Chapter4n7Detail({ data, chapterId }) {
       {/* 칠판 콘텐츠 전체 */}
       <div className="container">
         {content && chapterId == 1 ? (
-          <Ch4BlackBoardWithTab content={content} />
+          <Chapter1List content={content} chapterId={chapterId}/>
         ) : content && chapterId == 2 ? (
           <Ch7BlackBoardWithTab content={content} />
         ) : content && chapterId == 3 ? (
