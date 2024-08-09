@@ -51,16 +51,15 @@ public class ConversationService {
 
     @Transactional
     public ConversationDto chatMessage(String loginId,
-//                            MultipartFile audioFile,
-                                       String sttResult
-    ) {
+                                        MultipartFile audioFile) {
         Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
         if(member.isWithdraw()) throw new InvalidMemberException();
         try {
             if(!redisService.existData(generatePrefixedKey(HISTORY_PURPOSE, loginId))) throw new TimeOutException();
 //            String sttResult = clovaSpeechClient.upload(audioFile);
+            String sttResult = "반갑습니다."+Math.random();
             log.debug("STT 태그 : STT 결과 = "+ sttResult);
-            if (sttResult.isEmpty()) throw new NullSTTException();
+//            if (sttResult.isEmpty()) throw new NullSTTException();
             // 글자 수 확인
             if (Integer.parseInt(redisService.getData(generatePrefixedKey(TOKEN_SIZE_PURPOSE, loginId))) + sttResult.length() > MAX_TOKEN_LIMIT) throw new TokenLenException();
             // 기존 대화 이어서 처리
