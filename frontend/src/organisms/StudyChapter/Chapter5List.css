@@ -39,3 +39,37 @@
   background: #dcb78f;
   border-color: white;
 }
+
+.Chapter5Content {
+  display: flex;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 75%;
+  z-index: 100;
+  overflow: auto;
+}
+
+.Chapter5Word {
+  display: flex;
+  width: 25%;
+  height: 25%;
+  color: white;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.Chapter5Word > p {
+  cursor: pointer;
+}
+
+.Chapter5Word > p:hover {
+  color: #ffcc4d;
+  text-decoration: underline;
+  transition: color 0.1s ease, text-decoration 0.2s ease;
+}

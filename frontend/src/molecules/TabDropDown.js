@@ -6,7 +6,7 @@ function TabDropDown({ content, handleOnClick }) {
     <Dropdown.Menu className="TabDropdownMenu">
       {content.map((item, i) => {
         return (
-          <Dropdown.Item className="TabDropItem" onClick={handleOnClick}>
+          <Dropdown.Item className="TabDropItem" onClick={()=>{handleOnClick(i)}}>
             {item.categoryContent}
           </Dropdown.Item>
         );
