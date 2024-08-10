@@ -1,9 +1,6 @@
 import "./VocabularyList.css";
 import ChapterList from "../molecules/StudyList/ChapterList";
-import BlackBoardTab from "../molecules/BlackBoardTab";
 import { useEffect, useState } from "react";
-import BlackBoardDropDown from "../molecules/BlackBoardDropDown";
-import Text24 from "../atoms/Text24";
 import { ListGroup } from "react-bootstrap";
 
 function VocabularyList({ chapterTitle, content }) {
@@ -19,7 +16,6 @@ function VocabularyList({ chapterTitle, content }) {
       <div className="BlackBoardWithLine">
         <div className="BlackBoardBody">
           {/* 칠판 위 탭 버튼 */}
-          <BlackBoardDropDown chapterTitle={chapterTitle} />
 
           {/* 칠판 */}
           <div className="B">

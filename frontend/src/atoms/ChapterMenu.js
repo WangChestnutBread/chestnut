@@ -1,7 +1,6 @@
 import React from "react";
 import "./ChapterMenu.css";
 function ChapterMenu(props) {
-  console.log(props.chapterId);
   return (
     <div className="card">
       <div className="subcard">

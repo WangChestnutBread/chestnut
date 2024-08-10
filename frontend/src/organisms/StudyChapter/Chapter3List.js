@@ -41,6 +41,10 @@ function Chapter3List({content, chapterId}) {
           <div className="WordLastRuleContent">
             <Text32 text={"음절의 끝소리 자리에 \n ‘ㄱ, ㄴ, ㄷ, ㄹ, ㅁ, ㅂ, ㅇ’ \n 일곱 소리 이외의 자음이 오면 \n 이 일곱 자음 가운데 하나의 소리로 바뀌는 규칙"}/>
           </div>
+
+          <div className="WordLastRuleEx">
+            <Text32 text={"예) 낮[낟], 부엌[부엌]"}/>
+          </div>
         </div>
           
           
