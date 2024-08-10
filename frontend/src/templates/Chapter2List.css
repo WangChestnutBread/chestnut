@@ -1,7 +1,73 @@
 .Chapter2List {
-    display: flex;
-    position: relative;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Chapter2Content {
+  display: flex;
+  position: absolute;
+  width: 80%;
+  height: 60%;
+  top: 23%;
+  flex-direction: column;
+  overflow: auto;
+  gap: 100px;
+  z-index: 100;
+}
+
+
+.Chapter2Group { 
+  display: flex;
+  justify-content: space-around;
+  gap: 100px;
+}
+
+.Ch2ContentLeft {
+  display: flex;
+  flex-wrap: wrap;
+  width: 20%;
+  color: white;
+  right: 10%;
+  padding-left: 8.5%;
+}
+
+.Ch2ContentRight {
+  display: flex;
+  width: 100%;
+  color: white;
+  flex-wrap: wrap;
+  gap: 50px;
+  padding: 0% 8%;
+}
+
+.Ch2ContentWord {
+  display: flex;
+  cursor: pointer;
+}
+
+.Ch2ContentWord:hover {
+  color: #ffcc4d;
+  text-decoration: underline;
+  transition: color 0.1s ease, text-decoration 0.2s ease;
+}
+
+.VerticalLine {
+  position: absolute;
+  height: 80%;
+  left: 28%;
+  top: 13%;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 10px,
+    white 10px,
+    white 20px
+  );
+  background-size: 5px 30px;
+  z-index: 10;
+}
