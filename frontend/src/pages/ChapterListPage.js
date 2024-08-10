@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Chapter4n7Detail from "../../templates/StudyList/Chapter4n7Detail";
-import baseApi from "../../api/fetchAPI";
+import ChapterListTemplate from "../templates/StudyList/ChapterListTemplate";
+import baseApi from "../api/fetchAPI";
 import { useParams } from "react-router-dom";
 
-function Ch4n7DetailPage() {
+function ChapterListPage() {
   let [data, setData] = useState(null);
 
   let { chapterId } = useParams();
@@ -25,7 +25,7 @@ function Ch4n7DetailPage() {
   return (
     <div>
       {data ? (
-        <Chapter4n7Detail data={data} chapterId={chapterId} />
+        <ChapterListTemplate data={data} chapterId={chapterId} />
       ) : (
         <p>로딩중입니다</p>
       )}
@@ -33,4 +33,4 @@ function Ch4n7DetailPage() {
   );
 }
 
-export default Ch4n7DetailPage;
+export default ChapterListPage;
