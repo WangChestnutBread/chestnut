@@ -1,0 +1,16 @@
+.TabDropdownMenu {
+  height: 1200%;
+  font-size: 1.5rem;
+  overflow: auto;
+}
+
+.TabDropItem {
+  padding: 12px;
+  border-bottom: 1px solid lightgray;
+  cursor: pointer;
+  transition: 0.2s background;
+}
+
+.TabDropItem:hover {
+  background: #dcb78f;
+}
