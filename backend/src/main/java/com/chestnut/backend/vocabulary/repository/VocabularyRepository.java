@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface VocabularyRepository extends JpaRepository<Vocabulary, VocabularyId> {
@@ -31,4 +32,7 @@ public interface VocabularyRepository extends JpaRepository<Vocabulary, Vocabula
             "where v.member = :member",
             countQuery = "select count(v) from Vocabulary v where v.member = :member")
     Page<VocabularyDto> findByMember(@Param("member") Member member, Pageable pageable);
+
+    @Query("select v.study.studyId from Vocabulary v join v.study s where s.chapter.chapterId = :chapterId and v.member.memberId = :memberId")
+    List<Long> findVocabListByMemberAndChapter(@Param("chapterId") Byte chapterId, @Param("memberId") Long memberId);
 }

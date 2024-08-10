@@ -26,4 +26,8 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
 
     @Query("select s from Study s join fetch s.chapter where s.studyId = :studyId")
     Optional<Study> findByStudyIdWithChapter(Long studyId);
+
+    @Query("select s from Study s where s.chapter.chapterId = :chapterId and (:chapterId != 1 or s.studyId < 100)")
+    List<Study> findStudyListByChapter(@Param("chapterId") Byte chapterId);
+
 }
