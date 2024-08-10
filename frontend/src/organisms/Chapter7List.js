@@ -5,7 +5,7 @@ import { useState } from "react";
 import Text32 from "../atoms/Text32";
 import VocaModal from "./VocaModal";
 
-function Ch7BlackBoardWithTab({ content }) {
+function Chapter7List({ content }) {
   // console.log(content)
   const handleTabClick = (index) => {
     setCurrentTab(index);
@@ -125,4 +125,4 @@ function Ch7BlackBoardWithTab({ content }) {
   );
 }
 
-export default Ch7BlackBoardWithTab;
+export default Chapter7List;

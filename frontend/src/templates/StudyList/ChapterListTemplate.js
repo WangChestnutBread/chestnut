@@ -1,21 +1,24 @@
-import "./Chapter4n7Detail.css";
+import "./ChapterListTemplate.css";
 import "../NavbarExample.css";
-import Ch4BlackBoardWithTab from "../../organisms/Ch4BlackBoardWithTab";
-import Ch7BlackBoardWithTab from "../../organisms/Ch7BlackBoardWithTab";
 import { useEffect, useState } from "react";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
-import Chapter1List from "../Chapter1List";
-import Chapter2List from "../Chapter2List";
+import Chapter1List from "../../organisms/StudyChapter/Chapter1List";
+import Chapter2List from "../../organisms/StudyChapter/Chapter2List";
+import Chapter3List from "../../organisms/StudyChapter/Chapter3List";
+import Chapter4List from "../../organisms/Chapter4List";
+import Chapter5List from "../../organisms/StudyChapter/Chapter5List";
+import Chapter6List from "../../organisms/StudyChapter/Chapter6List";
+import Chapter7List from "../../organisms/Chapter7List";
 
-function Chapter4n7Detail({ data, chapterId }) {
+function ChapterListTemplate({ data, chapterId }) {
   let [content, setContent] = useState(null);
   useEffect(() => {
     setContent(data);
   }, []);
 
   return (
-    <div className="Chapter4n7Detail">
+    <div className="ChapterListTemplate">
       {/* navbar */}
       <div className="NavbarExample">
         <div className="NavbarButton">
@@ -29,19 +32,19 @@ function Chapter4n7Detail({ data, chapterId }) {
       {/* 칠판 콘텐츠 전체 */}
       <div className="container">
         {content && chapterId == 1 ? (
-          <Chapter1List content={content} chapterId={chapterId}/>
+          <Chapter1List content={content} chapterId={chapterId} />
         ) : content && chapterId == 2 ? (
           <Chapter2List content={content} />
         ) : content && chapterId == 3 ? (
-          <Ch7BlackBoardWithTab content={content} />
+          <Chapter3List content={content} />
         ) : content && chapterId == 4 ? (
-          <Ch4BlackBoardWithTab content={content} />
+          <Chapter4List content={content} />
         ) : content && chapterId == 5 ? (
-          <Ch7BlackBoardWithTab content={content} />
+          <Chapter5List content={content} />
         ) : content && chapterId == 6 ? (
-          <Ch7BlackBoardWithTab content={content} />
+          <Chapter6List content={content} />
         ) : content && chapterId == 7 ? (
-          <Ch7BlackBoardWithTab content={content} />
+          <Chapter7List content={content} />
         ) : (
           <p>로딩중입니다</p>
         )}
@@ -50,4 +53,4 @@ function Chapter4n7Detail({ data, chapterId }) {
   );
 }
 
-export default Chapter4n7Detail;
+export default ChapterListTemplate;
