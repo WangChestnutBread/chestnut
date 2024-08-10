@@ -1,0 +1,86 @@
+.Chapter3List {
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Chapter3Content {
+  display: flex;
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 15%;
+  gap: 100px;
+  z-index: 100;
+}
+
+.Ch3ContentLeft {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  align-items: center;
+  color: white;
+  gap: 50px;
+}
+
+.Chapter3Title {
+  display: flex;
+  flex-wrap: nowrap;
+  color: #74a6fd;
+  align-items: center;
+}
+
+.Ch3ContentWord {
+  display: flex;
+  cursor: pointer;
+}
+
+.Ch3ContentWord:hover {
+  color: #ffcc4d;
+  text-decoration: underline;
+  transition: color 0.1s ease, text-decoration 0.2s ease;
+}
+
+.Ch3ContentRight {
+  display: flex;
+  width: 100%;
+  height: 90%;
+  padding-left: 10%;
+  color: white;
+  flex-wrap: wrap;
+  white-space: pre-wrap;
+  justify-content: center;
+}
+
+.WordLastRule {
+  display: inline-flex;
+  color: #ffcc4d;
+  align-items: center;
+}
+
+.WordLastRuleContent {
+  display: inline-flex;
+  line-height: 400%;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.Ch3VerticalLine {
+  position: absolute;
+  height: 78%;
+  left: 32%;
+  top: 13%;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 10px,
+    white 10px,
+    white 20px
+  );
+  background-size: 5px 30px;
+  z-index: 10;
+}

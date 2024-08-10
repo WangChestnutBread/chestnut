@@ -6,7 +6,7 @@ import BlackBoardTab from "../../molecules/BlackBoardTab";
 import { useState } from "react";
 
 function Chapter2List({ content, chapterId }) {
-  console.log(content);
+  // console.log(content);
 
   const handleTabClick = (index) => {
     setCurrentTab(index);
@@ -33,7 +33,7 @@ function Chapter2List({ content, chapterId }) {
                   return (
                     <div
                       className="Ch2ContentWord"
-                      style={itemchild.isStudy ? { color: "#74A6FD" } : null}
+                      style={itemchild.isPass ? { color: "#74A6FD" } : itemchild.isStudy ? { color: "#CECECE" } : null}
                       onClick={() => {
                         navigate(
                           `/study/detail${chapterId}/${chapterId}/${itemchild.studyId}`

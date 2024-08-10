@@ -1,9 +1,9 @@
-import "./BlackBoardWithTab.css";
-import ChapterList from "../molecules/StudyList/ChapterList";
-import BlackBoardTab from "../molecules/BlackBoardTab";
+import "./Chapter47List.css";
+import ChapterList from "../../molecules/StudyList/ChapterList";
+import BlackBoardTab from "../../molecules/BlackBoardTab";
 import { useState } from "react";
-import Text32 from "../atoms/Text32";
-import VocaModal from "./VocaModal";
+import Text32 from "../../atoms/Text32";
+import VocaModal from "../VocaModal";
 
 function Chapter7List({ content }) {
   // console.log(content)
@@ -13,15 +13,15 @@ function Chapter7List({ content }) {
 
   let [currentTab, setCurrentTab] = useState(0);
   let [currentRule, setCurrentRule] = useState(0);
-  let [showModal, setShowModal] = useState(false)
-  let [modalWord, setModalWord] = useState()
-  let [modalPronounce, setModalPronounce] = useState()
-  
+  let [showModal, setShowModal] = useState(false);
+  let [modalWord, setModalWord] = useState();
+  let [modalPronounce, setModalPronounce] = useState();
+
   const handleWordClick = (word, pronounce) => {
     setModalWord(word);
     setModalPronounce(pronounce);
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -83,28 +83,27 @@ function Chapter7List({ content }) {
                 ].grandChildCategory.map((item, i) => {
                   return (
                     <div className="RightBoardBox">
-                      {
-                        item.map((pair, j) => {
-                          return (
-                              <div key={j} className="RightBoardPair">
-                                <div className="RightBoardWord">
-                                  <p onClick={()=>{
-                                    handleWordClick(pair.word, pair.pronounce)
-                                  }}>{pair.word}</p>
-                                  <p>[{pair.pronounce}]</p>  
-                                </div>
-                                <div className="Vs">
-                                  {
-                                  j !== (item.length-1) ? <span>vs</span> : null 
-                                }
-                                </div>
-                                
-                              </div>
-                          );
-                        })
-                      }
+                      {item.map((pair, j) => {
+                        return (
+                          <div key={j} className="RightBoardPair">
+                            <div className="RightBoardWord">
+                              <p
+                                onClick={() => {
+                                  handleWordClick(pair.word, pair.pronounce);
+                                }}
+                              >
+                                {pair.word}
+                              </p>
+                              <p>[{pair.pronounce}]</p>
+                            </div>
+                            <div className="Vs">
+                              {j !== item.length - 1 ? <span>vs</span> : null}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -117,9 +116,13 @@ function Chapter7List({ content }) {
 
       {/* 모달 */}
       <div className="FlyingModal">
-        {
-          showModal ? <VocaModal word={modalWord} pronounce={modalPronounce} onClose={handleCloseModal}/> : null
-        }
+        {showModal ? (
+          <VocaModal
+            word={modalWord}
+            pronounce={modalPronounce}
+            onClose={handleCloseModal}
+          />
+        ) : null}
       </div>
     </div>
   );

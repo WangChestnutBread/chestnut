@@ -1,8 +1,8 @@
-import "./BlackBoardWithTab.css";
-import ChapterList from "../molecules/StudyList/ChapterList";
-import BlackBoardTab from "../molecules/BlackBoardTab";
+import "./Chapter47List.css";
+import ChapterList from "../../molecules/StudyList/ChapterList";
+import BlackBoardTab from "../../molecules/BlackBoardTab";
 import { useState } from "react";
-import Text32 from "../atoms/Text32";
+import Text32 from "../../atoms/Text32";
 
 function Chapter4List({ content }) {
   const handleTabClick = (index) => {
@@ -16,7 +16,6 @@ function Chapter4List({ content }) {
     <div className="BlackBoardWithTab">
       <div className="BlackBoardWithLine">
         <div className="BlackBoardBody">
-
           {/* 칠판 위 탭 버튼 */}
           <div className="TabButton">
             {content.map((item, i) => {
@@ -27,7 +26,7 @@ function Chapter4List({ content }) {
                   isActive={currentTab === i}
                   onClick={() => {
                     handleTabClick(i);
-                    setCurrentRule(0)
+                    setCurrentRule(0);
                   }}
                 />
               );
@@ -36,7 +35,6 @@ function Chapter4List({ content }) {
 
           {/* 칠판 안 */}
           <div className="BoardInside">
-
             {/* 칠판 왼쪽 내용 */}
             <div className="LeftBoardList">
               {content[currentTab].phonology.map((item, i) => {

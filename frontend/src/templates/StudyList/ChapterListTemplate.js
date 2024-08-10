@@ -6,10 +6,10 @@ import ChestNutButton from "../../organisms/ChestNutButton";
 import Chapter1List from "../../organisms/StudyChapter/Chapter1List";
 import Chapter2List from "../../organisms/StudyChapter/Chapter2List";
 import Chapter3List from "../../organisms/StudyChapter/Chapter3List";
-import Chapter4List from "../../organisms/Chapter4List";
+import Chapter4List from "../../organisms/StudyChapter/Chapter4List";
 import Chapter5List from "../../organisms/StudyChapter/Chapter5List";
 import Chapter6List from "../../organisms/StudyChapter/Chapter6List";
-import Chapter7List from "../../organisms/Chapter7List";
+import Chapter7List from "../../organisms/StudyChapter/Chapter7List";
 
 function ChapterListTemplate({ data, chapterId }) {
   let [content, setContent] = useState(null);
@@ -34,17 +34,17 @@ function ChapterListTemplate({ data, chapterId }) {
         {content && chapterId == 1 ? (
           <Chapter1List content={content} chapterId={chapterId} />
         ) : content && chapterId == 2 ? (
-          <Chapter2List content={content} />
+          <Chapter2List content={content} chapterId={chapterId}/>
         ) : content && chapterId == 3 ? (
-          <Chapter3List content={content} />
+          <Chapter3List content={content} chapterId={chapterId}/>
         ) : content && chapterId == 4 ? (
-          <Chapter4List content={content} />
+          <Chapter4List content={content} chapterId={chapterId}/>
         ) : content && chapterId == 5 ? (
-          <Chapter5List content={content} />
+          <Chapter5List content={content} chapterId={chapterId}/>
         ) : content && chapterId == 6 ? (
-          <Chapter6List content={content} />
+          <Chapter6List content={content} chapterId={chapterId}/>
         ) : content && chapterId == 7 ? (
-          <Chapter7List content={content} />
+          <Chapter7List content={content} chapterId={chapterId}/>
         ) : (
           <p>로딩중입니다</p>
         )}
