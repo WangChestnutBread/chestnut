@@ -20,44 +20,43 @@ function LoginPage() {
   const setUserId = useAuthStore((state) => state.setUserId);
   const setManager = useAuthStore((state) => state.setManager);
   const setId = useAuthStore((state) => state.setId);
-  const setPw = useAuthStore((state) => state.setPw)
-
+  const setPw = useAuthStore((state) => state.setPw);
 
   const handleChangeName = (event) => {
-    setId(event.target.value)
+    setId(event.target.value);
     setName(event.target.value);
   };
 
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
-    setPw(event.target.value)
+    setPw(event.target.value);
   };
   const GotoBack = () => {
     navigate(-1);
   };
   const handleLogin = (event) => {
     console.log(event);
-      event.preventDefault();
-      axios
-        .post("https://i11d107.p.ssafy.io/chestnutApi/member/login", {
-          loginId: Id,
-          password: password,
-        })
-        .then((response) => {
-          if (response.data.code == 200) {
-            setAccessToken(response.headers["access"]);
-            setManager(response.data.data.admin);
-            navigate("/main");
-          } else if (response.data.code == 706) {
-            alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
-          }
-          console.log(response);
-          setUserId(Id);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    event.preventDefault();
+    axios
+      .post("https://i11d107.p.ssafy.io/chestnutApi/member/login", {
+        loginId: Id,
+        password: password,
+      })
+      .then((response) => {
+        if (response.data.code == 200) {
+          setAccessToken(response.headers["access"]);
+          setManager(response.data.data.admin);
+          navigate("/main");
+        } else if (response.data.code == 706) {
+          alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
+        }
+        console.log(response);
+        setUserId(Id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="container">
       <div
@@ -82,17 +81,16 @@ function LoginPage() {
           <MemberLogo title={"Login"} />
           <div
             style={{
-              paddingLeft: 91,
-              paddingRight: 91,
-              paddingTop: 48,
-              paddingBottom: 48,
+              paddingLeft: 20,
+              paddingRight: 30,
+              paddingTop: 20,
+              paddingBottom: 20,
               background: "#DCB78F",
               borderRadius: 25,
               overflow: "hidden",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              gap: 27,
               display: "flex",
             }}
           >
@@ -118,45 +116,6 @@ function LoginPage() {
                 content={"비밀번호를 입력하세요"}
                 work={handleChangePassword}
               />
-            </div>
-            <div
-              style={{
-                paddingTop: 10,
-                paddingBottom: 10,
-                background: "#DCB78F",
-                justifyContent: "flex-start",
-                alignItems: "flex-start",
-                gap: 10,
-                display: "inline-flex",
-              }}
-            >
-              <input
-                type="checkbox"
-                name="saveId"
-                id="Id"
-                style={{
-                  width: 25,
-                  height: 25,
-                  position: "relative",
-                  background: "white",
-                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                  borderRadius: 30,
-                  border: "2px black solid",
-                }}
-              />
-              <div
-                style={{
-                  width: 187,
-                  height: 32,
-                  color: "black",
-                  fontSize: 16,
-                  fontFamily: "Jua",
-                  fontWeight: "400",
-                  wordWrap: "break-word",
-                }}
-              >
-                아이디 저장
-              </div>
             </div>
             <div
               style={{

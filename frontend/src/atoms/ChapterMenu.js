@@ -9,7 +9,7 @@ function ChapterMenu(props) {
           <div className="imgbox">
             <img
               className="imgcontent"
-              src="https://via.placeholder.com/276x226"
+              src={`/image/Chapter${props.chapterId}.png`}
             />
           </div>
         </div>

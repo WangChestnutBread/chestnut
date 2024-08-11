@@ -8,7 +8,7 @@ import baseApi from "../../api/fetchAPI"
 import useAuthStore from "../../stores/authStore";
 
 function MainProfileTextBox({profile}) {
-  console.log(profile)
+  // console.log(profile)
   let navigate = useNavigate()
   const clearAccessToken = useAuthStore((state) => state.clearAccessToken);
 

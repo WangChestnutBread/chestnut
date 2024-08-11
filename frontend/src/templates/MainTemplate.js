@@ -4,13 +4,14 @@ import "./MainTemplate.css";
 import LastStudy from "../organisms/Main/LastStudy";
 import MainProfile from "../organisms/Main/MainProfile";
 import MainCalendar from "../organisms/Main/MainCalendar";
+import OpenChatButton from "../atoms/OpenChatButton"
 
-const MainTemplate = ({ profile }) => {
+const MainTemplate = ({ profile, attendance }) => {
   // 메뉴 밤
   let [menu, setMenu] = useState([
     { name: "학습", path: "/study" },
     { name: "대화연습", path: "" },
-    { name: "단어장", path: "" },
+    { name: "단어장", path: "/myVocabulary" },
     { name: "게시판", path: "/board/qna" },
   ]);
 
@@ -37,7 +38,8 @@ const MainTemplate = ({ profile }) => {
       </div>
 
       {/* 출석 캘린더 */}
-      <MainCalendar />
+      <MainCalendar attendance={attendance.attendanceAt}/>
+
     </div>
   );
 };

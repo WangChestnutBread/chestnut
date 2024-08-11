@@ -2,6 +2,7 @@ package com.chestnut.backend.study.service;
 
 import com.chestnut.backend.common.exception.MemberNotFoundException;
 import com.chestnut.backend.common.exception.NotFoundException;
+import com.chestnut.backend.log.service.LogService;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MemberRepository;
 import com.chestnut.backend.study.dto.*;
@@ -37,18 +38,42 @@ public class StudyService {
     }
 
     /**
-     * 챕터내 학습 목록 조회(1,2,3,5,6 단원용)
+     * 챕터내 학습 목록 조회
      */
-    @Transactional(readOnly = true)
+    @Transactional
     public List<?> findChapterStudyInfo(String loginId, int chapterId) {
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
         return switch (chapterId) {
             case 4 -> this.phonologyGroupInfo();
             case 7 -> this.confusedWordsGroup();
-            default -> studyInfoRepository.findChapterStudyInfo(member.getMemberId(), chapterId);
+            default -> convertData(member.getMemberId(), chapterId);
         };
     }
+
+    /**
+     * 챕터내 학습 목록 조회 (1,2,3,5,6단원 데이터 가공)
+     */
+    @Transactional(readOnly = true)
+    public List<ChapterStudyInfoParentDto> convertData(Long memberId, int chapterId) {
+        List<ChapterStudyInfo> list = studyInfoRepository.findChapterStudyInfo(memberId, chapterId);
+        Map<String, List<ChapterStudyInfo>> collect = list.stream()
+                .collect(Collectors.groupingBy(item -> item.getCategoryContent(),
+                        TreeMap::new, Collectors.toList()));
+        Set<String> keys = collect.keySet();
+        return keys.stream()
+                .map(item -> mapToParent(item, collect))
+                .toList();
+    }
+
+    public ChapterStudyInfoParentDto mapToParent(String key, Map<String, List<ChapterStudyInfo>> collect) {
+        List<ChapterStudyInfoChildDto> child = collect.get(key).stream()
+                .map(item -> new ChapterStudyInfoChildDto(item.getStudyId(), item.getWord(), item.getIsPass(), item.getIsStudy(), item.getIsVocabList()))
+                .toList();
+        return new ChapterStudyInfoParentDto(key, child);
+    }
+
+
 
     /**
      * 챕터내 학습 목록 조회 (4단원)

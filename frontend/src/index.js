@@ -19,7 +19,6 @@ import FindId from "./templates/Authentication/FindId";
 import FindPw from "./templates/Authentication/FindPw";
 import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
-import ChapterListpage from "./pages/StudyDetail/ChapterListpage";
 import StudyList from "./templates/StudyList";
 import MainPage from "./pages/MainPage";
 import RankingTemplate from "./templates/RankingTemplate";
@@ -37,6 +36,8 @@ import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite
 import OpenChat from "./pages/OpenChat";
 
 import VocabularyListPage from "./pages/VocabularyListPage"
+import Ranking from "./pages/Ranking";
+import ChapterListPage from "./pages/ChapterListPage";
 
 
 const router = createBrowserRouter([
@@ -140,45 +141,17 @@ const router = createBrowserRouter([
     path: "/study",
     element: <StudyList />
   },
-  
-
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Chapter1Listpage />
-  // },
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Chapter2Listpage />
-  // },
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Chapter3Listpage />
-  // },
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Ch4n7DetailPage/>
-  // },
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Chapter5Listpage />
-  // },
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Chapter6Listpage />
-  // },
-
   {
-    path: "/chapter/:chapterId",
-    element: <Ch4n7DetailPage/>
-  },
-
-  {
-    path: "/chapter/:chapterId",
-    element: <Ch4n7DetailPage />
+    path: "/ranking",
+    element: <Ranking/>
   },
   {
-    path: "/chapter/:listId",
-    element: <ChapterListpage />
+    path: "/myVocabulary",
+    element: <VocabularyListPage/>
+  },
+  {
+    path: "/chapter/:chapterId",
+    element: <ChapterListPage/>
   },
   {
     path: "/main",

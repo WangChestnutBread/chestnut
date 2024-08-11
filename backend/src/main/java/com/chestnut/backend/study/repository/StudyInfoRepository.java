@@ -68,7 +68,7 @@ public class StudyInfoRepository {
                         "select v.study.studyId as studyId from Vocabulary v where v.member.memberId = :memberId " +
                 ") v " +
                 "on s.studyId = v.studyId " +
-                "where s.chapter.chapterId = :chapterId and s.studyId < 100";
+                "where s.chapter.chapterId = :chapterId and (:chapterId != 1 or s.studyId < 100)";
 
         return em.createQuery(query, ChapterStudyInfo.class)
                 .setParameter("memberId", memberId)
