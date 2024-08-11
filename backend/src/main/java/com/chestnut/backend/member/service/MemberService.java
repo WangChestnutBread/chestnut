@@ -10,8 +10,6 @@ import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MainMemberRepository;
 import com.chestnut.backend.member.repository.MemberRepository;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -208,37 +206,36 @@ public class MemberService {
         redisService.deleteData("Refresh:"+loginId);
     }
 
+    /**
+     * 메인 페이지에 보일 멤버 정보 조회 메서드.
+     *
+     * @param loginId 조회할 사용자 아이디
+     * @return MainMemberInfoDto 조회한 사용자 정보 DTO
+     */
     @Transactional(readOnly = true)
     public MainMemberInfoDto getMainMemberInfo (String loginId){
-        Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
-        if(member.isWithdraw()) throw new InvalidMemberException();
-        try {
-            return  mainMemberRepository.findMainMemberInfo(member.getMemberId());
-        }catch (NoResultException e){
-            throw new NotFoundException();
-        }catch (PersistenceException e){
-            throw new DatabaseException();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new UnknownException();
-        }
-    }
-
-    @Transactional(readOnly = true)
-    public AttendanceLogDto getAttendanceLog(String loginId, int year){
-        Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
-        if(member.isWithdraw()) throw new InvalidMemberException();
-        try {
-            return new AttendanceLogDto(attendanceLogRepository.findByMemberIdandYear(member.getMemberId(), year));
-        }catch (PersistenceException e){
-            throw new DatabaseException();
-        }catch (Exception e){
-            throw new UnknownException();
-        }
+        // 멤버 유효성 검사
+        Member member = validateMember(loginId);
+        return  mainMemberRepository.findMainMemberInfo(member.getMemberId());
     }
 
     /**
-     * 멤버 조회 및 탈퇴 여부 검사
+     * 사용자 출석 기록 조회 메서드.
+     *
+     * @param loginId 조회할 사용자 아이디
+     * @param year 출석 조회 년도
+     * @return AttendanceLogDto 출석 기록 DTO
+     */
+    @Transactional(readOnly = true)
+    public AttendanceLogDto getAttendanceLog(String loginId, int year){
+        // 멤버 유효성 검사
+        Member member = validateMember(loginId);
+        return new AttendanceLogDto(attendanceLogRepository.findByMemberIdandYear(member.getMemberId(), year));
+    }
+
+    /**
+     * 멤버 조회 및 탈퇴 여부 검사 메서드.
+     *
      * @param loginId 검사할 사용자 아이디
      * @return Member 검사한 멤버
      * @throws MemberNotFoundException 사용자를 찾을 수 없는 경우
@@ -251,7 +248,8 @@ public class MemberService {
     }
 
     /**
-     * 멤버 조회 및 탈퇴, 관리자 여부 검사
+     * 멤버 조회 및 탈퇴, 관리자 여부 검사 메서드.
+     *
      * @param loginId 검사할 사용자 아이디
      * @return Member 검사한 멤버
      * @throws AdminPermissionDeniedException 사용자가 관리자 권한이 없는 경우
