@@ -1,9 +1,10 @@
-.Chapter5List {
+.Chapter5_6List {
   display: flex;
   position: relative;
   width: 100%;
   flex-direction: column;
   align-items: center;
+  gap: 30px;
 }
 
 .TabDropDownButton {
@@ -49,9 +50,24 @@
   align-items: center;
   flex-wrap: wrap;
   width: 80%;
-  height: 75%;
+  height: 68%;
   z-index: 100;
   overflow: auto;
+}
+
+.Chapter6Content {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 12%;
+  left: 12%;
+  width: 80%;
+  height: 68%;
+  gap: 10px;
+  z-index: 100;
+  /* overflow: auto; */
 }
 
 .Chapter5Word {
@@ -72,4 +88,27 @@
   color: #ffcc4d;
   text-decoration: underline;
   transition: color 0.1s ease, text-decoration 0.2s ease;
+}
+
+.Chapter6Word {
+  display: flex;
+  width: 100%;
+  padding: 15px 0px;
+  align-items: center;
+  color: white;
+}
+
+.Chapter6Word > p {
+  cursor: pointer;
+}
+
+.Chapter6Word > p:hover {
+  color: #ffcc4d;
+  text-decoration: underline;
+  transition: color 0.1s ease, text-decoration 0.2s ease;
+}
+
+.Chapter5_6Pagenation {
+  display: flex;
+  margin-bottom: 30px;
 }
