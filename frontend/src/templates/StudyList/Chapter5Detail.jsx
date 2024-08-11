@@ -71,7 +71,9 @@ const Chapter5Detail = () => {
           </div>
         </div>
         {/* 마이크 */}
+        <div className="mt-5">
         <RecordData func={moveData} func2={answer}/>
+        </div>
       </div>
     </div>
   );

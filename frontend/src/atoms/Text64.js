@@ -29,11 +29,15 @@ function Text64({ text, location }) {
 
     fetchData()
   }, []) // 빈 의존성 배열을 전달하여 컴포넌트 마운트 시 한 번만 실행되도록 함
-
+  console.log(styledText);
   return (
-    <p style={{ fontSize: '4rem' }}>
+  <div>
+    {styledText.length > 10 ? ( <p style={{ fontSize: '2rem' }}>
       {styledText}
-    </p>
+    </p>) : ( <p style={{ fontSize: '4rem' }}>
+      {styledText}
+    </p>) }
+    </div>
   )
 }
 
