@@ -70,7 +70,9 @@ const Chapter6Detail = () => {
           <div className="col-6 mt-2 mb-3"></div>
         </div>
         {/* 마이크 */}
+        <div className="mt-5">
         <RecordData func={moveData} func2={answer} />
+        </div>
       </div>
     </div>
   );

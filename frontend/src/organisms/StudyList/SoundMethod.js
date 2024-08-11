@@ -5,8 +5,6 @@ import SpeakExplanation from "../../molecules/StudyList/SpeakExplanation";
 import "./SoundMethod.css";
 
 const SoundMethod = (hangeul) => {
-
-
   const distinction = parseInt(hangeul.hangeul.studyId);
   const [hangeulData, setHangeulData] = useState();
 

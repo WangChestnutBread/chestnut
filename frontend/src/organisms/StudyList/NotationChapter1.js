@@ -18,14 +18,13 @@ const NotationChapter1 = ({word}) => {
   },[word.studyId])
 
   // console.log(data);
+  console.log();
 
   return (
-    <div className="box">
+    <div className="box rounded">
       {parseInt(word.chapterId) === 1 ? <div className="abc">표기[발음]</div> : <div className="abc">표기</div>}
-      
       <div className="data1">{data}</div>
       {parseInt(word.chapterId) === 1 ? <div className="data2">{`[${data}]`}</div>: <></>}
-      
     </div>
   );
 };
