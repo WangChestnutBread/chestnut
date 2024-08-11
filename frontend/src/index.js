@@ -19,6 +19,7 @@ import FindId from "./templates/Authentication/FindId";
 import FindPw from "./templates/Authentication/FindPw";
 import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
+import StudyList from "./templates/StudyList";
 import MainPage from "./pages/MainPage";
 import Chapter1Detail from "./templates/StudyList/Chapter1Detail";
 import Chapter2Detail from "./templates/StudyList/Chapter2Detail";
