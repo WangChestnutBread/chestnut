@@ -37,6 +37,7 @@ const Chapter3Detail = () => {
         })
         .then((res) => {
           console.log(res);
+          alert('축하드려요 성공입니다.')
         });
     }
   };

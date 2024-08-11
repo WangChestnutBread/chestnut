@@ -12,7 +12,7 @@ const MainTemplate = ({ profile, attendance }) => {
     { name: "학습", path: "/study" },
     { name: "대화연습", path: "" },
     { name: "단어장", path: "/myVocabulary" },
-    { name: "게시판", path: "/board/qna" },
+    { name: "게시판", path: "/board/announcement/1" },
   ]);
 
   return (

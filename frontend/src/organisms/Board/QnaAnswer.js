@@ -15,7 +15,7 @@ const QnaAnswer = () => {
     baseApi(`/board/qna/${params.id}`).then((res) => {
       console.log(res)
       setAnswer(res.data.data.answer)
-      setDate(res.data.data.answerAt)
+      setDate(res.data.data.createdAt)
     }).catch((err) => {
       console.log(err);
     })
@@ -26,7 +26,7 @@ const QnaAnswer = () => {
       <div className="d-flex justify-content-between mb-3">
         <div>{answer}</div>
         <div className="text-center">
-          <p>{`${date[0]}-${date[1]}-${date[2]} `}</p>
+          <p>{date[0]}-{date[1]}-{date[2]}</p>
           <p className="mt-3">관리자</p>
         </div>
       </div>
