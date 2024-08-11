@@ -6,6 +6,7 @@ import baseApi from "../../api/fetchAPI";
 const Pronunciations = ({saying, realData, location}) => {
 
   console.log(location);
+  console.log(saying);
   const [word, setWrod] = useState("")
   const [pronounce, setPronounce] = useState("")
 

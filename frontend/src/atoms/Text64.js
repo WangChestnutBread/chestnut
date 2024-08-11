@@ -7,7 +7,7 @@ function Text64({ text, location }) {
   // 문자열을 배열로 변환하고, 각 문자에 스타일을 적용한 span 요소를 반환
   const styledText = text.split('').map((char, index) => {
     // location 배열에 현재 index가 포함되어 있는지 확인
-    const isHighlighted = location.includes(index);
+    const isHighlighted = location.includes(index+1);
     return (
       <span key={index} style={{ color: isHighlighted ? 'red' : 'black' }}>
         {char}
