@@ -35,7 +35,7 @@ const Chapter2Detail = () => {
       }).then((res) => {
         console.log(res);
         setCorrect(true)
-        alert("성공입니다.")
+        alert("축하드려요 성공입니다.")
       })
     }
   }
