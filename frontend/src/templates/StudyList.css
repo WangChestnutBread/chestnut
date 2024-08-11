@@ -11,19 +11,13 @@
     align-items: center;
     display: inline-flex;
 }
-.titleFont{
-    text-align: center;
-    color: #412522;
-    font-size: 2rem;
-    font-family: 'Jua';
-    font-weight: 400;
-    line-height: 1;
-    word-Wrap: break-word;
-}
+
 .titleBox{
+    display: flex;
+    width: 100%;
+    padding: 30px 0px;
     justify-content: center;
     align-items: center;
-    display: flex;
 }
 .textBox{
     justify-content: center;
