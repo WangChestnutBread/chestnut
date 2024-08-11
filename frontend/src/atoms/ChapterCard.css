@@ -1,0 +1,39 @@
+.ChapterCard {
+  border-radius: 25px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.ChapterCardHeader {
+  background: #dcb78f;
+  font-size: 1.5rem;
+  padding: 18px;
+  text-align: center;
+}
+
+.ChapterCardImg {
+    width: 100%; /* 카드의 너비에 맞추기 */
+    height: auto; /* 자동으로 높이 설정 */
+    max-height: 210px; /* 세로 길이 최대값 설정 */
+    object-fit: cover; /* 비율을 유지하면서 카드 크기에 맞게 자르기 */
+    object-position: top; /* 이미지의 상단을 기준으로 자르기 */
+}
+
+.ChapterCardBody {
+
+}
+
+.ChapterButton {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.ChapterButton:hover {
+  background: #dcb78f;
+  color: white;
+}
+
+
