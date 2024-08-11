@@ -1,35 +1,12 @@
-import "./StudyList.css";
-import baseApi from "../api/fetchAPI";
+import "./ChapterMainTemplate.css";
 import ChapterCard from "../atoms/ChapterCard";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./NavbarExample.css";
 import StudyBackButton from "../molecules/StudyBackButton";
 import ChestNutButton from "../organisms/ChestNutButton";
 import Text32 from "../atoms/Text32";
 import { Row, Col } from "react-bootstrap";
 
-function StudyList() {
-  const navigate = useNavigate();
-  const [listdata, setListData] = useState([]);
-  
-  useEffect(() => {
-    // if (!accessToken) {
-    //   // accessToken이 없으면 로그인 페이지로 이동 또는 다른 처리
-    //   navigate('/login'); // 예시: 로그인 페이지로 이동
-    //   return;
-    // }
-    baseApi({
-      method: "get",
-      url: "/study/chapter",
-    }) 
-    .then((response) => {
-      setListData(response.data.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }, []);
+function ChapterMainTemplate({listdata}) {
 
   return (
     <div>
@@ -65,6 +42,6 @@ function StudyList() {
   );
 }
 
-export default StudyList;
+export default ChapterMainTemplate;
 
 

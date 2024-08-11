@@ -19,7 +19,6 @@ import FindId from "./templates/Authentication/FindId";
 import FindPw from "./templates/Authentication/FindPw";
 import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
-import StudyList from "./templates/StudyList";
 import MainPage from "./pages/MainPage";
 import RankingTemplate from "./templates/RankingTemplate";
 import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
@@ -37,6 +36,7 @@ import OpenChat from "./pages/OpenChat";
 import VocabularyListPage from "./pages/VocabularyListPage"
 import Ranking from "./pages/Ranking";
 import ChapterListPage from "./pages/ChapterListPage";
+import ChapterMainPage from "./pages/ChapterMainPage";
 
 
 const router = createBrowserRouter([
@@ -138,7 +138,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/study",
-    element: <StudyList />
+    element: <ChapterMainPage />
   },
   {
     path: "/ranking",
