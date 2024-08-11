@@ -13,8 +13,6 @@ import com.chestnut.backend.member.repository.MemberRepository;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
 import jakarta.servlet.http.HttpSession;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -243,8 +241,8 @@ public class MemberService {
      * 멤버 조회 및 탈퇴 여부 검사
      * @param loginId 검사할 사용자 아이디
      * @return Member 검사한 멤버
-     * @throws MemberNotFoundException 조회된 멤버 결과 없음
-     * @throws InvalidMemberException 탈퇴한 계정 조회
+     * @throws MemberNotFoundException 사용자를 찾을 수 없는 경우
+     * @throws InvalidMemberException 탈퇴한 계정인 경우
      */
     public Member validateMember(String loginId) {
         Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
@@ -256,9 +254,9 @@ public class MemberService {
      * 멤버 조회 및 탈퇴, 관리자 여부 검사
      * @param loginId 검사할 사용자 아이디
      * @return Member 검사한 멤버
-     * @throws AdminPermissionDeniedException 관리자 권한 없음
+     * @throws AdminPermissionDeniedException 사용자가 관리자 권한이 없는 경우
      */
-    public Member validateMemberForAdmoin(String loginId) {
+    public Member validateMemberForAdmin(String loginId) {
         Member member = validateMember(loginId);
         if(!member.isAdmin()) throw new AdminPermissionDeniedException();
         return member;
