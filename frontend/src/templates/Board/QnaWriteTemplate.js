@@ -16,6 +16,19 @@ const QNAWritePage = () => {
   };
 
   const handleDetailClick2 = () => {
+    if (title.length < 3){
+      alert('제목을 3글자 이상 적어주세요')
+      return
+    }
+    else if (content.length < 10) {
+      alert('내용을 10글자 이상 적어주세요')
+      return
+    }
+    else if (!qnaCategoryId) {
+      alert('유형을 선택해주세요')
+      return
+    }
+
     baseApi
       .post("/board/qna", {
         qnaCategoryId,

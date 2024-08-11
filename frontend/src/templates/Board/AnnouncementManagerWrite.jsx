@@ -151,7 +151,11 @@ const AnnouncementManagerWrite = () => {
   };
 
   const handleDetailClick = (e) => {
-    if (e.key === "Enter") {
+    if (title.length < 3 && content.length < 10){
+      alert("제목 3글자 내용 10글자 이상 적어주세요")
+    }
+
+    else if (e.key === "Enter") {
       baseApi
         .post("/board/announcement", {
           announceCategoryId,
@@ -170,6 +174,18 @@ const AnnouncementManagerWrite = () => {
   };
 
   const handleDetailClick2 = () => {
+    if (title.length < 3){
+      alert("제목 3글자 이상 적어주세요")
+      return
+    }
+    else if (content.length < 10){
+      alert("내용을 10글자 이상 적어주세요")
+      return
+    }
+    else if (!announceCategoryId){
+      alert('유형선택 부탁드립니다.')
+      return
+    }
     baseApi
         .post("/board/announcement", {
           announceCategoryId,

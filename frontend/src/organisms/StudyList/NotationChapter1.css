@@ -17,11 +17,11 @@
 }
 .data1 {
   text-align: center;
-  font-size: 64px; /* 글자 크기 */
+  font-size: 32px; /* 글자 크기 */
   color: white; /* 글자 색상 */
 }
 
 .data2 {
-  font-size: 64px; /* 글자 크기 */
+  font-size: 32px; /* 글자 크기 */
   color: #FFCC4D; /* 글자 색상 */
 }

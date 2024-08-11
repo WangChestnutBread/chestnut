@@ -32,7 +32,7 @@ function Text64({ text, location }) {
   console.log(styledText);
   return (
   <div>
-    {styledText.length > 10 ? ( <p style={{ fontSize: '2rem' }}>
+    {styledText.length > 5 ? ( <p style={{ fontSize: '2rem' }}>
       {styledText}
     </p>) : ( <p style={{ fontSize: '4rem' }}>
       {styledText}

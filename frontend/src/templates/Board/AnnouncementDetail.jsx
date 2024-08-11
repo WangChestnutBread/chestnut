@@ -2,14 +2,12 @@ import './AnnouncementDetail.css'
 import LogoAnnouncement from "../../molecules/Board/LogoAnnouncement";
 import { useNavigate, useParams } from "react-router-dom";
 import baseApi from "../../api/fetchAPI";
-import useAuthStore from "../../stores/authStore";
 import AnnouncementTitle from "../../organisms/Board/AnnouncementTitle";
 import AnnouncementContent from "../../organisms/Board/AnnouncementContent"
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
 
 const AnnouncementDetail = () => {
-  const userId = useAuthStore((state)=>(state.userId))
   const params = useParams();
   const navigate = useNavigate()
   console.log(params);
@@ -25,21 +23,6 @@ const AnnouncementDetail = () => {
       navigate(`/board/announcement/detail/${params.id}`);
     }
   };
-
-  // const updateAnnouncement = () => {
-  //   baseApi
-  //     .put(`board/announcement/${params.id}`, {
-  //       announceId: "1",
-  //       announceCategoryId: "1",
-  //       title: "너무너무수정할게많아요ㅜㅜㅜ",
-  //       content: "하지만재밌어요",
-  //       loginId: `${userId}`,
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       navigate('/board/announcement')
-  //     });
-  // };
 
   return (
     <div>
