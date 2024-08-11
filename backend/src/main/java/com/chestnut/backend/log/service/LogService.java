@@ -8,6 +8,7 @@ import com.chestnut.backend.log.entity.*;
 import com.chestnut.backend.log.repository.*;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MemberRepository;
+import com.chestnut.backend.member.service.MemberService;
 import com.chestnut.backend.study.entity.Study;
 import com.chestnut.backend.study.repository.StudyRepository;
 import lombok.RequiredArgsConstructor;
