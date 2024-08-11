@@ -1,84 +1,84 @@
-import "./VocabularyListTemplate.css"
+import "./VocabularyListTemplate.css";
 import QuestionMarkButton from "../molecules/QuestionMarkButton";
 import StudyBackButton from "../molecules/StudyBackButton";
 import ChestNutButton from "../organisms/ChestNutButton";
 import VocabularyList from "../organisms/VocabularyList";
-import "./NavbarExample.css"
+import "./NavbarExample.css";
 import Pagenation from "../atoms/Pagenation";
 import { useEffect, useState } from "react";
 import baseApi from "../api/fetchAPI";
 
-
 function VocabularyListTemplate() {
-    let [chapterTitle, setChapterTitle] = useState(null)
-    let [myVocabulary, setMyVocabulary] = useState(null)
+  let [chapterTitle, setChapterTitle] = useState(null);
+  let [currentVocaItem, setCurrentVocaItem] = useState(null);
 
-    const getChapterTitle = () => {
-        baseApi({
-            method: 'get',
-            url: '/study/chapter'
-        })
-        .then((res)=>{
-            // console.log(res)
-            setChapterTitle(res.data.data)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-    }
+  const getChapterTitle = () => {
+    baseApi({
+      method: "get",
+      url: "/study/chapter",
+    })
+      .then((res) => {
+        // console.log(res)
+        setChapterTitle(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    const getVocabulary = () => {
-        baseApi({
-            method: 'get',
-            url: '/vocabulary',
-            params :{
-                chapter:'0',
-                page:'0',
-                size:'10'
-            }
-        })
-        .then((res)=>{
-            // console.log(res.data.data)
-            setMyVocabulary(res.data.data)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-    }
-    
-    useEffect(()=>{
-        Promise.all([getChapterTitle(), getVocabulary()])
-        .then(()=>{console.log("호출")});
-    }, [])
+  const getVocabulary = (chapter, page) => {
+    baseApi({
+      method: "get",
+      url: "/vocabulary",
+      params: {
+        chapter: `${chapter}`,
+        page: `${page}`,
+        size: "6"
+      },
+    })
+      .then((res) => {
+        console.log(res.data.data);
+        setCurrentVocaItem(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  useEffect(() => {
+    Promise.all([getChapterTitle(), getVocabulary(0, 1)]).then(() => {
+      console.log("호출");
+    });
+  }, []);
 
-    return (
-        <div className="VocabularyListTemplate">
-            {/* navbar */}
-            <div className="NavbarExample">
-                <div className="NavbarButton">
-                    <div className="LeftButton">
-                        <StudyBackButton/>
-                        <ChestNutButton/>
-                    </div>
-                    <div className="RightButton">
-                        <QuestionMarkButton/>
-                    </div>
-                </div>
-            </div>
-
-
-
-            {/* 단어장 칠판 */}
-            {
-                chapterTitle && myVocabulary ? <VocabularyList chapterTitle={chapterTitle} content={myVocabulary.content}/> : null
-            }
-            
-
-            {/* 페이지네이션 */}
-            <Pagenation currentPage={""} totalPages={""} onPageChange={""}/>
+  return (
+    <div className="VocabularyListTemplate">
+      {/* navbar */}
+      <div className="NavbarExample">
+        <div className="NavbarButton">
+          <div className="LeftButton">
+            <StudyBackButton />
+            <ChestNutButton />
+          </div>
+          <div className="RightButton">
+            <QuestionMarkButton />
+          </div>
         </div>
-    )
+      </div>
+
+      {/* 단어장 칠판 */}
+      {chapterTitle && currentVocaItem ? (
+        <VocabularyList
+          chapterTitle={chapterTitle}
+          getVocabulary={getVocabulary}
+          currentVocaItem={currentVocaItem}
+          setCurrentVocaItem={setCurrentVocaItem}
+        />
+      ) : (
+        <p>로딩중...</p>
+      )}
+    </div>
+  );
 }
 
 export default VocabularyListTemplate;

@@ -1,44 +1,40 @@
-.BlackBoardWithTab {
+.VocaList {
   display: flex;
-  width: 100%;
-  flex-direction: column;
   position: relative;
-}
-
-.BlackBoardWithLine {
-  display: flex;
-}
-
-.BlackBoardBody {
-  position: relative;
-  width: 100%;
-  z-index: 10;
-}
-
-.TabButton {
-  display: flex;
-  position: absolute;
-  left: 20%;
-  gap: 1px;
-  z-index: -1;
-}
-
-.BoardInside {
-  display: flex;
-  position: absolute;
-  justify-content: space-around;
-  width: 100%;
-  height: 90%;
-  bottom: 4%;
-  z-index: 1000;
-}
-
-.BoardList {
-  display: flex;
-  position: absolute;
   width: 100%;
   flex-direction: column;
   align-items: center;
-  top: 20%;
-  left: 10%;
+  gap: 30px;
+}
+
+.VocaListContent {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 12%;
+  left: 12%;
+  width: 80%;
+  height: 68%;
+  gap: 10px;
+  z-index: 100;
+}
+
+.VocaListWord {
+  display: flex;
+  width: 100%;
+  padding: 15px 0px;
+  align-items: center;
+  color: white;
+}
+
+.VocaListWord > p {
+  cursor: pointer;
+}
+
+.VocaListWord > p:hover {
+  color: #ffcc4d;
+  text-decoration: underline;
+  transition: color 0.1s ease, text-decoration 0.2s ease;
 }
