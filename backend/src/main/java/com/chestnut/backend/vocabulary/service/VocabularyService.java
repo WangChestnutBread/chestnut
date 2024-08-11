@@ -1,5 +1,6 @@
 package com.chestnut.backend.vocabulary.service;
 
+import com.chestnut.backend.common.exception.InvalidMemberException;
 import com.chestnut.backend.common.exception.MemberNotFoundException;
 import com.chestnut.backend.common.exception.NotFoundException;
 import com.chestnut.backend.common.exception.StudyNotFoundException;
@@ -31,6 +32,7 @@ public class VocabularyService {
     public void addVocabulary(Long studyId, String loginId) {
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
+        if (member.isWithdraw()) throw new InvalidMemberException();
         Study study = studyRepository.findByStudyId(studyId)
                 .orElseThrow(StudyNotFoundException::new);
         vocabularyRepository.save(new Vocabulary(member, study));
@@ -39,6 +41,7 @@ public class VocabularyService {
     public void deleteVocabulary(Long studyId, String loginId) {
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
+        if (member.isWithdraw()) throw new InvalidMemberException();
         Study study = studyRepository.findByStudyId(studyId)
                 .orElseThrow(StudyNotFoundException::new);
         Vocabulary vocabulary = vocabularyRepository.findByMemberAndStudy(member, study)
@@ -49,6 +52,7 @@ public class VocabularyService {
     public Page<VocabularyDto> getVocabularyList(String loginId, Byte chapterId, Integer page, Integer size) {
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
+        if (member.isWithdraw()) throw new InvalidMemberException();
         Pageable pageable = PageRequest.of(page, size, Sort.by("study.studyId").ascending());
         if (chapterId == (byte)0) {
             return vocabularyRepository.findByMember(member, pageable);

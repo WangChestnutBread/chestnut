@@ -1,5 +1,6 @@
 package com.chestnut.backend.study.service;
 
+import com.chestnut.backend.common.exception.InvalidMemberException;
 import com.chestnut.backend.common.exception.MemberNotFoundException;
 import com.chestnut.backend.common.exception.NotFoundException;
 import com.chestnut.backend.log.entity.StudyLog;
@@ -40,6 +41,7 @@ public class StudyService {
     public List<ChapterInfoDto> getChapterInfo(String loginId) {
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
+        if (member.isWithdraw()) throw new InvalidMemberException();
         return studyInfoRepository.findChapterInfoByMemberId(member.getMemberId());
     }
 
@@ -49,6 +51,7 @@ public class StudyService {
     public List<?> findChapterStudyInfo(String loginId, int chapterId) {
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
+        if (member.isWithdraw()) throw new InvalidMemberException();
         return switch (chapterId) {
             case 4 -> this.phonologyGroupInfo();
             case 7 -> this.confusedWordsGroup();
