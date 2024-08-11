@@ -1,20 +1,65 @@
-import NavBar from "../../organisms/NavBar";
+import { useState } from "react";
+import StudyBackButton from "../../molecules/StudyBackButton";
+import ChestNutButton from "../../organisms/ChestNutButton";
 import "./QnaWriteTemplate.css";
 import { useNavigate } from "react-router-dom";
+import baseApi from "../../api/fetchAPI";
 
 const QNAWritePage = () => {
-  const navigate = useNavigate()
+  const [qnaCategoryId, setQnaCategoryId] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const navigate = useNavigate();
   const handleQnaClick = () => {
-    navigate('/board/qna')
-  }
-  const handleDetailClick = () => {
-    navigate('/board/qna')
-  }
+    navigate("/board/qna");
+  };
+
+  const handleDetailClick2 = () => {
+    baseApi
+      .post("/board/qna", {
+        qnaCategoryId,
+        title,
+        content,
+      })
+      .then((res) => {
+        console.log(res);
+        navigate("/board/qna");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDetailClick = (e) => {
+    if (e.key === "Enter") {
+      baseApi
+        .post("/board/qna", {
+          qnaCategoryId,
+          title,
+          content,
+        })
+        .then((res) => {
+          console.log(res);
+          navigate("/board/qna");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   return (
     <div>
       {/* // 헤더 영역 */}
-      <NavBar/>
+      <div className="NavbarExample">
+        <div className="NavbarButton">
+          <div className="LeftButton">
+            <StudyBackButton />
+            <ChestNutButton />
+          </div>
+        </div>
+      </div>
       <div className="container text-start justify-center">
         {/* // 메인타이틀 QNA */}
         <div className="logo-container">
@@ -31,15 +76,15 @@ const QNAWritePage = () => {
           <select
             className="form-select rounded-3 selected fs-5"
             aria-label="Default select example"
+            value={qnaCategoryId}
+            onChange={(e) => setQnaCategoryId(e.target.value)}
           >
             <option selected>유형을 선택하시오</option>
-            <option value="1">유형1</option>
-            <option value="2">유형2</option>
-            <option value="3">유형3</option>
-            <option value="4">유형4</option>
-            <option value="5">유형5</option>
-            <option value="6">유형6</option>
-            <option value="7">유형7</option>
+            <option value="1">랭킹</option>
+            <option value="2">오픈채팅</option>
+            <option value="3">학습</option>
+            <option value="4">게시판</option>
+            <option value="5">공지사항</option>
           </select>
         </div>
 
@@ -50,6 +95,8 @@ const QNAWritePage = () => {
             type="text"
             className="form-control rounded-3 text fs-5"
             placeholder="제목을 입력하시오"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         {/* //내용 */}
@@ -59,14 +106,21 @@ const QNAWritePage = () => {
             className="form-control rounded-3 content fs-5"
             placeholder="Leave a comment here"
             id="floatingTextarea2"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            onKeyDown={(e) => handleDetailClick(e)}
           ></textarea>
           <label for="floatingTextarea2">Comments</label>
         </div>
 
         {/* // 취소 등록 버튼 */}
         <div className="d-flex justify-content-between">
-          <button className="nobtn fs-3" onClick={handleQnaClick}>취소</button>
-          <button className="yesbtn fs-3" onClick={handleDetailClick}>등록</button>
+          <button className="nobtn fs-3" onClick={handleQnaClick}>
+            취소
+          </button>
+          <button className="yesbtn fs-3" onClick={handleDetailClick2}>
+            등록
+          </button>
         </div>
       </div>
     </div>
