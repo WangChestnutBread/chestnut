@@ -1,11 +1,16 @@
 import "../atoms/Pagenation.css";
 
-function Pagenation({ currentPage, totalPages, onPageChange, upPageChange, downPageChange }) {
-  
-  // const handlePageChange = (page) => {
+function Pagenation({
+  currentPage,
+  totalPages,
+  onPageChange,
+  upPageChange,
+  downPageChange,
+}) {
+  // const onPageChange = (page) => {
   //   if (page < 1 || page > totalPages) return;
   // };
-  
+
   const renderPageNumbers = () => {
     const pageNumbers = [];
 
@@ -35,7 +40,7 @@ function Pagenation({ currentPage, totalPages, onPageChange, upPageChange, downP
 
   return (
     <div className="PagenationPage">
-      <div className="FirstBorder" onClick={() => handlePageChange(1)}>
+      <div className="FirstBorder" onClick={() => onPageChange(1)}>
         <div className="PageBorder">
           <img src="/image/pageimage/pageleft.svg" alt="firstpage" />
         </div>
@@ -43,7 +48,7 @@ function Pagenation({ currentPage, totalPages, onPageChange, upPageChange, downP
       <div
         className="NumberBorder"
         onClick={() => downPageChange(currentPage)}
-        style={{ visibility: "visible"}}
+        style={{ visibility: "visible" }}
       >
         <div className="NumberContent">{"<"}</div>
       </div>
@@ -51,11 +56,11 @@ function Pagenation({ currentPage, totalPages, onPageChange, upPageChange, downP
       <div
         className="NumberBorder"
         onClick={() => upPageChange(currentPage)}
-        style={{ visibility: "visible"}}
+        style={{ visibility: "visible" }}
       >
         <div className="NumberContent">{">"}</div>
       </div>
-      <div className="LastBorder" onClick={() => handlePageChange(totalPages)}>
+      <div className="LastBorder" onClick={() => onPageChange(totalPages)}>
         <div className="PageBorder">
           <img src="/image/pageimage/pageright.svg" alt="lastpage" />
         </div>
