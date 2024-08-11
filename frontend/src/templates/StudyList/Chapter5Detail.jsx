@@ -66,8 +66,8 @@ const Chapter5Detail = () => {
           <div className="col-6 mt-2" >
             <Pronunciation saying={params} realData={realData} location={answerData}/>
           </div>
-          <div className="col-6 mt-2 mb-3">
-            
+          <div className="col-6 mt-2 mb-3" style={{"width":"500px", 'height': "350px"}} >
+            <img src="/image/success.png" alt="practice" style={{"width": "100%", "height":"100%"}} />
           </div>
         </div>
         {/* 마이크 */}

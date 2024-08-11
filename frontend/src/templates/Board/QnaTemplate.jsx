@@ -33,6 +33,14 @@ const QnaPage = () => {
           },
         });
         const data = response.data.data;
+        if (isAnnouncement){
+          setTotalPages(response.data.data.announcementListPage.totalPages)
+        }
+        else {
+          setTotalPages(response.data.data.qnaList.totalPages)
+        }
+       
+        
 
         if (isAnnouncement) {
           setArticles(data.announcementListPage.content || []);
@@ -170,7 +178,7 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
                 <span>{title}</span> <br /> <br />
                 <span>{name || '운영자'}</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                {isAnnouncement? <span>{updatedAt?.slice(0, 10)}</span> : <span>{`${createdAt?.slice(0, 10)}`}</span>}
+                {isAnnouncement? <span>{`${updatedAt?.slice(0, 1)}-${updatedAt?.slice(1, 2)}-${updatedAt?.slice(2,3)}`}</span> : <span>{`${createdAt?.slice(0, 1)}-${createdAt?.slice(1, 2)}-${createdAt?.slice(2,3)}`}</span>}
               </td>
               <td className="col-2 d-flex align-items-center justify-content-center">
                 {isAnnouncement ? (
