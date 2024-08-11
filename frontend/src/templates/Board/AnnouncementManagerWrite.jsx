@@ -147,7 +147,7 @@ const AnnouncementManagerWrite = () => {
   const [content, setContent] = useState("");
 
   const handleQnaClick = () => {
-    navigate("/board/qna");
+    navigate("/board/qna/1");
   };
 
   const handleDetailClick = (e) => {
@@ -161,7 +161,7 @@ const AnnouncementManagerWrite = () => {
         })
         .then((res) => {
           console.log(res);
-          navigate("/board/announcement");
+          navigate("/board/announcement/1");
         })
         .catch((error) => {
           console.log(error);
@@ -179,7 +179,7 @@ const AnnouncementManagerWrite = () => {
         })
         .then((res) => {
           console.log(res);
-          navigate("/board/announcement");
+          navigate("/board/announcement/1");
         })
         .catch((error) => {
           console.log(error);

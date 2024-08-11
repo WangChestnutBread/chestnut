@@ -13,51 +13,40 @@ const QnaPage = () => {
   const [articles, setArticles] = useState([]); // 공지사항 데이터를 저장하는 상태
   const [loading, setLoading] = useState(true); // 로딩 상태
   const navigate = useNavigate(); 
-  // 여기서부터 작성
-  const params = useParams()
-  const [currentPage, setCurrentPage] = useState(Number(params.id))
-  const [totalPages, setTotalPages] = useState(5)
-
-  useEffect(()=> {
-    setCurrentPage(Number(params.id))
-  },[params.id])
+  const params = useParams();
+  const [currentPage, setCurrentPage] = useState(Number(params.id));
+  const [totalPages, setTotalPages] = useState(5);
 
   useEffect(() => {
-    // 현재 페이지가 공지사항인지 Q&A인지에 따라 API 호출
+    setCurrentPage(Number(params.id));
+  }, [params.id]);
+
+  useEffect(() => {
     const fetchArticles = async () => {
       try {
-        console.log(isAnnouncement);
         setLoading(true);
-        const endpoint = isAnnouncement ?  "/board/announcement" : "/board/qna";
+        const endpoint = isAnnouncement ? "/board/announcement" : "/board/qna";
         const response = await baseApi.get(endpoint, {
           params: {
-            page: `${currentPage-1}`,
+            page: `${currentPage - 1}`,
             size: 10,
           },
-        })
-        console.log(response);
-        console.log(currentPage + "현재패이지 정보");
+        });
         const data = response.data.data;
 
-
-        // 상태에 데이터 저장
         if (isAnnouncement) {
-          setArticles(data.announcementListPage.content || [])
-          console.log('게시판');
+          setArticles(data.announcementListPage.content || []);
+        } else {
+          setArticles(data.qnaList.content);
         }
-        else {
-          setArticles(data.qnaList.content)
-          console.log('qNA');
-        }
-
       } catch (error) {
         console.error("데이터를 가져오는 중 오류 발생:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchArticles()
-  }, [isAnnouncement, params.id])
+    fetchArticles();
+  }, [isAnnouncement, currentPage]); // currentPage를 의존성 배열에 포함
 
   const handleWriteClick = () => {
     if (isAnnouncement) {
@@ -66,20 +55,22 @@ const QnaPage = () => {
       navigate("/board/qna/write");
     }
   };
+
   const onPageChange = (page) => {
     if (page < 1 || page > totalPages) return;
-    navigate(`/board/announcement/${page}`)
-  }
+    setCurrentPage(page); // currentPage 상태 업데이트
+    navigate(`/board/announcement/${page}`);
+  };
 
   const upPageChange = () => {
-    const nextPage = currentPage + 1
-    onPageChange(nextPage)
-  }
+    const nextPage = currentPage + 1;
+    onPageChange(nextPage);
+  };
 
   const downPageChange = () => {
-    const prevPage = currentPage - 1
-    onPageChange(prevPage)
-  }
+    const prevPage = currentPage - 1;
+    onPageChange(prevPage);
+  };
 
   return (
     <div>
@@ -133,7 +124,7 @@ const QnaPage = () => {
           <ArticleList isAnnouncement={isAnnouncement} articleArray={articles} />
         )}
         {/* 페이지네이션 */}
-        <Pagenation currentPage={params.id} totalPages={2} onPageChange={onPageChange} upPageChange={upPageChange} downPageChange={downPageChange}/>
+        <Pagenation currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} upPageChange={upPageChange} downPageChange={downPageChange} />
       </div>
     </div>
   );
@@ -143,8 +134,7 @@ export default QnaPage;
 
 const ArticleList = ({ isAnnouncement, articleArray }) => {
   const navigate = useNavigate();
-
-  const [isAuthenticated, setIsAuthenticated] = useState("운영자");
+  const [isAuthenticated, setIsAuthenticated] = useState("운영자")
 
   const handleDetailClick = (id) => {
     if (isAnnouncement) {
@@ -156,10 +146,6 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
 
   const list = ['랭킹', '오픈채팅', '학습', '게시판', '공지사항'];
 
-  console.log(articleArray);
-
- 
-
   return (
     <table className="table mt-3">
       <tbody className="table-group-divider">
@@ -169,8 +155,8 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
             qnaId,
             title,
             name,
-            date,
             updatedAt,
+            createdAt,
             hit,
             announceCategoryId,
             qnaCategoryId,
@@ -184,7 +170,7 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
                 <span>{title}</span> <br /> <br />
                 <span>{name || '운영자'}</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                {isAnnouncement? <span>{updatedAt?.slice(0, 10)}</span>: <></>}
+                {isAnnouncement? <span>{updatedAt?.slice(0, 10)}</span> : <span>{`${createdAt?.slice(0, 10)}`}</span>}
               </td>
               <td className="col-2 d-flex align-items-center justify-content-center">
                 {isAnnouncement ? (
@@ -214,5 +200,3 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
     </table>
   );
 };
-
-

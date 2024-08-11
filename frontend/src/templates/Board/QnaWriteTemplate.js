@@ -12,7 +12,7 @@ const QNAWritePage = () => {
 
   const navigate = useNavigate();
   const handleQnaClick = () => {
-    navigate("/board/qna");
+    navigate("/board/qna/1");
   };
 
   const handleDetailClick2 = () => {
@@ -24,7 +24,7 @@ const QNAWritePage = () => {
       })
       .then((res) => {
         console.log(res);
-        navigate("/board/qna");
+        navigate("/board/qna/1");
       })
       .catch((err) => {
         console.log(err);
@@ -41,7 +41,7 @@ const QNAWritePage = () => {
         })
         .then((res) => {
           console.log(res);
-          navigate("/board/qna");
+          navigate("/board/qna/1");
         })
         .catch((err) => {
           console.log(err);
