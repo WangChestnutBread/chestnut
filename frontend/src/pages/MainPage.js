@@ -30,7 +30,6 @@ function MainPage() {
         }
       );
       setProfile(response.data.data);
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -45,7 +44,6 @@ function MainPage() {
         }
       );
       setAttendance(response.data.data);
-      console.log(response);
     } catch (error) {
       console.error(error);
     }

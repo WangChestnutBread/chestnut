@@ -19,7 +19,6 @@ import FindId from "./templates/Authentication/FindId";
 import FindPw from "./templates/Authentication/FindPw";
 import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
-import ChapterListpage from "./pages/StudyDetail/ChapterListpage";
 import StudyList from "./templates/StudyList";
 import MainPage from "./pages/MainPage";
 import RankingTemplate from "./templates/RankingTemplate";
@@ -28,7 +27,8 @@ import Chapter2Detail from "./templates/StudyList/Chapter2Detail";
 import Chapter3Detail from './templates/StudyList/Chapter3Detail';
 import Chapter5Detail from './templates/StudyList/Chapter5Detail';
 import Chapter6Detail from './templates/StudyList/Chapter6Detail';
-import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
+import Ai from "./pages/Ai"
+
 
 import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite";
 
@@ -36,6 +36,7 @@ import OpenChat from "./pages/OpenChat";
 
 import VocabularyListPage from "./pages/VocabularyListPage"
 import Ranking from "./pages/Ranking";
+import ChapterListPage from "./pages/ChapterListPage";
 
 
 const router = createBrowserRouter([
@@ -44,11 +45,11 @@ const router = createBrowserRouter([
     element: <StartTemplates />
   },
   {
-    path: "/board/qna",
+    path: "/board/qna/:id",
     element: <QNApage />
   },
   {
-    path: "/board/announcement",
+    path: "/board/announcement/:id",
     element: <QNApage />
   },
   {
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
     element: <QnaDetailTemplate />
   },
   {
-    path: "/board/qna/manager",
+    path: "/board/qna/manager/:id",
     element: <QnaManagerDetail />
   },
   {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
   {
     path: "/study/detail6/:chapterId/:studyId",
     element: <Chapter6Detail />
+  },
+  {
+    path: "/ai",
+    element: <Ai />
   },
   {
     path: "/member",
@@ -143,35 +148,9 @@ const router = createBrowserRouter([
     path: "/myVocabulary",
     element: <VocabularyListPage/>
   },
-
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Chapter1Listpage />
-  // },
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Chapter2Listpage />
-  // },
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Chapter3Listpage />
-  // },
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Ch4n7DetailPage/>
-  // },
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Chapter5Listpage />
-  // },
-  // {
-  //   path: "/chapter/:chapterId",
-  //   element: <Chapter6Listpage />
-  // },
-
   {
     path: "/chapter/:chapterId",
-    element: <Ch4n7DetailPage/>
+    element: <ChapterListPage/>
   },
   {
     path: "/main",

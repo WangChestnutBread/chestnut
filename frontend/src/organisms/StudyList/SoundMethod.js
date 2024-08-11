@@ -5,8 +5,6 @@ import SpeakExplanation from "../../molecules/StudyList/SpeakExplanation";
 import "./SoundMethod.css";
 
 const SoundMethod = (hangeul) => {
-
-
   const distinction = parseInt(hangeul.hangeul.studyId);
   const [hangeulData, setHangeulData] = useState();
 
@@ -116,10 +114,13 @@ const SoundMethod = (hangeul) => {
         // console.log(distinction);
         // distinction이 19보다 작을 때만 API 호출
         if (distinction < 20) {
+          console.log(distinction);
           try {
             // 첫 번째 axios 호출
             const firstResponse = await baseApi.get(`/study/chapter/1`);
-            const word = firstResponse.data.data[distinction - 1].word;
+            // console.log(firstResponse.data.data[1]);
+            const word = firstResponse.data.data[1].child[distinction-1].word
+            console.log(word);
             // console.log(word);
             setHangeulData(word);
             // 두 번째 axios 호출
@@ -140,7 +141,7 @@ const SoundMethod = (hangeul) => {
           try {
             // 첫 번째 axios 호출
             const firstResponse = await baseApi.get(`/study/chapter/1`);
-            const word = firstResponse.data.data[distinction - 1].word;
+            const word = firstResponse.data.data[0].child[distinction-20].word
             console.log(word);
             setHangeulData(word);
             // 두 번째 axios 호출

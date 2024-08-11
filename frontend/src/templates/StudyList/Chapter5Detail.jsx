@@ -24,6 +24,7 @@ const Chapter5Detail = () => {
   }
   const answer = (value) => {
     setAnswerData(value)
+    console.log(value);
     if (value.length === 0) {
       isShow(true)
       baseApi.get('/log/study',{
@@ -33,6 +34,7 @@ const Chapter5Detail = () => {
         }
       }).then((res) => {
         console.log(res);
+        alert('축하드려요 성공입니다.')
       })
     }
   }
@@ -69,7 +71,9 @@ const Chapter5Detail = () => {
           </div>
         </div>
         {/* 마이크 */}
+        <div className="mt-5">
         <RecordData func={moveData} func2={answer}/>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import "./Chapter1List.css";
-import ChapterList from "../molecules/StudyList/ChapterList";
-import Text32 from "../atoms/Text32";
+import ChapterList from "../../molecules/StudyList/ChapterList";
+import Text32 from "../../atoms/Text32";
 import { useNavigate } from "react-router-dom";
 
 function Chapter1List({ content, chapterId }) {

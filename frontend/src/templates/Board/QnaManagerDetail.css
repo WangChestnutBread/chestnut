@@ -25,11 +25,22 @@
   border-radius: 10px;
   border: none; /* 기존 파란색 보더 제거 */
 }
+.successbtn {
+  background: #000;
+}
 
 .btn-primary:hover {
-  background: #6B3906; /* 호버 시 동일한 색상 유지 */
+  background: #6c757d; /* 호버 시 동일한 색상 유지 */
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* 호버 시 동일한 그림자 유지 */
 }
+.successbtn:hover {
+  background: #000;
+}
+
+.successbtn:active {
+  background: #000;
+}
+
 
 .btn-primary:active {
   background: #6B3906; /* 클릭 시 동일한 색상 유지 */

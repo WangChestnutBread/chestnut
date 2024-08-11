@@ -1,55 +1,42 @@
-import React, { useState, useEffect } from "react";
 import "./StudyList.css";
+import baseApi from "../api/fetchAPI";
 import ChapterMenu from "../atoms/ChapterMenu";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./NavbarExample.css";
 import StudyBackButton from "../molecules/StudyBackButton";
 import ChestNutButton from "../organisms/ChestNutButton";
-import useAuthStore from "../stores/authStore";
-import axios from "axios";
+import Text32 from "../atoms/Text32";
 
 function StudyList() {
   const navigate = useNavigate();
   const [listdata, setlistData] = useState([]);
-  const accessToken = useAuthStore((state) => state.accessToken); // accessToken 가져오기
   
   useEffect(() => {
-    if (!accessToken) {
-      // accessToken이 없으면 로그인 페이지로 이동 또는 다른 처리
-      navigate('/login'); // 예시: 로그인 페이지로 이동
-      return;
-    }
-    
-    axios
-    .get("https://i11d107.p.ssafy.io/chestnutApi/study/chapter", {
-      headers: {
-        access: accessToken, // accessToken을 헤더에 넣기
-      },
-    })
+    // if (!accessToken) {
+    //   // accessToken이 없으면 로그인 페이지로 이동 또는 다른 처리
+    //   navigate('/login'); // 예시: 로그인 페이지로 이동
+    //   return;
+    // }
+    baseApi({
+      method: "get",
+      url: "/study/chapter",
+    }) 
     .then((response) => {
-      if (response.data.code == 200) {
-        setlistData(response.data.data)
-      } else if (response.data.code == 801) {
-        alert("유효하지 않은 토큰입니다.");
-      } else if (response.data.code == 710) {
-        alert("DB에 없는 정보입니다.");
-      } else if (response.data.code == 299) {
-        alert("알 수 없는 오류입니다.");
-      }
-      console.log(response.data.data[0]);
-      console.log(listdata)
+      console.log(response.data);
     })
     .catch((error) => {
       console.log(error);
     });
-  }, [accessToken, navigate]);
+  }, []);
+
   const handleChapterNavigation = (chapter) => {
     navigate(`/chapter/${chapter}`);
   };
-  console.log(listdata.slice(0, 4));
+
   return (
     <div>
-      <div>
+      {/* navbar */}
         <div className="NavbarExample">
           <div className="NavbarButton">
             <div className="LeftButton">
@@ -58,20 +45,18 @@ function StudyList() {
             </div>
           </div>
         </div>
-      </div>
+      
       <div className="container">
+        {/* 제목 */}
         <div className="titleBox">
-          <div className="textBox">
-            <div className="titleFont">무엇을 학습할까??</div>
-          </div>
-          <div className="img-con">
-            <img className="imgsqueez" src="/image/squeez.png" alt="squeez" />
-          </div>
+          <Text32 text={"무엇을 학습할까?"}/>
         </div>
-        <div className="chapterlist">
+
+        챕터 리스트        
+        {/* <div className="chapterlist">
           <div className="chapterTotalBox">
-            <div className="chapterinnerbox">
-              <div className="group-box">
+            <div className="chapterinnerbox"> */}
+              {/* <div className="group-box">
                 <div className="cardgroup">
                     {listdata.map((chapter) => (
                         <div className="cardlist" key={chapter.chapterId}>
@@ -82,7 +67,7 @@ function StudyList() {
                         </div>
                       ))}
                 </div>
-              </div>
+              </div> */}
               <div className="cardgroup-sec">
                 {/* <div className="group-box">
                     {listdata.slice(4).map((chapter) => (
@@ -95,9 +80,9 @@ function StudyList() {
                         </div>
                     ))}
                 </div> */}
-              </div>
+              {/* </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

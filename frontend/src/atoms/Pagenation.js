@@ -1,11 +1,15 @@
-import React from "react";
 import "../atoms/Pagenation.css";
 
-function Pagination({ currentPage, totalPages, onPageChange }) {
-  const handlePageChange = (page) => {
-    if (page < 1 || page > totalPages) return;
-    onPageChange(page);
-  };
+function Pagenation({
+  currentPage,
+  totalPages,
+  onPageChange,
+  upPageChange,
+  downPageChange,
+}) {
+  // const onPageChange = (page) => {
+  //   if (page < 1 || page > totalPages) return;
+  // };
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
@@ -24,7 +28,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         <div
           key={i}
           className={`NumberBorder ${currentPage === i ? "active" : ""}`}
-          onClick={() => handlePageChange(i)}
+          onClick={() => onPageChange(i)}
         >
           <div className="NumberContent">{i}</div>
         </div>
@@ -36,33 +40,33 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
 
   return (
     <div className="PagenationPage">
-      <div className="FirstBorder" onClick={() => handlePageChange(1)}>
+      <div className="FirstBorder" onClick={() => onPageChange(1)}>
         <div className="PageBorder">
-          <img src="/pageimage/pageleft.svg" alt="firstpage" />
+          <img src="/image/pageimage/pageleft.svg" alt="firstpage" />
         </div>
       </div>
       <div
         className="NumberBorder"
-        onClick={() => handlePageChange(currentPage - 1)}
-        style={{ visibility: currentPage > 1 ? "visible" : "hidden" }}
+        onClick={() => downPageChange(currentPage)}
+        style={{ visibility: "visible" }}
       >
         <div className="NumberContent">{"<"}</div>
       </div>
       {renderPageNumbers()}
       <div
         className="NumberBorder"
-        onClick={() => handlePageChange(currentPage + 1)}
-        style={{ visibility: currentPage < totalPages ? "visible" : "hidden" }}
+        onClick={() => upPageChange(currentPage)}
+        style={{ visibility: "visible" }}
       >
         <div className="NumberContent">{">"}</div>
       </div>
-      <div className="LastBorder" onClick={() => handlePageChange(totalPages)}>
+      <div className="LastBorder" onClick={() => onPageChange(totalPages)}>
         <div className="PageBorder">
-          <img src="/pageimage/pageright.svg" alt="lastpage" />
+          <img src="/image/pageimage/pageright.svg" alt="lastpage" />
         </div>
       </div>
     </div>
   );
 }
 
-export default Pagination;
+export default Pagenation;

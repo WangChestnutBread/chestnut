@@ -1,0 +1,114 @@
+.Chapter5_6List {
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.TabDropDownButton {
+  position: absolute;
+  left: 8%;
+}
+
+.TabDropDownToggle {
+  left: 0%;
+  width: 110%;
+  height: 60px;
+  color: white;
+  font-size: 2rem;
+  border-radius: 25px 25px 0 0;
+  background: #6b3906;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background: #6b3906;
+  color: white;
+  border: none;
+}
+
+.btn.show {
+  background: #dcb78f;
+  border-color: white;
+}
+
+.btn:first-child:active {
+  background: #dcb78f;
+  border-color: white;
+}
+
+.Chapter5Content {
+  display: flex;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 68%;
+  z-index: 100;
+  overflow: auto;
+}
+
+.Chapter6Content {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 12%;
+  left: 12%;
+  width: 80%;
+  height: 68%;
+  gap: 10px;
+  z-index: 100;
+  /* overflow: auto; */
+}
+
+.Chapter5Word {
+  display: flex;
+  width: 25%;
+  height: 25%;
+  color: white;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.Chapter5Word > p {
+  cursor: pointer;
+}
+
+.Chapter5Word > p:hover {
+  color: #ffcc4d;
+  text-decoration: underline;
+  transition: color 0.1s ease, text-decoration 0.2s ease;
+}
+
+.Chapter6Word {
+  display: flex;
+  width: 100%;
+  padding: 15px 0px;
+  align-items: center;
+  color: white;
+}
+
+.Chapter6Word > p {
+  cursor: pointer;
+}
+
+.Chapter6Word > p:hover {
+  color: #ffcc4d;
+  text-decoration: underline;
+  transition: color 0.1s ease, text-decoration 0.2s ease;
+}
+
+.Chapter5_6Pagenation {
+  display: flex;
+  margin-bottom: 30px;
+}
