@@ -1,13 +1,11 @@
-import React from "react";
 import "../atoms/Pagenation.css";
 
-function Pagination({ currentPage, totalPages, onPageChange, upPageChange, downPageChange }) {
+function Pagenation({ currentPage, totalPages, onPageChange, upPageChange, downPageChange }) {
   
   // const handlePageChange = (page) => {
   //   if (page < 1 || page > totalPages) return;
   // };
   
-
   const renderPageNumbers = () => {
     const pageNumbers = [];
 
@@ -39,13 +37,13 @@ function Pagination({ currentPage, totalPages, onPageChange, upPageChange, downP
     <div className="PagenationPage">
       <div className="FirstBorder" onClick={() => onPageChange(1)}>
         <div className="PageBorder">
-          <img src="/pageimage/pageleft.svg" alt="firstpage" />
+          <img src="/image/pageimage/pageleft.svg" alt="firstpage" />
         </div>
       </div>
       <div
         className="NumberBorder"
         onClick={() => downPageChange(currentPage)}
-        style={{ visibility: currentPage > 1 ? "visible" : "hidden" }}
+        style={{ visibility: "visible"}}
       >
         <div className="NumberContent" onClick={downPageChange()}>{"<"}</div>
       </div>
@@ -53,17 +51,17 @@ function Pagination({ currentPage, totalPages, onPageChange, upPageChange, downP
       <div
         className="NumberBorder"
         onClick={() => upPageChange(currentPage)}
-        style={{ visibility: currentPage < totalPages ? "visible" : "hidden" }}
+        style={{ visibility: "visible"}}
       >
         <div className="NumberContent" >{">"}</div>
       </div>
       <div className="LastBorder" onClick={() => onPageChange(totalPages)}>
         <div className="PageBorder">
-          <img src="/pageimage/pageright.svg" alt="lastpage" />
+          <img src="/image/pageimage/pageright.svg" alt="lastpage" />
         </div>
       </div>
     </div>
   );
 }
 
-export default Pagination;
+export default Pagenation;
