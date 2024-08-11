@@ -3,7 +3,7 @@
   overflow: hidden;
   border: none;
   box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .ChapterCardHeader {
@@ -14,15 +14,27 @@
 }
 
 .ChapterCardImg {
-    width: 100%; /* 카드의 너비에 맞추기 */
-    height: auto; /* 자동으로 높이 설정 */
-    max-height: 210px; /* 세로 길이 최대값 설정 */
-    object-fit: cover; /* 비율을 유지하면서 카드 크기에 맞게 자르기 */
-    object-position: top; /* 이미지의 상단을 기준으로 자르기 */
+  width: 100%;
+  height: auto;
+  max-height: 210px;
+  object-fit: cover;
+  object-position: top;
 }
 
-.ChapterCardBody {
+.ChapterProgressBar {
+  display: flex;
+  flex-direction: column;
+  padding: 0% 6%;
+}
 
+.ChapterProgressText {
+  display: inline-flex;
+  justify-content: space-between;
+  /* color: #FF824D; */
+}
+
+.progress-bar {
+  background-color: #FF824D;
 }
 
 .ChapterButton {
@@ -35,5 +47,3 @@
   background: #dcb78f;
   color: white;
 }
-
-
