@@ -41,4 +41,11 @@ public class StudyController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/study-id")
+    public ResponseEntity<?> getStudyIdList() {
+        List<Long> studyIdList = studyService.getWholeStudyIdList();
+        ResponseDto<List<Long>> result = new ResponseDto<>("200", studyIdList);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 }

@@ -22,5 +22,11 @@ public interface StudyLogRepository extends JpaRepository<StudyLog, Long> {
             "order by sl.studyLogId desc")
     List<Boolean> findPassRecord(@Param("memberId") Long memberId, @Param("studyId") Long studyId, Pageable pageable);
 
+    @Query(
+            "select sl from StudyLog sl join " +
+            "(select max(sl2.studyLogId) studyLogId from StudyLog sl2 where sl2.member.memberId = :memberId group by sl2.study.studyId) maxLog " +
+            "on sl.studyLogId = maxLog.studyLogId"
+    )
+    List<StudyLog> findRecentStudyLogByMemberId(@Param("memberId") Long memberId);
 
 }

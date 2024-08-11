@@ -1,6 +1,7 @@
 package com.chestnut.backend.member.repository;
 
 import com.chestnut.backend.member.dto.MainMemberInfoDto;
+import com.chestnut.backend.member.entity.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -42,6 +43,14 @@ public class MainMemberRepository {
                 "SET m.ranking = r.ranking";
 
         entityManager.createNativeQuery(query).executeUpdate();
+    }
+
+    //테스트용 코드
+    public Member findMemberByLoginId(String loginId) {
+        String query = "SELECT m FROM Member m WHERE m.loginId = :loginId";
+        return entityManager.createQuery(query, Member.class)
+                .setParameter("loginId", loginId)
+                .getSingleResult();
     }
 
 }
