@@ -130,17 +130,15 @@
 
 // export default AnnouncementManagerWrite;
 
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
 import baseApi from "../../api/fetchAPI";
-import useAuthStore from './../../stores/authStore';
-
+import useAuthStore from "./../../stores/authStore";
 
 const AnnouncementManagerWrite = () => {
-  const userId = useAuthStore((state) => state.userId) 
+  const userId = useAuthStore((state) => state.userId);
   const navigate = useNavigate();
 
   // State for form inputs
@@ -148,27 +146,45 @@ const AnnouncementManagerWrite = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-
   const handleQnaClick = () => {
     navigate("/board/qna");
   };
 
-  const handleDetailClick = () => {
-    baseApi
-      .post("/board/announcement", {
-        announceCategoryId,
-        title,
-        content,
-        loginId: `${userId}`, 
-      })
-      .then((res) => {
-        console.log(res);
-        navigate("/board/announcement"); 
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const handleDetailClick = (e) => {
+    if (e.key === "Enter") {
+      baseApi
+        .post("/board/announcement", {
+          announceCategoryId,
+          title,
+          content,
+          loginId: `${userId}`,
+        })
+        .then((res) => {
+          console.log(res);
+          navigate("/board/announcement");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
+
+  const handleDetailClick2 = () => {
+    baseApi
+        .post("/board/announcement", {
+          announceCategoryId,
+          title,
+          content,
+          loginId: `${userId}`,
+        })
+        .then((res) => {
+          console.log(res);
+          navigate("/board/announcement");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  }
 
   return (
     <div>
@@ -197,14 +213,13 @@ const AnnouncementManagerWrite = () => {
           <select
             className="form-select rounded-3 selected fs-5"
             aria-label="Default select example"
-            value={announceCategoryId} 
-            onChange={(e) => setAnnounceCategoryId(e.target.value)} 
+            value={announceCategoryId}
+            onChange={(e) => setAnnounceCategoryId(e.target.value)}
           >
             <option value="">유형을 선택하시오</option>
             <option value="1">랭킹</option>
             <option value="2">오픈채팅</option>
             <option value="3">학습</option>
-            
             <option value="4">게시판</option>
             <option value="5">공지사항</option>
           </select>
@@ -217,8 +232,8 @@ const AnnouncementManagerWrite = () => {
             type="text"
             className="form-control rounded-3 text fs-5"
             placeholder="제목을 입력하시오"
-            value={title} // Connect state to input
-            onChange={(e) => setTitle(e.target.value)} 
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
@@ -229,8 +244,9 @@ const AnnouncementManagerWrite = () => {
             className="form-control rounded-3 content fs-5"
             placeholder="Leave a comment here"
             id="floatingTextarea2"
-            value={content} // Connect state to input
-            onChange={(e) => setContent(e.target.value)} // Update state on change
+            value={content}
+            onKeyDown={(e) => handleDetailClick(e)}
+            onChange={(e) => setContent(e.target.value)}
           ></textarea>
           <label htmlFor="floatingTextarea2">Comments</label>
         </div>
@@ -240,7 +256,7 @@ const AnnouncementManagerWrite = () => {
           <button className="nobtn fs-3" onClick={handleQnaClick}>
             취소
           </button>
-          <button className="yesbtn fs-3" onClick={handleDetailClick}>
+          <button className="yesbtn fs-3" onClick={handleDetailClick2}>
             등록
           </button>
         </div>

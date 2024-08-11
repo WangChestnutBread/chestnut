@@ -29,6 +29,8 @@ import Chapter3Detail from './templates/StudyList/Chapter3Detail';
 import Chapter5Detail from './templates/StudyList/Chapter5Detail';
 import Chapter6Detail from './templates/StudyList/Chapter6Detail';
 import Ch4n7DetailPage from "./pages/StudyDetail/Ch4n7DetailPage";
+import Ai from "./pages/Ai"
+
 
 import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite";
 
@@ -43,11 +45,11 @@ const router = createBrowserRouter([
     element: <StartTemplates />
   },
   {
-    path: "/board/qna",
+    path: "/board/qna/:id",
     element: <QNApage />
   },
   {
-    path: "/board/announcement",
+    path: "/board/announcement/:id",
     element: <QNApage />
   },
   {
@@ -55,7 +57,7 @@ const router = createBrowserRouter([
     element: <QnaDetailTemplate />
   },
   {
-    path: "/board/qna/manager",
+    path: "/board/qna/manager/:id",
     element: <QnaManagerDetail />
   },
   {
@@ -93,6 +95,10 @@ const router = createBrowserRouter([
   {
     path: "/study/detail6/:chapterId/:studyId",
     element: <Chapter6Detail />
+  },
+  {
+    path: "/ai",
+    element: <Ai />
   },
   {
     path: "/member",
@@ -134,6 +140,7 @@ const router = createBrowserRouter([
     path: "/study",
     element: <StudyList />
   },
+  
 
   // {
   //   path: "/chapter/:chapterId",
