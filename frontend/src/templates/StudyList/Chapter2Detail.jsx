@@ -17,6 +17,7 @@ const Chapter2Detail = () => {
   const [realData, setRealData] = useState("내발음😎")
   const [answerData, setAnswerData] = useState([100000])
   const [show, isShow] = useState(false)
+  const [correct, setCorrect] = useState(false)
   console.log();
 
   const moveData = (value) => {
@@ -24,7 +25,6 @@ const Chapter2Detail = () => {
   }
   const answer = (value) => {
     setAnswerData(value)
-    console.log(value);
     if (value.length === 0) {
       isShow(true)
       baseApi.get('/log/study',{
@@ -34,6 +34,8 @@ const Chapter2Detail = () => {
         }
       }).then((res) => {
         console.log(res);
+        setCorrect(true)
+        alert("성공입니다.")
       })
     }
   }

@@ -7,7 +7,7 @@ import baseApi from "../../api/fetchAPI";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuthStore from "../../stores/authStore";
 
-const Record = ({func, func2}) => {
+const Record = ({ func, func2 }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [showIcons, setShowIcons] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
@@ -18,50 +18,52 @@ const Record = ({func, func2}) => {
   const navigate = useNavigate();
   const { studyId, chapterId } = useParams();
   const [data, setData] = useState("");
-  const setPronunciation = useAuthStore((state) => state.setPronunciation)
-
+  const setPronunciation = useAuthStore((state) => state.setPronunciation);
+  const params = useParams();
 
   const upPage = () => {
-    func("내발음😎")
-    func2([10000])
+    func("내발음😎");
+    func2([10000]);
     if (studyId < 40) {
       navigate(`/study/detail1/1/${+studyId + 1}`);
-    }
-    else if (studyId > 39 && studyId < 439){
+      baseApi.get(`/log/study`, {
+        params: {
+          studyId: params.studyId,
+          isPass: 1,
+        },
+      });
+    } else if (studyId > 39 && studyId < 439) {
       navigate(`/study/detail2/2/${+studyId + 1}`);
-    }
-    else if (studyId > 438 && studyId < 446){
+    } else if (studyId > 438 && studyId < 446) {
       navigate(`/study/detail3/3/${+studyId + 1}`);
-    }
-    else if (studyId < 1381 && studyId > 445){
+    } else if (studyId < 1381 && studyId > 445) {
       navigate(`/study/detail5/5/${+studyId + 1}`);
-    }
-    else if (studyId < 2367 && studyId > 1380){
+    } else if (studyId < 2367 && studyId > 1380) {
       navigate(`/study/detail6/6/${+studyId + 1}`);
-    } 
-  }
+    }
+  };
   const downPage = () => {
-    func("내발음😎")
-    func2([1000000])
-    if (studyId < 2){
-      alert('첫 학습페이지 입니다.')
-    } 
-    else if (studyId > 0 && studyId < 42) {
+    func("내발음😎");
+    func2([1000000]);
+    if (studyId < 2) {
+      alert("첫 학습페이지 입니다.");
+    } else if (studyId > 0 && studyId < 42) {
       navigate(`/study/detail1/1/${studyId - 1}`);
-    }
-    else if (studyId > 40 && studyId < 441){
+      baseApi.get(`/log/study`, {
+        params: {
+          studyId: params.studyId,
+          isPass: 1,
+        },
+      });
+    } else if (studyId > 40 && studyId < 441) {
       navigate(`/study/detail2/2/${studyId - 1}`);
-    }
-    else if (studyId > 438 && studyId < 448){
+    } else if (studyId > 438 && studyId < 448) {
       navigate(`/study/detail3/3/${studyId - 1}`);
-    }
-    else if (studyId < 1382 && studyId > 445){
+    } else if (studyId < 1382 && studyId > 445) {
       navigate(`/study/detail5/5/${studyId - 1}`);
-    }
-    else if (studyId < 2367 && studyId > 1381){
+    } else if (studyId < 2367 && studyId > 1381) {
       navigate(`/study/detail6/6/${studyId - 1}`);
     }
-    
   };
 
   // 녹음 시작/정지 토글
@@ -144,19 +146,19 @@ const Record = ({func, func2}) => {
         .post("/study/detail/pronunciation/evaluate/test/fail", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-          }
+          },
         })
         .then((res) => {
           console.log(res.data.data.answerMismatchIndices);
-          setPronunciation(res.data.data.pronunciation)
+          setPronunciation(res.data.data.pronunciation);
           console.log(res.data.data.pronunciation);
-          func(res.data.data.pronunciation)
-          func2(res.data.data.answerMismatchIndices)
-        }).catch((err) => {
-          alert("다시 말좀...")
-          console.log(err);
+          func(res.data.data.pronunciation);
+          func2(res.data.data.answerMismatchIndices);
         })
-        
+        .catch((err) => {
+          alert("다시 말좀...");
+          console.log(err);
+        });
     } catch (error) {
       console.error("Error uploading file:", error);
     }
@@ -192,7 +194,7 @@ const Record = ({func, func2}) => {
             onClick={handleToggle}
           />
         </div>
-        <img src="/image/right.png" alt="right" onClick={upPage}/>
+        <img src="/image/right.png" alt="right" onClick={upPage} />
       </div>
 
       {wavBlob && !showIcons && (

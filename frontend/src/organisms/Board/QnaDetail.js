@@ -24,11 +24,11 @@ const QnaDetail = () => {
     });
   },[]);
 
-  const date = data.updatedAt ? data.updatedAt.slice(0,10) : ""
+  const date = data.createdAt ? `${data.createdAt[0]}-${data.createdAt[1]}-${data.createdAt[2]}` : ""
   console.log(date);
   return (
-    <div className="qna-detail p-4 mb-5 mt-5 border-top border-4 border-black">
-      <div className="d-flex justify-content-between mb-3">
+    <div className="qna-detail p-4 mt-5 border-top border-4 border-black">
+      <div className="d-flex justify-content-between">
         <div>
           <p className="mt-2">
             {'('+list[data.qnaCategoryId-1]+') '}

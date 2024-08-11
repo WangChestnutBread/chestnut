@@ -4,6 +4,7 @@ import "./ChestNutButton.css";
 
 function ChestNutButton() {
   let [showMenu, setShowMenu] = useState(false);
+
   return (
     <div className="ChestNutButton">
       <img
@@ -25,7 +26,7 @@ function DropMenu() {
     { img: "/image/List.png", path: "/study", menu: "학습 목록" },
     { img: "/image/AITalk.png", path: "", menu: "대화 연습" },
     { img: "/image/Board.png", path: "", menu: "단어장" },
-    { img: "/image/BookMarkImage.png", path: "/board/qna", menu: "게시판" },
+    { img: "/image/BookMarkImage.png", path: "/board/qna/1", menu: "게시판" },
   ]);
   return (
     <div className="DropMenu">
