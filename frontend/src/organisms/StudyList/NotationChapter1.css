@@ -1,11 +1,11 @@
 /* NotationChapter1.css */
 .box {
   background-color: #0C4518;
-  position: relative; /* 자식 요소를 절대 위치로 배치할 수 있도록 설정 */
+  position: relative;
   height: 340px;
   display: flex;
-  justify-content: center; /* 주 콘텐츠를 수평 가운데 정렬 */
-  align-items: center; /* 주 콘텐츠를 수직 가운데 정렬 */
+  justify-content: center; 
+  align-items: center; 
 }
 
 .abc {
@@ -16,6 +16,7 @@
   font-size: 24px;
 }
 .data1 {
+  text-align: center;
   font-size: 64px; /* 글자 크기 */
   color: white; /* 글자 색상 */
 }

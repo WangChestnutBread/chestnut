@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import baseApi from "../../api/fetchAPI";
 import Mouse from "../../molecules/StudyList/Mouse";
 import Tongue from "../../molecules/StudyList/Tongue";
-import { json, useParams } from "react-router-dom";
-import useAuthStore from "../../stores/authStore";
+import { useParams } from "react-router-dom";
 
 const MouseTongue = ({params}) => {
   console.log(params);
