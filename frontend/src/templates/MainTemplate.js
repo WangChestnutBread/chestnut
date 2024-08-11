@@ -10,7 +10,7 @@ const MainTemplate = ({ profile, attendance }) => {
   // 메뉴 밤
   let [menu, setMenu] = useState([
     { name: "학습", path: "/study" },
-    { name: "대화연습", path: "" },
+    { name: "대화연습", path: "/ai" },
     { name: "단어장", path: "/myVocabulary" },
     { name: "게시판", path: "/board/announcement/1" },
   ]);

@@ -21,22 +21,18 @@ import EditMyInfo from "./templates/Authentication/EditMyInfo";
 import MyInfo from "./templates/Authentication/MyInfo";
 import StudyList from "./templates/StudyList";
 import MainPage from "./pages/MainPage";
-import RankingTemplate from "./templates/RankingTemplate";
-import Chapter1Detail from "./templates/StudyList/Chapter1Detail"
+import Chapter1Detail from "./templates/StudyList/Chapter1Detail";
 import Chapter2Detail from "./templates/StudyList/Chapter2Detail";
 import Chapter3Detail from './templates/StudyList/Chapter3Detail';
 import Chapter5Detail from './templates/StudyList/Chapter5Detail';
 import Chapter6Detail from './templates/StudyList/Chapter6Detail';
-import Ai from "./pages/Ai"
-
-
+import Ai from "./pages/Ai";
 import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite";
-
 import OpenChat from "./pages/OpenChat";
-
-import VocabularyListPage from "./pages/VocabularyListPage"
+import VocabularyListPage from "./pages/VocabularyListPage";
 import Ranking from "./pages/Ranking";
 import ChapterListPage from "./pages/ChapterListPage";
+import ProtectedRoute from "./templates/Authentication/ProtectedRoute";
 
 
 const router = createBrowserRouter([
@@ -46,59 +42,59 @@ const router = createBrowserRouter([
   },
   {
     path: "/board/qna/:id",
-    element: <QNApage />
+    element: <ProtectedRoute><QNApage /></ProtectedRoute>
   },
   {
     path: "/board/announcement/:id",
-    element: <QNApage />
+    element: <ProtectedRoute><QNApage /></ProtectedRoute>
   },
   {
     path: "/board/qna/detail/:id",
-    element: <QnaDetailTemplate />
+    element: <ProtectedRoute><QnaDetailTemplate /></ProtectedRoute>
   },
   {
     path: "/board/qna/manager/:id",
-    element: <QnaManagerDetail />
+    element: <ProtectedRoute><QnaManagerDetail /></ProtectedRoute>
   },
   {
     path: "/board/qna/write",
-    element: <QNAWritePage />
+    element: <ProtectedRoute><QNAWritePage /></ProtectedRoute>
   },
   {
     path: "/board/announcement/detail/:id",
-    element: <AnnouncementDetail />
+    element: <ProtectedRoute><AnnouncementDetail /></ProtectedRoute>
   },
   {
     path: "/board/announcement/manager/write",
-    element: <AnnouncementManagerWrite />
+    element: <ProtectedRoute><AnnouncementManagerWrite /></ProtectedRoute>
   },
   {
     path: "/board/announcement/write",
-    element: <AnnouncementWrite />
+    element: <ProtectedRoute><AnnouncementWrite /></ProtectedRoute>
   },
   {
     path: "/study/detail1/:chapterId/:studyId",
-    element: <Chapter1Detail />
+    element: <ProtectedRoute><Chapter1Detail /></ProtectedRoute>
   },
   {
     path: "/study/detail2/:chapterId/:studyId",
-    element: <Chapter2Detail />
+    element: <ProtectedRoute><Chapter2Detail /></ProtectedRoute>
   },
   {
     path: "/study/detail3/:chapterId/:studyId",
-    element: <Chapter3Detail />
+    element: <ProtectedRoute><Chapter3Detail /></ProtectedRoute>
   },
   {
     path: "/study/detail5/:chapterId/:studyId",
-    element: <Chapter5Detail />
+    element: <ProtectedRoute><Chapter5Detail /></ProtectedRoute>
   },
   {
     path: "/study/detail6/:chapterId/:studyId",
-    element: <Chapter6Detail />
+    element: <ProtectedRoute><Chapter6Detail /></ProtectedRoute>
   },
   {
     path: "/ai",
-    element: <Ai />
+    element: <ProtectedRoute><Ai /></ProtectedRoute>
   },
   {
     path: "/member",
@@ -124,7 +120,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/myprofile",
-    element: <MyProfile />,
+    element: <ProtectedRoute><MyProfile /></ProtectedRoute>,
     children: [
       {
         path: "myinfo",
@@ -138,27 +134,23 @@ const router = createBrowserRouter([
   },
   {
     path: "/study",
-    element: <StudyList />
+    element: <ProtectedRoute><StudyList /></ProtectedRoute>
   },
   {
     path: "/ranking",
-    element: <Ranking/>
+    element: <ProtectedRoute><Ranking /></ProtectedRoute>
   },
   {
     path: "/myVocabulary",
-    element: <VocabularyListPage/>
+    element: <ProtectedRoute><VocabularyListPage /></ProtectedRoute>
   },
   {
     path: "/chapter/:chapterId",
-    element: <ChapterListPage/>
+    element: <ProtectedRoute><ChapterListPage /></ProtectedRoute>
   },
   {
     path: "/main",
-    element: <MainPage/>,
-  },
-  {
-    path: "/abc",
-    element: <RankingTemplate />
+    element: <ProtectedRoute><MainPage /></ProtectedRoute>,
   },
 ]);
 
@@ -169,7 +161,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

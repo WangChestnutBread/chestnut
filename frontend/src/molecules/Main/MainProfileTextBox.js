@@ -3,14 +3,14 @@ import MainProfileLine from "../../atoms/MainProfileLine";
 import Text24 from "../../atoms/Text24";
 import Text20 from "../../atoms/Text20";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import baseApi from "../../api/fetchAPI"
 import useAuthStore from "../../stores/authStore";
 
 function MainProfileTextBox({profile}) {
   // console.log(profile)
   let navigate = useNavigate()
-  const clearAccessToken = useAuthStore((state) => state.clearAccessToken);
+  // const clearAccessToken = useAuthStore((state) => state.clearAccessToken);
+  const setAccessToken = useAuthStore((state) => state.setAccessToken);
 
   return (
     <div className="MainProfileTextBox">
@@ -75,7 +75,7 @@ function MainProfileTextBox({profile}) {
           })
           .then((res)=>{
             console.log(res)
-            clearAccessToken()
+            setAccessToken(undefined)
             navigate('/')
           })
           .catch((err)=>{
