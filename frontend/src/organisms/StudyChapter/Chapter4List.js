@@ -1,4 +1,4 @@
-import "./Chapter47List.css";
+import "./Chapter4_7List.css";
 import ChapterList from "../../molecules/StudyList/ChapterList";
 import BlackBoardTab from "../../molecules/BlackBoardTab";
 import { useState } from "react";
