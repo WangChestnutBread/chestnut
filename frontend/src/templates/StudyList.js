@@ -51,12 +51,12 @@ function StudyList() {
         <div className="titleBox">
           <Text32 text={"무엇을 학습할까?"}/>
         </div>
-        
-        {/* 챕터 리스트 */}        
-        <div className="chapterlist">
+
+        챕터 리스트        
+        {/* <div className="chapterlist">
           <div className="chapterTotalBox">
-            <div className="chapterinnerbox">
-              <div className="group-box">
+            <div className="chapterinnerbox"> */}
+              {/* <div className="group-box">
                 <div className="cardgroup">
                     {listdata.map((chapter) => (
                         <div className="cardlist" key={chapter.chapterId}>
@@ -67,7 +67,7 @@ function StudyList() {
                         </div>
                       ))}
                 </div>
-              </div>
+              </div> */}
               <div className="cardgroup-sec">
                 {/* <div className="group-box">
                     {listdata.slice(4).map((chapter) => (
@@ -80,9 +80,9 @@ function StudyList() {
                         </div>
                     ))}
                 </div> */}
-              </div>
+              {/* </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
