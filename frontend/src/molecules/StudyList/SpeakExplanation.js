@@ -11,7 +11,7 @@ const SpeakExplanation = ({ data }) => {
             key={index}
             className="leaf-container d-flex"
           >
-            <img src="/image/leaf.png" alt="잎" className="leaf-image" />
+            <img src="/image/Leaf.png" alt="잎" className="leaf-image" />
             <span className="leaf-text">{saying.word}</span>
           </div>
           <div className="m-2">

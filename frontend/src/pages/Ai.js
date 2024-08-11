@@ -196,7 +196,7 @@ const Ai = ({ userId }) => {
         <div className="logo-container">
           <div className="position-relative">
             <img src="/image/Logo.png" alt="밤빵" className="logo" />
-            <span className="qna position-absolute bottom-0 start-100">Ai</span>
+            <span className="qna position-absolute bottom-0 start-100">AI대화</span>
           </div>
         </div>
       </div>
@@ -208,7 +208,7 @@ const Ai = ({ userId }) => {
           padding: "20px",
           maxHeight: "1000px",
           overflowY: "scroll",
-          backgroundColor: "#DCB78F",
+          backgroundColor: "#fff9ef",
           borderRadius: "10px",
           marginTop: "20px",
         }}
@@ -232,7 +232,8 @@ const Ai = ({ userId }) => {
               color: "white",
             }}
           >
-            <strong>{msg.role}:</strong> {msg.content}
+           
+            <strong> {msg.role}:</strong> {msg.content}
           </div>
         ))}
       </div>
