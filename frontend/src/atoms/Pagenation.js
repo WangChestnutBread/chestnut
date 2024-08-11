@@ -2,9 +2,10 @@ import React from "react";
 import "../atoms/Pagenation.css";
 
 function Pagination({ currentPage, totalPages, onPageChange, upPageChange, downPageChange }) {
-  const handlePageChange = (page) => {
-    if (page < 1 || page > totalPages) return;
-  };
+  
+  // const handlePageChange = (page) => {
+  //   if (page < 1 || page > totalPages) return;
+  // };
   
 
   const renderPageNumbers = () => {
@@ -24,7 +25,7 @@ function Pagination({ currentPage, totalPages, onPageChange, upPageChange, downP
         <div
           key={i}
           className={`NumberBorder ${currentPage === i ? "active" : ""}`}
-          onClick={() => handlePageChange(i)}
+          onClick={() => onPageChange(i)}
         >
           <div className="NumberContent">{i}</div>
         </div>
