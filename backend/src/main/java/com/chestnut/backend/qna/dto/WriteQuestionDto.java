@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WriteQuestionDTO {
+public class WriteQuestionDto {
     private String loginId;
     private byte qnaCategoryId;
     private String title;
