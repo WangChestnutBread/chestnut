@@ -91,8 +91,8 @@ public class MemberService {
         //체크 필요
         redisService.deleteData("CheckLoginIdDuplication:" + checkDuplicationLoginId);
         redisService.deleteData("CheckNicknameDuplication:" + checkDuplicationNickname);
-        redisService.deleteData("CheckEmailDuplication: " +checkDuplicationEmail);
-        redisService.deleteData("CheckEmailCode: "+checkCodeEmail);
+        redisService.deleteData("CheckEmailDuplication:" +checkDuplicationEmail);
+        redisService.deleteData("CheckEmailCode:"+checkCodeEmail);
 
     }
 
