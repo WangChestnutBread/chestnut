@@ -17,7 +17,7 @@ const Record = ({ func, func2 }) => {
   const ffmpeg = new FFmpeg();
   const navigate = useNavigate();
   const { studyId, chapterId } = useParams();
-  const [data, setData] = useState("");
+  const [check, setData] = useState("");
   const setPronunciation = useAuthStore((state) => state.setPronunciation);
 
   const checkPoint = useAuthStore((state) => state.checkPoint);
@@ -131,6 +131,11 @@ const Record = ({ func, func2 }) => {
   // 녹음 시작/정지 토글
   const handleToggle = async () => {
     if (isRecording) {
+      baseApi.get(`/study/detail/${studyId}/word`).then((res) => {
+        console.log(res.data.data.word);
+        setData(res.data.data.word)
+      })
+
       // 녹음 중지
       mediaRecorderRef.current.stop();
       setIsRecording(false);
@@ -196,24 +201,25 @@ const Record = ({ func, func2 }) => {
   // 데이터 서버 전송
   const handleUpload = async () => {
     if (!wavBlob) return;
-
+    console.log(check);
     const formData = new FormData();
-    formData.append("word", data);
+    formData.append("word", check);
     formData.append("audio", wavBlob, "audio.wav");
     console.log(wavBlob);
     console.log(formData);
     checkWavFile(wavBlob);
     try {
       baseApi
-        .post("/study/detail/pronunciation/evaluate/test/fail", formData, {
+        .post("/study/detail/pronunciation/evaluate", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         })
         .then((res) => {
-          console.log(res.data.data.answerMismatchIndices);
+          console.log(res);
+          // console.log(res.data.data.answerMismatchIndices);
           setPronunciation(res.data.data.pronunciation);
-          console.log(res.data.data.pronunciation);
+          // console.log(res.data.data.pronunciation);
           func(res.data.data.pronunciation);
           func2(res.data.data.answerMismatchIndices);
         })
