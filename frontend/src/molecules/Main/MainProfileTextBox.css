@@ -51,6 +51,12 @@
     display: flex;
     align-items: flex-end;
     gap: 7px;
+    cursor: pointer;
+}
+
+.Ranking:hover {
+    /* transform: scale(1.05); */
+    opacity: 0.7;
 }
 
 .Fourth {
@@ -66,11 +72,20 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    
+    cursor: pointer;
+}
+
+.InfoChange:hover {
+    /* transform: scale(1.05); */
+    opacity: 0.7;
 }
 
 .Logout {
     cursor: pointer;
+}
+
+.Logout:hover {
+    opacity: 0.7;
 }
 
 .Bar {
