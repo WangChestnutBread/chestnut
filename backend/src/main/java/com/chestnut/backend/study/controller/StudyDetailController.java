@@ -76,12 +76,14 @@ public class StudyDetailController {
         return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
     }
 
+    //TODO 더미 코드 - 배포시 제거
     @PostMapping("/pronunciation/evaluate/test/fail")
     public ResponseEntity<?> checkPronunciationTestFail(@RequestParam("word") String word,
                                                 @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
         PronunceEvaluateDto evaluation = new PronunceEvaluateDto(0, "그리고 안녕하시오", List.of(1, 2, 8), List.of(1, 2, 7));
         return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
     }
+    //TODO 더미 코드 - 배포시 제거
     @PostMapping("/pronunciation/evaluate/test/success")
     public ResponseEntity<?> checkPronunciationTestSuccess(@RequestParam("word") String word,
                                                     @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
