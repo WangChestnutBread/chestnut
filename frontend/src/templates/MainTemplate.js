@@ -5,6 +5,8 @@ import LastStudy from "../organisms/Main/LastStudy";
 import MainProfile from "../organisms/Main/MainProfile";
 import MainCalendar from "../organisms/Main/MainCalendar";
 import MainSideButtonGroup from "../molecules/Main/MainSideButtonGroup";
+import OpenChat from "../pages/OpenChat";
+import { Modal } from "react-bootstrap";
 
 const MainTemplate = ({ profile, attendance }) => {
   // 메뉴 밤
@@ -14,6 +16,12 @@ const MainTemplate = ({ profile, attendance }) => {
     { name: "단어장", path: "/myVocabulary" },
     { name: "게시판", path: "/board/announcement/1" },
   ]);
+
+  let [showOpenChat, setShowOpenChat] = useState(false);
+
+  const handleOpenChatClick = () => {
+    setShowOpenChat(!showOpenChat);
+  };
 
   return (
     <div>
@@ -25,7 +33,7 @@ const MainTemplate = ({ profile, attendance }) => {
 
         {/* 밤 메뉴 */}
         <MainMenu menu={menu} />
-        
+
         <div className="MainStatus">
           {/* 프로필 */}
           <MainProfile profile={profile} />
@@ -36,15 +44,19 @@ const MainTemplate = ({ profile, attendance }) => {
             word={profile.word}
             chapterId={profile.chapterId}
             studyId={profile.studyId}
-            />
+          />
         </div>
 
         {/* 출석 캘린더 */}
-        <MainCalendar attendance={attendance.attendanceAt}/>
+        <MainCalendar attendance={attendance.attendanceAt} />
       </div>
 
-        {/* 사이드 버튼 모음 */}
-        <MainSideButtonGroup />
+      {/* 오픈 채팅 모달 */}
+      {showOpenChat && <div className="MainOpenChat"><OpenChat/></div>}
+
+      {/* 사이드 버튼 모음 */}
+      <MainSideButtonGroup handleOpenChatClick={handleOpenChatClick} />
+
     </div>
   );
 };

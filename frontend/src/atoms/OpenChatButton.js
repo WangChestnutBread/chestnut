@@ -1,8 +1,10 @@
+import { useState } from "react";
 import "./OpenChatButton.css"
 
-function OpenChatButton() {
+function OpenChatButton({handleOpenChatClick}) {
+
   return (
-    <button className="OpenChatButton">
+    <button className="OpenChatButton" onClick={handleOpenChatClick}>
       <img src="/icons/OpenChatIcon.svg"/>
     </button>
   );
