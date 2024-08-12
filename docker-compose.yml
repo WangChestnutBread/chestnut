@@ -1,5 +1,5 @@
 x-common-env: &default-tz
-  TZ: Asia/Seoul
+  TZ=Asia/Seoul
 
 services:
   nginx:
