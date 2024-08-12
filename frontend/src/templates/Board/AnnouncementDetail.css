@@ -4,6 +4,7 @@
   background: #6b3906;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
+  color: white;
 }
 
 .updatebtn {
@@ -12,4 +13,13 @@
   background: #DCB78F;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
+}
+
+.listbtn {
+  width: 100px;
+  height: 78px;
+  background: #6b3906;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  color: white;
 }

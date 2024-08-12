@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ListBtn = () => {
   const navigate = useNavigate();
   const handleQnaClick = () => {
-    navigate("/board/announcement/1");
+    navigate("/board/qna/1");
   };
 
   return (

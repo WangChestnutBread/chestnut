@@ -38,41 +38,47 @@ const Record = ({ func, func2 }) => {
     func2([10000]);
 
     const nextId = getNextId(Number(studyId)); // 다음 ID 가져오기
-    if (nextId && studyId > 39 && studyId < 439) {
-      navigate(`/study/detail2/2/${nextId}`);
+    if (studyId > 0 && studyId < 40) {
+      navigate(`/study/detail1/1/${nextId}`);
       baseApi.get(`/log/study`, {
         params: {
           studyId: nextId,
           isPass: 1,
         },
       });
+    } else if (nextId && studyId > 39 && studyId < 439) {
+      navigate(`/study/detail2/2/${nextId}`);
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: nextId,
+      //     isPass: 1,
+      //   },
+      // });
     } else if (nextId && studyId > 438 && studyId < 446) {
       navigate(`/study/detail3/3/${nextId}`);
-      baseApi.get(`/log/study`, {
-        params: {
-          studyId: nextId,
-          isPass: 1,
-        },
-      });
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: nextId,
+      //     isPass: 1,
+      //   },
+      // });
     } else if (nextId && studyId > 445 && studyId < 1381) {
       navigate(`/study/detail5/5/${nextId}`);
-      baseApi.get(`/log/study`, {
-        params: {
-          studyId: nextId,
-          isPass: 1,
-        },
-      });
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: nextId,
+      //     isPass: 1,
+      //   },
+      // });
     } else if (studyId < 2368) {
       navigate(`/study/detail6/6/${nextId}`);
-      baseApi.get(`/log/study`, {
-        params: {
-          studyId: nextId,
-          isPass: 1,
-        },
-      });
-    } 
-    
-    else {
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: nextId,
+      //     isPass: 1,
+      //   },
+      // });
+    } else {
       alert("다음 학습 페이지가 없습니다.");
     }
   };
@@ -82,7 +88,7 @@ const Record = ({ func, func2 }) => {
     func2([1000000]);
 
     const prevId = getPrevId(Number(studyId)); // 이전 ID 가져오기
-    if (prevId && studyId > 0 && studyId < 42 ) {
+    if (prevId && studyId > 0 && studyId < 42) {
       navigate(`/study/detail1/1/${prevId}`);
       baseApi.get(`/log/study`, {
         params: {
@@ -90,15 +96,15 @@ const Record = ({ func, func2 }) => {
           isPass: 1,
         },
       });
-    } else if (prevId && studyId < 441 ) {
+    } else if (prevId && studyId < 441) {
       navigate(`/study/detail2/2/${prevId}`);
-      baseApi.get(`/log/study`, {
-        params: {
-          studyId: prevId,
-          isPass: 1,
-        },
-      });
-    } else if (prevId && studyId < 448 ) {
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: prevId,
+      //     isPass: 1,
+      //   },
+      // });
+    } else if (prevId && studyId < 448) {
       navigate(`/study/detail3/3/${prevId}`);
       baseApi.get(`/log/study`, {
         params: {
@@ -106,24 +112,23 @@ const Record = ({ func, func2 }) => {
           isPass: 1,
         },
       });
-    } else if (prevId && studyId < 1383 ) {
+    } else if (prevId && studyId < 1383) {
       navigate(`/study/detail5/5/${prevId}`);
-      baseApi.get(`/log/study`, {
-        params: {
-          studyId: prevId,
-          isPass: 1,
-        },
-      });
-    } else if (prevId && studyId < 2370 ) {
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: prevId,
+      //     isPass: 1,
+      //   },
+      // });
+    } else if (prevId && studyId < 2370) {
       navigate(`/study/detail6/6/${prevId}`);
-      baseApi.get(`/log/study`, {
-        params: {
-          studyId: prevId,
-          isPass: 1,
-        },
-      });
-    }
-     else {
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: prevId,
+      //     isPass: 1,
+      //   },
+      // });
+    } else {
       alert("첫 학습페이지 입니다.");
     }
   };
@@ -133,8 +138,8 @@ const Record = ({ func, func2 }) => {
     if (isRecording) {
       baseApi.get(`/study/detail/${studyId}/word`).then((res) => {
         console.log(res.data.data.word);
-        setData(res.data.data.word)
-      })
+        setData(res.data.data.word);
+      });
 
       // 녹음 중지
       mediaRecorderRef.current.stop();
