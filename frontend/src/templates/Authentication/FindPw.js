@@ -7,6 +7,7 @@ import BackButton from "../../atoms/BackButton";
 import { useNavigate } from "react-router-dom";
 import NewInputForm from "../../organisms/Authentication/NewInputForm";
 import "./FindPw.css";
+import CustomAlert from "../../atoms/alert";
 function FindPw() {
     const navigate = useNavigate();
 
@@ -22,6 +23,8 @@ function FindPw() {
     const [isPw, setIsPw] = useState(false);
     const [isPwCon, setIsPwCon] = useState(false);
     const [isAuth, setIsAuth] = useState(false);
+
+    const [alertContent, setAlertContent] = useState("");
 
     const succes = () => {
         alert("비밀번호가 변경되었습니다.")
@@ -56,7 +59,7 @@ function FindPw() {
     };
 
     const handleSubmit = (event) => {
-        alert("인증번호를 전송했습니다.");
+        setAlertContent("인증번호를 전송했습니다.");
         event.preventDefault();
     };
 
@@ -110,6 +113,7 @@ function FindPw() {
                     </div>
                 </div>
             </div>
+            <CustomAlert content={alertContent} />
         </div>
     );
 }
