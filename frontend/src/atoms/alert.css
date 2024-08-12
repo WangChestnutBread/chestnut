@@ -1,0 +1,53 @@
+.custom-alert-popup {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    height: 170px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.swal2-custom-html {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.custom-icon {
+    color: white !important;
+    background-color: #a94442 !important;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.custom-alert-content {
+    font-size: 1.4rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.custom-alert-button {
+    background-color: #5a3d22;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 200px;
+    outline: none;
+}
+
+.custom-alert-button:hover {
+    background-color: #a94442;
+}

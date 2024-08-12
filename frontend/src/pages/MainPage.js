@@ -6,6 +6,7 @@ import axios from "axios";
 import { get } from "jquery";
 import { useEffect, useState } from "react";
 import OpenChatButton from "../atoms/OpenChatButton";
+import Loading from "../organisms/Loading";
 function MainPage() {
   const { accessToken, setAccessToken } = useAuthStore((state) => ({
     ...state,
@@ -46,7 +47,7 @@ function MainPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const promiseResult = Promise.all([getProfile(), getAttendance()])
+        const promiseResult = Promise.all([getProfile(), getAttendance()]);
       } catch (err) {
         console.error(err);
       }
@@ -63,7 +64,9 @@ function MainPage() {
       {profile && attendance ? (
         <MainTemplate profile={profile} attendance={attendance} />
       ) : (
-        <p>로딩중입니다</p>
+        <div className="loading-container">
+          <Loading />
+        </div>
       )}
 
       

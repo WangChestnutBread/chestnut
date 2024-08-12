@@ -18,9 +18,18 @@ public interface AttendanceLogRepository extends JpaRepository<AttendanceLog, Lo
             "and al.member = :member")
     Optional<Short> findYesterdayLog(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end, @Param("member")Member member);
 
-    @Query("SELECT CAST(DATE(al.attendanceAt) AS java.time.LocalDate) " +
-            "FROM AttendanceLog al " +
-            "right join al.member m " +
-            "WHERE YEAR(al.attendanceAt) = :year and m.memberId=:memberId")
+    /**
+     * 출석 기록을 조회.
+     *
+     * @param memberId 출석 조회할 멤버 Id
+     * @param year 조회할 년도
+     * @return List<LocalDate> 출석한 날짜 목록
+     */
+    @Query("""
+            SELECT CAST(DATE(al.attendanceAt) AS java.time.LocalDate)
+            FROM AttendanceLog al
+            right join al.member m
+            WHERE YEAR(al.attendanceAt) = :year and m.memberId=:memberId
+            """)
     List<LocalDate> findByMemberIdandYear(@Param("memberId") Long memberId, @Param("year") int year);
 }

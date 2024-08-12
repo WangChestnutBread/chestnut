@@ -75,24 +75,22 @@ function MainProfileTextBox({ profile }) {
         </div>
 
         {/* 2. 로그아웃 */}
-        <div
-          className="Logout"
-          onClick={() => {
-            baseApi({
-              method: "POST",
-              url: "/member/logout",
-            })
-              .then((res) => {
-                // console.log(res)
-                setAccessToken(undefined);
-                navigate("/");
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }}
-        >
-          <Text20 text="로그아웃" />
+        <div className="Logout" onClick={()=>{
+          baseApi({
+            method: 'POST',
+            url: '/member/logout'
+          })
+          .then((res)=>{
+            console.log(res)
+            setAccessToken(undefined)
+            alert("로그인 해주세요")
+            navigate('/member/login')
+          })
+          .catch((err)=>{
+            console.log(err)
+          })
+        }}>
+          <Text20 text="로그아웃"/>
         </div>
       </div>
     </div>

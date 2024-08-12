@@ -28,12 +28,15 @@ public class Member {
     private Long memberId;
 
     @NotNull
+    @Column(unique=true)
     private String loginId;
     @NotNull
     private String password;
     @NotNull
+    @Column(unique=true)
     private String email;
     @NotNull
+    @Column(unique=true)
     private String nickname;
     private LocalDate birthday;
     @NotNull

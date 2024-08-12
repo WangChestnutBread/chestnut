@@ -10,11 +10,8 @@ import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MainMemberRepository;
 import com.chestnut.backend.member.repository.MemberRepository;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,23 +32,45 @@ public class MemberService {
     @Transactional
     public void signup(SignupReqDTO signupReqDTO, HttpSession session) {
 
+        String loginId = signupReqDTO.getLoginId();
+        String checkDuplicationLoginId = (String) session.getAttribute("CheckLoginIdDuplication:");
+        if (checkDuplicationLoginId == null) {
+            // loginId 중복 검사 안함
+            throw new NotCheckDuplicationLoginId();
+        }
+        if (!checkDuplicationLoginId.equals(loginId)) {
+            // 입력한 loginId와 중복 검사 한 loginId가 다름 ( = 중복 검사 후에 입력한 아이디 바꾼 경우)
+            throw new LoginIdSessionException();
+        }
+
+        String nickname = signupReqDTO.getNickname();
+        String checkDuplicationNickname = (String) session.getAttribute("CheckNicknameDuplication:");
+        if (checkDuplicationNickname == null) {
+            // 닉네임 중복 검사 안함
+            throw new NotCheckDuplicationNickname();
+        }
+        if (!checkDuplicationNickname.equals(nickname)) {
+            // 입력한 닉네임과 중복 검사 한 닉네임이 다름 ( = 중복 검사 후에 입력한 닉네임 바꾼 경우)
+            throw new NicknameSessionException();
+        }
+
         //DTO에서의 이메일 꺼내기 -> session에서 중복 검사 이메일과 같은지 확인 / 코드 검사 이메일과 같은지 확인
         String email = signupReqDTO.getEmail();
         String checkDuplicationEmail = (String) session.getAttribute("CheckEmailDuplication:");
         String checkCodeEmail = (String) session.getAttribute("CheckEmailCode:");
 
-        //1. checkDuplicationEmail이 null인지 확인 ->
-        //2. checkCodeEmail이 null인지 확인
-        //3. DTO의 이메일과 해당 값들이 같은지 확인
         if(checkDuplicationEmail == null) {
-            throw new MailSessionNotFoundException();
+            // email 중복 검사 안함
+            throw new NotCheckDuplicationEmail();
         }
 
         if(checkCodeEmail == null) {
-            throw new MailSessionNotFoundException();
+            // email 인증 번호 작성 안함
+            throw new NotVerifiedEmailException();
         }
 
         if(!checkDuplicationEmail.equals(email) || !checkCodeEmail.equals(email)) {
+            // 입력한 이메일과 중복 검사 및 인증 한 이메일이 다름 ( = 검사 후에 입력한 이메일 바꾼 경우)
             throw new EmailSessionException();
         }
 
@@ -60,21 +79,18 @@ public class MemberService {
         if (!password.equals(checkPassword)) {
             throw new PasswordNotEqualException();
         }
-        try {
-            String codePwd = bCryptPasswordEncoder.encode(password);
-            Avatar avatar = avatarRepository.findByAvatarId(1)
-                    .orElseThrow(AvatarNotFoundException::new);
-            Member member = signupReqDTO.toEntity(codePwd, avatar);
-            memberRepository.save(member);
-        } catch (DataAccessException e) {
-            throw new DatabaseException();
-        } catch (Exception e) {
-            throw new UnknownException();
-        }
+
+        String codePwd = bCryptPasswordEncoder.encode(password);
+        Avatar avatar = avatarRepository.findByAvatarId(1)
+                .orElseThrow(AvatarNotFoundException::new);
+        Member member = signupReqDTO.toEntity(codePwd, avatar);
+        memberRepository.save(member);
 
         //체크 필요
-        redisService.deleteData("checkDuplicationEmail: " +checkDuplicationEmail);
-        redisService.deleteData("checkCodeEmail: "+checkCodeEmail);
+        redisService.deleteData("CheckLoginIdDuplication:" + checkDuplicationLoginId);
+        redisService.deleteData("CheckNicknameDuplication:" + checkDuplicationNickname);
+        redisService.deleteData("CheckEmailDuplication: " +checkDuplicationEmail);
+        redisService.deleteData("CheckEmailCode: "+checkCodeEmail);
 
     }
 
@@ -96,6 +112,7 @@ public class MemberService {
 
     @Transactional
     public void checkNicknameDuplicate(String nickname) {
+        //유효성 검사 + 중복 검사
         if (memberRepository.existsByNickname(nickname)) {
             throw new DataDuplicatedException();
         }
@@ -110,7 +127,7 @@ public class MemberService {
 
     @Transactional
     public void checkEmailDuplicate(String email) {
-        if(memberRepository.existsByEmail(email)) {
+        if (memberRepository.existsByEmail(email)) {
             throw new DataDuplicatedException();
         }
     }
@@ -208,37 +225,36 @@ public class MemberService {
         redisService.deleteData("Refresh:"+loginId);
     }
 
+    /**
+     * 메인 페이지에 보일 멤버 정보 조회 메서드.
+     *
+     * @param loginId 조회할 사용자 아이디
+     * @return MainMemberInfoDto 조회한 사용자 정보 DTO
+     */
     @Transactional(readOnly = true)
     public MainMemberInfoDto getMainMemberInfo (String loginId){
-        Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
-        if(member.isWithdraw()) throw new InvalidMemberException();
-        try {
-            return  mainMemberRepository.findMainMemberInfo(member.getMemberId());
-        }catch (NoResultException e){
-            throw new NotFoundException();
-        }catch (PersistenceException e){
-            throw new DatabaseException();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new UnknownException();
-        }
-    }
-
-    @Transactional(readOnly = true)
-    public AttendanceLogDto getAttendanceLog(String loginId, int year){
-        Member member = memberRepository.findByLoginId(loginId).orElseThrow(MemberNotFoundException::new);
-        if(member.isWithdraw()) throw new InvalidMemberException();
-        try {
-            return new AttendanceLogDto(attendanceLogRepository.findByMemberIdandYear(member.getMemberId(), year));
-        }catch (PersistenceException e){
-            throw new DatabaseException();
-        }catch (Exception e){
-            throw new UnknownException();
-        }
+        // 멤버 유효성 검사
+        Member member = validateMember(loginId);
+        return  mainMemberRepository.findMainMemberInfo(member.getMemberId());
     }
 
     /**
-     * 멤버 조회 및 탈퇴 여부 검사
+     * 사용자 출석 기록 조회 메서드.
+     *
+     * @param loginId 조회할 사용자 아이디
+     * @param year 출석 조회 년도
+     * @return AttendanceLogDto 출석 기록 DTO
+     */
+    @Transactional(readOnly = true)
+    public AttendanceLogDto getAttendanceLog(String loginId, int year){
+        // 멤버 유효성 검사
+        Member member = validateMember(loginId);
+        return new AttendanceLogDto(attendanceLogRepository.findByMemberIdandYear(member.getMemberId(), year));
+    }
+
+    /**
+     * 멤버 조회 및 탈퇴 여부 검사 메서드.
+     *
      * @param loginId 검사할 사용자 아이디
      * @return Member 검사한 멤버
      * @throws MemberNotFoundException 사용자를 찾을 수 없는 경우
@@ -251,7 +267,8 @@ public class MemberService {
     }
 
     /**
-     * 멤버 조회 및 탈퇴, 관리자 여부 검사
+     * 멤버 조회 및 탈퇴, 관리자 여부 검사 메서드.
+     *
      * @param loginId 검사할 사용자 아이디
      * @return Member 검사한 멤버
      * @throws AdminPermissionDeniedException 사용자가 관리자 권한이 없는 경우

@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,7 +25,7 @@ public class QnAService {
     private final MemberRepository memberRepository;
 
     @Transactional(readOnly = true)
-    public QnAResDTO getQnAList(String loginId, String role, Pageable pageable) {
+    public QnAResDto getQnAList(String loginId, String role, Pageable pageable) {
 
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
@@ -51,13 +50,13 @@ public class QnAService {
             qnaList = qnARepository.findByMemberNickname(nickname, pageable);
         }
 
-        QnAResDTO qna = new QnAResDTO(categories, qnaList);
+        QnAResDto qna = new QnAResDto(categories, qnaList);
         return qna;
 
     }
 
     @Transactional(readOnly = true)
-    public QnADetailResDTO getQnADetail(String loginId, Long qnaId) {
+    public QnADetailResDto getQnADetail(String loginId, Long qnaId) {
         // 받아온 qnaId로 해당 QnA 찾고 -> QnA의 memberId와 loginId을 이용한 memberId가 같은지 여부 확인 -> 멤버 여부 확인! -> MemberNotFound
         // qnaId에 해당하는 qna 게시글이 있는지 확인 -> ArticleNotFound
 
@@ -72,12 +71,12 @@ public class QnAService {
             throw new IncorrectAccessException();
         }
 
-        return QnADetailResDTO.from(qna);
+        return QnADetailResDto.from(qna);
 
     }
 
     @Transactional
-    public void writeQuestion(WriteQuestionDTO writeQuestionDTO) {
+    public void writeQuestion(WriteQuestionDto writeQuestionDTO) {
 
         // loginId로 member 찾고 -> memberId 을 활용하기
         Member member = memberRepository.findByLoginId(writeQuestionDTO.getLoginId())
@@ -91,7 +90,7 @@ public class QnAService {
     }
 
     @Transactional
-    public void writeAnswer(WriteAnswerDTO writeAnswerDTO) {
+    public void writeAnswer(WriteAnswerDto writeAnswerDTO) {
 
         // 관리자인지 여부 확인
         String loginId = writeAnswerDTO.getLoginId();
