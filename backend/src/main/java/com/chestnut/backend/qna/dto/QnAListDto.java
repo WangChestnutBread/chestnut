@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class QnAListDTO {
+public class QnAListDto {
 
     private Long qnaId;
     private Byte qnaCategoryId;
