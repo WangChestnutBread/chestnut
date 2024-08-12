@@ -27,6 +27,7 @@ const MainTemplate = ({ profile, attendance }) => {
 
         {/* 밤 메뉴 */}
         <MainMenu menu={menu} />
+        
         <div className="MainStatus">
           {/* 프로필 */}
           <MainProfile profile={profile} />
