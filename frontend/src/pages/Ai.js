@@ -201,7 +201,7 @@ const Ai = ({ userId }) => {
       <div className="container text-start justify-center">
         <div className="logo-container">
           <div className="position-relative">
-            <img src="/image/Logo.png" alt="밤빵" className="logo" />
+            <img src="/image/Logo.png" alt="밤빵" className="logo" style={{"width":"300px"}} />
             <span className="qna position-absolute bottom-0 start-100">
               AI대화
             </span>
