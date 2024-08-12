@@ -1,9 +1,9 @@
 .LastStudyButton {
     display: flex;
     background-color: #6B3906;
-    width: 309px;
-    height: 41px;
+    width: 100%;
     border-radius: 10px;
+    padding: 10px;
     border: none;
     justify-content: center;
     align-items: center;
