@@ -1,3 +1,7 @@
+x-common-env: &default-tz
+  environment:
+    - TZ=Asia/Seoul
+
 services:
   nginx:
     image : ${DOCKER_IMAGE}:${DOCKER_TAG_FE}-latest
@@ -5,6 +9,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    <<: *default-tz
     environment:
       - DOCKER_TAG_BE=${DOCKER_TAG_BE}
       - BACKEND_PORT=${BACKEND_PORT}
@@ -31,6 +36,7 @@ services:
   springboot:
     image: ${DOCKER_IMAGE}:${DOCKER_TAG_BE}-latest
     container_name: ${DOCKER_TAG_BE}
+    <<: *default-tz
     environment:
       - PROFILES_ACTIVE=${PROFILES_ACTIVE}
       - BACKEND_PORT=${BACKEND_PORT}
@@ -65,6 +71,7 @@ services:
   mysql:
     image: mysql:8.0
     container_name: MySQL-8.0
+    <<: *default-tz
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
@@ -77,6 +84,7 @@ services:
   redis:
     image: redis:latest
     container_name: my-redis
+    <<: *default-tz
     volumes:
       - redis_data:/data
       - ${REDIS_DEFAULT_CONFIG_FILE}:/usr/local/etc/redis/redis.conf
