@@ -7,6 +7,8 @@ import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.service.MailAuthService;
 import com.chestnut.backend.member.service.MemberService;
 import com.chestnut.backend.member.validation.annotation.Email;
+import com.chestnut.backend.member.validation.annotation.LoginId;
+import com.chestnut.backend.member.validation.annotation.Nickname;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,14 +38,16 @@ public class MemberController {
     }
 
     @GetMapping("/check-nickname")
-    public ResponseEntity<?> checkNicknameDuplicate(@RequestParam String nickname) {
+    public ResponseEntity<?> checkNicknameDuplicate(@Nickname @RequestParam String nickname, HttpSession session) {
         memberService.checkNicknameDuplicate(nickname);
+        session.setAttribute("CheckNicknameDuplication:", nickname);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
     @GetMapping("/check-loginId")
-    public ResponseEntity<?> checkLoginIdDuplicate(@RequestParam String loginId) {
+    public ResponseEntity<?> checkLoginIdDuplicate(@LoginId @RequestParam String loginId, HttpSession session) {
         memberService.checkLoginIdDuplicate(loginId);
+        session.setAttribute("CheckLoginIdDuplication:", loginId);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
@@ -62,7 +66,7 @@ public class MemberController {
     }
 
     @PostMapping("/reset-pwd/unknown")
-    public ResponseEntity<?> resetPwdUknown(@Valid @RequestBody ResetPwdUnknownReqDTO resetPwdUnknownReqDTO,
+    public ResponseEntity<?> resetPwdUnknown(@Valid @RequestBody ResetPwdUnknownReqDTO resetPwdUnknownReqDTO,
                                             @SessionAttribute(name = "CheckEmailCode:", required = false) String authEmail) {
         if(authEmail == null || !resetPwdUnknownReqDTO.getEmail().equals(authEmail)) {
             throw new NotVerifiedEmailException();
@@ -90,7 +94,7 @@ public class MemberController {
     }
 
     @GetMapping("/withdraw")
-    public ResponseEntity<?> withdraw(@AuthenticationPrincipal CustomMemberDetails customMemberDetails){
+    public ResponseEntity<?> withdraw(@AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
         memberService.withdraw(customMemberDetails.getLoginId());
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
@@ -102,9 +106,9 @@ public class MemberController {
     }
 
     @PostMapping("/email/code-check")
-    public ResponseEntity<?> checkMail(@RequestBody MailAuthDto mailAuthDto, HttpSession session){
+    public ResponseEntity<?> checkMail(@RequestBody MailAuthDto mailAuthDto, HttpSession session) {
         mailAuthService.verifyEmailCode(mailAuthDto);
-        session.setAttribute("CheckEmailCode:", mailAuthDto.getEmail());
+        session.setAttribute("CheckEmailCode:"+mailAuthDto.getPurpose()+":", mailAuthDto.getEmail());
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
