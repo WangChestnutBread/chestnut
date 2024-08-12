@@ -39,7 +39,7 @@ public class RedisService {
             String value = redisConfig.objectMapper().writeValueAsString(list);
             ops.set(key, value, Duration.ofMillis(duration));
         } catch (JsonProcessingException e) {
-            throw new RedisException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -49,7 +49,7 @@ public class RedisService {
         try {
             return redisConfig.objectMapper().readValue(value, new TypeReference<>() {});
         } catch (JsonProcessingException e) {
-            throw new RedisException();
+            throw new RuntimeException(e);
         }
     }
 
