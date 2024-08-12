@@ -1,10 +1,8 @@
 import MainTemplate from "../templates/MainTemplate";
-import "./MainPage.css";
 import useAuthStore from "../stores/authStore";
 import baseApi from "../api/fetchAPI";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import OpenChatButton from "../atoms/OpenChatButton";
 import Loading from "../organisms/Loading";
 function MainPage() {
 

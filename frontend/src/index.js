@@ -27,7 +27,6 @@ import Chapter5Detail from './templates/StudyList/Chapter5Detail';
 import Chapter6Detail from './templates/StudyList/Chapter6Detail';
 import Ai from "./pages/Ai";
 import AnnouncementManagerWrite from "./templates/Board/AnnouncementManagerWrite";
-import OpenChat from "./pages/OpenChat";
 import VocabularyListPage from "./pages/VocabularyListPage";
 import Ranking from "./pages/Ranking";
 import ChapterListPage from "./pages/ChapterListPage";
