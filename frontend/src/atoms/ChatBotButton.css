@@ -9,6 +9,10 @@
     box-shadow: 0px 0px 10px 0px #6B3906;
 }
 
+.ChatBotButton:hover {
+    transform: scale(1.05);
+}
+
 .ChatBotButton > img {
     width: 100%;
     height: 100%;

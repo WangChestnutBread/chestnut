@@ -4,9 +4,7 @@ import "./MainTemplate.css";
 import LastStudy from "../organisms/Main/LastStudy";
 import MainProfile from "../organisms/Main/MainProfile";
 import MainCalendar from "../organisms/Main/MainCalendar";
-import OpenChatButton from "../atoms/OpenChatButton"
-import ChatBotButton from "../atoms/ChatBotButton";
-import MainSideButtonGroup from "../molecules/MainSideButtonGroup";
+import MainSideButtonGroup from "../molecules/Main/MainSideButtonGroup";
 
 const MainTemplate = ({ profile, attendance }) => {
   // 메뉴 밤
