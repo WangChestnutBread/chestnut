@@ -14,12 +14,14 @@ function Chapter7List({ content }) {
   let [currentTab, setCurrentTab] = useState(0);
   let [currentRule, setCurrentRule] = useState(0);
   let [showModal, setShowModal] = useState(false);
-  let [modalWord, setModalWord] = useState();
-  let [modalPronounce, setModalPronounce] = useState();
+  let [modalWord, setModalWord] = useState(null);
+  let [modalPronounce, setModalPronounce] = useState(null);
+  let [modalStudyId, setModalStudyId] = useState(null);
 
-  const handleWordClick = (word, pronounce) => {
+  const handleWordClick = (word, pronounce, studyId) => {
     setModalWord(word);
     setModalPronounce(pronounce);
+    setModalStudyId(studyId);
     setShowModal(true);
   };
 
@@ -84,16 +86,16 @@ function Chapter7List({ content }) {
                   return (
                     <div className="RightBoardBox">
                       {item.map((pair, j) => {
+                        console.log(pair);
                         return (
                           <div key={j} className="RightBoardPair">
-                            <div className="RightBoardWord">
-                              <p
-                                onClick={() => {
-                                  handleWordClick(pair.word, pair.pronounce);
-                                }}
-                              >
-                                {pair.word}
-                              </p>
+                            <div
+                              className="RightBoardWord"
+                              onClick={() => {
+                                handleWordClick(pair.word, pair.pronounce, pair.studyId);
+                              }}
+                            >
+                              <p>{pair.word}</p>
                               <p>[{pair.pronounce}]</p>
                             </div>
                             <div className="Vs">
@@ -120,6 +122,7 @@ function Chapter7List({ content }) {
           <VocaModal
             word={modalWord}
             pronounce={modalPronounce}
+            studyId={modalStudyId}
             onClose={handleCloseModal}
           />
         ) : null}
