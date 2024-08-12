@@ -1,3 +1,6 @@
+x-common-env: &default-tz
+  TZ: Asia/Seoul
+
 services:
   nginx:
     image : ${DOCKER_IMAGE}:${DOCKER_TAG_FE}-latest
@@ -10,6 +13,7 @@ services:
       - BACKEND_PORT=${BACKEND_PORT}
       - SERVER_NAME=${SERVER_NAME}
       - CONTEXT_PATH=${CONTEXT_PATH}
+      - <<: *default-tz
     volumes:
       - /home/ubuntu/data/certbot/conf:/etc/letsencrypt
       - /home/ubuntu/data/certbot/www:/var/www/certbot
@@ -31,6 +35,7 @@ services:
   springboot:
     image: ${DOCKER_IMAGE}:${DOCKER_TAG_BE}-latest
     container_name: ${DOCKER_TAG_BE}
+    <<: *default-tz
     environment:
       - PROFILES_ACTIVE=${PROFILES_ACTIVE}
       - BACKEND_PORT=${BACKEND_PORT}
@@ -54,6 +59,7 @@ services:
       - OPENAI_TEMPERATURE=${OPENAI_TEMPERATURE}
       - OPENAI_MAX_TOKENS_LIMIT=${OPENAI_MAX_TOKENS_LIMIT}
       - EXPIRATION_TIME_MILLIS=${EXPIRATION_TIME_MILLIS}
+      - <<: *default-tz
     expose:
       - ${BACKEND_PORT}
     networks:
@@ -67,6 +73,7 @@ services:
     container_name: MySQL-8.0
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - <<: *default-tz
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
@@ -77,6 +84,8 @@ services:
   redis:
     image: redis:latest
     container_name: my-redis
+    environment:
+      - <<: *default-tz
     volumes:
       - redis_data:/data
       - ${REDIS_DEFAULT_CONFIG_FILE}:/usr/local/etc/redis/redis.conf
