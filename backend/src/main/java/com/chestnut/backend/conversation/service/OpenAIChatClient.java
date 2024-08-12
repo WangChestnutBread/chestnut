@@ -2,7 +2,6 @@ package com.chestnut.backend.conversation.service;
 
 import com.chestnut.backend.common.exception.ChatApiFailException;
 import com.chestnut.backend.common.exception.ChatApiRefusalException;
-import com.chestnut.backend.common.exception.SttFailException;
 import com.chestnut.backend.conversation.dto.ChatCompletionDto;
 import com.chestnut.backend.conversation.dto.ChatMessageDto;
 import com.chestnut.backend.conversation.dto.ChatReposeJsonDto;
@@ -99,7 +98,6 @@ public class OpenAIChatClient {
      * @param response 응답 ResponseEntity 객체
      * @return ChatReposeJsonDto 추출된 대답을 담는 DTO
      * @throws ChatApiRefusalException AI가 대답을 거부했을 경우
-     * @throws JsonProcessingException json 파싱 예외가 발생했을 경우
      */
     public ChatReposeJsonDto extractDtoFromJsonResponse(ResponseEntity<String> response) {
         try {

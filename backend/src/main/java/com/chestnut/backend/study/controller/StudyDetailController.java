@@ -16,7 +16,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -64,12 +63,11 @@ public class StudyDetailController {
      * @param audioFile 사용자가 업로드한 오디오 파일
      * @param customMemberDetails 인증된 사용자 정보
      * @return ResponseEntity<?> 발음 평가 결과를 포함하는 ResponseEntity 객체
-     * @throws IOException 녹음 파일 처리 중 발생할 수 있는 예외
      */
     @PostMapping("/pronunciation/evaluate")
     public ResponseEntity<?> checkPronunciation(@RequestParam("word") String word,
                                                 @RequestParam("audio") MultipartFile audioFile,
-                                                @AuthenticationPrincipal CustomMemberDetails customMemberDetails) throws IOException {
+                                                @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
         log.debug("STT 태그 : 요청 body 내용 "+word+" "+audioFile.getOriginalFilename());
         log.debug("STT 태그 : audio file resource "+audioFile.getResource());
         PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, audioFile);

@@ -1,6 +1,5 @@
 package com.chestnut.backend.conversation.service;
 
-import com.chestnut.backend.common.exception.NullSTTException;
 import com.chestnut.backend.common.exception.TimeOutException;
 import com.chestnut.backend.common.exception.TokenLenException;
 import com.chestnut.backend.common.service.RedisService;
@@ -11,16 +10,13 @@ import com.chestnut.backend.log.service.LogService;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.service.MemberService;
 import com.chestnut.backend.study.service.ClovaSpeechClient;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -57,7 +53,6 @@ public class ConversationService {
      * AI 자유 대화 메서드.
      *
      * @param loginId 대화할 사용자 아이디
-     * @throws JsonProcessingException Redis 처리 중 발생할 수 있는 예외
      */
     public void startConversation(String loginId) {
         log.debug("대화 시작 태그 : service");

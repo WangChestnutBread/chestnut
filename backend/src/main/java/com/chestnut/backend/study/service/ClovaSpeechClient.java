@@ -58,7 +58,6 @@ public class ClovaSpeechClient {
      *
      * @param file STT 수행할 녹음 파일
      * @return HttpEntity<MultiValueMap<String, Object>> 요청 객체
-     * @throws IOException 녹음 파일 IO 관련시 발생할 수 있는 예외
      */
     private HttpEntity<MultiValueMap<String, Object>> createRequestEntity(MultipartFile file) {
         // Header 설정

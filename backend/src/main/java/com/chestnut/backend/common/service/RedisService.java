@@ -1,7 +1,6 @@
 package com.chestnut.backend.common.service;
 
 import com.chestnut.backend.common.config.RedisConfig;
-import com.chestnut.backend.common.exception.RedisException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;

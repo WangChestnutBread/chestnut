@@ -1,7 +1,5 @@
 package com.chestnut.backend.study.service;
 
-import com.chestnut.backend.common.exception.NullSTTException;
-import com.chestnut.backend.common.exception.SttFailException;
 import com.chestnut.backend.member.service.MemberService;
 import com.chestnut.backend.study.dto.PronunceEvaluateDto;
 import com.chestnut.backend.study.util.StringComparator;
@@ -9,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 /**
  * 발음 평가 서비스를 제공하는 클래스.
