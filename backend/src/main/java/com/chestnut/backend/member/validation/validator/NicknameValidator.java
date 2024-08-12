@@ -12,14 +12,14 @@ public class NicknameValidator implements ConstraintValidator<Nickname, String> 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
         if (value == null || value.trim().isEmpty()) {
-            throw new InvalidFormatException();
+            return false;
         }
 
         String regex = "^[A-Za-z0-9가-힣]{2,20}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(value);
         if (!matcher.matches()) {
-            throw new InvalidFormatException();
+            return false;
         }
         return true;
     }
