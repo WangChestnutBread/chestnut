@@ -35,7 +35,6 @@ services:
   springboot:
     image: ${DOCKER_IMAGE}:${DOCKER_TAG_BE}-latest
     container_name: ${DOCKER_TAG_BE}
-    <<: *default-tz
     environment:
       - PROFILES_ACTIVE=${PROFILES_ACTIVE}
       - BACKEND_PORT=${BACKEND_PORT}
