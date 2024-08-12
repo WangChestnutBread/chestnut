@@ -9,16 +9,29 @@
 
 .VocaListContent {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   position: absolute;
   justify-content: center;
   align-items: center;
-  top: 12%;
-  left: 15%;
-  width: 80%;
+  top: 10%;
+  left: 12%;
+  width: 75%;
   height: 68%;
-  gap: 10px;
   z-index: 100;
+}
+
+.VocaListContent > :last-child {
+  border-bottom: none;
+}
+
+.VocalListGroup {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 18px 30px;
+  border-bottom: 2px solid white;
+  gap: 50px;
 }
 
 .VocaListWord {
@@ -27,6 +40,7 @@
   padding: 15px 0px;
   align-items: center;
   color: white;
+  line-height: 250%;
 }
 
 .VocaListWord > p {
@@ -37,4 +51,24 @@
   color: #ffcc4d;
   text-decoration: underline;
   transition: color 0.1s ease, text-decoration 0.2s ease;
+}
+
+.VocalListDelete {
+  display: flex;
+  width: 15%;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #6b3906;
+  color: white;
+}
+
+.VocalListDelete:hover {
+  background-color: #dcb78f;
+  color: #6b3906;
+  transition: background-color 0.2s ease;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
 }

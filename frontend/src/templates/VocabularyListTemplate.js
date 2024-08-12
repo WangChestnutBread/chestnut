@@ -33,7 +33,7 @@ function VocabularyListTemplate() {
       params: {
         chapter: `${chapter}`,
         page: `${page}`,
-        size: "6",
+        size: "5",
       },
     })
       .then((res) => {

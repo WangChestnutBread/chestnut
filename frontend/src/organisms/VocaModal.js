@@ -8,7 +8,9 @@ import { useState } from "react";
 import baseApi from "../api/fetchAPI";
 
 const VocaModal = ({ word, pronounce, studyId, onClose }) => {
-  const [myPronounce, setMyProunce] = useState("내 발음😎");
+  const [myPronounce, setMyProunce] = useState(
+    `이곳에 녹음한 내 발음이 \n 표시돼요😎`
+  );
   const [answerPronounce, setAnswerPronounce] = useState([100000]);
   const [show, isShow] = useState(false);
 
@@ -64,7 +66,7 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
                 </div>
                 {word ? (
                   <div className="RightSide">
-                    <Text32 text={pronounce} />
+                    <Text24 text={pronounce} />
                   </div>
                 ) : null}
               </div>
@@ -75,7 +77,7 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
                   </div>
                   {word ? (
                     <div className="RightSide">
-                      <Text32 text={myPronounce} />
+                      <Text24 text={myPronounce} />
                     </div>
                   ) : null}
                 </div>
