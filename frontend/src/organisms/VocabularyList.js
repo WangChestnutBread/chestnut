@@ -7,6 +7,7 @@ import Text32 from "../atoms/Text32";
 import { Dropdown } from "react-bootstrap";
 import VocaTabDropDown from "../molecules/VocaTabDropDown";
 import VocaModal from "./VocaModal";
+import baseApi from "../api/fetchAPI";
 
 function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
   const modifiedChapterTitle = [...chapterTitle];
@@ -61,6 +62,22 @@ function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
     }
   };
 
+  const deleteVoca = (studyId) => {
+    baseApi
+      .delete("/vocabulary", {
+        params: {
+          studyId,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        getVocabulary(currentChapter, currentVocaPage);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     console.log(currentVocaItem),
     (
@@ -85,13 +102,31 @@ function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
           ) : (
             currentVocaItem.content.map((item, i) => {
               return (
-                <div
-                  className="VocaListWord"
-                  onClick={() => {
-                    handleWordClick(item.word, "item.pronounce", item.studyId);
-                  }}
-                >
-                  <Text32 text={item.word} />
+                <div className="VocalListGroup">
+                  {/* 단어 */}
+                  <div
+                    className="VocaListWord"
+                    onClick={() => {
+                      handleWordClick(
+                        item.word,
+                        "item.pronounce",
+                        item.studyId
+                      );
+                    }}
+                  >
+                    <Text32 text={item.word} />
+                  </div>
+
+                  {/* 단어장 단어 삭제 버튼 */}
+
+                  <button
+                    className="VocalListDelete"
+                    onClick={() => {
+                      deleteVoca(item.studyId);
+                    }}
+                  >
+                    단어 삭제
+                  </button>
                 </div>
               );
             })
