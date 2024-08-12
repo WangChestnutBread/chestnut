@@ -57,6 +57,7 @@ public class MemberController {
     public ResponseEntity<?> checkLoginIdDuplicate(@LoginId @RequestParam String loginId, HttpSession session) {
         memberService.checkLoginIdDuplicate(loginId);
         session.setAttribute("CheckLoginIdDuplication:", loginId);
+        System.out.println(session.getAttribute("CheckLoginIdDuplication:"));
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
