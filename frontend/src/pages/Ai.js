@@ -3,19 +3,14 @@ import { useNavigate } from "react-router-dom";
 import baseApi from "../api/fetchAPI";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
-import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
 import StudyBackButton from "../molecules/StudyBackButton";
 import ChestNutButton from "../organisms/ChestNutButton";
-import { Container } from 'react-bootstrap';
 
 const Ai = ({ userId }) => {
   const [messages, setMessages] = useState([]); // 대화 메시지 상태
   const [isRecording, setIsRecording] = useState(false);
-  const [showIcons, setShowIcons] = useState(false);
-  const [max, setMax] = useState(0); // 누적된 숫자 값을 저장할 상태
   const [audioBlob, setAudioBlob] = useState(null);
   const [wavBlob, setWavBlob] = useState(null);
-  const [show, setShow] = useState(false);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const ffmpeg = new FFmpeg();
@@ -26,7 +21,6 @@ const Ai = ({ userId }) => {
     const startConversation = async () => {
       try {
         const response = await baseApi.get("/conversation/start");
-        console.log(response);
         if (response.status !== 200) {
           throw new Error("Failed to start conversation");
         }
@@ -66,9 +60,7 @@ const Ai = ({ userId }) => {
 
   const handleToggle = async () => {
     if (isRecording) {
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-      setShowIcons(true);
+      mediaRecorderRef.current.stop(); // 녹음 중지 시 녹음을 전송합니다.
     } else {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -104,34 +96,17 @@ const Ai = ({ userId }) => {
       const wavData = await ffmpeg.readFile("output.wav");
       const wavBlob = new Blob([wavData.buffer], { type: "audio/wav" });
       setWavBlob(wavBlob);
+      handleUpload(wavBlob); // WAV 파일로 변환 후 바로 업로드합니다.
     } catch (error) {
       console.error("Error converting to WAV:", error);
     }
   };
 
-  const checkWavFile = (blob) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const data = new Uint8Array(e.target.result);
-      const riff = String.fromCharCode(...data.slice(0, 4));
-      const wave = String.fromCharCode(...data.slice(8, 12));
-
-      if (riff === "RIFF" && wave === "WAVE") {
-        console.log("Valid WAV file");
-      } else {
-        console.error("Invalid WAV file");
-      }
-    };
-    reader.readAsArrayBuffer(blob);
-  };
-
-  const handleUpload = async () => {
+  const handleUpload = async (wavBlob) => {
     if (!wavBlob) return;
 
     const formData = new FormData();
     formData.append("audio", wavBlob, "audio.wav");
-
-    checkWavFile(wavBlob);
 
     try {
       const response = await baseApi.post("/conversation/message", formData, {
@@ -140,50 +115,27 @@ const Ai = ({ userId }) => {
         },
       });
 
-      console.log(response);
       const data = await response.data;
 
       // 새로운 메시지를 생성
       const newMessages = data.data.messages.map((msg) => {
         const contentParts = msg.content.split("0");
-        console.log(data.data.isTotalTokenLimit);
-        const numericValue = Number(data.data.isTotalTokenLimit);
 
         return {
           role: msg.role === "user" ? "" : "심심이",
           content: contentParts[0],
-          numericValue: numericValue, // 숫자 값을 추가
         };
       });
-      console.log(newMessages);
-      // 새로운 max 값을 계산하여 누적
-      let newMax = max;
-      newMessages.forEach((msg) => {
-        newMax += msg.numericValue;
-      });
 
-      if (newMax === 1) {
-        setMessages([]);
-        setMax(0);
-        setShow(false);
-      } else {
-        setMessages((prevMessages) => [...prevMessages, ...newMessages]);
-        setMax(newMax);
-      }
+      setMessages((prevMessages) => [...prevMessages, ...newMessages]);
     } catch (error) {
       console.error("Error uploading file:", error);
       alert("다시 시도해 주세요.");
     }
 
-    setShowIcons(false);
     setAudioBlob(null);
     setWavBlob(null);
-  };
-
-  const handleCancel = () => {
-    setShowIcons(false);
-    setAudioBlob(null);
-    setWavBlob(null);
+    setIsRecording(false); // 녹음 완료 후 녹음 상태 해제
   };
 
   return (
@@ -201,7 +153,7 @@ const Ai = ({ userId }) => {
       <div className="container text-start justify-center">
         <div className="logo-container">
           <div className="position-relative">
-            <img src="/image/Logo.png" alt="밤빵" className="logo" style={{"width":"300px"}} />
+            <img src="/image/Logo.png" alt="밤빵" className="logo" style={{ width: "300px" }} />
             <span className="qna position-absolute bottom-0 start-100">
               AI대화
             </span>
@@ -214,7 +166,7 @@ const Ai = ({ userId }) => {
         className="messages-container mt-5"
         style={{
           padding: "20px",
-          maxHeight: "1000px",
+          maxHeight: "500px",
           overflowY: "auto",  // 스크롤이 가능하도록 설정
           backgroundColor: "#fff9ef",
           borderRadius: "10px",
@@ -236,7 +188,7 @@ const Ai = ({ userId }) => {
               clear: "both",
               float: index % 2 === 0 ? "right" : "left",
               maxWidth: "60%", // 박스의 최대 너비를 설정하여 가로로 길어지는 것을 방지
-              fontSize: "35px",
+              fontSize: "20px",
               color: "white",
               minHeight: "50px", // 최소 높이 설정
               height: "auto", // 높이가 내용에 따라 자동으로 조정되도록 설정
@@ -270,13 +222,6 @@ const Ai = ({ userId }) => {
           left: "46.5%",
         }}
       >
-        {showIcons && (
-          <div className="d-flex justify-content-center">
-            <FaRegCircleCheck className="icon-check" onClick={handleUpload} />
-            <FaRegCircleXmark className="icon-xmark" onClick={handleCancel} />
-          </div>
-        )}
-
         <div
           className="record justify-content-center"
           style={{
@@ -297,16 +242,6 @@ const Ai = ({ userId }) => {
             />
           </div>
         </div>
-
-        {wavBlob && !showIcons && (
-          <div className="audio-container">
-            <h3>Recorded Audio</h3>
-            <audio controls src={URL.createObjectURL(wavBlob)}></audio>
-            <a href={URL.createObjectURL(wavBlob)} download="audio.wav">
-              Download Audio
-            </a>
-          </div>
-        )}
       </div>
     </div>
   );
