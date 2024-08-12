@@ -33,7 +33,9 @@ public class MemberService {
     public void signup(SignupReqDTO signupReqDTO, HttpSession session) {
 
         String loginId = signupReqDTO.getLoginId();
+        System.out.println(loginId);
         String checkDuplicationLoginId = (String) session.getAttribute("CheckLoginIdDuplication:");
+        System.out.println("checkDuplicationLoginId:"+checkDuplicationLoginId);
         if (checkDuplicationLoginId == null) {
             // loginId 중복 검사 안함
             throw new NotCheckDuplicationLoginId();
