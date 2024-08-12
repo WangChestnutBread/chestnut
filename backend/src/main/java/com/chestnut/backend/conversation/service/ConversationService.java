@@ -17,11 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -83,8 +82,9 @@ public class ConversationService {
                 log.debug("대화 태그 : 보상 부여 완료");
                 String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 log.debug("대화 태그 : 보상 날짜 "+todayDate);
-                long millisUntilMidnight = LocalTime.now().until(LocalTime.MIDNIGHT, ChronoUnit.MILLIS);
-                if (millisUntilMidnight < 0) { millisUntilMidnight += TimeUnit.DAYS.toMillis(1);}
+                LocalDateTime now = LocalDateTime.now();
+                LocalDateTime nextMidnight = now.toLocalDate().plusDays(1).atStartOfDay();
+                long millisUntilMidnight = ChronoUnit.MILLIS.between(now, nextMidnight);
                 log.debug("대화 태그 : 보상 시간 "+millisUntilMidnight);
                 redisService.setDataExpire(generatePrefixedKey(REWARD_PURPOSE, loginId), todayDate, millisUntilMidnight);
                 log.debug("대화 태그 : 보상 부여 기록 완료");
