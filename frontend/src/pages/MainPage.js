@@ -11,13 +11,6 @@ function MainPage() {
   const { accessToken, setAccessToken } = useAuthStore((state) => ({
     ...state,
   }));
-  // const reissueToken = () => {
-  //   // axios.post("https://i11d107.p.ssafy.io/chestnutApi/member/reissue",{})
-  //   // .then((res) => console.log(res))
-  //   baseApi.post("/member/reissue").then((res) => {
-  //     console.log(res);
-  //   });
-  // };
 
   let [profile, setProfile] = useState(null);
   let [attendance, setAttendance] = useState(null);
@@ -67,7 +60,7 @@ function MainPage() {
 
   return (
     <div className="MainPage">
-      {/* <button onClick={reissueToken}>토큰 재발급 테스트</button> */}
+
       {profile && attendance ? (
         <MainTemplate profile={profile} attendance={attendance} />
       ) : (
@@ -76,12 +69,7 @@ function MainPage() {
         </div>
       )}
 
-      <div>
-        {/* 오픈 채팅 버튼 */}
-        <OpenChatButton />
-
-        {/* 챗봇 버튼 */}
-      </div>
+      
     </div>
   );
 }
