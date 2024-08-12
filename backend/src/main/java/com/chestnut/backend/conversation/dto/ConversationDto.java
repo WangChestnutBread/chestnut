@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 대화 내용을 표현하는  Data Transfer Object.
- * 챗봇과의 대화에서 발생한 메시지 목록과
+ * AI과의 대화에서 발생한 메시지 목록과
  * 총 토큰 제한 여부를 포함.
  */
 @Getter
