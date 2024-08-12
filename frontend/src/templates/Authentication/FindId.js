@@ -39,7 +39,6 @@ function FindId() {
                         icon: "error",
                         title: "ID 찾기",
                         text: "멤버 조회에 실패했습니다.",
-                        footer: '<a href="/member/password">비밀번호 찾기</a>'
                     });
                 }
                 else if (response.data.code == 713) {
@@ -47,7 +46,6 @@ function FindId() {
                         icon: "error",
                         title: "ID 찾기",
                         text: "아이디와 이메일이 불일치합니다.",
-                        footer: '<a href="/member/password">비밀번호 찾기</a>'
                     });
                 }
                 else {
