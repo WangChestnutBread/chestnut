@@ -36,6 +36,7 @@ const AnnouncementDetail = () => {
   }
 
   const deleteAnnouncement = () => {
+    // eslint-disable-next-line no-restricted-globals
     if (confirm("삭제하시겠습니까?")) {
       baseApi.delete(`/board/announcement/${params.id}`).then((res) => {
         console.log(res);
