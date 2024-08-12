@@ -17,7 +17,7 @@ const AnnouncementDetail = () => {
     if (confirm("삭제하시겠습니까?")) {
       baseApi.delete(`/board/announcement/${params.id}`).then((res) => {
         console.log(res);
-        navigate(`/board/announcement`);
+        navigate(`/board/announcement/1`);
       });
     } else {
       navigate(`/board/announcement/detail/${params.id}`);
@@ -47,9 +47,7 @@ const AnnouncementDetail = () => {
           <button className="deletebtn" onClick={deleteAnnouncement}>
             삭제
           </button>
-          {/* <button className="updatebtn" onClick={updateAnnouncement}>
-            수정
-          </button> */}
+
         </div>
       </div>
     </div>

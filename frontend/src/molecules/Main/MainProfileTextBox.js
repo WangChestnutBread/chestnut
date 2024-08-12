@@ -77,7 +77,6 @@ function MainProfileTextBox({profile}) {
             console.log(res)
             setAccessToken(undefined)
             alert("로그인 해주세요")
-            navigate('/member/login')
           })
           .catch((err)=>{
             console.log(err)
