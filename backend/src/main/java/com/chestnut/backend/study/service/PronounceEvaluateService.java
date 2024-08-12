@@ -1,7 +1,5 @@
 package com.chestnut.backend.study.service;
 
-import com.chestnut.backend.common.exception.NullSTTException;
-import com.chestnut.backend.common.exception.SttFailException;
 import com.chestnut.backend.member.service.MemberService;
 import com.chestnut.backend.study.dto.PronunceEvaluateDto;
 import com.chestnut.backend.study.util.StringComparator;
@@ -9,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 /**
  * 발음 평가 서비스를 제공하는 클래스.
@@ -32,19 +28,13 @@ public class PronounceEvaluateService {
      * @param answer 정답 문자열
      * @param audioFile 사용자가 발음한 음성 파일
      * @return PronunceEvaluateDto 발음 평가 결과 DTO
-     * @throws IOException 파일 처리 중 발생할 수 있는 예외
-     * @throws SttFailException STT 통신 실패한 경우
-     * @throws NullSTTException STT 결과가 비어 있는 경우
      */
-    public PronunceEvaluateDto pronounceEvaluate(String loginId, String answer, MultipartFile audioFile) throws IOException {
+    public PronunceEvaluateDto pronounceEvaluate(String loginId, String answer, MultipartFile audioFile) {
         // 멤버 유효성 검사
         memberService.validateMember(loginId);
         // 음성 파일을 클로바 음성 인식 API에 업로드하여 STT 결과를 가져옴
         String sttResult = clovaSpeechClient.upload(audioFile);
         log.debug("STT 태그 : STT 결과 = "+ sttResult);
-        // STT 결과가 비어 있는 경우 예외 발생
-        if (sttResult.isEmpty())
-            throw new NullSTTException();
         // // 정답 문자열과 STT 결과를 비교 후 발음 평가 결과 DTO 생성 및 반환
         return StringComparator.compareStrings(answer, sttResult);
     }

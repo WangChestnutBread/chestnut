@@ -4,7 +4,6 @@ import com.chestnut.backend.common.dto.ResponseDto;
 import com.chestnut.backend.conversation.dto.ConversationDto;
 import com.chestnut.backend.conversation.service.ConversationService;
 import com.chestnut.backend.member.dto.CustomMemberDetails;
-import com.chestnut.backend.study.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
