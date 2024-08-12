@@ -33,9 +33,7 @@ public class MemberService {
     public void signup(SignupReqDTO signupReqDTO, HttpSession session) {
 
         String loginId = signupReqDTO.getLoginId();
-        System.out.println(loginId);
         String checkDuplicationLoginId = (String) session.getAttribute("CheckLoginIdDuplication:");
-        System.out.println("checkDuplicationLoginId:"+checkDuplicationLoginId);
         if (checkDuplicationLoginId == null) {
             // loginId 중복 검사 안함
             throw new NotCheckDuplicationLoginId();
@@ -59,7 +57,7 @@ public class MemberService {
         //DTO에서의 이메일 꺼내기 -> session에서 중복 검사 이메일과 같은지 확인 / 코드 검사 이메일과 같은지 확인
         String email = signupReqDTO.getEmail();
         String checkDuplicationEmail = (String) session.getAttribute("CheckEmailDuplication:");
-        String checkCodeEmail = (String) session.getAttribute("CheckEmailCode:");
+        String checkCodeEmail = (String) session.getAttribute("CheckEmailCode:signup:");
 
         if(checkDuplicationEmail == null) {
             // email 중복 검사 안함
@@ -91,8 +89,8 @@ public class MemberService {
         //체크 필요
         redisService.deleteData("CheckLoginIdDuplication:" + checkDuplicationLoginId);
         redisService.deleteData("CheckNicknameDuplication:" + checkDuplicationNickname);
-        redisService.deleteData("CheckEmailDuplication:" +checkDuplicationEmail);
-        redisService.deleteData("CheckEmailCode:"+checkCodeEmail);
+        redisService.deleteData("CheckEmailDuplication:" + checkDuplicationEmail);
+        redisService.deleteData("CheckEmailCode:signup:" + checkCodeEmail);
 
     }
 
