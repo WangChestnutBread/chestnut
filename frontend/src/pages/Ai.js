@@ -6,6 +6,7 @@ import { fetchFile } from "@ffmpeg/util";
 import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
 import StudyBackButton from "../molecules/StudyBackButton";
 import ChestNutButton from "../organisms/ChestNutButton";
+import { Container } from 'react-bootstrap';
 
 const Ai = ({ userId }) => {
   const [messages, setMessages] = useState([]); // 대화 메시지 상태
@@ -14,12 +15,12 @@ const Ai = ({ userId }) => {
   const [max, setMax] = useState(0); // 누적된 숫자 값을 저장할 상태
   const [audioBlob, setAudioBlob] = useState(null);
   const [wavBlob, setWavBlob] = useState(null);
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const ffmpeg = new FFmpeg();
   const navigate = useNavigate();
-
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     const startConversation = async () => {
@@ -51,6 +52,17 @@ const Ai = ({ userId }) => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [userId, navigate]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]); // 메시지가 업데이트될 때마다 호출
+
+  const scrollToBottom = () => {
+    const container = messagesEndRef.current?.parentNode;
+    if (container) {
+      container.scrollTo(0, container.scrollHeight);
+    }
+  };
 
   const handleToggle = async () => {
     if (isRecording) {
@@ -134,10 +146,11 @@ const Ai = ({ userId }) => {
       // 새로운 메시지를 생성
       const newMessages = data.data.messages.map((msg) => {
         const contentParts = msg.content.split("0");
-        const numericValue = parseFloat("0" + contentParts[1]);
-        console.log(contentParts[1]);
+        console.log(data.data.isTotalTokenLimit);
+        const numericValue = Number(data.data.isTotalTokenLimit);
+
         return {
-          role: msg.role === "user" ? "You" : "AI",
+          role: msg.role === "user" ? "" : "심심이",
           content: contentParts[0],
           numericValue: numericValue, // 숫자 값을 추가
         };
@@ -149,17 +162,10 @@ const Ai = ({ userId }) => {
         newMax += msg.numericValue;
       });
 
-      if(newMax > 2 && show ===false) {
-        alert('토큰 만료가 얼마남지 않았습니다. 곧 대화내용이 초기화 됩니다.')
-        setShow(true)
-      }
-
-      // max 값이 3을 초과하면 대화를 초기화
-      console.log(newMax);
-      if (newMax > 3) {
+      if (newMax === 1) {
         setMessages([]);
         setMax(0);
-        setShow(false)
+        setShow(false);
       } else {
         setMessages((prevMessages) => [...prevMessages, ...newMessages]);
         setMax(newMax);
@@ -196,7 +202,9 @@ const Ai = ({ userId }) => {
         <div className="logo-container">
           <div className="position-relative">
             <img src="/image/Logo.png" alt="밤빵" className="logo" />
-            <span className="qna position-absolute bottom-0 start-100">AI대화</span>
+            <span className="qna position-absolute bottom-0 start-100">
+              AI대화
+            </span>
           </div>
         </div>
       </div>
@@ -207,7 +215,7 @@ const Ai = ({ userId }) => {
         style={{
           padding: "20px",
           maxHeight: "1000px",
-          overflowY: "scroll",
+          overflowY: "auto",  // 스크롤이 가능하도록 설정
           backgroundColor: "#fff9ef",
           borderRadius: "10px",
           marginTop: "20px",
@@ -227,15 +235,30 @@ const Ai = ({ userId }) => {
               alignSelf: index % 2 === 0 ? "flex-end" : "flex-start",
               clear: "both",
               float: index % 2 === 0 ? "right" : "left",
-              maxWidth: "60%",
+              maxWidth: "60%", // 박스의 최대 너비를 설정하여 가로로 길어지는 것을 방지
               fontSize: "35px",
               color: "white",
+              minHeight: "50px", // 최소 높이 설정
+              height: "auto", // 높이가 내용에 따라 자동으로 조정되도록 설정
+              wordBreak: "break-word", // 단어가 길어지면 강제로 줄바꿈
+              whiteSpace: "normal", // 텍스트가 박스 너비를 초과하면 줄바꿈
             }}
           >
-           
-            <strong> {msg.role}:</strong> {msg.content}
+            {msg.role === "심심이" ? (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <img
+                  src="/image/aistudy.png"
+                  alt="심심이"
+                  style={{ width: "30px", height: "30px", marginRight: "10px" }}
+                />
+                <strong>{msg.content}</strong>
+              </div>
+            ) : (
+              <strong>{msg.content}</strong>
+            )}
           </div>
         ))}
+        <div ref={messagesEndRef} /> {/* 스크롤을 맞추기 위한 div */}
       </div>
 
       {/* 녹음버튼 */}

@@ -7,9 +7,6 @@ function Pagenation({
   upPageChange,
   downPageChange,
 }) {
-  // const onPageChange = (page) => {
-  //   if (page < 1 || page > totalPages) return;
-  // };
 
   const renderPageNumbers = () => {
     const pageNumbers = [];

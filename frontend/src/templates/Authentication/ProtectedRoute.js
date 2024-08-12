@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
 
   if (!accessToken) {
     // accessToken이 없으면 로그인 페이지로 리디렉션
-    return <Navigate to="/member/login" replace />;
+    return <Navigate to="/" replace /> ;
   }
 
   return children;
