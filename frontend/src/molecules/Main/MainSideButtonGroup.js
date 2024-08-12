@@ -3,10 +3,10 @@ import ChatBotButton from "../../atoms/ChatBotButton";
 import OpenChatButton from "../../atoms/OpenChatButton";
 
 
-function MainSideButtonGroup() {
+function MainSideButtonGroup({handleOpenChatClick}) {
   return (
     <div className="MainSideButtonGroup">
-      <OpenChatButton />
+      <OpenChatButton handleOpenChatClick={handleOpenChatClick}/>
       <ChatBotButton />
     </div>
   );
