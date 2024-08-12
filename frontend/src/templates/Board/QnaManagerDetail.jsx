@@ -48,18 +48,13 @@ const QnaManagerDetail = () => {
   console.log(params.id);
 
   const updateComment = (e) => {
-    if (e.key === "Enter") {
-      setShowAnswerForm(false);
-      console.log(e);
-      baseApi
-        .post(`/board/qna/${params.id}/answer`, { answer: answer })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } 
+    baseApi.post(`/board/qna/${params.id}/answer`,{
+      answer: answer
+    }).then((res)=> {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    })
   };
 
   return (
@@ -120,7 +115,7 @@ const QnaManagerDetail = () => {
                   rows="3"
                   value={answer}
                   onChange={handleAnswerChange}
-                  onKeyDown={(e) => updateComment(e)}
+                  onClick={updateComment}
                   required
                 ></textarea>
               </div>
