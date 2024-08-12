@@ -19,50 +19,112 @@ const Record = ({ func, func2 }) => {
   const { studyId, chapterId } = useParams();
   const [data, setData] = useState("");
   const setPronunciation = useAuthStore((state) => state.setPronunciation);
-  const params = useParams();
+
+  const checkPoint = useAuthStore((state) => state.checkPoint);
+
+  // getNextId와 getPrevId 함수 정의
+  const getNextId = (currentId) => {
+    const index = checkPoint.findIndex((id) => id > currentId);
+    return index !== -1 ? checkPoint[index] : null;
+  };
+
+  const getPrevId = (currentId) => {
+    const index = checkPoint.findIndex((id) => id >= currentId) - 1;
+    return index >= 0 ? checkPoint[index] : null;
+  };
 
   const upPage = () => {
     func("내발음😎");
     func2([10000]);
-    if (studyId < 40) {
-      navigate(`/study/detail1/1/${+studyId + 1}`);
+
+    const nextId = getNextId(Number(studyId)); // 다음 ID 가져오기
+    if (nextId && studyId > 39 && studyId < 439) {
+      navigate(`/study/detail2/2/${nextId}`);
       baseApi.get(`/log/study`, {
         params: {
-          studyId: params.studyId,
+          studyId: nextId,
           isPass: 1,
         },
       });
-    } else if (studyId > 39 && studyId < 439) {
-      navigate(`/study/detail2/2/${+studyId + 1}`);
-    } else if (studyId > 438 && studyId < 446) {
-      navigate(`/study/detail3/3/${+studyId + 1}`);
-    } else if (studyId < 1381 && studyId > 445) {
-      navigate(`/study/detail5/5/${+studyId + 1}`);
-    } else if (studyId < 2367 && studyId > 1380) {
-      navigate(`/study/detail6/6/${+studyId + 1}`);
+    } else if (nextId && studyId > 438 && studyId < 446) {
+      navigate(`/study/detail3/3/${nextId}`);
+      baseApi.get(`/log/study`, {
+        params: {
+          studyId: nextId,
+          isPass: 1,
+        },
+      });
+    } else if (nextId && studyId > 445 && studyId < 1381) {
+      navigate(`/study/detail5/5/${nextId}`);
+      baseApi.get(`/log/study`, {
+        params: {
+          studyId: nextId,
+          isPass: 1,
+        },
+      });
+    } else if (studyId < 2368) {
+      navigate(`/study/detail6/6/${nextId}`);
+      baseApi.get(`/log/study`, {
+        params: {
+          studyId: nextId,
+          isPass: 1,
+        },
+      });
+    } 
+    
+    else {
+      alert("다음 학습 페이지가 없습니다.");
     }
   };
+
   const downPage = () => {
     func("내발음😎");
     func2([1000000]);
-    if (studyId < 2) {
-      alert("첫 학습페이지 입니다.");
-    } else if (studyId > 0 && studyId < 42) {
-      navigate(`/study/detail1/1/${studyId - 1}`);
+
+    const prevId = getPrevId(Number(studyId)); // 이전 ID 가져오기
+    if (prevId && studyId > 0 && studyId < 42 ) {
+      navigate(`/study/detail1/1/${prevId}`);
       baseApi.get(`/log/study`, {
         params: {
-          studyId: params.studyId,
+          studyId: prevId,
           isPass: 1,
         },
       });
-    } else if (studyId > 40 && studyId < 441) {
-      navigate(`/study/detail2/2/${studyId - 1}`);
-    } else if (studyId > 438 && studyId < 448) {
-      navigate(`/study/detail3/3/${studyId - 1}`);
-    } else if (studyId < 1382 && studyId > 445) {
-      navigate(`/study/detail5/5/${studyId - 1}`);
-    } else if (studyId < 2367 && studyId > 1381) {
-      navigate(`/study/detail6/6/${studyId - 1}`);
+    } else if (prevId && studyId < 441 ) {
+      navigate(`/study/detail2/2/${prevId}`);
+      baseApi.get(`/log/study`, {
+        params: {
+          studyId: prevId,
+          isPass: 1,
+        },
+      });
+    } else if (prevId && studyId < 448 ) {
+      navigate(`/study/detail3/3/${prevId}`);
+      baseApi.get(`/log/study`, {
+        params: {
+          studyId: prevId,
+          isPass: 1,
+        },
+      });
+    } else if (prevId && studyId < 1383 ) {
+      navigate(`/study/detail5/5/${prevId}`);
+      baseApi.get(`/log/study`, {
+        params: {
+          studyId: prevId,
+          isPass: 1,
+        },
+      });
+    } else if (prevId && studyId < 2370 ) {
+      navigate(`/study/detail6/6/${prevId}`);
+      baseApi.get(`/log/study`, {
+        params: {
+          studyId: prevId,
+          isPass: 1,
+        },
+      });
+    }
+     else {
+      alert("첫 학습페이지 입니다.");
     }
   };
 
