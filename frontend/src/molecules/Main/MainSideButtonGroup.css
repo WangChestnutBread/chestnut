@@ -1,0 +1,10 @@
+.MainSideButtonGroup {
+    position: fixed;
+    right: 25px;
+    bottom: 30px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
