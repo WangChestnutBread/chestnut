@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class QnAResDTO {
+public class QnAResDto {
     List<QnACategory> qnaCategory;
     Page<QnA> qnaList;
 }
