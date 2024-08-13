@@ -63,12 +63,13 @@ function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
   };
 
   const deleteVoca = (studyId) => {
-    baseApi
-      .delete("/vocabulary", {
-        params: {
-          studyId,
-        },
-      })
+    baseApi({
+      method: "delete",
+      url: "/vocabulary",
+      data: {
+          studyId: studyId,
+      },
+    })
       .then((res) => {
         console.log(res);
         getVocabulary(currentChapter, currentVocaPage);
