@@ -10,6 +10,7 @@ import NewInputForm from "../../organisms/Authentication/NewInputForm";
 import "./FindPw.css";
 import CustomAlert from "../../atoms/alert";
 import InspectionForm from "../../molecules/Authentication/InspectionForm";
+import { error } from "jquery";
 function FindPw() {
     const navigate = useNavigate();
 
@@ -29,6 +30,8 @@ function FindPw() {
     const [isAuth, setIsAuth] = useState(false);
     const [isEmail, setIsEmail] = useState(false);
 
+    const [isChange, setIsChange] = useState("");
+
     const [alertContent, setAlertContent] = useState("");
 
     const url = "https://i11d107.p.ssafy.io/chestnutApi";
@@ -41,14 +44,41 @@ function FindPw() {
             newPassword: Pw,
             newPasswordConfirm: PwCon
         })
-        .then(response => {
-            console.log(response.data)
-            if(response.data.code === "200") {
+        .then(res => {
+            console.log(res.data)
+            if (res.data.code === "200") {
+                setIsChange(true);
                 setAlertContent("비밀번호가 변경되었습니다.")
-                navigate("/member/login");
+                return;
             }
+            if (res.data.code === "714") {
+                setAlertContent("등록된 사용자가 아닙니다.")
+            } else if (res.data.code === "603") {
+                setAlertContent("비밀번호 양식이 적절하지 않습니다.");
+            } else if (res.data.code === "610" || res.data.code === "604") {
+                setAlertContent("비밀번호를 다시 확인하여 주세요.");
+            } else if (res.data.code === "609") {
+                setAlertContent("이메일을 인증하세요.");
+            } else {
+                setAlertContent("알 수 없는 오류가 발생하였습니다.");
+            }
+            setIsChange(false);
+        }).catch(error => {
+            console.log(error);
         })
     };
+
+    const handleCloseAlert = () => {
+        setAlertContent(null);
+        if (isChange) {
+            navigate("/member/login");
+        }
+        else {
+            setPw("");
+            setPwCon("");
+            setAuth("");
+        }
+    }
 
     const inputId = (e) => {
         const currentId = e.target.value;
@@ -87,7 +117,6 @@ function FindPw() {
             setPwConMessage("비밀번호가 일치합니다.");
             setIsPwCon(true);
         }
-        
     };
 
     const inputEmail = (e) => {
@@ -108,7 +137,7 @@ function FindPw() {
         event.preventDefault();
 
         if (!isEmail) {
-            setAlertContent("이메일 형식이 올바르지 않습니다.");
+            setEmailMessage("이메일 형식이 올바르지 않습니다.");
             return;
         }
 
@@ -119,34 +148,32 @@ function FindPw() {
         .then(response => {
             console.log("이메일 발송")
             if (response.data.code === "200") {
-                setAlertContent("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
+                setAlertContent("인증 이메일을 발송하였습니다.");
                 setIsEmail(true);
             }
             if (response.data.code === "603") {
-                setAlertContent("올바르지 않은 이메일 양식입니다.");
+                setEmailMessage("올바르지 않은 이메일 양식입니다.");
                 setIsEmail(false);
             } else if (response.data.code === "606") {
-                setAlertContent("인증번호 보내는 데 실패했습니다.");
+                setEmailMessage("인증번호 보내는 데 실패했습니다.");
                 setIsEmail(false);
             } else if (response.data.code === "299") {
-                setAlertContent("알 수 없는 오류가 발생했습니다.");
+                setEmailMessage("알 수 없는 오류가 발생했습니다.");
                 setIsEmail(false);
             }
             console.log(response);
         })
         .catch(error => {
             console.log(error);
-            setAlertContent("인증 이메일 발송 중 오류가 발생했습니다.");
+            setEmailMessage("인증 이메일 발송 중 오류가 발생했습니다.");
         });
-
         event.preventDefault();
-
     };
 
     const checkAuth = (e) => {
         e.preventDefault();
         if (!Auth) {
-            alert("인증번호를 입력해주세요.");
+            setAlertContent("인증번호를 입력해주세요.");
             return;
         }
 
@@ -157,7 +184,8 @@ function FindPw() {
         }).then(response => {
             console.log(Auth);
             if (response.data.code === "200") {
-                setAuthMessage("인증번호가 일치합니다.");
+                setAlertContent("인증되엇습니다.");
+                setAuthMessage("인증되었습니다.");
                 setIsAuth(true);
             } else if (response.data.code === "605") {
                 setAuthMessage("인증번호가 일치하지 않습니다.");
@@ -202,7 +230,10 @@ function FindPw() {
                     </div>
                 </div>
             </div>
-            {alertContent && <CustomAlert content={alertContent} />}
+            {alertContent &&
+                <CustomAlert content={alertContent}
+                onClose={handleCloseAlert}
+            />}
         </div>
     );
 }
