@@ -22,14 +22,19 @@ function LastStudy({chapter, word, chapterId, studyId}) {
                 <div className="LastStudyChapter">
                     <div className="LastStudyChapterLeft">
                         <Text24 text="학습 현황 : "/>
-                        <Text24 text={chapter}/>
+                        {
+                            chapter ? <Text24 text={chapter}/> : <Text24 text="자음/모음"/>
+                        }
+                        
                     </div>
                     <img src="/icons/LastStudyIcon.svg"/>
                 </div>
                 <div className="LastStudyWord">
-                    <Text24 text={word}/>
+                    {
+                        word ? <Text24 text={word}/> : <Text24 text="ㄱ"/>
+                    }                    
                 </div>
-                <LastStudyButton onClick={handleOnClick}/>
+                <LastStudyButton word={word} onClick={handleOnClick}/>
             </div>
 
         </div>
