@@ -345,16 +345,14 @@ function SignUPPage() {
                 <BackButton work={GotoBack} />
                 <div style={{ width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 22, display: 'flex' }}>
                     <MemberLogo title={'회원가입'} />
-                    <div style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 40, paddingBottom: 20, background: '#DCB78F', borderRadius: 25, overflow: 'visible', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex' }}>
-                        <div style={{ flex: '1 1 0', alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'inline-flex' }}>
+                    <div style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 40, paddingBottom: 20, background: '#DCB78F', borderRadius: 25, overflow: 'visible', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex', marginBottom: 40 }}>
+                        <div style={{ flex: '1 1 0', alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'inline-flex', gap: 15 }}>
                             <InspectionForm content={'ID'} text={IdMessage} name={'중복확인'} work={createId} value={Id} input={inputId} />
                             <SignUpPwInput content={'PW'} text={PwMessage} work={createPw} value={Pw} />
                             <SignUpPwInput content={'PW 재확인'} text={PwConMessage} work={createPwCon} value={PwCon} />
                             <InspectionForm content={'이메일'} text={EmailMessage} name={'인증'} work={createEmail} input={inputEmail} value={Email} disabled={!isEmailValid}/>
                             <InspectionForm content={'인증번호'} name={'확인'} text={AuthMessage} work={checkAuth} value={Auth} input={inputAuth} />
-                            <div style={{marginBottom: 25}}>
-                                <LoginInputForm content={'이름'} name={name} work={inputName} value={name} input={inputname}/>
-                            </div>
+                            <LoginInputForm content={'이름'} name={name} work={inputName} value={name} input={inputname}/>
                             <InspectionForm content={'닉네임'} name={'중복확인'} text={nickMessage} work={checkname} value={nickname} input={inputNickname} />
                             <div style={{ alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'inline-flex' }}>
                                 <BirthCalendar clickDate={handleDateClick} value={selectedDate}/>

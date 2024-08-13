@@ -4,8 +4,6 @@ import MemberLogo from "../../molecules/Authentication/MemberLogo";
 import BackButton from "../../atoms/BackButton";
 import Button from "../../molecules/Authentication/Button";
 import InfoBox from "../../molecules/Authentication/InfoBox";
-import BirthInfo from "../../atoms/Authentication/MemberBirth/BirthInfo";
-import LoginIdPwFont from "../../atoms/Authentication/LoginIdPwFont";
 import baseApi from "../../api/fetchAPI";
 
 function MyInfo() {
@@ -33,7 +31,10 @@ function MyInfo() {
                 setNickname(response.data.data.nickname);
 
                 if (response.data.data.birthday) {
-                    setBirth(response.data.data.birthday.split("-"));
+                    // setBirth(response.data.data.birthday);
+                    let inputBirth = response.data.data.birthday;
+                    let birthString = inputBirth[0]+"-"+inputBirth[1]+"-"+inputBirth[2];
+                    setBirth(birthString);
                 }
             } else if (response.data.code === "801") {
                 alert("유효하지 않는 토큰입니다.");
@@ -64,24 +65,16 @@ function MyInfo() {
                 <BackButton work={GotoBack} />
                 <div style={{width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 22, display: 'flex'}}>
                     <MemberLogo title={'내정보'} />
-                    <div style={{paddingLeft: 91, paddingRight: 91, paddingTop: 48, paddingBottom: 48, background: '#DCB78F', borderRadius: 25, overflow: 'hidden', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex'}}>
+                    <div style={{paddingLeft: 30, paddingRight: 30, paddingTop: 40, paddingBottom: 20, background: '#DCB78F', borderRadius: 25, overflow: 'hidden', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'flex', marginBottom: 40}}>
                         <div style={{alignSelf: 'stretch', height: 92, paddingBottom: 10, paddingLeft: 10, paddingRight: 10, background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'flex'}}>
                             <InfoBox title={'닉네임'} name={nickname} />
                         </div>
                         <div style={{alignSelf: 'stretch', height: 102, padding: 10, background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'flex'}}>
                             <InfoBox title={'이름'} name={name} />
                         </div>
-                        {birth && (
-                            <div style={{height: 100, padding: 10, background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'flex'}}>
-                                <LoginIdPwFont title={'생년월일'} />
-                                <div style={{width: 582, justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'inline-flex'}}>
-                                    <BirthInfo value={birth[0]} />
-                                    <BirthInfo value={birth[1]} />
-                                    <BirthInfo value={birth[2]} />
-                                    <LoginIdPwFont title={'선택사항'} />
-                                </div>
-                            </div>
-                        )}
+                        <div style={{alignSelf: 'stretch', height: 102, padding: 10, background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'flex'}}>
+                            <InfoBox title={'생년월일'} name={birth} />
+                        </div>
                         <div style={{alignSelf: 'stretch', height: 102, padding: 10, background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'flex'}}>
                             <InfoBox title={'이메일'} name={Email} />
                         </div>

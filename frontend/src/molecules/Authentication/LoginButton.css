@@ -1,9 +1,9 @@
 .Button{
-    height: 108px;
+    /* height: 108px; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 27px;
+    /* gap: 27px; */
     display: flex;
 }
 
