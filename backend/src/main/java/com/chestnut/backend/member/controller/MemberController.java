@@ -77,9 +77,15 @@ public class MemberController {
     @PostMapping("/reset-pwd/unknown")
     public ResponseEntity<?> resetPwdUnknown(@Valid @RequestBody ResetPwdUnknownReqDTO resetPwdUnknownReqDTO,
                                             @SessionAttribute(name = "CheckEmailCode:changePassword:", required = false) String authEmail) {
+        System.out.println("111");
+        System.out.println(resetPwdUnknownReqDTO.getEmail());
+        System.out.println(authEmail);
         if(!resetPwdUnknownReqDTO.getEmail().equals(authEmail)) {
+            System.out.println("222");
             throw new NotVerifiedEmailException();
         }
+        System.out.println("333");
+        System.out.println(authEmail);
         memberService.resetPwdUnknown(resetPwdUnknownReqDTO.toDto());
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
