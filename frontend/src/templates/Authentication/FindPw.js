@@ -35,6 +35,7 @@ function FindPw() {
     // const url = "http://localhost:8081/chestnutApi";
 
     const succes = () => {
+        console.log(Id)
         axios.post(url+"/member/reset-pwd/unknown", {
             loginId: Id,
             email: Email,
@@ -44,7 +45,6 @@ function FindPw() {
         .then(response => {
             console.log(response.data)
             if(response.data.code === "200") {
-                console.log("b")
                 setAlertContent("비밀번호가 변경되었습니다.")
                 navigate("/member/login");
             }
