@@ -6,13 +6,23 @@ import MemberLogo from "../../molecules/Authentication/MemberLogo";
 import SignUpPwInput from "../../molecules/Authentication/SignUpPwInput";
 import LoginInputForm from "../../atoms/Authentication/LoginInputForm";
 import BackButton from "../../atoms/BackButton";
-import Birth from "../../atoms/Authentication/MemberBirth/Birth";
-import BirthMonth from "../../atoms/Authentication/MemberBirth/BirthMonth";
-import BirthDay from "../../atoms/Authentication/MemberBirth/BirthDay";
 import Button from "../../molecules/Authentication/Button";
-import baseApi from "../../api/fetchAPI";
 import BirthCalendar from "../../atoms/Authentication/MemberBirth/BirthCalendar";
 import styled from "styled-components";
+
+const TimeWrapper = styled.div`
+position: relative;
+width: 100%;
+`;
+
+const Timer = styled.div`
+position: absolute;
+right: 120px;
+top: 50%;
+transform: translate(0, -50%);
+color: #6B3906;
+font-weight: bold;
+`;
 
 function SignUPPage() {
     const navigate = useNavigate();
@@ -389,21 +399,6 @@ function SignUPPage() {
 
     }, [verificationSent]);
 
-    const TimeWrapper = styled.div`
-        position: relative;
-        width: 100%;
-    `;
-
-    const Timer = styled.div`
-        position: absolute;
-        right: 120px;
-        top: 50%;
-        transform: translate(0, -50%);
-        color: #6B3906;
-        font-weight: bold;
-    `;
-
-
     //본 디자인 프레임
     return (
         <div className="container">
@@ -416,10 +411,10 @@ function SignUPPage() {
                             <InspectionForm content={'ID'} text={IdMessage} name={'중복확인'} work={createId} value={Id} input={inputId} />
                             <SignUpPwInput content={'PW'} text={PwMessage} work={createPw} value={Pw} />
                             <SignUpPwInput content={'PW 재확인'} text={PwConMessage} work={createPwCon} value={PwCon} />
-                            
+
                             <InspectionForm content={'이메일'} text={EmailMessage} name={'인증'} work={createEmail} input={inputEmail} value={Email} disabled={!isEmailValid}/>
                             <TimeWrapper>
-                                {verificationSent && (
+                                {verificationSent && !isAuth && (
                                     <Timer>{formatTime()}</Timer>
                                 )}
                                 <InspectionForm content={'인증번호'} name={'확인'} text={AuthMessage} work={checkAuth} value={Auth} input={inputAuth} />
