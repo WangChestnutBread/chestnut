@@ -4,7 +4,7 @@ import './alert.css'
 
 function CustomAlert (props) {
     useEffect(() => {
-        Swal.fire({
+        const alert = Swal.fire({
 
             html: `
                     <div class="swal2-custom-html">
@@ -12,7 +12,7 @@ function CustomAlert (props) {
                         <span class="custom-alert-content">${props.content}</span>
                     </div>
                 `,
-        
+                
             confirmButtonText: "확인",
             customClass: {
                 popup: 'custom-alert-popup',
@@ -23,7 +23,13 @@ function CustomAlert (props) {
             },
             buttonsStyling: false, // 기본 스타일을 사용하지 않도록 설정
         });
-    }, []);
+        // Alert이 닫힌 후 onClose 호출
+        alert.then(() => {
+            if (props.onClose) {
+                props.onClose(); // onClose가 전달되면 호출
+            }
+        });
+    }, [props.content, props.onClose]);
     return null;
 }
 

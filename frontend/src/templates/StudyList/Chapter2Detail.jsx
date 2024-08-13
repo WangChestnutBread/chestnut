@@ -5,41 +5,42 @@ import Notation from "../../organisms/StudyList/NotationChapter1";
 import SoundMethod from "../../organisms/StudyList/SoundMethod";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
-import Pronunciation from "../../organisms/StudyList/Pronunciations"
-import { useParams } from 'react-router-dom';
+import Pronunciation from "../../organisms/StudyList/Pronunciations";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import baseApi from "../../api/fetchAPI";
-
+import Ch2Notation from "./../../organisms/StudyList/Ch2Notation";
 
 const Chapter2Detail = () => {
-  const params = useParams()
+  const params = useParams();
   console.log(params);
-  const [realData, setRealData] = useState("내발음😎")
-  const [answerData, setAnswerData] = useState([100000])
-  const [show, isShow] = useState(false)
-  const [correct, setCorrect] = useState(false)
+  const [realData, setRealData] = useState("내발음😎");
+  const [answerData, setAnswerData] = useState([100000]);
+  const [show, isShow] = useState(false);
+  const [correct, setCorrect] = useState(false);
   console.log();
 
   const moveData = (value) => {
-    setRealData(value)
-  }
+    setRealData(value);
+  };
   const answer = (value) => {
-    setAnswerData(value)
+    setAnswerData(value);
     if (value.length === 0) {
-      isShow(true)
-      baseApi.get('/log/study',{
-        params:{
-          studyId: params.studyId,
-          isPass: 1
-        }
-      }).then((res) => {
-        console.log(res);
-        setCorrect(true)
-        alert("축하드려요 성공입니다.")
-      })
+      isShow(true);
+      baseApi
+        .get("/log/study", {
+          params: {
+            studyId: params.studyId,
+            isPass: 1,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setCorrect(true);
+          alert("축하드려요 성공입니다.");
+        });
     }
-  }
-
+  };
 
   return (
     <div>
@@ -56,25 +57,31 @@ const Chapter2Detail = () => {
       <div className="container">
         <div className="row">
           <div className="col-4 mt-2">
-            <Notation word={params}/>
+            <Ch2Notation word={params} />
+            {/* <Notation word={params}/> */}
           </div>
           <div className="col-8 mt-2">
-            <SoundMethod hangeul={params}/>
+            <SoundMethod hangeul={params} />
           </div>
         </div>
         {/* 발음, 카메라 */}
         <div className="row">
-          <div className="col-6 mt-2" >
-            <Pronunciation saying={params} realData={realData} location={answerData} />
+          <div className="col-6 mt-2 ">
+            <Pronunciation
+              saying={params}
+              realData={realData}
+              location={answerData}
+            />
+            <div className="mt-5 d-flex ms-5">
+              <RecordData func={moveData} func2={answer} />
+            </div>
           </div>
+
           <div className="col-6 mt-2 mb-3">
             <CameraOrganism />
           </div>
         </div>
         {/* 마이크 */}
-        <div className="mt-5">
-        <RecordData func={moveData} func2={answer}/>
-        </div>
       </div>
     </div>
   );

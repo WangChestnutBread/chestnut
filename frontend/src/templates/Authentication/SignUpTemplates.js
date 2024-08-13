@@ -64,8 +64,6 @@ function SignUPPage() {
     // const url = "http://localhost:8081"
 
 
-
-
     //회원가입 버튼을 눌렀을 때 요청내어줄 회원 정보 전송하는 AXIOS함수
     const succes = () => {
         axios.post(url+"/member/signup", {

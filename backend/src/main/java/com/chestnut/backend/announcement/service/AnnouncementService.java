@@ -93,8 +93,8 @@ public class AnnouncementService {
         validateSame(loginId, announcementDto.getLoginId());
         // 멤버 유효성 검사 : 관리자 권환 확인
         Member member = memberService.validateMemberForAdmin(announcementDto.getLoginId());
-        // 공지사항 양식 검사 후 해당 카테고리 정보 반환
-        AnnouncementCategory announcementCategory = validateAnnouncementDto(announcementDto);
+        // 공지사항카테고리 존재 여부 검사 후 해당 카테고리 정보 반환
+        AnnouncementCategory announcementCategory = validateAnnouncementDto(announcementDto.getAnnounceCategoryId());
         // Announcement 엔티티 생성
         Announcement announcement = Announcement.builder()
                 .title(announcementDto.getTitle())
@@ -140,8 +140,8 @@ public class AnnouncementService {
         validateSame(announceId, announcementDto.getAnnounceId());
         // 멤버 유효성 검사 : 관리자 권환 확인
         memberService.validateMemberForAdmin(announcementDto.getLoginId());
-        // 수정할 공지사항 양식 검사
-        validateAnnouncementDto(announcementDto);
+        // 수정할 공지사항카테고리 검사
+        validateAnnouncementDto(announcementDto.getAnnounceCategoryId());
         // 공지사항 수정
         int updatedRows = announcementRepository.updateAnnouncement(
                 announcementDto.getAnnounceCategoryId(),
@@ -157,23 +157,13 @@ public class AnnouncementService {
     /**
      * 공지사항 양식(title, content, announceCategoryId) 검사 메서드.
      *
-     * @param announcementDto 검사할 공지사항 DTO
+     * @param announcementCategoryId 검사할 공지사항 카테고리 Id
      * @return AnnouncementCategory 검사한 공지사항의 카테고리 Entity 반환
-     * @throws InvalidFormatException 공지사항 제목(title)비었거나, 100자 초과한 경우 또는 내용(content)이 빈 내용일 경우
      * @throws CategoryNotFoundException 공지사항 카테고리 ID가 존재하지 않을 경우
      */
-    private AnnouncementCategory validateAnnouncementDto(AnnouncementDto announcementDto) {
-        // title & content 양식 검사
-        boolean isInvalidTitleLen = announcementDto.getTitle() == null ||
-                                    announcementDto.getTitle().trim().isEmpty() ||
-                                    announcementDto.getTitle().length() > 100;
-        boolean isInvalidContentLen = announcementDto.getContent() == null ||
-                                    announcementDto.getContent().trim().isEmpty();
-        // 제목 또는 내용에 대한 유효성 검사 실패 시 예외 처리
-        if(isInvalidTitleLen || isInvalidContentLen)
-            throw new InvalidFormatException();
+    private AnnouncementCategory validateAnnouncementDto(Byte announcementCategoryId) {
         // 공지 사항 카테고리 존재 여부 확인
-        return announcementCategoryRepository.findById(announcementDto.getAnnounceCategoryId())
+        return announcementCategoryRepository.findById(announcementCategoryId)
                 .orElseThrow(CategoryNotFoundException::new);
     }
 

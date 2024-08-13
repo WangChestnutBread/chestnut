@@ -47,6 +47,8 @@ function LoginPage() {
           setAccessToken(response.headers["access"]);
           setManager(response.data.data.admin);
           navigate("/main");
+          console.log(response);
+          // console.log("토의 열심히 하시네");
         } else if (response.data.code == 706) {
           alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
         }

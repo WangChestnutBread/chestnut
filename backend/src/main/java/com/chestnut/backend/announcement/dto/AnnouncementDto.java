@@ -1,6 +1,8 @@
 package com.chestnut.backend.announcement.dto;
 
 import com.chestnut.backend.announcement.entity.Announcement;
+import com.chestnut.backend.common.validation.annotation.Content;
+import com.chestnut.backend.common.validation.annotation.Title;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +20,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AnnouncementDto {
     private Long announceId;
+    @Title
     private String title;
     private LocalDateTime updatedAt;
     private int hit;
+    @Content
     private String content;
     private Byte announceCategoryId;
     private String loginId;

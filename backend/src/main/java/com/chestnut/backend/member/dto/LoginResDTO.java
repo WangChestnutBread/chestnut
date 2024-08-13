@@ -8,8 +8,8 @@ public class LoginResDTO {
     private String loginId;
     private boolean isAdmin;
 
-    public LoginResDTO(String loginId, int isAdmin) {
+    public LoginResDTO(String loginId, boolean isAdmin) {
         this.loginId = loginId;
+        this.isAdmin = isAdmin;
     }
-
 }

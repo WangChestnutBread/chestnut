@@ -6,7 +6,6 @@ import MainProfile from "../organisms/Main/MainProfile";
 import MainCalendar from "../organisms/Main/MainCalendar";
 import MainSideButtonGroup from "../molecules/Main/MainSideButtonGroup";
 import OpenChat from "../organisms/OpenChat";
-import { Modal } from "react-bootstrap";
 
 const MainTemplate = ({ profile, attendance }) => {
   // 메뉴 밤

@@ -19,12 +19,12 @@ function Pagenation({
     if (endPage - startPage + 1 < maxPageNumbers) {
       startPage = Math.max(1, endPage - maxPageNumbers + 1);
     }
-
+    
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
         <div
-          key={i}
-          className={`NumberBorder ${currentPage === i ? "active" : ""}`}
+        key={i}
+        className={`NumberBorder ${currentPage === i ? "active" : ""}`}
           onClick={() => onPageChange(i)}
         >
           <div className="NumberContent">{i}</div>
