@@ -26,8 +26,8 @@ function LastStudy({chapter, word, chapterId, studyId}) {
                     </div>
                     <img src="/icons/LastStudyIcon.svg"/>
                 </div>
-                <div>
-                    <Text32 text={word}/>
+                <div className="LastStudyWord">
+                    <Text24 text={word}/>
                 </div>
                 <LastStudyButton onClick={handleOnClick}/>
             </div>

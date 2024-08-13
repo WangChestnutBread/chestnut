@@ -3,8 +3,8 @@ package com.chestnut.backend.conversation.dto;
 import lombok.*;
 
 /**
- * 챗봇의 메시지를 표현하는  Data Transfer Object.
- * 챗봇과 사용자 간의 메시지를 담고 있으며,
+ * AI의 메시지를 표현하는  Data Transfer Object.
+ * AI과 사용자 간의 메시지를 담고 있으며,
  * 역할(user 또는 system)과 내용으로 구성.
  */
 @Getter
@@ -12,9 +12,9 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class ChatMessageDto {
-    // 메시지를 발신한 역할 (예: "user" (사용자), "system" (챗봇))
+    // 메시지를 발신한 역할 (예: "user" (사용자), "system" (AI))
     private String role;
-    // 사용자가 입력한 텍스트 또는 챗봇의 응답 텍스트
+    // 사용자가 입력한 텍스트 또는 AI의 응답 텍스트
     private String content;
 
     /**

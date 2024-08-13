@@ -147,7 +147,7 @@ const AnnouncementManagerWrite = () => {
   const [content, setContent] = useState("");
 
   const handleQnaClick = () => {
-    navigate("/board/qna/1");
+    navigate("/board/announcement/1");
   };
 
   const handleDetailClick = (e) => {
@@ -261,7 +261,6 @@ const AnnouncementManagerWrite = () => {
             placeholder="Leave a comment here"
             id="floatingTextarea2"
             value={content}
-            onKeyDown={(e) => handleDetailClick(e)}
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
           <label htmlFor="floatingTextarea2">Comments</label>

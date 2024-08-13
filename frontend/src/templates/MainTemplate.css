@@ -24,3 +24,13 @@
     height: 100%;
     gap: 30px;
 }
+
+.MainOpenChat {
+    position: fixed;
+    bottom: 115px; 
+    right: 80px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 100; 
+}

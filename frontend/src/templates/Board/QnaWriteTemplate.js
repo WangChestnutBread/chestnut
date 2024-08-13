@@ -44,24 +44,6 @@ const QNAWritePage = () => {
       });
   };
 
-  const handleDetailClick = (e) => {
-    if (e.key === "Enter") {
-      baseApi
-        .post("/board/qna", {
-          qnaCategoryId,
-          title,
-          content,
-        })
-        .then((res) => {
-          console.log(res);
-          navigate("/board/qna/1");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-
   return (
     <div>
       {/* // 헤더 영역 */}
@@ -77,7 +59,7 @@ const QNAWritePage = () => {
         {/* // 메인타이틀 QNA */}
         <div className="logo-container">
           <div className="position-relative">
-            <img src="/image/Logo.png" alt="밤빵" className="logo" />
+            <img src="/image/Logo.png" alt="밤빵" className="logo" style={{"width":"260px", "height":"110px"}} />
             <span className="qna position-absolute bottom-0 start-100">
               Q&A
             </span>
@@ -121,7 +103,6 @@ const QNAWritePage = () => {
             id="floatingTextarea2"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            onKeyDown={(e) => handleDetailClick(e)}
           ></textarea>
           <label for="floatingTextarea2">Comments</label>
         </div>

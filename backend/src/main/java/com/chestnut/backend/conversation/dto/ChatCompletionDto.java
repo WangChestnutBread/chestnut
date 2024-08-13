@@ -4,8 +4,8 @@ import lombok.*;
 
 import java.util.List;
 
-/** 챗봇 요청을 위한 Data Transfer Object.
- * 챗봇 API와의 상호작용에 필요한 정보를 나타내며,
+/** AI 요청을 위한 Data Transfer Object.
+ * AI API와의 상호작용에 필요한 정보를 나타내며,
  * 모델, 메시지 목록, 응답 다양성(0-2), 최대 토큰 수를 포함.
  */
 @Getter

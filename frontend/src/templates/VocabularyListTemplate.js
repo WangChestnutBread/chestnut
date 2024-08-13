@@ -18,7 +18,6 @@ function VocabularyListTemplate() {
       url: "/study/chapter",
     })
       .then((res) => {
-        // console.log(res)
         setChapterTitle(res.data.data);
       })
       .catch((err) => {
@@ -27,17 +26,17 @@ function VocabularyListTemplate() {
   };
 
   const getVocabulary = (chapter, page) => {
+    console.log(chapter, page);
     baseApi({
       method: "get",
       url: "/vocabulary",
       params: {
         chapter: `${chapter}`,
         page: `${page}`,
-        size: "6"
+        size: "5",
       },
     })
       .then((res) => {
-        console.log(res.data.data);
         setCurrentVocaItem(res.data.data);
       })
       .catch((err) => {
@@ -72,7 +71,6 @@ function VocabularyListTemplate() {
           chapterTitle={chapterTitle}
           getVocabulary={getVocabulary}
           currentVocaItem={currentVocaItem}
-          setCurrentVocaItem={setCurrentVocaItem}
         />
       ) : (
         <p>로딩중...</p>

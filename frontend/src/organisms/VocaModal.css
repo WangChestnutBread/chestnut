@@ -53,7 +53,10 @@
   height: 100%;
   align-items: center;
   justify-content: center;
+  text-align: center;
   background: #D9D9D9;
+  white-space: pre-wrap;
+  line-height: 200%;
 }
 
 .ModalFooter {

@@ -1,7 +1,6 @@
 package com.chestnut.backend.common.service;
 
 import com.chestnut.backend.common.config.RedisConfig;
-import com.chestnut.backend.common.exception.RedisException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +38,7 @@ public class RedisService {
             String value = redisConfig.objectMapper().writeValueAsString(list);
             ops.set(key, value, Duration.ofMillis(duration));
         } catch (JsonProcessingException e) {
-            throw new RedisException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -49,7 +48,7 @@ public class RedisService {
         try {
             return redisConfig.objectMapper().readValue(value, new TypeReference<>() {});
         } catch (JsonProcessingException e) {
-            throw new RedisException();
+            throw new RuntimeException(e);
         }
     }
 
