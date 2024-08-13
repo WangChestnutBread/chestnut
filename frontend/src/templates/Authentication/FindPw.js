@@ -31,8 +31,7 @@ function FindPw() {
 
     const [alertContent, setAlertContent] = useState("");
 
-    // const url = "https://i11d107.p.ssafy.io/chestnutApi";
-    const url = "http://localhost:8081/chestnutApi";
+    const url = "https://i11d107.p.ssafy.io/chestnutApi";
 
     const succes = () => {
         console.log(Id)
