@@ -22,7 +22,7 @@ const BirthCalendar = ({clickDate, value}) => {
 
     return (
         <BirthCalendarContainer>
-            <BirthDropdownButton onClick={handleToggleCalendar}>{nowDate}</BirthDropdownButton>
+            <BirthDropdownButton onClick={handleToggleCalendar}>{value ? value : nowDate}</BirthDropdownButton>
             <BirthCalendarWrapper $isOpen={isOpen}>
                 <StyledCalendar 
                     onChange={handleDateChange} 

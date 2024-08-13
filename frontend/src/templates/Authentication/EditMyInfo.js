@@ -5,9 +5,6 @@ import { useNavigate } from "react-router-dom";
 import MemberLogo from "../../molecules/Authentication/MemberLogo";
 import InspectionForm from "../../molecules/Authentication/InspectionForm";
 import LoginInputForm from "../../atoms/Authentication/LoginInputForm";
-import Birth from "../../atoms/Authentication/MemberBirth/Birth";
-import BirthMonth from "../../atoms/Authentication/MemberBirth/BirthMonth";
-import BirthDay from "../../atoms/Authentication/MemberBirth/BirthDay";
 import Button from "../../molecules/Authentication/Button";
 import BackButton from "../../atoms/BackButton";
 import PwResetButton from "../../atoms/Authentication/PwResetButton";
@@ -18,6 +15,11 @@ import FindIdForm from "../../organisms/Authentication/FindIdForm";
 import axios from "axios";
 import Swal from 'sweetalert2'
 import baseApi from "../../api/fetchAPI";
+import BirthCalendar from "../../atoms/Authentication/MemberBirth/BirthCalendar";
+import moment from "moment";
+import LoginIdPwFont from "../../atoms/Authentication/LoginIdPwFont";
+import styled from 'styled-components';
+
 
 function EditMyInfo(){
     const navigate = useNavigate();
@@ -32,7 +34,9 @@ function EditMyInfo(){
     const [CurPw, setCurPw] = useState("");
     const [nickname, setNickname] = useState("");
     const [birthday, setBirthday] = useState(null);
-    const [birth, setBirth] = useState([]);
+    const [birth, setBirth] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null);
+
 
     const [IdMessage, setIdMessage] = useState("");
     const [PwMessage, setPwMessage] = useState("");
@@ -52,6 +56,8 @@ function EditMyInfo(){
     const [isCurPw, setIsCurPw] = useState(false);
     const [isNickname, setIsNickname] = useState(false);
 
+    const url = "https://i11d107.p.ssafy.io/chestnutApi";
+
     useEffect(() => {
         baseApi({
             method: 'get',
@@ -64,10 +70,22 @@ function EditMyInfo(){
                 setName(response.data.data.memberName);
                 setEmail(response.data.data.email);
                 setBirthday(response.data.data.birthday);
+                let originalBirthday = response.data.data.birthday;
+                console.log("birthday 들어온 값: ", response.data.data?.birthday);
+                console.log("들어온 값: ", originalBirthday);
                 setNickname(response.data.data.nickname);
 
-                if (response.data.data.birthday) {
-                    setBirth(response.data.data.birthday.split("-"));
+                if (originalBirthday) {
+                    console.log("birthday는 null이 아니다.")
+                    console.log("birthday: ", originalBirthday);
+                    setBirth(originalBirthday);
+                    console.log("birth: ", birth);
+                    const firstDate = new Date(originalBirthday[0], (originalBirthday[1]-1), originalBirthday[2]);
+                    setSelectedDate(moment(firstDate).format("YYYY-MM-DD"));
+                    console.log("selected date: ", selectedDate);
+                } else {
+                    console.log("birthday는 null이다")
+                    setBirth(null);
                 }
             } else if (response.data.code === "801") {
                 alert("유효하지 않는 토큰입니다.");
@@ -84,12 +102,20 @@ function EditMyInfo(){
         });
     }, []);
 
+
     const GotoBack = () => {
         navigate(-1);
     };
 
+    //생년월일
+    const handleDateClick = (date) => {
+        setSelectedDate(date);
+        console.log("선택된 날짜: ", date);
+    }
+
+
     const succes = () => {
-        const birthdayString = birth.length === 3 ? `${birth[0]}-${birth[1]}-${birth[2]}` : null;
+        const birthdayString = selectedDate !== null ? moment(selectedDate).format("YYYY-MM-DD") : null;
 
         baseApi({
             method: 'post',
@@ -103,7 +129,7 @@ function EditMyInfo(){
             }
         })
         .then(response => {
-            if (response.data.code === 200) {
+            if (response.data.code === "200") {
                 Swal.fire({
                     icon: "info",
                     title: "회원정보 수정",
@@ -134,6 +160,15 @@ function EditMyInfo(){
     const inputEmail = (e) => {
         const currentEmail = e.target.value;
         setEmail(currentEmail);
+        console.log(currentEmail);
+        const emailRegExp = /^[A-Za-z0-9_]*[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+        if (!emailRegExp.test(currentEmail)) {
+            setEmailMessage("이메일 형식이 올바르지 않습니다.")
+            setIsEmail(false);
+        } else {
+            setEmailMessage("사용 가능한 이메일 입니다.")
+            setIsEmail(true);
+        }
     }
 
     const inputId = (e) => {
@@ -186,42 +221,106 @@ function EditMyInfo(){
     const checkPw = (e) => {
         const currentPwnow = e.target.value;
         setCurPw(currentPwnow);
-        if (CurPw !== "ssafy") {
-            setCurPwMessage("비밀번호가 일치하지 않습니다.");
-            setIsCurPw(false);
-        } else {
-            setCurPwMessage("비밀번호가 일치합니다.");
-            setIsCurPw(true);
-        }
+
+
+
+        // if (CurPw !== "ssafy") {
+        //     setCurPwMessage("비밀번호가 일치하지 않습니다.");
+        //     setIsCurPw(false);
+        // } else {
+        //     setCurPwMessage("비밀번호가 일치합니다.");
+        //     setIsCurPw(true);
+        // }
         e.preventDefault();
     };
 
-    const createEmail = (e) => {
-        const emailRegExp = /^[A-Za-z0-9_]*[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
-        if (!emailRegExp.test(Email)) {
-            setEmailMessage("이메일 형식이 올바르지 않습니다.")
-            setIsEmail(false);
-        } else {
-            setEmailMessage("사용 가능한 이메일 입니다.")
-            setIsEmail(true);
-        }
-        e.preventDefault();
-    };
 
-    const handleSubmit = (event) => {
-        alert("인증번호를 전송했습니다.");
-        event.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        if (!isEmail) {
+            alert("유효한 이메일 주소를 입력해주세요.");
+            return;
+        }
+
+        axios.get(url+"/member/check-email",{
+            params: {
+                email: Email,
+            }
+        })
+        .then(response=>{
+            if (response.data.code === "200") {
+                console.log("이메일 중복 체크 성공")
+                axios.post(url+"/member/email/code-request", {
+                    email: Email,
+                    purpose: "changeEmail",
+                })
+                    .then(response => {
+                        console.log("이메일 발송")
+                        if (response.data.code === "200") {
+                            alert("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
+                            setIsEmail(true);
+                        }
+                        if (response.data.code === "601") {
+                            alert("이미 존재하는 이메일입니다.");
+                            setIsEmail(false);
+                        } else if (response.data.code === "603") {
+                            alert("올바르지 않은 이메일 양식입니다.");
+                            setIsEmail(false);
+                        } else if (response.data.code === "606") {
+                            alert("인증번호 보내는 데 실패했습니다.");
+                            setIsEmail(false);
+                        } else if (response.data.code === "299") {
+                            alert("알 수 없는 오류가 발생했습니다.");
+                            setIsEmail(false);
+                        }
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert("인증 이메일 발송 중 오류가 발생했습니다.");
+                    });
+            } else if (response.data.code === "601") {
+                setEmailMessage("이미 존재하는 이메일입니다.");
+                setIsEmail(false);
+            }
+        }).catch(error=>{
+            console.log(error);
+            alert("이메일 확인 중 오류가 발생했습니다.");
+        })
     };
 
     const checkAuth = (e) => {
-        if (Auth !== "1234") {
-            setAuthMessage("인증번호가 일치하지 않습니다.");
-            setIsAuth(false);
-        } else {
-            setAuthMessage("인증번호가 일치합니다.");
-            setIsAuth(true);
-        }
         e.preventDefault();
+
+        if (!Auth) {
+            alert("인증번호를 입력해주세요.");
+            return;
+        }
+
+        axios.post(url+"/member/email/code-check", {
+            email: Email,
+            code: Auth,
+            purpose:"changeEmail"
+        }).then(response => {
+            console.log(Auth);
+            if (response.data.code === "200") {
+                setAuthMessage("인증번호가 일치합니다.");
+                setIsAuth(true);
+            } else if (response.data.code === "605") {
+                setAuthMessage("인증번호가 일치하지 않습니다.");
+                setIsAuth(false);
+            } else if (response.data.code === "602") {
+                setAuthMessage("유효시간이 초과되었습니다. 다시 시도해주세요.");
+                setIsAuth(false);
+            } else if (response.data.code === "299") {
+                setAuthMessage("인증에 실패했습니다. 다시 시도해주세요.");
+                setIsAuth(false);
+            }
+            console.log(response);
+        }).catch(error => {
+            console.log(error);
+        })
     };
 
     const inputAuth = (e) => {
@@ -230,14 +329,29 @@ function EditMyInfo(){
     };
 
     const checkname = (e) => {
-        if (nickname === "ssafy") {
-            setNickMessage("이미 사용중인 닉네임입니다.");
-            setIsNickname(false);
-        } else {
-            setNickMessage("사용 가능한 닉네임입니다.");
-            setIsNickname(true);
-        }
         e.preventDefault();
+        axios.get(url+"/member/check-nickname", {
+            params: {
+                nickname: nickname
+            }
+        })
+            .then(response => {
+                console.log(response);
+                if (response.data.code === "200") {
+                    setNickMessage("사용 가능한 닉네임입니다.");
+                    setIsNickname(true)
+
+                } else if (response.data.code === "601") {
+                    setNickMessage("존재하는 닉네임입니다.");
+                    setIsNickname(false);
+                } else if (response.data.code === "603") {
+                    setNickMessage("잘못된 닉네임 형식입니다.");
+                    setIsNickname(false);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
     };
 
     const inputname = (e) => {
@@ -261,13 +375,14 @@ function EditMyInfo(){
             }
         })
         .then(response => {
-            if (response.data.code === 200) {
+            if (response.data.code === "200") {
                 Swal.fire({
                     icon: "info",
                     title: "비밀번호 재설정",
                     text: "비밀번호 변경을 완료했습니다."
                 });
                 setCurPw(Pw);
+                setModalIsOpen(false);
             } else {
                 Swal.fire({
                     icon: "error",
@@ -281,38 +396,87 @@ function EditMyInfo(){
         });
     }
 
+    // const StyledModal = styled(Modal)`
+    //     &.Modal {
+    //         position: absolute;
+    //         top: 50%;
+    //         left: 50%;
+    //         transform: translate(-50%, -50%);
+    //         width: 675px;
+    //         height: 450px;
+    //         border-radius: 25px;
+    //         background-color: #DCB78F;
+    //         padding: 20px;
+    //         z-index: 1001;
+    //     }
+    // `;
+
+    // const ModalOverlay = styled.div`
+    //     position: fixed;
+    //     top: 0;
+    //     left: 0;
+    //     right: 0;
+    //     bottom: 0;
+    //     background-color: rgba(0, 0, 0, 0.5);
+    //     z-index: 1000;
+    // `;
+
     return(
         <div>
             <div className="container">
-                <div style={{paddingTop: 50, justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+                <div style={{justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
                     <BackButton work={GotoBack} />
-                    <div style={{width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 22, display: 'flex'}}>
+                    <div style={{width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 22, display: 'flex', margin: 30}}>
                         <MemberLogo title={'내 정보 수정'} />
-                        <div style={{paddingLeft: 91, paddingRight: 91, paddingTop: 48, paddingBottom: 48, background: '#DCB78F', borderRadius: 25, overflow: 'hidden', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex'}}>
-                            <div style={{flex: '1 1 0', alignSelf: 'stretch', paddingTop: 56, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 16, display: 'inline-flex'}}>
-                                <InspectionForm content={'닉네임 입력하세요'} name={'중복확인'} text={nickMessage} work={checkname} value={nickname} input={inputname} />
-                                <LoginInputForm content={'이름을 입력하세요'} name={name}/>
-                                {birth && birth.length === 3 && (
-                                    <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'inline-flex'}}>
-                                        <Birth year={birth[0]}/>
-                                        <BirthMonth month={birth[1]}/>
-                                        <BirthDay day={birth[2]}/>
+                        <div style={{paddingLeft: 40, paddingRight: 40, paddingTop: 40, paddingBottom: 30, background: '#DCB78F', borderRadius: 25, overflow: 'hidden', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex'}}>
+                            <div style={{flex: '1 1 0', alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 16, display: 'inline-flex'}}>
+                                <div>
+                                    <LoginIdPwFont title={"닉네임"} />
+                                    <InspectionForm content={'닉네임 입력하세요'} name={'중복확인'} text={nickMessage} work={checkname} value={nickname} input={inputname} />
+                                </div>
+                                <div>
+                                    <LoginIdPwFont title={"이름"} />
+                                    <LoginInputForm content={'이름을 입력하세요'} name={name}/>
+                                </div>
+                                <div>
+                                    <LoginIdPwFont title={"생년월일"} />
+                                    <div style={{ alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'inline-flex' }}>
+                                        <BirthCalendar clickDate={handleDateClick} value={selectedDate}/>
                                     </div>
-                                )}
-                                <InspectionForm content={'ID를 입력하세요'} text={IdMessage} name={'중복인증'} work={createId} value={Id} input={inputId} />
-                                <HiddenForm name={Email} input={inputEmail} work={createEmail} value={Email} value1={Auth} text1={AuthMessage} work1={checkAuth} input1={inputAuth}/>
-                                <PwResetButton button={'비밀번호 재설정'} work={() => setModalIsOpen(true)}/>
-                                <Button button={'내 정보 수정'} work={succes}/>
+                                </div>
+                                <div>
+                                    <LoginIdPwFont title={"아이디"} />
+                                    <InspectionForm content={'ID를 입력하세요'} text={IdMessage} name={'중복인증'} work={createId} value={Id} input={inputId} />
+                                </div>
+                                <div>
+                                    <LoginIdPwFont title={"이메일"} />
+                                    <HiddenForm name={Email} input={inputEmail} work={handleSubmit} value={Email} value1={Auth} text1={AuthMessage} text={EmailMessage} work1={checkAuth} input1={inputAuth}/>
+                                </div>
+                                <div style={{marginTop: 10, gap:10, display:"flex", flexDirection: "column", gap:16}}>
+                                    <PwResetButton button={'비밀번호 재설정'} work={() => setModalIsOpen(true)}/>
+                                    <Button button={'내 정보 수정'} work={succes}/>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <Modal className="Modal" isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} shouldCloseOnOverlayClick={false}>
-                <div style={{width: 700, height: 500, borderRadius: 25, justifyContent: 'center', alignItems: 'center', display: 'inline-flex', background: '#DCB78F'}}>
-                    <div style={{flex: '1 1 0', alignSelf: 'stretch', paddingTop: 50, paddingLeft: 40, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+            <Modal 
+                className="Modal" 
+                isOpen={modalIsOpen} 
+                onRequestClose={() => setModalIsOpen(false)} 
+                shouldCloseOnOverlayClick={true}
+                ariaHideApp={false}
+            >
+                
+                <div style={{width: 675, height: 480, borderRadius: 25, justifyContent: 'center', alignItems: 'center', display: 'inline-flex', background: '#DCB78F', display: "flex", flexDirection: "column", paddingTop: 15, paddingBottom: 15}}>
+                    <div style={{display:"flex", justifyContent:'flex-end', width:"100%", marginBottom: 10, paddingRight: 20}}>
+                        <div className="pw-modal-close" onClick={() => setModalIsOpen(false)}></div>
+                    </div>
+                    <div style={{flex: '1 1 0', gap:20, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'flex', paddingBottom: 20}}>
                         <div style={{alignSelf: 'stretch', background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
-                            <FindIdForm title={'현재 비밀번호'}content={'현재 비밀번호를 입력하세요'} name={'확인'} text={CurPwMessage} work={checkPw} value={CurPw} input={inputPw} />  
+                            <NewInputForm title={'현재 비밀번호'} content={'현재 비밀번호를 입력하세요'} value={CurPw} work={checkPw} text={CurPwMessage}/>  
+                            {/* <FindIdForm title={'현재 비밀번호'}content={'현재 비밀번호를 입력하세요'} name={'확인'} text={CurPwMessage} work={checkPw} value={CurPw} input={inputPw} />   */}
                         </div>
                         <div style={{alignSelf: 'stretch', background: 'rgba(255, 249, 239, 0)', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 10, display: 'flex'}}>
                             <NewInputForm title={'새 비밀번호'} content={'새 비밀번호를 입력하세요'} value={Pw} work={createPw} text={PwMessage}/>
