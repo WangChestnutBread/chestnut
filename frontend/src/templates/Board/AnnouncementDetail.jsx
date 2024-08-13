@@ -84,7 +84,7 @@ const AnnouncementDetail = () => {
       <div className="container text-start">
         {/* 로고 */}
         <LogoAnnouncement />
-        <button className='listbtn mt-4' onClick={moveAnnouncement}>게시판 목록</button>
+        <button className='listbtn mt-4' onClick={moveAnnouncement} style={{border:"none"}}>게시판 목록</button>
         {/* 게시판 제목 및 내용 */}
         {isEditing ? (
           <div>
@@ -111,10 +111,10 @@ const AnnouncementDetail = () => {
         )}
         {/* 삭제 수정 버튼 */}
         <div className="row justify-content-evenly">
-          <button className="updatebtn" onClick={updateAnnouncement}>
+          <button className="updatebtn" onClick={updateAnnouncement} style={{border:"none"}}>
             {isEditing ? "저장" : "수정"}
           </button>
-          <button className="deletebtn" onClick={deleteAnnouncement}>
+          <button className="deletebtn" onClick={deleteAnnouncement} style={{border:"none"}}>
             삭제
           </button>
         </div>

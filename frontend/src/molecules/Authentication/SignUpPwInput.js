@@ -11,7 +11,7 @@ function SignUpPwInput(props){
     };
 
     const handleSubmit = (event) =>{
-        alert(`이름: ${name}`);
+        // alert(`이름: ${name}`);
         event.preventDefault();
     };
 
@@ -25,7 +25,7 @@ function SignUpPwInput(props){
     };
     return(
         <div >
-        <form className="FormBorder LoginFormFont" >
+        <form className="FormBorder LoginFormFont" onSubmit={handleSubmit}>
             <input className="LoginFormBorder LoginFormFont" type="password" value={props.value} onChange={props.work} placeholder={props.content}/>
         </form>
         <IdLengthText text={props.text} />

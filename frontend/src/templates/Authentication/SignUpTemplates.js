@@ -102,6 +102,7 @@ function SignUPPage() {
     };
     //Id 중복검사하는 axios 함수(중복 인증 버튼을 클릭했을 경우)
     const createId = (e) => {
+        console.log("클릭함");
         e.preventDefault(); // 기본 동작 방지
         const currentId = Id;
 
@@ -133,7 +134,10 @@ function SignUPPage() {
 
     const validateId = (currentId) => {
         const idRegExp=/^[a-zA-Z0-9]{5,15}$/;
-        if (!idRegExp.test(currentId)) {
+        if (!currentId) {
+            setIdMessage("");
+            setIsId(false);
+        } else if (!idRegExp.test(currentId)) {
             setIdMessage("5~15 사이의 대소문자와 숫자로만 작성해주세요.");
             setIsId(false);
         } else {
@@ -149,14 +153,17 @@ function SignUPPage() {
         const currentPw = e.target.value;
         setPw(currentPw);
         const passwordRegExp=/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-        if(!passwordRegExp.test(currentPw)){
+        if (currentPw == "") {
+            setPwMessage("");
+            setIsPw(false);
+        } else if(!passwordRegExp.test(currentPw)){
             setPwMessage("숫자, 영문자, 특수문자 조합으로 8자리 이상 입력해주세요.");
             setIsPw(false);
         }
-        else{
-            setPwMessage("안전한 비밀번호입니다.");
+        else if (passwordRegExp.test(currentPw)) {
+            setPwMessage("");
             setIsPw(true);
-        }
+        } 
     };
 
     //비밀번호 확인해서 일치하는 지 확인하는 함수
@@ -168,7 +175,7 @@ function SignUPPage() {
             setPwConMessage("비밀번호가 일치하지 않습니다.");
             setIsPwCon(false);
         } else {
-            setPwConMessage("비밀번호가 일치합니다.");
+            setPwConMessage("");
             setIsPwCon(true);
 
         }
@@ -290,7 +297,10 @@ function SignUPPage() {
         setEmail(inputemail);
         const isValid = validateEmail(inputemail);
         setIsEmailValid(isValid);
-        if (!isValid) {
+        if (!inputemail) {
+            setEmailMessage("");
+
+        } else if (!isValid) {
             setEmailMessage("유효한 이메일 형식이 아닙니다.");
         } else {
             setEmailMessage("");
@@ -343,16 +353,14 @@ function SignUPPage() {
                 <BackButton work={GotoBack} />
                 <div style={{ width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 22, display: 'flex' }}>
                     <MemberLogo title={'회원가입'} />
-                    <div style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 40, paddingBottom: 20, background: '#DCB78F', borderRadius: 25, overflow: 'visible', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex' }}>
-                        <div style={{ flex: '1 1 0', alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'inline-flex' }}>
+                    <div style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 40, paddingBottom: 20, background: '#DCB78F', borderRadius: 25, overflow: 'visible', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 27, display: 'flex', marginBottom: 40 }}>
+                        <div style={{ flex: '1 1 0', alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'inline-flex', gap: 15 }}>
                             <InspectionForm content={'ID'} text={IdMessage} name={'중복확인'} work={createId} value={Id} input={inputId} />
                             <SignUpPwInput content={'PW'} text={PwMessage} work={createPw} value={Pw} />
                             <SignUpPwInput content={'PW 재확인'} text={PwConMessage} work={createPwCon} value={PwCon} />
                             <InspectionForm content={'이메일'} text={EmailMessage} name={'인증'} work={createEmail} input={inputEmail} value={Email} disabled={!isEmailValid}/>
                             <InspectionForm content={'인증번호'} name={'확인'} text={AuthMessage} work={checkAuth} value={Auth} input={inputAuth} />
-                            <div style={{marginBottom: 25}}>
-                                <LoginInputForm content={'이름'} name={name} work={inputName} value={name} input={inputname}/>
-                            </div>
+                            <LoginInputForm content={'이름'} name={name} work={inputName} value={name} input={inputname}/>
                             <InspectionForm content={'닉네임'} name={'중복확인'} text={nickMessage} work={checkname} value={nickname} input={inputNickname} />
                             <div style={{ alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'inline-flex' }}>
                                 <BirthCalendar clickDate={handleDateClick} value={selectedDate}/>

@@ -10,8 +10,6 @@ const NotationChapter1 = ({word}) => {
   const [data, setData] = useState()
   useEffect(() => {
     baseApi.get(`/study/detail/${word.studyId}/word`).then((res) => {
-      // console.log(12332312312313);
-      // console.log(res);
       setData(res.data.data.word)
 
     })

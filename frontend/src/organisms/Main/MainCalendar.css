@@ -35,6 +35,24 @@
   background-color: #dcb78f;
 }
 
+abbr[title] {
+  text-decoration: none;
+  cursor: none;
+  text-decoration-skip-ink: none; 
+}
+
+.react-calendar__month-view__days__day--weekend > :nth-last-child() > :last-child {
+  background-color: blue;
+}
+
+.sunday {
+  color: red !important;
+}
+
+.react-calendar__tile {
+  color: black;
+}
+
 .react-calendar__tile--active {
   background: none !important;
   color: black !important;

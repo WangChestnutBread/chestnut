@@ -11,7 +11,7 @@ const ListBtn = () => {
 
   return (
     <div className="d-flex justify-content-center">
-      <button className="list-btn" onClick={handleQnaClick}>목록</button>
+      <button className="list-btn" onClick={handleQnaClick} style={{border:"none"}}>목록</button>
     </div>
   );
 };
