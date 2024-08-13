@@ -51,8 +51,6 @@ function SignUPPage() {
     // const url = "http://localhost:8081"
 
 
-
-
     //회원가입 버튼을 눌렀을 때 요청내어줄 회원 정보 전송하는 AXIOS함수
     const succes = () => {
         axios.post(url+"/member/signup", {
@@ -211,31 +209,31 @@ function SignUPPage() {
                     email: Email,
                     purpose: "signup",
                 })
-                    .then(response => {
-                        console.log("이메일 발송")
-                        if (response.data.code === "200") {
-                            alert("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
-                            setIsEmail(true);
-                        }
-                        if (response.data.code === "601") {
-                            alert("이미 존재하는 이메일입니다.");
-                            setIsEmail(false);
-                        } else if (response.data.code === "603") {
-                            alert("올바르지 않은 이메일 양식입니다.");
-                            setIsEmail(false);
-                        } else if (response.data.code === "606") {
-                            alert("인증번호 보내는 데 실패했습니다.");
-                            setIsEmail(false);
-                        } else if (response.data.code === "299") {
-                            alert("알 수 없는 오류가 발생했습니다.");
-                            setIsEmail(false);
-                        }
-                        console.log(response);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        alert("인증 이메일 발송 중 오류가 발생했습니다.");
-                    });
+                .then(response => {
+                    console.log("이메일 발송")
+                    if (response.data.code === "200") {
+                        alert("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
+                        setIsEmail(true);
+                    }
+                    if (response.data.code === "601") {
+                        alert("이미 존재하는 이메일입니다.");
+                        setIsEmail(false);
+                    } else if (response.data.code === "603") {
+                        alert("올바르지 않은 이메일 양식입니다.");
+                        setIsEmail(false);
+                    } else if (response.data.code === "606") {
+                        alert("인증번호 보내는 데 실패했습니다.");
+                        setIsEmail(false);
+                    } else if (response.data.code === "299") {
+                        alert("알 수 없는 오류가 발생했습니다.");
+                        setIsEmail(false);
+                    }
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert("인증 이메일 발송 중 오류가 발생했습니다.");
+                });
             } else if (response.data.code === "601") {
                 setEmailMessage("이미 존재하는 이메일입니다.");
                 setIsEmail(false);

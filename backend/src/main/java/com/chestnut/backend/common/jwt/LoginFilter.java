@@ -70,9 +70,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         LoginResDTO loginResDTO = null;
         if(role.equals("ROLE_ADMIN")) {
-            loginResDTO = new LoginResDTO(loginId, 1);
+            loginResDTO = new LoginResDTO(loginId, true);
         } else {
-            loginResDTO = new LoginResDTO(loginId, 0);
+            loginResDTO = new LoginResDTO(loginId, false);
         }
 
         //loginId, role 사용해서 JWTUtil에서 토큰을 만든다.
