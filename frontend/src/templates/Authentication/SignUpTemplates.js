@@ -104,6 +104,7 @@ function SignUPPage() {
     };
     //Id 중복검사하는 axios 함수(중복 인증 버튼을 클릭했을 경우)
     const createId = (e) => {
+        console.log("클릭함");
         e.preventDefault(); // 기본 동작 방지
         const currentId = Id;
 
@@ -135,7 +136,10 @@ function SignUPPage() {
 
     const validateId = (currentId) => {
         const idRegExp=/^[a-zA-Z0-9]{5,15}$/;
-        if (!idRegExp.test(currentId)) {
+        if (!currentId) {
+            setIdMessage("");
+            setIsId(false);
+        } else if (!idRegExp.test(currentId)) {
             setIdMessage("5~15 사이의 대소문자와 숫자로만 작성해주세요.");
             setIsId(false);
         } else {
@@ -151,14 +155,17 @@ function SignUPPage() {
         const currentPw = e.target.value;
         setPw(currentPw);
         const passwordRegExp=/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-        if(!passwordRegExp.test(currentPw)){
+        if (currentPw == "") {
+            setPwMessage("");
+            setIsPw(false);
+        } else if(!passwordRegExp.test(currentPw)){
             setPwMessage("숫자, 영문자, 특수문자 조합으로 8자리 이상 입력해주세요.");
             setIsPw(false);
         }
-        else{
-            setPwMessage("안전한 비밀번호입니다.");
+        else if (passwordRegExp.test(currentPw)) {
+            setPwMessage("");
             setIsPw(true);
-        }
+        } 
     };
 
     //비밀번호 확인해서 일치하는 지 확인하는 함수
@@ -170,7 +177,7 @@ function SignUPPage() {
             setPwConMessage("비밀번호가 일치하지 않습니다.");
             setIsPwCon(false);
         } else {
-            setPwConMessage("비밀번호가 일치합니다.");
+            setPwConMessage("");
             setIsPwCon(true);
 
         }
@@ -292,7 +299,10 @@ function SignUPPage() {
         setEmail(inputemail);
         const isValid = validateEmail(inputemail);
         setIsEmailValid(isValid);
-        if (!isValid) {
+        if (!inputemail) {
+            setEmailMessage("");
+
+        } else if (!isValid) {
             setEmailMessage("유효한 이메일 형식이 아닙니다.");
         } else {
             setEmailMessage("");

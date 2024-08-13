@@ -7,7 +7,9 @@ function InspectionForm(props){
         <div>
             <form className="FormBorder LoginFormFont" >
                 <input className="LoginFormBorder LoginFormFont" type="text" value={props.value} onChange={props.input} placeholder={props.content}/>
-                <InspectionButton name={props.name} work={props.work}/>
+                {props.name && props.work && (
+                    <InspectionButton name={props.name} work={props.work} />
+                )}
             </form>
             <IdLengthText text={props.text} />
         </div>
