@@ -66,11 +66,12 @@ public class StudyDetailController {
      */
     @PostMapping("/pronunciation/evaluate")
     public ResponseEntity<?> checkPronunciation(@RequestParam("word") String word,
+                                                @RequestParam("sttPronounce") String sttPronounce,
                                                 @RequestParam("audio") MultipartFile audioFile,
                                                 @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
-        log.debug("STT 태그 : 요청 body 내용 "+word+" "+audioFile.getOriginalFilename());
+        log.debug("STT 태그 : 요청 body 내용 "+word+" "+sttPronounce+" "+audioFile.getOriginalFilename());
         log.debug("STT 태그 : audio file resource "+audioFile.getResource());
-        PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, audioFile);
+        PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, sttPronounce, audioFile);
         return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
     }
 
