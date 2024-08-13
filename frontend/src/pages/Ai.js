@@ -153,64 +153,73 @@ const Ai = ({ userId }) => {
       <div className="container text-start justify-center">
         <div className="logo-container">
           <div className="position-relative">
-            <img src="/image/Logo.png" alt="밤빵" className="logo" style={{ width: "300px" }} />
+            <img
+              src="/image/Logo.png"
+              alt="밤빵"
+              className="logo"
+              style={{ width: "260px", height: "110px" }}
+            />
             <span className="qna position-absolute bottom-0 start-100">
               AI대화
             </span>
           </div>
         </div>
-      </div>
 
-      {/* 메시지 표시 */}
-      <div
-        className="messages-container mt-5"
-        style={{
-          padding: "20px",
-          maxHeight: "500px",
-          overflowY: "auto",  // 스크롤이 가능하도록 설정
-          backgroundColor: "#fff9ef",
-          borderRadius: "10px",
-          marginTop: "20px",
-        }}
-      >
-        {messages.map((msg, index) => (
-          <div
-            key={index}
-            className={msg.role === "You" ? "user-msg" : "assistant-msg"}
-            style={{
-              display: "inline-block",
-              backgroundColor: msg.role === "You" ? "#6B3906" : "#6B3906",
-              padding: "10px",
-              borderRadius: "10px",
-              marginBottom: "10px",
-              textAlign: msg.role === "You" ? "left" : "right",
-              alignSelf: index % 2 === 0 ? "flex-end" : "flex-start",
-              clear: "both",
-              float: index % 2 === 0 ? "right" : "left",
-              maxWidth: "60%", // 박스의 최대 너비를 설정하여 가로로 길어지는 것을 방지
-              fontSize: "20px",
-              color: "white",
-              minHeight: "50px", // 최소 높이 설정
-              height: "auto", // 높이가 내용에 따라 자동으로 조정되도록 설정
-              wordBreak: "break-word", // 단어가 길어지면 강제로 줄바꿈
-              whiteSpace: "normal", // 텍스트가 박스 너비를 초과하면 줄바꿈
-            }}
-          >
-            {msg.role === "심심이" ? (
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <img
-                  src="/image/aistudy.png"
-                  alt="심심이"
-                  style={{ width: "30px", height: "30px", marginRight: "10px" }}
-                />
+        {/* 메시지 표시 */}
+        <div
+          className="messages-container mt-5"
+          style={{
+            padding: "20px",
+            maxHeight: "500px",
+            overflowY: "auto", // 스크롤이 가능하도록 설정
+            backgroundColor: "#fff9ef",
+            borderRadius: "10px",
+            marginTop: "20px",
+          }}
+        >
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={msg.role === "You" ? "user-msg" : "assistant-msg"}
+              style={{
+                display: "inline-block",
+                backgroundColor: msg.role === "You" ? "#6B3906" : "#6B3906",
+                padding: "10px",
+                borderRadius: "10px",
+                marginBottom: "10px",
+                textAlign: msg.role === "You" ? "left" : "right",
+                alignSelf: index % 2 === 0 ? "flex-end" : "flex-start",
+                clear: "both",
+                float: index % 2 === 0 ? "right" : "left",
+                maxWidth: "60%", // 박스의 최대 너비를 설정하여 가로로 길어지는 것을 방지
+                fontSize: "20px",
+                color: "white",
+                minHeight: "50px", // 최소 높이 설정
+                height: "auto", // 높이가 내용에 따라 자동으로 조정되도록 설정
+                wordBreak: "break-word", // 단어가 길어지면 강제로 줄바꿈
+                whiteSpace: "normal", // 텍스트가 박스 너비를 초과하면 줄바꿈
+              }}
+            >
+              {msg.role === "심심이" ? (
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <img
+                    src="/image/aistudy.png"
+                    alt="심심이"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      marginRight: "10px",
+                    }}
+                  />
+                  <strong>{msg.content}</strong>
+                </div>
+              ) : (
                 <strong>{msg.content}</strong>
-              </div>
-            ) : (
-              <strong>{msg.content}</strong>
-            )}
-          </div>
-        ))}
-        <div ref={messagesEndRef} /> {/* 스크롤을 맞추기 위한 div */}
+              )}
+            </div>
+          ))}
+          <div ref={messagesEndRef} /> {/* 스크롤을 맞추기 위한 div */}
+        </div>
       </div>
 
       {/* 녹음버튼 */}

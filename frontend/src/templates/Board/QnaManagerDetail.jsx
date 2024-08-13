@@ -88,16 +88,18 @@ const QnaManagerDetail = () => {
           ) : !showAnswerForm ? (
             <div className="d-flex justify-content-between mb-3">
               {answer ? (
-                <p className="mt-3">{answer}</p>
+                <p className="mt-3" style={{fontSize:"1.5rem"}}>{answer}</p>
               ) : (
-                <p className="mt-3">답변을 작성해주세요.</p>
+                <p className="mt-3" style={{fontSize:"1.5rem"}}>답변을 작성해주세요.</p>
               )}
               { answer ? <button
                 className="successbtn mt-1 btn btn-primary"
+                style={{backgroundColor:"#6B3906"}}
               >
                 답변 완료
               </button>: <button
                 className="answerbtn mt-1 btn btn-primary"
+                style={{backgroundColor:"#DCB78F"}}
                 onClick={handleAnswerClick}
               >
                 답변 작성
