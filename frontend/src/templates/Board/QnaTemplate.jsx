@@ -41,7 +41,7 @@ const QnaPage = () => {
         });
         const data = response.data.data;
 
-        if (isAnnouncement) {
+        if (window.location.pathname.includes('announcement')) {
           setTotalPages(data.announcementListPage.totalPages);
           setArticles(data.announcementListPage.content);
         } else {

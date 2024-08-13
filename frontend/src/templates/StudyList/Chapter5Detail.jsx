@@ -1,45 +1,37 @@
-import "../NavbarExample.css";
+import { useState } from "react";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
 import Notation from "../../organisms/StudyList/NotationChapter1";
-import SoundMethod from "../../organisms/StudyList/SoundMethod";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
-import Pronunciation from "../../organisms/StudyList/Pronunciations"
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 import baseApi from "../../api/fetchAPI";
-
-
+import Ch5SM from "../../organisms/StudyList/Ch5SM";
+import Ch5Pronunciation from "../../organisms/StudyList/Ch5Pronunciation"
 
 const Chapter5Detail = () => {
-  const params = useParams()
-  const [realData, setRealData] = useState("내발음😎")
-  const [answerData, setAnswerData] = useState([100000])
-  const [word, setWord] = useState("")
-  const [show, isShow] = useState(false)
+  const params = useParams();
+  const [realData, setRealData] = useState("내발음😎");
+  const [answerData, setAnswerData] = useState([100000]);
+  const [selectedChar, setSelectedChar] = useState("");  // 클릭된 글자 상태 관리
 
-  console.log(params);
   const moveData = (value) => {
-    setRealData(value)
-  }
+    setRealData(value);
+  };
+
   const answer = (value) => {
-    setAnswerData(value)
-    console.log(value);
+    setAnswerData(value);
     if (value.length === 0) {
-      isShow(true)
       baseApi.get('/log/study',{
         params:{
           studyId: params.studyId,
           isPass: 1
         }
       }).then((res) => {
-        console.log(res);
-        alert('축하드려요 성공입니다.')
-      })
+        alert('축하드려요 성공입니다.');
+      });
     }
-  }
- 
+  };
 
   return (
     <div>
@@ -65,13 +57,18 @@ const Chapter5Detail = () => {
         {/* 소리나는 방법, ???(우승다람쥐) */}
         <div className="row">
           <div className="col-6 mt-2" >
-            <Pronunciation saying={params} realData={realData} location={answerData}/>
+            <Ch5Pronunciation 
+              saying={params} 
+              realData={realData} 
+              location={answerData}
+              onCharacterClick={setSelectedChar}  // 클릭된 글자를 전달
+            />
           </div>
           <div className="col-6 mt-2 mb-3" style={{"width":"500px", 'height': "350px"}} >
             <img src="/image/success.png" alt="practice" style={{"width": "100%", "height":"100%"}} />
           </div>
           <div>
-            <SoundMethod hangeul={params}/>
+            <Ch5SM hangeul={params} selectedChar={selectedChar}/>  {/* 선택된 글자 전달 */}
           </div>
         </div>
         {/* 마이크 */}
@@ -82,4 +79,5 @@ const Chapter5Detail = () => {
     </div>
   );
 };
+
 export default Chapter5Detail;
