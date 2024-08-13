@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import baseApi from "../../api/fetchAPI";
 import HowSpeak from "../../molecules/StudyList/HowSpeak";
 import SpeakExplanation from "../../molecules/StudyList/SpeakExplanation";
-import "./SoundMethod.css";
+import "./Ch3SM.css";
 
 const SoundMethod = (hangeul) => {
   const distinction = parseInt(hangeul.hangeul.studyId);
@@ -206,7 +206,7 @@ const SoundMethod = (hangeul) => {
   }, [hangeul.hangeul.studyId]);
 
   return (
-    <div className="ch2 rounded-3 shadow ">
+    <div className="qwer rounded-3 shadow ">
       <HowSpeak />
       {word ? <SpeakExplanation data={word} /> : <></>}
     </div>

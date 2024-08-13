@@ -1,0 +1,48 @@
+.record {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 13px 20px;
+  gap: 114px;
+
+  width: 378px;
+  height: 66px;
+
+  background: #6b3906;
+  border-radius: 10px;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.icon-check, .icon-xmark {
+  width: 50px; /* Adjust the size as needed */
+  height: 50px; /* Adjust the size as needed */
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+  font-size: 24px; /* Adjust the icon size as needed */
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.icon-check:hover, .icon-xmark:hover {
+  transform: scale(1.1);
+}
+
+.icon-check {
+  color: green;
+}
+
+.icon-xmark {
+  color: red;
+}
