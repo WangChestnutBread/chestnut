@@ -1,6 +1,3 @@
-import NavBar from "../../organisms/NavBar";
-import MouseTongue from "../../organisms/StudyList/MouseTongue";
-import Record from "../../organisms/StudyList/Record";
 import "../NavbarExample.css";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
@@ -13,12 +10,16 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import baseApi from "../../api/fetchAPI";
 
+
+
 const Chapter5Detail = () => {
   const params = useParams()
   const [realData, setRealData] = useState("내발음😎")
   const [answerData, setAnswerData] = useState([100000])
+  const [word, setWord] = useState("")
   const [show, isShow] = useState(false)
 
+  console.log(params);
   const moveData = (value) => {
     setRealData(value)
   }
@@ -68,6 +69,9 @@ const Chapter5Detail = () => {
           </div>
           <div className="col-6 mt-2 mb-3" style={{"width":"500px", 'height': "350px"}} >
             <img src="/image/success.png" alt="practice" style={{"width": "100%", "height":"100%"}} />
+          </div>
+          <div>
+            <SoundMethod hangeul={params}/>
           </div>
         </div>
         {/* 마이크 */}

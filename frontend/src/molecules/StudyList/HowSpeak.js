@@ -4,7 +4,7 @@ const HowSpeak = () => {
   return (
     <div className="d-flex align-items-center">
 
-      <img src="/image/HowSpeak.png" alt="어케말하노" className="m-3"/>
+      <img src="/image/HowSpeak.png" alt="어케말하노" className="ms-4 mt-3"/>
       <Text24 text={"소리내는 방법"} />
     </div>
   )

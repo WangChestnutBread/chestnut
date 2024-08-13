@@ -20,9 +20,9 @@ const Pronunciations = ({saying, realData, location}) => {
 
 
   return (
-    <div>
+    <div className="">
       <div className="d-flex">
-        <div>
+        <div className="">
           <PronunciationLeft data={"발음"} />
         </div>
         {word ? (
