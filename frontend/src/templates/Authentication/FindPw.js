@@ -185,7 +185,7 @@ function FindPw() {
                     <MemberLogo title={'PW 찾기'} />
                     <div className="formlist">
                             <div className="idbox">
-                                <LoginIdInput title={'ID'} content={'아이디를 입력하세요'} value={Id} input={inputId} />
+                                <InspectionForm title={'ID'} content={'아이디를 입력하세요'} value={Id} input={inputId} />
                             </div>
                             <div className="formbox">
                                 <InspectionForm title={'이메일'} content={'이메일을 입력하세요'} name={'전송'} work={handleSubmit} value={Email} input={inputEmail} text={EmailMessage} disabled={!isEmail}/>
