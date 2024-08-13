@@ -26,10 +26,10 @@ const QnaAnswer = () => {
   return (
     <div className="answer p-4 mb-4 border-bottom border-2 border-black">
       <div className="d-flex justify-content-between mb-3 row">
-        <div className='word-wrap col-10'>{content}</div>
+        <div className='word-wrap col-10' style={{fontSize:"1.5rem"}}>{content}</div>
         <div className="text-center date-container col-2">
-          <p>{date.slice(0,1)+"-"+ date.slice(1,2)+"-"+date.slice(2,3)}</p>
-          <p className="mt-3 ">관리자</p>
+          {/* <p>{date.slice(0,1)+"-"+ date.slice(1,2)+"-"+date.slice(2,3)}</p>
+          <p className="mt-3 ">관리자</p> */}
         </div>
       </div>
     </div>
