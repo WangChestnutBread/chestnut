@@ -76,8 +76,8 @@ public class MemberController {
 
     @PostMapping("/reset-pwd/unknown")
     public ResponseEntity<?> resetPwdUnknown(@Valid @RequestBody ResetPwdUnknownReqDTO resetPwdUnknownReqDTO,
-                                            @SessionAttribute(name = "CheckEmailCode:", required = false) String authEmail) {
-        if(authEmail == null || !resetPwdUnknownReqDTO.getEmail().equals(authEmail)) {
+                                            @SessionAttribute(name = "CheckEmailCode:changePassword:", required = false) String authEmail) {
+        if(!resetPwdUnknownReqDTO.getEmail().equals(authEmail)) {
             throw new NotVerifiedEmailException();
         }
         memberService.resetPwdUnknown(resetPwdUnknownReqDTO.toDto());
