@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import InspectionForm from "../../molecules/Authentication/InspectionForm";
@@ -6,12 +6,23 @@ import MemberLogo from "../../molecules/Authentication/MemberLogo";
 import SignUpPwInput from "../../molecules/Authentication/SignUpPwInput";
 import LoginInputForm from "../../atoms/Authentication/LoginInputForm";
 import BackButton from "../../atoms/BackButton";
-import Birth from "../../atoms/Authentication/MemberBirth/Birth";
-import BirthMonth from "../../atoms/Authentication/MemberBirth/BirthMonth";
-import BirthDay from "../../atoms/Authentication/MemberBirth/BirthDay";
 import Button from "../../molecules/Authentication/Button";
-import baseApi from "../../api/fetchAPI";
 import BirthCalendar from "../../atoms/Authentication/MemberBirth/BirthCalendar";
+import styled from "styled-components";
+
+const TimeWrapper = styled.div`
+position: relative;
+width: 100%;
+`;
+
+const Timer = styled.div`
+position: absolute;
+right: 120px;
+top: 50%;
+transform: translate(0, -50%);
+color: #6B3906;
+font-weight: bold;
+`;
 
 function SignUPPage() {
     const navigate = useNavigate();
@@ -36,6 +47,8 @@ function SignUPPage() {
     const [EmailMessage, setEmailMessage] = useState("");
     const [AuthMessage, setAuthMessage] = useState("");
     const [nickMessage, setnickMessage] = useState("");
+    const [timer, setTimer] = useState(300);
+    const [verificationSent, setVerificationSent] = useState(false);
 
     //회원정보가 생성된 부분 포함할 변수
     const [isId, setIsId] = useState(false);
@@ -209,31 +222,36 @@ function SignUPPage() {
                     email: Email,
                     purpose: "signup",
                 })
-                .then(response => {
-                    console.log("이메일 발송")
-                    if (response.data.code === "200") {
-                        alert("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
-                        setIsEmail(true);
-                    }
-                    if (response.data.code === "601") {
-                        alert("이미 존재하는 이메일입니다.");
-                        setIsEmail(false);
-                    } else if (response.data.code === "603") {
-                        alert("올바르지 않은 이메일 양식입니다.");
-                        setIsEmail(false);
-                    } else if (response.data.code === "606") {
-                        alert("인증번호 보내는 데 실패했습니다.");
-                        setIsEmail(false);
-                    } else if (response.data.code === "299") {
-                        alert("알 수 없는 오류가 발생했습니다.");
-                        setIsEmail(false);
-                    }
-                    console.log(response);
-                })
-                .catch(error => {
-                    console.log(error);
-                    alert("인증 이메일 발송 중 오류가 발생했습니다.");
-                });
+                    .then(response => {
+                        console.log("이메일 발송")
+                        if (response.data.code === "200") {
+                            alert("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
+                            //인증번호 재전송
+                            if (verificationSent) {
+                                resendVerification();
+                            }
+                            setIsEmail(true);
+                            setVerificationSent(true);
+                        }
+                        if (response.data.code === "601") {
+                            alert("이미 존재하는 이메일입니다.");
+                            setIsEmail(false);
+                        } else if (response.data.code === "603") {
+                            alert("올바르지 않은 이메일 양식입니다.");
+                            setIsEmail(false);
+                        } else if (response.data.code === "606") {
+                            alert("인증번호 보내는 데 실패했습니다.");
+                            setIsEmail(false);
+                        } else if (response.data.code === "299") {
+                            alert("알 수 없는 오류가 발생했습니다.");
+                            setIsEmail(false);
+                        }
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert("인증 이메일 발송 중 오류가 발생했습니다.");
+                    });
             } else if (response.data.code === "601") {
                 setEmailMessage("이미 존재하는 이메일입니다.");
                 setIsEmail(false);
@@ -345,6 +363,39 @@ function SignUPPage() {
         setIsNickname(true);
     }
 
+    // 타이머 함수
+    const formatTime = () => {
+        const minutes = Math.floor(timer/60);
+        const seconds = timer % 60;
+        return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+    }
+
+    const resendVerification = () => {
+        setTimer(300);
+    }
+
+    useEffect(() => {
+        let interval;
+        if (verificationSent) {
+            interval = setInterval(() => {
+                setTimer((prevTimer) => {
+                    if (prevTimer <= 1) {
+                        clearInterval(interval);
+                        setVerificationSent(false);
+                        return 0;
+                    }
+                    return prevTimer - 1;
+                });
+            }, 1000);
+        }
+
+        return () => {
+            if (interval) {
+                clearInterval(interval);
+            }
+        };
+
+    }, [verificationSent]);
 
     //본 디자인 프레임
     return (
@@ -358,8 +409,14 @@ function SignUPPage() {
                             <InspectionForm content={'ID'} text={IdMessage} name={'중복확인'} work={createId} value={Id} input={inputId} />
                             <SignUpPwInput content={'PW'} text={PwMessage} work={createPw} value={Pw} />
                             <SignUpPwInput content={'PW 재확인'} text={PwConMessage} work={createPwCon} value={PwCon} />
+
                             <InspectionForm content={'이메일'} text={EmailMessage} name={'인증'} work={createEmail} input={inputEmail} value={Email} disabled={!isEmailValid}/>
-                            <InspectionForm content={'인증번호'} name={'확인'} text={AuthMessage} work={checkAuth} value={Auth} input={inputAuth} />
+                            <TimeWrapper>
+                                {verificationSent && !isAuth && (
+                                    <Timer>{formatTime()}</Timer>
+                                )}
+                                <InspectionForm content={'인증번호'} name={'확인'} text={AuthMessage} work={checkAuth} value={Auth} input={inputAuth} />
+                            </TimeWrapper>
                             <LoginInputForm content={'이름'} name={name} work={inputName} value={name} input={inputname}/>
                             <InspectionForm content={'닉네임'} name={'중복확인'} text={nickMessage} work={checkname} value={nickname} input={inputNickname} />
                             <div style={{ alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 16, display: 'inline-flex' }}>

@@ -16,6 +16,7 @@ import baseApi from "../../api/fetchAPI";
 import BirthCalendar from "../../atoms/Authentication/MemberBirth/BirthCalendar";
 import moment from "moment";
 import LoginIdPwFont from "../../atoms/Authentication/LoginIdPwFont";
+import styled from "styled-components";
 
 
 function EditMyInfo(){
@@ -33,6 +34,8 @@ function EditMyInfo(){
     const [birthday, setBirthday] = useState(null);
     const [birth, setBirth] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [verificationSent, setVerificationSent] = useState(false);
+    const [sentCode, setSentCode] = useState(false);
 
 
     const [IdMessage, setIdMessage] = useState("");
@@ -295,6 +298,8 @@ function EditMyInfo(){
                         if (response.data.code === "200") {
                             alert("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
                             setIsEmail(true);
+                            setSentCode(true);
+                            setVerificationSent(!verificationSent);
                         }
                         if (response.data.code === "601") {
                             alert("이미 존재하는 이메일입니다.");
@@ -443,6 +448,7 @@ function EditMyInfo(){
     }
 
 
+
     return(
         <div>
             <div className="container">
@@ -472,7 +478,21 @@ function EditMyInfo(){
                                 </div>
                                 <div>
                                     <LoginIdPwFont title={"이메일"} />
-                                    <HiddenForm name={Email} input={inputEmail} work={handleSubmit} value={Email} value1={Auth} text1={AuthMessage} text={EmailMessage} work1={checkAuth} input1={inputAuth}/>
+                                    <HiddenForm 
+                                        name={Email} 
+                                        input={inputEmail} 
+                                        work={handleSubmit} 
+                                        value={Email} 
+                                        value1={Auth} 
+                                        text1={AuthMessage} 
+                                        text={EmailMessage} 
+                                        work1={checkAuth} 
+                                        input1={inputAuth}
+                                        verificationSent={verificationSent}
+                                        setVerificationSent={setVerificationSent}
+                                        sentCode={sentCode}
+                                        isAuth={isAuth}
+                                    />
                                 </div>
                                 <div style={{marginTop: 10, gap:10, display:"flex", flexDirection: "column", gap:16}}>
                                     <PwResetButton button={'비밀번호 재설정'} work={() => setModalIsOpen(true)}/>
