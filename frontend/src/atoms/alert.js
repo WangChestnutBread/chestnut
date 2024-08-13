@@ -12,7 +12,7 @@ function CustomAlert (props) {
                         <span class="custom-alert-content">${props.content}</span>
                     </div>
                 `,
-        
+                
             confirmButtonText: "확인",
             customClass: {
                 popup: 'custom-alert-popup',
