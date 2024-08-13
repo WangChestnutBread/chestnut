@@ -12,7 +12,6 @@ function HiddenForm(props){
             setchange((state)=>"hiddenForm");
         }
     };
-    console.log(state)
     return(
         <div>
             <div style={{display:"flex", alignItems: "center"}}>
