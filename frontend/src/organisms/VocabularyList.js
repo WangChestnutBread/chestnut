@@ -1,5 +1,6 @@
 import "./VocabularyList.css";
 import "./VocaModal.css";
+import "../molecules/TabDropDown.css";
 import ChapterList from "../molecules/StudyList/ChapterList";
 import { useEffect, useState } from "react";
 import Pagenation from "../atoms/Pagenation";
@@ -80,12 +81,12 @@ function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
   };
 
   return (
-    console.log(currentVocaItem),
+    // console.log(currentVocaItem),
     (
       <div className="VocaList container">
         {/* 칠판 위 드롭다운 버튼 */}
         <Dropdown className="TabDropDownButton">
-          <Dropdown.Toggle id="dropdown-basic" className="TabDropDownToggle">
+          <Dropdown.Toggle variant="light" id="dropdown-basic" className="TabDropDownToggle">
             {`Ch${modifiedChapterTitle[currentChapter].chapterId}. ${modifiedChapterTitle[currentChapter].chapterName}`}
           </Dropdown.Toggle>
           <VocaTabDropDown
