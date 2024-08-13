@@ -21,7 +21,7 @@ function Chapter4List({ content }) {
             {content.map((item, i) => {
               return (
                 <BlackBoardTab
-                  key={`${item.categoryContent}-${i}`}
+                  key={`chapter4TabButton-${i}`}
                   tabTitle={item.categoryContent}
                   isActive={currentTab === i}
                   onClick={() => {
@@ -39,7 +39,7 @@ function Chapter4List({ content }) {
             <div className="LeftBoardList">
               {content[currentTab].phonology.map((item, i) => {
                 return (
-                  <div>
+                  <div key={`chapter4LeftList-${item.studyId}`}>
                     <div
                       className={`LeftBoardText ${
                         currentRule === i ? "active" : ""
@@ -48,7 +48,7 @@ function Chapter4List({ content }) {
                         setCurrentRule(i);
                       }}
                     >
-                      <Text32 key={item.studyId} text={item.phonologyRule} />
+                      <Text32 text={item.phonologyRule} />
                     </div>
                   </div>
                 );
@@ -66,6 +66,7 @@ function Chapter4List({ content }) {
                     .phonologyExplanation
                 }
               </p>
+              
             </div>
           </div>
 
