@@ -31,8 +31,8 @@ function FindPw() {
 
     const [alertContent, setAlertContent] = useState("");
 
-    const url = "https://i11d107.p.ssafy.io/chestnutApi";
-    // const url = "http://localhost:8081/chestnutApi";
+    // const url = "https://i11d107.p.ssafy.io/chestnutApi";
+    const url = "http://localhost:8081/chestnutApi";
 
     const succes = () => {
         console.log(Id)
@@ -184,7 +184,7 @@ function FindPw() {
                 <div style={{ width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                     <MemberLogo title={'PW 찾기'} />
                     <div className="formlist">
-                            <div className="idbox">
+                            <div className="formbox">
                                 <InspectionForm title={'ID'} content={'아이디를 입력하세요'} value={Id} input={inputId} />
                             </div>
                             <div className="formbox">
