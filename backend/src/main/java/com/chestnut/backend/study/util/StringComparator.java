@@ -26,19 +26,15 @@ public final class StringComparator {
      * @param userInput 사용자 입력 문자열
      * @return PronunceEvaluateDto 문자열 비교 평가 결과
      */
-    public static PronunceEvaluateDto compareStrings(String answer, String sttPronounc, String userInput) {
+    public static PronunceEvaluateDto compareStrings(String answer, String userInput) {
         // 정답 문자열 전처리
         ProcessedString processedAnswer = preprocessAndMap(answer);
-        // stt 발음 인식 후보 전처리
-        ProcessedString processedSttPronounc = preprocessAndMap(sttPronounc);
         // 사용자 입력 전처리
         ProcessedString processedInput = preprocessAndMap(userInput);
         log.debug("STT 태그 : 정답 전처리 결과 = "+processedAnswer.processed);
-        log.debug("STT 태그 : stt 인식 후보 전처리 결과 = "+processedSttPronounc.processed);
         log.debug("STT 태그 : 사용자 발음 전처리 결과 = "+processedInput.processed);
         // 통과 시 결과 반환
-        if (processedAnswer.processed.equals(processedInput.processed) ||
-                processedSttPronounc.processed.equals(processedInput.processed)) {
+        if (processedAnswer.processed.equals(processedInput.processed)) {
             return new PronunceEvaluateDto (1, processedInput.processed, Collections.emptyList(), Collections.emptyList());
         }
         // 불일치 인덱스 찾기

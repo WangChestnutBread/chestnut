@@ -66,27 +66,11 @@ public class StudyDetailController {
      */
     @PostMapping("/pronunciation/evaluate")
     public ResponseEntity<?> checkPronunciation(@RequestParam("word") String word,
-                                                @RequestParam("sttPronounce") String sttPronounce,
                                                 @RequestParam("audio") MultipartFile audioFile,
                                                 @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
-        log.debug("STT 태그 : 요청 body 내용 "+word+" "+sttPronounce+" "+audioFile.getOriginalFilename());
+        log.debug("STT 태그 : 요청 body 내용 "+word+" "+audioFile.getOriginalFilename());
         log.debug("STT 태그 : audio file resource "+audioFile.getResource());
-        PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, sttPronounce, audioFile);
-        return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
-    }
-
-    //TODO 더미 코드 - 배포시 제거
-    @PostMapping("/pronunciation/evaluate/test/fail")
-    public ResponseEntity<?> checkPronunciationTestFail(@RequestParam("word") String word,
-                                                @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
-        PronunceEvaluateDto evaluation = new PronunceEvaluateDto(0, "그리고 안녕하시오", List.of(1, 2, 8), List.of(1, 2, 7));
-        return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
-    }
-    //TODO 더미 코드 - 배포시 제거
-    @PostMapping("/pronunciation/evaluate/test/success")
-    public ResponseEntity<?> checkPronunciationTestSuccess(@RequestParam("word") String word,
-                                                    @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
-        PronunceEvaluateDto evaluation = new PronunceEvaluateDto(1, "그러나 안녕하세요", List.of(), List.of());
+        PronunceEvaluateDto evaluation = pronounceEvaluateService.pronounceEvaluate(customMemberDetails.getLoginId(), word, audioFile);
         return new ResponseEntity<>(new ResponseDto<>("200", evaluation), HttpStatus.OK);
     }
 }
