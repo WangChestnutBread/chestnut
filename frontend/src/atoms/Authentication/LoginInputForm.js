@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import LoginButton from "./LoginButton";
 import "./Page.css";
 
 function LoginInputForm(props){
@@ -11,7 +10,6 @@ function LoginInputForm(props){
     };
 
     const handleSubmit = (event) =>{
-        alert(`이름: ${name}`);
         event.preventDefault();
     };
 
