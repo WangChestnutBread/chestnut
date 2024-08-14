@@ -8,13 +8,15 @@ function MainPage() {
 
   const setCheckPoint = useAuthStore((state)=>state.setCheckPoint)
   
-  useEffect(() => {
-    baseApi.get(`/study/study-id`,).then((res) => {
-      console.log(res.data.data);
-      setCheckPoint(res.data.data)
-    })
-  },[])
 
+    const study = () => {
+      baseApi.get(`/study/study-id`,).then((res) => {
+        console.log(res.data.data);
+        setCheckPoint(res.data.data)
+      
+    })}
+  
+ 
 
   const { accessToken, setAccessToken } = useAuthStore((state) => ({
     ...state,
@@ -56,7 +58,7 @@ function MainPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const promiseResult = Promise.all([getProfile(), getAttendance()]);
+        const promiseResult = Promise.all([getProfile(), getAttendance(), study()]);
       } catch (err) {
         console.error(err);
       }
