@@ -13,12 +13,17 @@ import { useState } from "react";
 import baseApi from "../../api/fetchAPI";
 import Ch3SM from "../../organisms/StudyList/Ch3SM";
 import Ch3Notation from './../../organisms/StudyList/Ch3Notaion';
+import Lottie from "lottie-react";
+import Correct from "../../assets/lottie/correct.json";
+import Wrong from "../../assets/lottie/wrong.json"
 
 const Chapter3Detail = () => {
   const params = useParams();
-  const [realData, setRealData] = useState("내발음😎");
+  const [realData, setRealData] = useState("녹음된 발음");
   const [answerData, setAnswerData] = useState([100000]);
   const [show, isShow] = useState(false);
+  const [correct, isCorrect] = useState(false);
+  const [wrong, isWrong] = useState(false)
 
   const moveData = (value) => {
     console.log(value);
@@ -37,9 +42,16 @@ const Chapter3Detail = () => {
           },
         })
         .then((res) => {
-          console.log(res);
-          alert("축하드려요 성공입니다.");
-        });
+          isCorrect(true);
+          setTimeout(() => {
+            isCorrect(false);
+          }, 2000);
+        }).catch((err) => {
+          isWrong(true);
+          setTimeout(() => {
+            isWrong(false)
+          },2000)
+        })
     }
   };
 
@@ -53,7 +65,6 @@ const Chapter3Detail = () => {
           <div className="col-8 mt-2">
             <div className="d-flex">
               <div className="col-4">
-                {/* <Notation word={params} /> */}
                 <Ch3Notation word={params} />
               </div>
               <div className="col-8">
@@ -80,6 +91,33 @@ const Chapter3Detail = () => {
         <div className="row">
           <div className="col-6 mt-2 mb-3"></div>
         </div>
+        <div
+                style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  zIndex: 1000,
+                  width: "800px",
+                  height: "800px",
+                  transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+                  pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+                }}
+              >
+                {correct ? <Lottie animationData={Correct} /> : <></>}
+              </div>
+              <div style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  zIndex: 1000,
+                  width: "800px",
+                  height: "800px",
+                  transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+                  pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+                }}>
+                   {wrong ? <Lottie animationData={Wrong} /> : <></>}
+              </div>
+
         {/* 마이크 */}
       </div>
     </div>
