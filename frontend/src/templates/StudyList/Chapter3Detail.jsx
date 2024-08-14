@@ -16,6 +16,7 @@ import Ch3Notation from './../../organisms/StudyList/Ch3Notaion';
 import Lottie from "lottie-react";
 import Correct from "../../assets/lottie/correct.json";
 import Wrong from "../../assets/lottie/wrong.json"
+import "./ChapterDetail.css"
 
 const Chapter3Detail = () => {
   const params = useParams();
@@ -56,7 +57,7 @@ const Chapter3Detail = () => {
   };
 
   return (
-    <div>
+    <div className="ChapterDetail">
       {/* 헤더 */}
       <NavbarExample showBookMarkButton={true}></NavbarExample>
       {/* 표기, 입모양, 혀모양 */}
