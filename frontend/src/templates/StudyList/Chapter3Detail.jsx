@@ -24,6 +24,7 @@ const Chapter3Detail = () => {
   const [show, isShow] = useState(false);
   const [correct, isCorrect] = useState(false);
   const [wrong, isWrong] = useState(false)
+  
 
   const moveData = (value) => {
     console.log(value);
@@ -58,7 +59,7 @@ const Chapter3Detail = () => {
   return (
     <div>
       {/* 헤더 */}
-      <NavbarExample showBookMarkButton={true}></NavbarExample>
+      <NavbarExample showBookMarkButton={true} studyId={params.studyId}></NavbarExample>
       {/* 표기, 입모양, 혀모양 */}
       <div className="container">
         <div className="row">

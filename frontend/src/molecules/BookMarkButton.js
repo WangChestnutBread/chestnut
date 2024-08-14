@@ -1,9 +1,27 @@
 import { useEffect, useState } from "react";
 import "./BookMarkButton.css"
+import baseApi from "../api/fetchAPI";
+import { useLocation } from "react-router-dom";
 
-function BookMarkButton() {
+function BookMarkButton({studyId}) {
   let [initialMount, setInitialMount] = useState(false);
   let [inVoca, setInVoca] = useState(false);
+
+  const location = useLocation();
+  const addVoca = (studyId) => {
+    baseApi({
+      method: "post",
+      url: "/vocabulary",
+      data: {
+        studyId: studyId,
+      },
+    });
+  };
+
+  useEffect(() => {
+    addVoca(studyId);
+  }, [location.pathname]);
+
   useEffect(() => {
     if (initialMount && inVoca) {
       window.alert("단어장에 추가됐습니다");
