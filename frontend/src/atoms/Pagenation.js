@@ -24,7 +24,7 @@ function Pagenation({
       pageNumbers.push(
         <div
         key={i}
-        className={`NumberBorder ${currentPage === i ? "active" : ""}`}
+        className={`NumberBorder PaginationBtn ${currentPage === i ? "active" : ""}`}
           onClick={() => onPageChange(i)}
         >
           <div className="NumberContent">{i}</div>
@@ -37,31 +37,37 @@ function Pagenation({
 
   return (
     <div className="PagenationPage">
-      <div className="FirstBorder" onClick={() => onPageChange(1)}>
+
+      <div className="PaginationBtn FirstBorder" onClick={() => onPageChange(1)}>
         <div className="PageBorder">
-          <img src="/image/pageimage/pageleft.svg" alt="firstpage" />
+          {"|<"}
         </div>
       </div>
+      
       <div
-        className="NumberBorder"
+        className="PaginationBtn PreNextBtn NumberBorder"
         onClick={() => downPageChange(currentPage)}
         style={{ visibility: "visible" }}
-      >
-        <div className="NumberContent">{"<"}</div>
+      > 
+        <div className="NumberContent"> {"<"} </div>
       </div>
+
       {renderPageNumbers()}
+      
       <div
-        className="NumberBorder"
+        className="PaginationBtn PreNextBtn NumberBorder"
         onClick={() => upPageChange(currentPage)}
         style={{ visibility: "visible" }}
       >
         <div className="NumberContent">{">"}</div>
       </div>
-      <div className="LastBorder" onClick={() => onPageChange(totalPages)}>
+      
+      <div className="PaginationBtn LastBorder" onClick={() => onPageChange(totalPages)}>
         <div className="PageBorder">
-          <img src="/image/pageimage/pageright.svg" alt="lastpage" />
+        {">|"}
         </div>
       </div>
+
     </div>
   );
 }
