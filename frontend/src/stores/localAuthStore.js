@@ -9,7 +9,7 @@ const useLocalAuthStore = create(
       resetHasVisitedBefore: () => set({ hasVisitedBefore: false }),
     }),
     {
-      name: "chestNutLocalStorage", // 로컬 스토리지의 이름
+      name: "chestNutLocalStorage",
       storage: createJSONStorage(() => localStorage),
     }
   )
