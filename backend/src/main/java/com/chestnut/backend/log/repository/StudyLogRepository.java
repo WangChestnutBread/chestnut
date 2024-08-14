@@ -15,7 +15,7 @@ public interface StudyLogRepository extends JpaRepository<StudyLog, Long> {
     @Query("select sl.todayCount from StudyLog sl " +
             "where sl.member.memberId = :memberId and sl.studiedDay = current_date() " +
             "order by sl.studyLogId desc")
-    List<Byte> findRecentLogByMemberId(@Param("memberId") Long memberId, Pageable pageable);
+    List<Integer> findRecentLogByMemberId(@Param("memberId") Long memberId, Pageable pageable);
 
     @Query("select sl.passRecord from StudyLog sl " +
             "where sl.member.memberId = :memberId and sl.study.studyId = :studyId " +

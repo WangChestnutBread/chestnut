@@ -37,8 +37,8 @@ public class StudyLog {
     @Column(columnDefinition = "date default (CURRENT_DATE)", nullable = false)
     private LocalDate studiedDay;
 
-    @Column(columnDefinition = "tinyint", nullable = false)
-    private byte todayCount;
+    @Column(columnDefinition = "int", nullable = false)
+    private int todayCount;
 
     @Column(columnDefinition = "tinyint(1) default 0", nullable = false)
     private boolean isPass;
