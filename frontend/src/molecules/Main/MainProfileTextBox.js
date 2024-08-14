@@ -62,7 +62,9 @@ function MainProfileTextBox({ profile }) {
         <div className="Ranking" onClick={()=>{navigate('/ranking')}}>
           <img src="/image/Ranking.png" height="31px" />
           <Text20 text="내 랭킹" />
-          <Text24 text={profile.ranking} />
+          {
+            profile.ranking === 0 ? <Text24 text="-" /> : <Text24 text={profile.ranking} />
+          }
           <Text24 text="위" />
         </div>
       </div>
