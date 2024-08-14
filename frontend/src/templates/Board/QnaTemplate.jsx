@@ -41,12 +41,12 @@ const QnaPage = () => {
         });
         const data = response.data.data;
 
-        if (isAnnouncement) {
+        if (window.location.pathname.includes('announcement')) {
           setTotalPages(data.announcementListPage.totalPages);
-          setArticles(data.announcementListPage.content || []);
+          setArticles(data.announcementListPage.content);
         } else {
           setTotalPages(data.qnaList.totalPages);
-          setArticles(data.qnaList.content || []);
+          setArticles(data.qnaList.content );
         }
       } catch (error) {
         console.error("데이터를 가져오는 중 오류 발생:", error);

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import PronunciationLeft from "../../molecules/StudyList/PronunciationLeft";
-import PronunciationRight from "../../molecules/StudyList/PronunciationRight";
+import Ch5PronunciationLeft from "../../molecules/StudyList/Ch5PronunciationLeft";
+import Ch5PronunciationRight from "../../molecules/StudyList/Ch5PronunciationRight";
 import baseApi from "../../api/fetchAPI";
 import { useParams } from "react-router-dom";
 
-const Pronunciations = ({saying, realData, location}) => {
+const Ch5Pronunciation = ({saying, realData, location, onCharacterClick}) => {
 
   const params = useParams()
   const [word, setWrod] = useState("")
@@ -23,11 +23,11 @@ const Pronunciations = ({saying, realData, location}) => {
     <div className="">
       <div className="d-flex">
         <div className="">
-          <PronunciationLeft data={"발음"} />
+          <Ch5PronunciationLeft data={"발음"} />
         </div>
         {word ? (
           <div>
-            <PronunciationRight data={word} location={location} />
+            <Ch5PronunciationRight data={word} location={location} onCharacterClick={onCharacterClick} />
           </div>
         ) : (
           <></>
@@ -35,11 +35,11 @@ const Pronunciations = ({saying, realData, location}) => {
       </div>
       <div className="d-flex" style={{ marginTop: 30 }}>
         <div>
-          <PronunciationLeft data={"내 발음"} />
+          <Ch5PronunciationLeft data={"내 발음"} />
         </div>
         {pronounce ? (
           <div>
-            <PronunciationRight data={realData} location={[]}/>
+            <Ch5PronunciationRight data={realData} location={[]} onCharacterClick={onCharacterClick}/>
           </div>
         ) : (
           <></>
@@ -49,4 +49,4 @@ const Pronunciations = ({saying, realData, location}) => {
   );
 };
 
-export default Pronunciations;
+export default Ch5Pronunciation;

@@ -79,8 +79,7 @@ public class ConversationService {
 
         // 사용자 질문 녹음 STT 수행
          String sttResult = clovaSpeechClient.upload(audioFile);
-        //TODO 더미 코드 - 배포시 제거
-//        String sttResult = "반갑습니다."+Math.random();
+
         log.debug("STT 태그 : STT 결과 = "+ sttResult);
 
         // 글자 수가 지정한 토큰 제한을 넘었는지 검사
@@ -99,8 +98,6 @@ public class ConversationService {
         // CHATGPT 전달
          ChatReposeJsonDto chatReposeJsonDto = openAIChatClient.sendMessage(chatHistory);
 
-        //TODO 더미 코드 - 배포시 제거
-//        ChatReposeJsonDto chatReposeJsonDto = new ChatReposeJsonDto("안녕하세요"+Math.random(),18);
         log.debug("대화 태그 : ai 대답 = "+chatReposeJsonDto.getAiMessage());
 
         // AI 대답 DTO로 정리 및 기록
