@@ -65,6 +65,7 @@ function FindPw() {
             if (res.data.code === "200") {
                 setIsChange(true);
                 setAlertContent("비밀번호가 변경되었습니다.")
+                navigate("/member/login");
                 return;
             }
             if (res.data.code === "714") {
@@ -88,10 +89,7 @@ function FindPw() {
 
     const handleCloseAlert = () => {
         setAlertContent(null);
-        if (isChange) {
-            navigate("/member/login");
-        }
-        else {
+        if (!isChange) {
             setPw("");
             setPwCon("");
             setAuth("");
