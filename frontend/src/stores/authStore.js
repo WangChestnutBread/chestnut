@@ -18,6 +18,10 @@ const useAuthStore = create(
       setPronunciation: (pronunciation) => set({ pronunciation }),
       checkPoint: undefined,
       setCheckPoint: (checkPoint) => set({ checkPoint }),
+      
+      hasVisitedBefore: false,
+      setHasVisitedBefore: (value) => set({ hasVisitedBefore: value }),
+      resetHasVisitedBefore: () => set({ hasVisitedBefore: false }),
     }),
     {
       name: "chestNut",
