@@ -5,8 +5,7 @@ import Text24 from "./Text24";
 
 function WelcomeModal({ onClose, handleStartTutorial }) {
   return (
-    <Modal className="WelcomeModal" show onHide={onClose} centered>
-      {/* <Modal.Header closeButton className="WelcomeModalHeader"></Modal.Header> */}
+    <Modal className="WelcomeModal" show onHide={onClose} backdrop="static" centered>
       <Modal.Header className="WelcomeModalHeader"></Modal.Header>
       <Modal.Body className="WelcomeModalBody">
         <img src="./image/Squirrel.png" width="40px" />
