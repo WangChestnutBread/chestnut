@@ -464,7 +464,7 @@ function EditMyInfo(){
                                 </div>
                                 <div>
                                     <LoginIdPwFont title={"이름"} />
-                                    <InspectionForm content={'이름을 입력하세요'} text={nameMessage} value={name} input={inputName} />
+                                    <InspectionForm content={'이름을 입력하세요'} text={nameMessage} value={name} input={inputName}/>
                                 </div>
                                 <div>
                                     <LoginIdPwFont title={"생년월일"} />
@@ -474,7 +474,7 @@ function EditMyInfo(){
                                 </div>
                                 <div>
                                     <LoginIdPwFont title={"아이디"} />
-                                    <InspectionForm content={'ID를 입력하세요'} text={IdMessage} name={'중복인증'} work={createId} value={Id} input={inputId} />
+                                    <InspectionForm content={'ID를 입력하세요'} text={IdMessage} value={Id} input={inputId} disabled={true}/>
                                 </div>
                                 <div>
                                     <LoginIdPwFont title={"이메일"} />
