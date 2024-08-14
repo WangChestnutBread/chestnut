@@ -1,6 +1,7 @@
 package com.chestnut.backend.log.repository;
 
 import com.chestnut.backend.log.entity.StudyLog;
+import com.chestnut.backend.member.entity.Member;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -29,7 +30,11 @@ public interface StudyLogRepository extends JpaRepository<StudyLog, Long> {
     )
     List<StudyLog> findRecentStudyLogByMemberId(@Param("memberId") Long memberId, @Param("chapterId") Byte chapterId);
 
-    //select study_id from study_log where member_id = 1 and chapter_id = 4 group by study_id;
     @Query("select sl.study.studyId from StudyLog sl where sl.member.memberId = :memberId and sl.chapter.chapterId = :chapterId group by sl.study.studyId")
     List<Long> findStudyIdByChapterIdAndMemberId(@Param("memberId") Long memberId, @Param("chapterId") Byte chapterId);
+
+    @Query("select s.word from Study s join "
+        + "(select sl.study.studyId studyId from StudyLog sl where sl.member = :member and sl.studiedDay = :studiedDay group by sl.study.studyId) s2 "
+        + "on s.studyId = s2.studyId")
+    List<String> getStudiedWordAtTheDay(@Param("member")Member member, @Param("studiedDay") LocalDate studiedDay);
 }
