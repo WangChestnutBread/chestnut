@@ -60,7 +60,6 @@ const Chapter5Detail = () => {
   return (
     <div className="ChapterDetail">
       <NavbarExample showBookMarkButton={true} showSentenceButton={true}/>
-      {/* 표기, 카메라 */}
       <div className="container">
         <div className="row">
           <div className="col-8">
@@ -86,7 +85,7 @@ const Chapter5Detail = () => {
               />
             </div>
             <div className="mt-2">
-              <RecordData func={moveData} func2={answer} />
+              
               <div
                 style={{
                   position: "fixed",
@@ -120,7 +119,7 @@ const Chapter5Detail = () => {
           </div>
         </div>
         {/* 소리나는 방법, 카메라 */}
-
+        <RecordData func={moveData} func2={answer} />
         {/* 마이크 */}
       </div>
     </div>
