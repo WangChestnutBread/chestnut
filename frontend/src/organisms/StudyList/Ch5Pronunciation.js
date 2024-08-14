@@ -32,6 +32,7 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick}) => {
           display:"flex",
           width:"100%",
           height:"50%",
+          backgroundColor:"#DCB78F"
       }}>
         {/* 1행 1열 */}
         <div 
@@ -58,7 +59,8 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick}) => {
           display:"flex",
           width:"100%",
           height:"50%",
-          marginTop:"2%"
+          marginTop:"2%",
+          backgroundColor:"#DCB78F"
       }}>
         {/* 2행 1열 */}
         <div 
