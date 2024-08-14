@@ -10,6 +10,7 @@ const Ai = ({ userId }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const [wavBlob, setWavBlob] = useState(null);
+  const [showStartMessage, setShowStartMessage] = useState(true); // 대화 시작 메시지 상태
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const ffmpeg = new FFmpeg();
@@ -81,6 +82,7 @@ const Ai = ({ userId }) => {
 
         mediaRecorderRef.current.start();
         setIsRecording(true);
+        setShowStartMessage(false); // 녹음 시작 시 "대화를 시작하세요" 메시지를 숨깁니다.
       } catch (error) {
         console.error("Error accessing microphone:", error);
       }
@@ -155,6 +157,14 @@ const Ai = ({ userId }) => {
             </span>
           </div>
         </div>
+
+        {/* 대화 시작 메시지 */}
+        {showStartMessage && (
+          <div className="text-center mt-3" style={{ fontSize: "2rem", color: "#6B3906" }}>
+            녹음 버튼을 눌러서 시작해주세요.
+          </div>
+          
+        )}
 
         {/* 메시지 표시 */}
         <div
