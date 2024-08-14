@@ -12,6 +12,7 @@ import BirthDay from "../../atoms/Authentication/MemberBirth/BirthDay";
 import Button from "../../molecules/Authentication/Button";
 import baseApi from "../../api/fetchAPI";
 import BirthCalendar from "../../atoms/Authentication/MemberBirth/BirthCalendar";
+import CustomAlert from "../../atoms/alert";
 
 function SignUPPage() {
     const navigate = useNavigate();
@@ -47,9 +48,10 @@ function SignUPPage() {
     const [isNickname, setIsNickname] = useState(false);
     const [isEmailValid, setIsEmailValid] = useState(false);
 
-    const url = "https://i11d107.p.ssafy.io/chestnutApi";
-    // const url = "http://localhost:8081"
+    const [isSignup, setIsSignup] = useState("");
+    const [alertContent, setAlertContent] = useState("");
 
+    const url = "https://i11d107.p.ssafy.io/chestnutApi";
 
     //회원가입 버튼을 눌렀을 때 요청내어줄 회원 정보 전송하는 AXIOS함수
     const succes = () => {
@@ -62,30 +64,47 @@ function SignUPPage() {
             nickname: nickname,
             birthday: selectedDate,
         })
-            .then(response => {
-                if (response.data.code === "200") {
-                    alert("회원가입에 성공했습니다.");
-                    navigate("/member/login");
-                } else if (response.data.code === "603") {
-                    alert("올바르지 않은 비밀번호 형식입니다.");
-                } else if (response.data.code === "604") {
-                    alert("비밀번호가 일치하지 않습니다.");
-                } else if (response.data.code === "707") {
-                    alert("MySQL CRUD 실패");
-                } else if (response.data.code === "299") {
-                    alert("알 수 없는 오류로 인해 회원가입에 실패했습니다.");
-                } else if (response.data.code === "611") {
-                    alert("중복된 아이디입니다.")
-                } else if (response.data.code === "614") {
-                    alert("사용자 입력 아이디와 중복 검사 한 아이디가 다릅니다.")
-                }
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        .then(res => {
+            if (res.data.code === "200") {
+                isSignup(true);
+                setAlertContent("회원가입에 성공했습니다.");
+            }
+            if (res.data.code === "611" || res.data.code === "614") {
+                setAlertContent("아이디를 확인하세요.");
+                setId("");
+            } else if (res.data.code === "612" || res.data.code === "615") {
+                setAlertContent("닉네임을 확인하세요.");
+                setnickname("");
+            } else if (res.data.code === "613" || res.data.code === "616") {
+                setAlertContent("이메일을 확인하세요.");
+                setEmail("");
+                setAuth("");
+            } else if (res.data.code === "609") {
+                setAlertContent("이메일을 인증하세요.");
+                setEmail("");
+                setAuth("");
+            } else if (res.data.code === "604") {
+                setAlertContent("비밀번호를 확인하세요.");
+                setPw("");
+                setPwCon("");
+            } else {
+                setAlertContent("알 수 없는 오류가 발생하였습니다.");
+            }
+            setIsSignup(false);
+            console.log(res);
+        }).catch(error => {
+            console.log(error);
+        });
 
     };
+
+    const handleCloseAlert = () => {
+        setAlertContent(null);
+        if (isSignup) navigate("/member/login");
+        else {
+
+        }
+    }
 
     //생년월일
     const handleDateClick = (date) => {
@@ -175,7 +194,7 @@ function SignUPPage() {
             setPwConMessage("비밀번호가 일치하지 않습니다.");
             setIsPwCon(false);
         } else {
-            setPwConMessage("");
+            setPwConMessage("비밀번호가 일치합니다.");
             setIsPwCon(true);
 
         }
@@ -212,20 +231,20 @@ function SignUPPage() {
                 .then(response => {
                     console.log("이메일 발송")
                     if (response.data.code === "200") {
-                        alert("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
+                        setAlertContent("인증 이메일을 발송했습니다.");
                         setIsEmail(true);
                     }
                     if (response.data.code === "601") {
-                        alert("이미 존재하는 이메일입니다.");
+                        EmailMessage("이미 존재하는 이메일입니다.");
                         setIsEmail(false);
                     } else if (response.data.code === "603") {
-                        alert("올바르지 않은 이메일 양식입니다.");
+                        EmailMessage("올바르지 않은 이메일 양식입니다.");
                         setIsEmail(false);
                     } else if (response.data.code === "606") {
-                        alert("인증번호 보내는 데 실패했습니다.");
+                        EmailMessage("인증번호 보내는 데 실패했습니다.");
                         setIsEmail(false);
                     } else if (response.data.code === "299") {
-                        alert("알 수 없는 오류가 발생했습니다.");
+                        EmailMessage("알 수 없는 오류가 발생했습니다.");
                         setIsEmail(false);
                     }
                     console.log(response);
@@ -299,7 +318,6 @@ function SignUPPage() {
         setIsEmailValid(isValid);
         if (!inputemail) {
             setEmailMessage("");
-
         } else if (!isValid) {
             setEmailMessage("유효한 이메일 형식이 아닙니다.");
         } else {
@@ -370,6 +388,10 @@ function SignUPPage() {
                     </div>
                 </div>
             </div>
+            {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
         </div>
     );
 }
