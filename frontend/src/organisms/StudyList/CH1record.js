@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./Record.css";
+import "./Ch1record.css";
+import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
-import baseApi from "../../api/fetchAPI";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuthStore from "../../stores/authStore";
+import baseApi from "../../api/fetchAPI";
 
-const Record = ({ func, func2 }) => {
+const CH1record = ({ func, func2 }) => {
   const [isRecording, setIsRecording] = useState(false);
+  const [showIcons, setShowIcons] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const [wavBlob, setWavBlob] = useState(null);
   const mediaRecorderRef = useRef(null);
@@ -46,12 +48,36 @@ const Record = ({ func, func2 }) => {
       });
     } else if (nextId && studyId > 39 && studyId < 439) {
       navigate(`/study/detail2/2/${nextId}`);
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: nextId,
+      //     isPass: 1,
+      //   },
+      // });
     } else if (nextId && studyId > 438 && studyId < 446) {
       navigate(`/study/detail3/3/${nextId}`);
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: nextId,
+      //     isPass: 1,
+      //   },
+      // });
     } else if (nextId && studyId > 445 && studyId < 1381) {
       navigate(`/study/detail5/5/${nextId}`);
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: nextId,
+      //     isPass: 1,
+      //   },
+      // });
     } else if (studyId < 2368) {
       navigate(`/study/detail6/6/${nextId}`);
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: nextId,
+      //     isPass: 1,
+      //   },
+      // });
     } else {
       alert("다음 학습 페이지가 없습니다.");
     }
@@ -72,6 +98,12 @@ const Record = ({ func, func2 }) => {
       });
     } else if (prevId && studyId < 441) {
       navigate(`/study/detail2/2/${prevId}`);
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: prevId,
+      //     isPass: 1,
+      //   },
+      // });
     } else if (prevId && studyId < 448) {
       navigate(`/study/detail3/3/${prevId}`);
       baseApi.get(`/log/study`, {
@@ -82,8 +114,20 @@ const Record = ({ func, func2 }) => {
       });
     } else if (prevId && studyId < 1383) {
       navigate(`/study/detail5/5/${prevId}`);
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: prevId,
+      //     isPass: 1,
+      //   },
+      // });
     } else if (prevId && studyId < 2370) {
       navigate(`/study/detail6/6/${prevId}`);
+      // baseApi.get(`/log/study`, {
+      //   params: {
+      //     studyId: prevId,
+      //     isPass: 1,
+      //   },
+      // });
     } else {
       alert("첫 학습페이지 입니다.");
     }
@@ -93,12 +137,14 @@ const Record = ({ func, func2 }) => {
   const handleToggle = async () => {
     if (isRecording) {
       baseApi.get(`/study/detail/${studyId}/word`).then((res) => {
+        console.log(res.data.data.word);
         setData(res.data.data.word);
       });
 
       // 녹음 중지
       mediaRecorderRef.current.stop();
       setIsRecording(false);
+      setShowIcons(true); // O/X 버튼 표시
     } else {
       // 녹음 시작
       try {
@@ -116,7 +162,7 @@ const Record = ({ func, func2 }) => {
           const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
           setAudioBlob(blob);
           audioChunksRef.current = [];
-          convertToWav(blob); // 녹음이 완료되면 WAV로 변환 및 업로드
+          convertToWav(blob); // 녹음이 완료되면 WAV로 변환
         };
 
         mediaRecorderRef.current.start();
@@ -136,7 +182,6 @@ const Record = ({ func, func2 }) => {
       const wavData = await ffmpeg.readFile("output.wav");
       const wavBlob = new Blob([wavData.buffer], { type: "audio/wav" });
       setWavBlob(wavBlob);
-      handleUpload(wavBlob); // 변환 후 즉시 업로드
     } catch (error) {
       console.error("Error converting to WAV:", error);
     }
@@ -159,12 +204,14 @@ const Record = ({ func, func2 }) => {
   };
 
   // 데이터 서버 전송
-  const handleUpload = async (wavBlob) => {
+  const handleUpload = async () => {
     if (!wavBlob) return;
     console.log(check);
     const formData = new FormData();
     formData.append("word", check);
     formData.append("audio", wavBlob, "audio.wav");
+    console.log(wavBlob);
+    console.log(formData);
     checkWavFile(wavBlob);
     try {
       baseApi
@@ -175,7 +222,9 @@ const Record = ({ func, func2 }) => {
         })
         .then((res) => {
           console.log(res);
+          // console.log(res.data.data.answerMismatchIndices);
           setPronunciation(res.data.data.pronunciation);
+          // console.log(res.data.data.pronunciation);
           func(res.data.data.pronunciation);
           func2(res.data.data.answerMismatchIndices);
         })
@@ -188,29 +237,39 @@ const Record = ({ func, func2 }) => {
     }
 
     // 초기화
+    setShowIcons(false);
+    setAudioBlob(null);
+    setWavBlob(null);
+  };
+
+  // 녹음 초기화
+  const handleCancel = () => {
+    setShowIcons(false);
     setAudioBlob(null);
     setWavBlob(null);
   };
 
   return (
-    <div className="d-flex row justify-content-center">
-      <div className="record">
+    <div className="d-flex row">
+      
+      <div className="record justify-content-between ms-5">
         <img src="/image/left.png" alt="left" onClick={downPage} />
-        <div>
+        {/* <div>
           <img
             src={isRecording ? "/image/stop.png" : "/image/record.png"}
             alt={isRecording ? "stop" : "record"}
             className={isRecording ? "stop" : "continue"}
             onClick={handleToggle}
           />
-        </div>
+        </div> */}
         <img src="/image/right.png" alt="right" onClick={upPage} />
       </div>
 
-      {wavBlob && (
+      {wavBlob && !showIcons && (
         <div className="audio-container">
           <h3>Recorded Audio</h3>
           <audio controls src={URL.createObjectURL(wavBlob)}></audio>
+          {/* 파일 다운로드 링크 */}
           <a href={URL.createObjectURL(wavBlob)} download="audio.wav">
             Download Audio
           </a>
@@ -220,4 +279,4 @@ const Record = ({ func, func2 }) => {
   );
 };
 
-export default Record;
+export default CH1record;

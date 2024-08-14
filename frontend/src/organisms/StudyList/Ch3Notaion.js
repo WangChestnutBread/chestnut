@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import baseApi from "../../api/fetchAPI";
-import "./NotationChapter1.css";
+import "./Ch3Notation.css";
 
 
 
-const NotationChapter1 = ({word}) => {
+
+const Ch3Notation = ({word}) => {
   // console.log(word.word);
   
   const [data, setData] = useState()
@@ -19,7 +20,7 @@ const NotationChapter1 = ({word}) => {
   console.log();
 
   return (
-    <div className="box rounded">
+    <div className="ch3box rounded">
       {parseInt(word.chapterId) === 1 ? <div className="abc">표기[발음]</div> : <div className="abc">표기</div>}
       <div className="data1">{data}</div>
       {parseInt(word.chapterId) === 1 ? <div className="data2">{`[${data}]`}</div>: <></>}
@@ -27,4 +28,4 @@ const NotationChapter1 = ({word}) => {
   );
 };
 
-export default NotationChapter1;
+export default Ch3Notation;

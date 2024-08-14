@@ -2,6 +2,7 @@ package com.chestnut.backend.study.util;
 
 import com.chestnut.backend.study.dto.PronunceEvaluateDto;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +13,7 @@ import java.util.List;
  * 사용자 입력과 정답 문자열을 비교하여
  * 불일치 인덱스를 찾고, 평가 결과를 담은 DTO를 생성합니다.
  */
+@Slf4j
 public final class StringComparator {
 
     // 생성자를 private으로 설정하여 인스턴스 생성을 방지
@@ -29,20 +31,21 @@ public final class StringComparator {
         ProcessedString processedAnswer = preprocessAndMap(answer);
         // 사용자 입력 전처리
         ProcessedString processedInput = preprocessAndMap(userInput);
-
+        log.debug("STT 태그 : 정답 전처리 결과 = "+processedAnswer.processed);
+        log.debug("STT 태그 : 사용자 발음 전처리 결과 = "+processedInput.processed);
+        // 통과 시 결과 반환
+        if (processedAnswer.processed.equals(processedInput.processed)) {
+            return new PronunceEvaluateDto (1, processedInput.processed, Collections.emptyList(), Collections.emptyList());
+        }
         // 불일치 인덱스 찾기
         List<Integer> mismatchIndices = findMismatchIndices(processedAnswer.processed, processedInput.processed);
-        // 통과 시 결과 반환
-        if (mismatchIndices.isEmpty()) {
-            return new PronunceEvaluateDto (1, userInput, Collections.emptyList(), Collections.emptyList());
-        }
 
         // 정답 불일치 인덱스 매핑
         List<Integer> answerMismatchIndices = mapIndices(mismatchIndices, processedAnswer.mapping);
         // 사용자 입력 불일치 인덱스 매핑
         List<Integer> inputMismatchIndices = mapIndices(mismatchIndices, processedInput.mapping);
         // 불일치 시 결과 반환
-        return new PronunceEvaluateDto (0, userInput, answerMismatchIndices, inputMismatchIndices);
+        return new PronunceEvaluateDto (0, processedInput.processed, answerMismatchIndices, inputMismatchIndices);
     }
 
     /**

@@ -15,7 +15,6 @@
   font-size: 32px;
   width: 100px;
   color: #939393;
-  
 }
 
 .announcementbtn{
@@ -26,36 +25,38 @@ justify-content: center;
 align-items: center;
 padding: 10px;
 gap: 10px;
-
 width: 174px;
 height: 45px;
 left: 0px;
 top: 0px;
-
-background: #6B3906;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
 
 }
 
+.announcementbtn:hover{
+  background: #6B3906;
+}
+
 .qnabtn{
   text-decoration: none;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px;
-gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  width: 174px;
+  height: 45px;
+  left: 204px;
+  top: 0px;
+  /* background: #DCB78F; */
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
 
-width: 174px;
-height: 45px;
-left: 204px;
-top: 0px;
-
-background: #DCB78F;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 10px;
-
+.qnabtn :hover{
+  background : #6B3906;
 }
 
 .completed_answer{
@@ -65,12 +66,8 @@ justify-content: center;
 align-items: center;
 padding: 10px;
 gap: 10px;
-
-
 width: 92px;
 height: 45px;
-
-
 background: #6B3906;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
@@ -113,13 +110,21 @@ gap: 10px;
 width: 80px;
 height: 45px;
 color: white;
-background: #6B3906;
+background: #DCB78F;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
+}
+
+.writebtn:hover{
+  background: #6B3906;
+  transition: 0.5s;
 }
 
 .detail:hover {
   background-color: #DCB78F;
   cursor: pointer;
   transition: 0.5s;
+}
+td {
+  border-bottom: 1px solid #444444;
 }

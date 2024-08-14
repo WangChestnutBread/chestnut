@@ -26,17 +26,18 @@ function VocabularyListTemplate() {
   };
 
   const getVocabulary = (chapter, page) => {
-    console.log(chapter, page);
+    // console.log(chapter, page);
     baseApi({
       method: "get",
       url: "/vocabulary",
       params: {
         chapter: `${chapter}`,
-        page: `${page}`,
+        page: `${page-1}`,
         size: "5",
       },
     })
       .then((res) => {
+        console.log(res.data.data);
         setCurrentVocaItem(res.data.data);
       })
       .catch((err) => {

@@ -1,8 +1,8 @@
 /* NotationChapter1.css */
-.box {
+.ch2box {
   background-color: #0C4518;
   position: relative;
-  height: 300px;
+  height: 263px;
   display: flex;
   justify-content: center; 
   align-items: center; 

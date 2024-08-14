@@ -109,10 +109,10 @@ const QNAWritePage = () => {
 
         {/* // 취소 등록 버튼 */}
         <div className="d-flex justify-content-between">
-          <button className="nobtn fs-3" onClick={handleQnaClick}>
+          <button className="nobtn fs-3" onClick={handleQnaClick} style={{border:"none"}}>
             취소
           </button>
-          <button className="yesbtn fs-3" onClick={handleDetailClick2}>
+          <button className="yesbtn fs-3" onClick={handleDetailClick2} style={{border:"none"}}>
             등록
           </button>
         </div>

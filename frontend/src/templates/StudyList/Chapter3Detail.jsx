@@ -12,6 +12,8 @@ import Pronunciation from "../../organisms/StudyList/Pronunciations";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import baseApi from "../../api/fetchAPI";
+import Ch3SM from "../../organisms/StudyList/Ch3SM";
+import Ch3Notation from './../../organisms/StudyList/Ch3Notaion';
 
 const Chapter3Detail = () => {
   const params = useParams();
@@ -37,7 +39,7 @@ const Chapter3Detail = () => {
         })
         .then((res) => {
           console.log(res);
-          alert('축하드려요 성공입니다.')
+          alert("축하드려요 성공입니다.");
         });
     }
   };
@@ -56,30 +58,37 @@ const Chapter3Detail = () => {
       {/* 표기, 입모양, 혀모양 */}
       <div className="container">
         <div className="row">
-          <div className="col-4 mt-2">
-            <Notation word={params} />
-          </div>
           <div className="col-8 mt-2">
-            <SoundMethod hangeul={params} />
+            <div className="d-flex">
+              <div className="col-4">
+                {/* <Notation word={params} /> */}
+                <Ch3Notation word={params} />
+              </div>
+              <div className="col-8">
+                <CameraOrganism />
+              </div>
+            </div>
+
+            <div className="mt-2 justify-content-center">
+              <Pronunciation
+                saying={params}
+                realData={realData}
+                location={answerData}
+              />
+            </div>
+            <div className="mt-2">
+              <RecordData func={moveData} func2={answer} />
+            </div>
+          </div>
+          <div className="col-4 mt-2">
+            <Ch3SM hangeul={params} />
           </div>
         </div>
         {/* 소리나는 방법, 카메라 */}
         <div className="row">
-          <div className="col-6 mt-2">
-            <Pronunciation
-              saying={params}
-              realData={realData}
-              location={answerData}
-            />
-          </div>
-          <div className="col-6 mt-2 mb-3">
-            <CameraOrganism />
-          </div>
+          <div className="col-6 mt-2 mb-3"></div>
         </div>
         {/* 마이크 */}
-        <div className="mt-5">
-        <RecordData func={moveData} func2={answer} />
-        </div>
       </div>
     </div>
   );

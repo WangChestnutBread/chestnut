@@ -35,7 +35,7 @@ const QnaPage = () => {
         const endpoint = isAnnouncement ? "/board/announcement" : "/board/qna";
         const response = await baseApi.get(endpoint, {
           params: {
-            page: `${currentPage - 1}`,
+            page: `${currentPage - 1 }`,
             size: 10,
           },
         });
@@ -43,10 +43,10 @@ const QnaPage = () => {
 
         if (isAnnouncement) {
           setTotalPages(data.announcementListPage.totalPages);
-          setArticles(data.announcementListPage.content || []);
+          setArticles(data.announcementListPage.content);
         } else {
           setTotalPages(data.qnaList.totalPages);
-          setArticles(data.qnaList.content);
+          setArticles(data.qnaList.content );
         }
       } catch (error) {
         console.error("데이터를 가져오는 중 오류 발생:", error);
@@ -135,6 +135,7 @@ const QnaPage = () => {
                 style={{
                   backgroundColor: isAnnouncement ? "#6B3906" : "#DCB78F",
                   color: isAnnouncement ? "white" : "black",
+                  border: "none",
                 }}
               >
                 공지사항
@@ -150,6 +151,7 @@ const QnaPage = () => {
                 style={{
                   backgroundColor: !isAnnouncement ? "#6B3906" : "#DCB78F",
                   color: !isAnnouncement ? "white" : "black",
+                  border: "none",
                 }}
               >
                 Q & A
@@ -157,7 +159,11 @@ const QnaPage = () => {
             </NavLink>
           </div>
 
-          <button className="writebtn" onClick={handleWriteClick}>
+          <button
+            className="writebtn"
+            onClick={handleWriteClick}
+            style={{ border: "none" }}
+          >
             글쓰기
           </button>
         </div>
@@ -172,13 +178,15 @@ const QnaPage = () => {
           />
         )}
         {/* 페이지네이션 */}
-        <Pagenation
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={onPageChange}
-          upPageChange={upPageChange}
-          downPageChange={downPageChange}
-        />
+        <div className="mt-5">
+          <Pagenation
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={onPageChange}
+            upPageChange={upPageChange}
+            downPageChange={downPageChange}
+          />
+        </div>
       </div>
     </div>
   );
@@ -230,20 +238,23 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
                   handleDetailClick(isAnnouncement ? announceId : qnaId)
                 }
               >
-                <span>{title}</span> <br /> <br />
-                <span>{nickname || '운영자'}</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                {isAnnouncement ? (
-                  <span>{`${updatedAt?.slice(0, 1)}-${updatedAt?.slice(
-                    1,
-                    2
-                  )}-${updatedAt?.slice(2, 3)}`}</span>
-                ) : (
-                  <span>{`${createdAt?.slice(0, 1)}-${createdAt?.slice(
-                    1,
-                    2
-                  )}-${createdAt?.slice(2, 3)}`}</span>
-                )}
+                <span style={{ fontSize: "20px" }}>{title}</span> <br /> <br />
+                <div className="text-end">
+                  <span>{nickname || "운영자"}</span>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                  {isAnnouncement ? (
+                    <span>{`${updatedAt?.slice(0, 1)}-${updatedAt?.slice(
+                      1,
+                      2
+                    )}-${updatedAt?.slice(2, 3)}`}</span>
+                  ) : (
+                    <span>{`${createdAt?.slice(0, 1)}-${createdAt?.slice(
+                      1,
+                      2
+                    )}-${createdAt?.slice(2, 3)}`}</span>
+                  )}
+                </div>
               </td>
               <td className="col-2 d-flex align-items-center justify-content-center">
                 {isAnnouncement ? (
@@ -261,6 +272,7 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
                         navigate(`/board/qna/manager/${qnaId}`);
                       }
                     }}
+                    style={{border:"none"}}
                   >
                     {isAnswer
                       ? "답변완료"
