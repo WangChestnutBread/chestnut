@@ -3,7 +3,11 @@ import Text24 from "../../atoms/Text24";
 
 const Ch5PronunciationLeft = ({ data }) => {
   return (
-    <div className="left d-flex justify-content-center align-items-center rounded-start">
+    <div 
+      className="left d-flex justify-content-center align-items-center rounded-start" 
+      style={{
+        height:"100%",
+    }}>
       <Text24 text={data} />
     </div>
   );

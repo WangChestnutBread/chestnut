@@ -56,75 +56,140 @@ const Chapter6Detail = () => {
 
   return (
     <div>
-
-
       <NavbarExample showBookMarkButton={true}/>
-      {/* 표기, 카메라 */}
+
+    
+      {/* 행과 열로 나눔. Style 위주로 함. 
+      marginTop으로 행 사이 margin을 주고
+      1행 사이에 marginLeft와 marginRight로 열 간 간격을 줌*/}
 
       <div className="container">
-        <div className="row">
-          <div className="col-8 mt-2">
-            <div className="d-flex">
-              <div className="col-4">
-                {/* <Notation word={params} /> */}
-                <Ch3Notation word={params} />
-              </div>
-              <div className="col-8">
-                <CameraOrganism />
-              </div>
-            </div>
+        {/* 표기, 카메라 */}
 
-            <div className="mt-2 justify-content-center">
-              <Ch5Pronunciation
-                saying={params}
-                realData={realData}
-                location={answerData}
-                onCharacterClick={setSelectedChar}
-              />
-            </div>
-            <div className="mt-2">
-              <RecordData func={moveData} func2={answer} />
-            </div>
-          </div>
-          <div className="col-4 mt-2">
-            <Ch5SM hangeul={params} selectedChar={selectedChar} />
-          </div>
-        </div>
-        {/* 소리나는 방법, 카메라 */}
-        <div className="row">
-          <div className="col-6 mt-2 mb-3"></div>
-        </div>
-        <div
+        {/* 1행 */}
+        <div 
           style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            zIndex: 1000,
-            width: "800px",
-            height: "800px",
-            transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
-            pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
-          }}
-        >
-          {correct ? <Lottie animationData={Correct} /> : <></>}
+            display:"flex",
+            justifyContent:"space-evenly",
+            marginTop:"25px",
+        }}>
+          {/* 1행 1열 */}
+          <div 
+            style={{
+              maxWidth:"30%",
+          }}>
+            {/* <Notation word={params} /> */}
+            <Ch3Notation word={params} />
+          </div>
+          {/* 1행 2열: 소리나는 방법, 카메라 */}
+          <div 
+            style={{
+              maxWidth:"40%",
+              marginLeft:"20px",              
+          }}>
+            <CameraOrganism />
+          </div>
+          {/* 1행 3열: 발음과 내 발음 */}
+          <div 
+            style={{
+              width:"30%",
+              marginLeft:"20px", 
+          }}>
+            <Ch5Pronunciation
+              saying={params}
+              realData={realData}
+              location={answerData}
+              onCharacterClick={setSelectedChar}
+            />
+          </div>
         </div>
-        <div
+        
+        {/* 2행 */}
+        <div 
           style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            zIndex: 1000,
-            width: "800px",
-            height: "800px",
-            transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
-            pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
-          }}
-        >
-          {wrong ? <Lottie animationData={Wrong} /> : <></>}
+            maxHeight:"30%",
+            marginTop:"25px",
+        }}>
+          <Ch5SM hangeul={params} selectedChar={selectedChar} />
         </div>
-        {/* 마이크 */}
+        {/* 3행: 네비게이션 바 */}
+        <div 
+          style={{
+            marginTop:"25px",
+        }}>
+        <RecordData func={moveData} func2={answer} />
+        </div>
+
       </div>
     </div>
+
+
+    // <div>
+
+
+
+
+    //   <div className="container">
+    //     <div className="row">
+    //       <div className="col-8 mt-2">
+    //         <div className="d-flex">
+    //           <div className="col-3">
+
+    //           </div>
+    //           <div className="col-6">
+    
+    //           </div>
+    //           <div className="col-3">
+
+    //           </div>
+    //         </div>
+
+    //         <div className="mt-2 justify-content-center">
+              
+    //         </div>
+    //         <div className="mt-2">
+
+    //         </div>
+    //       </div>
+    //       <div className="col-4 mt-2">
+            
+    //       </div>
+    //     </div>
+        
+    //     <div className="row">
+    //       <div className="col-6 mt-2 mb-3"></div>
+    //     </div>
+    //     <div
+    //       style={{
+    //         position: "fixed",
+    //         top: "50%",
+    //         left: "50%",
+    //         zIndex: 1000,
+    //         width: "800px",
+    //         height: "800px",
+    //         transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+    //         pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+    //       }}
+    //     >
+    //       {correct ? <Lottie animationData={Correct} /> : <></>}
+    //     </div>
+    //     <div
+    //       style={{
+    //         position: "fixed",
+    //         top: "50%",
+    //         left: "50%",
+    //         zIndex: 1000,
+    //         width: "800px",
+    //         height: "800px",
+    //         transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+    //         pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+    //       }}
+    //     >
+    //       {wrong ? <Lottie animationData={Wrong} /> : <></>}
+    //     </div>
+    //     {/* 마이크 */}
+    //   </div>
+    // </div>
   );
 };
 export default Chapter6Detail;

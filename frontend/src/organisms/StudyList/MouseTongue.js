@@ -18,11 +18,11 @@ const MouseTongue = ({params}) => {
 
   return (
     <div className="d-flex m-t-box">
-      <div className="face-box rounded-3 shadow m-2">
+      <div className="face-box flex-fill rounded-3 shadow m-2 ms-0 me-3">
         {/* 입모양 영역 */}
         <Mouse mouthData={mouthData} />
       </div>
-      <div className="face-box rounded-3 shadow m-2">
+      <div className="face-box flex-fill rounded-3 shadow m-2 me-0">
         {/* 혀모양 영역 */}
         <Tongue tongueData={tongueData} />
       </div>

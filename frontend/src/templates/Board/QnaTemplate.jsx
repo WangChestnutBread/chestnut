@@ -6,6 +6,8 @@ import "./QnaTemplate.css";
 import NavbarExample from "../NavbarExample";
 import Pagenation from "../../atoms/Pagenation";
 import baseApi from "../../api/fetchAPI";
+import useAuthStore from "../../stores/authStore";
+
 
 const QnaPage = () => {
   const params = useParams();
@@ -15,6 +17,8 @@ const QnaPage = () => {
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [currentPage, setCurrentPage] = useState(Number(params.id));
   const [totalPages, setTotalPages] = useState(5);
+
+  const manager = useAuthStore((state) => state.manager)
 
   useEffect(() => {
     // 현재 URL 경로를 기반으로 isAnnouncement의 초기 값을 설정
@@ -39,6 +43,7 @@ const QnaPage = () => {
           },
         });
         const data = response.data.data;
+        console.log(data);
 
         if (window.location.pathname.includes('announcement')) {
           setTotalPages(data.announcementListPage.totalPages);
@@ -100,7 +105,7 @@ const QnaPage = () => {
       {/* 헤더 */}
       <NavbarExample/>
       {/* 로고 */}
-      <div className="container text-start justify-center">
+      <div className="container text-start justify-center mt-5">
         <div className="logo-container">
           <div className="position-relative">
             <img
@@ -151,13 +156,13 @@ const QnaPage = () => {
             </NavLink>
           </div>
 
-          <button
+          { !isAnnouncement || manager ?  <button
             className="writebtn"
             onClick={handleWriteClick}
             style={{ border: "none" }}
           >
             글쓰기
-          </button>
+          </button> : <></>}
         </div>
 
         {/* 공지사항 목록 */}
@@ -167,10 +172,11 @@ const QnaPage = () => {
           <ArticleList
             isAnnouncement={isAnnouncement}
             articleArray={articles}
+            manager={manager}
           />
         )}
         {/* 페이지네이션 */}
-        <div className="mt-5">
+        <div className="mt-5 mb-5">
           <Pagenation
             currentPage={currentPage}
             totalPages={totalPages}
@@ -186,7 +192,7 @@ const QnaPage = () => {
 
 export default QnaPage;
 
-const ArticleList = ({ isAnnouncement, articleArray }) => {
+const ArticleList = ({ isAnnouncement, articleArray, manager }) => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState("운영자");
 
@@ -198,86 +204,97 @@ const ArticleList = ({ isAnnouncement, articleArray }) => {
     }
   };
 
-  const list = ["랭킹", "오픈채팅", "학습", "게시판", "공지사항"];
-  console.log(articleArray);
+  const list = ["회원정보", "학습", "오픈채팅", "대화연습", "보상", "기타"];
+  console.log(articleArray.nickname);
 
   return (
-    <table className="table mt-3">
-      <tbody className="table-group-divider">
-        {articleArray.map(
-          ({
-            announceId,
-            qnaId,
-            title,
-            name,
-            nickname,
-            updatedAt,
-            createdAt,
-            hit,
-            announceCategoryId,
-            qnaCategoryId,
-            isAnswer,
-          }) => (
-            <tr key={isAnnouncement ? announceId : qnaId} className="row">
-              <td className="col-2 d-flex align-items-center justify-content-center">
-                {isAnnouncement
-                  ? list[announceCategoryId - 1]
-                  : list[qnaCategoryId - 1]}
-              </td>
-              <td
-                className="col-8 detail"
-                onClick={() =>
-                  handleDetailClick(isAnnouncement ? announceId : qnaId)
-                }
-              >
-                <span style={{ fontSize: "20px" }}>{title}</span> <br /> <br />
-                <div className="text-end">
-                  <span>{nickname || "운영자"}</span>
-                  <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-
-                  {isAnnouncement ? (
-                    <span>{`${updatedAt?.slice(0, 1)}-${updatedAt?.slice(
-                      1,
-                      2
-                    )}-${updatedAt?.slice(2, 3)}`}</span>
-                  ) : (
-                    <span>{`${createdAt?.slice(0, 1)}-${createdAt?.slice(
-                      1,
-                      2
-                    )}-${createdAt?.slice(2, 3)}`}</span>
-                  )}
-                </div>
-              </td>
-              <td className="col-2 d-flex align-items-center justify-content-center">
-                {isAnnouncement ? (
-                  <>
-                    <div>
-                      <img src="/image/eye.png" alt="눈" className="m-2" />
-                    </div>
-                    <div>{Math.floor(hit / 4)}</div>
-                  </>
-                ) : (
-                  <button
-                    className={isAnswer ? "completed_answer" : "waiting_answer"}
-                    onClick={() => {
-                      if (isAuthenticated === "운영자") {
-                        navigate(`/board/qna/manager/${qnaId}`);
-                      }
-                    }}
-                    style={{border:"none"}}
+    <>
+      {articleArray.length > 0 ? (
+        <table className="table mt-3">
+          <tbody className="table-group-divider">
+            {articleArray.map(
+              ({
+                announceId,
+                qnaId,
+                title,
+                name,
+                nickname,
+                updatedAt,
+                createdAt,
+                hit,
+                announceCategoryId,
+                qnaCategoryId,
+                isAnswer,
+              }) => (
+                <tr key={isAnnouncement ? announceId : qnaId} className="row">
+                  <td className="col-2 d-flex align-items-center justify-content-center">
+                    {isAnnouncement
+                      ? list[announceCategoryId - 1]
+                      : list[qnaCategoryId - 1]}
+                  </td>
+                  <td
+                    className="col-8 detail"
+                    onClick={() =>
+                      handleDetailClick(isAnnouncement ? announceId : qnaId)
+                    }
                   >
-                    {isAnswer
-                      ? "답변완료"
-                      : isAuthenticated === "운영자"
-                      ? "답변작성"
-                      : "답변대기"}
-                  </button>
-                )}
-              </td>
-            </tr>
-          )
-        )}
-      </tbody>
-    </table>
+                    <span style={{ fontSize: "20px" }}>{title}</span> <br /> <br />
+                    <div className="text-end">
+                      <span>{nickname || "운영자"}</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+  
+                      {isAnnouncement ? (
+                        <span>{`${updatedAt?.slice(0, 1)}-${updatedAt?.slice(
+                          1,
+                          2
+                        )}-${updatedAt?.slice(2, 3)}`}</span>
+                      ) : (
+                        <span>{`${createdAt?.slice(0, 1)}-${createdAt?.slice(
+                          1,
+                          2
+                        )}-${createdAt?.slice(2, 3)}`}</span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="col-2 d-flex align-items-center justify-content-center">
+                    {isAnnouncement ? (
+                      <>
+                        <div>
+                          <img src="/image/eye.png" alt="눈" className="m-2" />
+                        </div>
+                        <div>{Math.floor(hit / 4)}</div>
+                      </>
+                    ) : manager ? (
+                       <button
+                        className={isAnswer ? "completed_answer" : "waiting_answer"}
+                        onClick={() => {
+                          if (isAuthenticated === "운영자") {
+                            navigate(`/board/qna/manager/${qnaId}`);
+                          }
+                        }}
+                        style={{border:"none"}}
+                      >
+                        {isAnswer
+                          ? "답변완료"
+                          : "답변작성"
+                         } 
+                      </button> 
+                    ): (
+                      <p>
+                        {isAnswer
+                            ? "답변완료"
+                            : "답변대기"} 
+                      </p>
+                    )}
+                  </td>
+                </tr>
+              )
+            )}
+          </tbody>
+        </table>
+      ) : (
+        <div className="text-center mt-5" style={{fontSize:"2rem"}}>데이터가 없습니다</div>
+      )}
+    </>
   );
 };

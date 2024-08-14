@@ -70,11 +70,12 @@ const AnnouncementManagerWrite = () => {
             onChange={(e) => setAnnounceCategoryId(e.target.value)}
           >
             <option value="">유형을 선택하시오</option>
-            <option value="1">랭킹</option>
-            <option value="2">오픈채팅</option>
-            <option value="3">학습</option>
-            <option value="4">게시판</option>
-            <option value="5">공지사항</option>
+            <option value="1">회원정보</option>
+            <option value="2">학습</option>
+            <option value="3">오픈채팅</option>
+            <option value="4">대화연습</option>
+            <option value="5">보상</option>
+            <option value="6">기타</option>
           </select>
         </div>
 

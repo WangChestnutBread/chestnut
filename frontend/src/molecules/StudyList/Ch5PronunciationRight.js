@@ -6,6 +6,7 @@ const Ch5PronunciationRight = ({ data, location, onCharacterClick }) => {
     <div
       className="right d-flex justify-content-center align-items-center text-center rounded-end"
       style={{
+        height:"100%",
         wordBreak: "break-word",     
         whiteSpace: "pre-wrap",      
         maxWidth: "100%",             

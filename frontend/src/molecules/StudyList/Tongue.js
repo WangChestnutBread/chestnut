@@ -8,7 +8,7 @@ const Tongue = (tongueData) => {
         <img src="/icons/Tongue.svg" alt="tongue" className="m-2"/>
         <span>혀모양</span>
       </div>
-      <div className="tongue-box">
+      <div className="tongue-box mx-auto d-flex justify-content-center">
         <img src={tongueData.tongueData} className="tongue-a" alt="tongue"/>
       </div>
     </div>
