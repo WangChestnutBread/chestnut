@@ -26,6 +26,7 @@
   flex-direction: column;
   z-index: 100;
   gap: 100px;
+  overflow: auto;
   /* justify-content: space-evenly; */
   /* align-items: center; */
 }
