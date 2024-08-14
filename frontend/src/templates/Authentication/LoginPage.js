@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MemberLogo from "../../molecules/Authentication/MemberLogo";
 import LoginIdInput from "../../molecules/Authentication/LoginIdInput";
@@ -21,6 +21,8 @@ function LoginPage() {
   const setManager = useAuthStore((state) => state.setManager);
   const setId = useAuthStore((state) => state.setId);
   const setPw = useAuthStore((state) => state.setPw);
+
+  
 
   const handleChangeName = (event) => {
     setId(event.target.value);
@@ -48,6 +50,7 @@ function LoginPage() {
           setManager(response.data.data.admin);
           navigate("/main");
           console.log(response);
+          
           // console.log("토의 열심히 하시네");
         } else if (response.data.code == 706) {
           alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
