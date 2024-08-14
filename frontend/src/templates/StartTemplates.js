@@ -19,7 +19,7 @@ function LandingPage() {
   };
   const GotoSignup = () => {
     navigate("/member/signup");
-  }
+  };
 
   return (
     <div className="landing-page">
@@ -28,7 +28,7 @@ function LandingPage() {
           <img src="/image/Logo.png" alt="Logo" className="logo" />
         </div>
       </div>
-      <div className={`button-container ${showButtons ? 'show' : ''}`}>
+      <div className={`button-container ${showButtons ? "show" : ""}`}>
         <button className="landing-button" onClick={GotoLogin}>
           로그인
         </button>

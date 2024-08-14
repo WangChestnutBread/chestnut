@@ -16,7 +16,6 @@ import baseApi from "../../api/fetchAPI";
 import BirthCalendar from "../../atoms/Authentication/MemberBirth/BirthCalendar";
 import moment from "moment";
 import LoginIdPwFont from "../../atoms/Authentication/LoginIdPwFont";
-import styled from "styled-components";
 
 
 function EditMyInfo(){
@@ -65,26 +64,18 @@ function EditMyInfo(){
         })
         .then(response => {
             if (response.data.code === "200") {
-                console.log(response);
                 setId(response.data.data.loginId);
                 setName(response.data.data.memberName);
                 setEmail(response.data.data.email);
                 setBirthday(response.data.data.birthday);
                 let originalBirthday = response.data.data.birthday;
-                console.log("birthday 들어온 값: ", response.data.data?.birthday);
-                console.log("들어온 값: ", originalBirthday);
                 setNickname(response.data.data.nickname);
 
                 if (originalBirthday) {
-                    console.log("birthday는 null이 아니다.")
-                    console.log("birthday: ", originalBirthday);
                     setBirth(originalBirthday);
-                    console.log("birth: ", birth);
                     const firstDate = new Date(originalBirthday[0], (originalBirthday[1]-1), originalBirthday[2]);
                     setSelectedDate(moment(firstDate).format("YYYY-MM-DD"));
-                    console.log("selected date: ", selectedDate);
                 } else {
-                    console.log("birthday는 null이다")
                     setBirth(null);
                 }
             } else if (response.data.code === "801") {
@@ -207,34 +198,6 @@ function EditMyInfo(){
         }
     };
 
-    const createId = (e) => {
-        e.preventDefault();
-        const currentId = e.target.value;
-        setId(currentId);
-        
-        axios.get(url+"/member/check-loginId",{
-            params: {
-                loginId: Id,
-            }
-        })
-        .then(response=>{
-            if (response.data.code === "200") {
-                console.log("아이디 중복 체크 성공")
-                setIdMessage("사용 가능한 아이디입니다.")
-                setIsId(true)
-            } else if (response.data.code === "601") {
-                setIdMessage("이미 존재하는 아이디입니다.");
-                setIsId(false);
-            } else if (response.data.code === "603") {
-                setIdMessage("제출 양식 오류");
-                setIsId(false)
-            }
-        }).catch(error=>{
-            console.log(error);
-            alert("아이디 확인 중 오류가 발생했습니다.");
-        })
-    };
-
     const createPw = (e) => {
         const currentPw = e.target.value;
         setPw(currentPw);
@@ -281,6 +244,8 @@ function EditMyInfo(){
             return;
         }
 
+        setEmailMessage("인증번호를 보내는 중입니다.");
+
         axios.get(url+"/member/check-email",{
             params: {
                 email: Email,
@@ -295,6 +260,7 @@ function EditMyInfo(){
                 })
                     .then(response => {
                         console.log("이메일 발송")
+                        setEmailMessage("");
                         if (response.data.code === "200") {
                             alert("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
                             setIsEmail(true);

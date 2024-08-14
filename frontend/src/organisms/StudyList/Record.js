@@ -32,7 +32,7 @@ const Record = ({ func, func2 }) => {
   };
 
   const upPage = () => {
-    func("내발음😎");
+    func("녹음된 발음");
     func2([10000]);
 
     const nextId = getNextId(Number(studyId)); // 다음 ID 가져오기
@@ -58,7 +58,7 @@ const Record = ({ func, func2 }) => {
   };
 
   const downPage = () => {
-    func("내발음😎");
+    func("녹음된 발음");
     func2([1000000]);
 
     const prevId = getPrevId(Number(studyId)); // 이전 ID 가져오기
@@ -163,12 +163,12 @@ const Record = ({ func, func2 }) => {
     if (!wavBlob) return;
     console.log(check);
     const formData = new FormData();
-    formData.append("word", check);
-    formData.append("audio", wavBlob, "audio.wav");
+    formData.append("word", '그러나, 안녕하세요?'); //check로 넣으면 됨
+    // formData.append("audio", wavBlob, "audio.wav");
     checkWavFile(wavBlob);
     try {
       baseApi
-        .post("/study/detail/pronunciation/evaluate", formData, {
+        .post("/study/detail/pronunciation/evaluate/test/success", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -180,7 +180,7 @@ const Record = ({ func, func2 }) => {
           func2(res.data.data.answerMismatchIndices);
         })
         .catch((err) => {
-          alert("다시 말좀...");
+          alert("다시 녹음해주시겠어요?");
           console.log(err);
         });
     } catch (error) {
