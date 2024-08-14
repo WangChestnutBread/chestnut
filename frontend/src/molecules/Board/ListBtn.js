@@ -10,8 +10,8 @@ const ListBtn = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center">
-      <button className="list-btn" onClick={handleQnaClick} style={{border:"none"}}>목록</button>
+    <div className="d-flex justify-content-start mb-2 mt-5">
+      <button className="list-btn" onClick={handleQnaClick} style={{border:"none", width: "100px", height: "45px"}}>게시판 목록</button>
     </div>
   );
 };

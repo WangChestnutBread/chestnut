@@ -22,12 +22,12 @@ const QnaAnswer = () => {
   },[])
 
   return (
-    <div className="answer p-4 mb-4 mt-5 border-bottom border-2 border-black">
+    <div className="answer pt-3 pb-3 ps-4 pe-4 mb-4 mt-2">
       <div className="d-flex justify-content-between mb-3">
-        <div style={{fontSize:"1.3rem"}}>{answer}</div>
+        <div style={{fontSize:"1.0rem"}}>{answer}</div>
         <div className="text-center">
-          <p>{date[0]}-{date[1]}-{date[2]}</p>
-          <p className="mt-3">관리자</p>
+          <p className="mt-1">{date[0]}-{date[1]}-{date[2]}</p>
+          <p className="mt-1">관리자</p>
         </div>
       </div>
     </div>

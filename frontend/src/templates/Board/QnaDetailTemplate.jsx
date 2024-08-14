@@ -17,13 +17,13 @@ const QnaDetailTemplate = () => {
       <div className="container text-start">
         {/* 로고 */}
         <LogoQna />
+        {/* 목록 버튼 */}
+        <ListBtn />
         {/* Qna 내용 */}
         <QnaDetail />
         {/* answer 내용 */}
         <QnaAnswer />
-        {/* 목록 버튼 */}
-        <ListBtn />
-        <hr className="mt-5"/>
+        
       </div>
     </div>
   );

@@ -10,7 +10,6 @@ import useAuthStore from "../../stores/authStore";
 
 const QnaManagerDetail = () => {
   const params = useParams();
-  const [showAnswerForm, setShowAnswerForm] = useState(false);
   const [answer, setAnswer] = useState(null);
   const [submittedAnswer, setSubmittedAnswer] = useState("");
   const userId = useAuthStore((state) => state.userId);
@@ -22,38 +21,36 @@ const QnaManagerDetail = () => {
     });
   }, []);
 
-  const handleAnswerClick = () => {
-    setShowAnswerForm(true);
-  };
-
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    // setSubmittedAnswer(answer);
-    setShowAnswerForm(false);
+    updateComment();
   };
 
   const handleCancelClick = () => {
-    setShowAnswerForm(false);
-  };
-
-  const handleAnswerChange = (event) => {
-    setAnswer(event.target.value);
-  };
-
-  const handleEditClick = () => {
-    setShowAnswerForm(true);
+    setSubmittedAnswer(""); 
   };
 
   console.log(params.id);
 
   const updateComment = (e) => {
     baseApi.post(`/board/qna/${params.id}/answer`,{
-      answer: answer
+      answer: submittedAnswer
     }).then((res)=> {
       console.log(res);
+      setAnswer(submittedAnswer);
+      setSubmittedAnswer("");
     }).catch((err) => {
       console.log(err);
     })
+  };
+
+  const formatAnswer = (text) => {
+    return text.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br/>
+      </React.Fragment>
+    ));
   };
 
   return (
@@ -62,78 +59,49 @@ const QnaManagerDetail = () => {
       <div className="container text-start">
         {/* 로고 */}
         <LogoQna />
+        {/* 버튼 */}
+        <ListBtn />
         {/* 질문 디테일 */}
         <QnaDetail />
         {/* 답변 창 */}
-        <div className="answer p-4 mb-4 mt-5 border-bottom border-2 border-black bg-light">
-          {submittedAnswer && !showAnswerForm ? (
-            <div className="submitted-answer">
-              <p>{submittedAnswer}</p>
-              <button
-                className="btn btn-secondary mt-3"
-                onClick={handleEditClick}
-              >
-                답변 수정
-              </button>
-            </div>
-          ) : !showAnswerForm ? (
-            <div className="d-flex justify-content-between mb-3">
-              {answer ? (
-                <p className="mt-3" style={{fontSize:"1.5rem"}}>{answer}</p>
-              ) : (
-                <p className="mt-3" style={{fontSize:"1.5rem"}}>답변을 작성해주세요.</p>
-              )}
-              { answer ? <button
-                className="successbtn mt-1 btn btn-primary"
-                style={{backgroundColor:"#6B3906"}}
-              >
-                답변 완료
-              </button>: <button
-                className="answerbtn mt-1 btn btn-primary"
-                style={{backgroundColor:"#DCB78F"}}
-                onClick={handleAnswerClick}
-              >
-                답변 작성
-              </button>}
-            </div>
-          ) : (
-            <form onSubmit={handleFormSubmit} className="answer-form">
-              <div className="mb-3">
-                <label htmlFor="answer" className="form-label">
-                  답변
-                </label>
+        <div className="answer pt-3 pb-3 ps-4 pe-4 mb-4 mt-2">
+          {!answer ? (
+            <form onSubmit={handleFormSubmit} style={{paddingBottom: 30}}>
+              <div className="form-floating">
                 <textarea
-                  className="form-control"
-                  id="answer"
-                  rows="3"
-                  value={answer}
-                  onChange={handleAnswerChange}
-                  onClick={updateComment}
-                  required
+                  className="form-control rounded-3 content fs-6 mb-5"
+                  placeholder="Leave a comment here"
+                  id="floatingTextarea2"
+                  value={submittedAnswer}
+                  onChange={(e) => setSubmittedAnswer(e.target.value)}
+                  style={{background:"#f8f9fa", border: "none", padding: 0, whiteSpace: "pre-wrap"}}
                 ></textarea>
               </div>
-              <div className="d-flex justify-content-between">
+              <div className="d-flex justify-content-end" style={{gap: "10px"}}>
                 <button
                   type="submit"
-                  className="btn btn-primary"
-                  onClick={updateComment}
+                  className="btn fs-5"
+                  style={{height:"40px",width:"78px",background:"#DCB78F",borderRadius:"10px",color:"black"}}
                 >
                   제출
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn fs-5"
                   onClick={handleCancelClick}
+                  style={{height:"40px",width:"78px",background:"#D8D8D8",borderRadius:"10px",color:"black"}}
                 >
                   취소
                 </button>
               </div>
             </form>
+          ) : (
+              <div className="submitted-answer" style={{whiteSpace: "pre-wrap"}}>
+                <p>{formatAnswer(answer)}</p>
+              </div>
           )}
         </div>
-        {/* 버튼 */}
-        <ListBtn />
-        <hr className="mt-5" />
+        <div className="mt-5" />
       </div>
     </div>
   );

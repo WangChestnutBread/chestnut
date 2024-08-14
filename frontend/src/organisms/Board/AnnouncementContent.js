@@ -18,11 +18,10 @@ const QnaAnswer = () => {
     })
   },[])
   return (
-    <div className="answer p-4 mb-4 border-bottom border-2 border-black">
+    <div className="answer pt-3 pb-3 ps-4 pe-4 mb-4 mt-2">
       <div className="d-flex justify-content-between mb-3 row">
-        <div className='word-wrap col-10' style={{fontSize:"1.2rem"}}>{content}</div>
-        <div className="text-center date-container col-2">
-        </div>
+        <div className='word-wrap' style={{fontSize:"1.0rem", lineHeight: "normal"}}>{content}</div>
+        {/* <div className="text-center date-container col-2"></div> */}
       </div>
     </div>
   );
