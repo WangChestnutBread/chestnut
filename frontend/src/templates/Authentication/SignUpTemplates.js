@@ -62,11 +62,10 @@ function SignUPPage() {
     const [isEmailValid, setIsEmailValid] = useState(false);
 
     const [isSignup, setIsSignup] = useState("");
+    const [isEmailCheck, setIsEmailCheck] = useState("");
     const [alertContent, setAlertContent] = useState("");
 
     const url = "https://i11d107.p.ssafy.io/chestnutApi";
-
-
 
     //회원가입 버튼을 눌렀을 때 요청내어줄 회원 정보 전송하는 AXIOS함수
     const succes = () => {
@@ -80,33 +79,32 @@ function SignUPPage() {
             birthday: selectedDate,
         })
         .then(res => {
+            console.log(res.data);
+            console.log(res.data.loginId);
+            console.log(res.data.Id);
+            console.log(Id);
+            console.log(res.data.password);
+            console.log(res.data.Pw);
+            console.log(Pw);
             if (res.data.code === "200") {
                 isSignup(true);
                 setAlertContent("회원가입에 성공했습니다.");
             }
             if (res.data.code === "611" || res.data.code === "614") {
                 setAlertContent("아이디를 확인하세요.");
-                setId("");
             } else if (res.data.code === "612" || res.data.code === "615") {
                 setAlertContent("닉네임을 확인하세요.");
-                setnickname("");
             } else if (res.data.code === "613" || res.data.code === "616") {
                 setAlertContent("이메일을 확인하세요.");
-                setEmail("");
-                setAuth("");
             } else if (res.data.code === "609") {
                 setAlertContent("이메일을 인증하세요.");
-                setEmail("");
-                setAuth("");
             } else if (res.data.code === "604") {
                 setAlertContent("비밀번호를 확인하세요.");
-                setPw("");
-                setPwCon("");
-            } else {
-                setAlertContent("알 수 없는 오류가 발생하였습니다.");
+            }
+             else {
+                setAlertContent("회원가입에 실패하였습니다.");
             }
             setIsSignup(false);
-            console.log(res);
         }).catch(error => {
             console.log(error);
         });
@@ -117,7 +115,12 @@ function SignUPPage() {
         setAlertContent(null);
         if (isSignup) navigate("/member/login");
         else {
-
+            setId("");
+            setnickname("");
+            setEmail("");
+            setAuth("");
+            setPw("");
+            setPwCon("");
         }
     }
 
@@ -136,7 +139,6 @@ function SignUPPage() {
     };
     //Id 중복검사하는 axios 함수(중복 인증 버튼을 클릭했을 경우)
     const createId = (e) => {
-        console.log("클릭함");
         e.preventDefault(); // 기본 동작 방지
         const currentId = Id;
 
@@ -180,8 +182,6 @@ function SignUPPage() {
         }
     }
 
-
-
     //비밀번호 생성할 경우 조건(영대소문자, 특수기호, 숫자)를 만족하는 지 체크하는 함수
     const createPw = (e) => {
         const currentPw = e.target.value;
@@ -217,7 +217,7 @@ function SignUPPage() {
 
     //이메일 유효성 검사
     const validateEmail = (email) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$/;
         return emailRegex.test(email);
     }
 
@@ -227,7 +227,7 @@ function SignUPPage() {
         e.preventDefault();
         
         if (!isEmailValid) {
-            alert("유효한 이메일 주소를 입력해주세요.");
+            setEmailMessage("유효한 이메일 주소를 입력해주세요.");
             return;
         }
 
@@ -246,7 +246,7 @@ function SignUPPage() {
                     .then(response => {
                         console.log("이메일 발송")
                         if (response.data.code === "200") {
-                            alert("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
+                            setEmailMessage("인증 이메일을 발송했습니다.");
                             //인증번호 재전송
                             if (verificationSent) {
                                 resendVerification();
@@ -255,23 +255,23 @@ function SignUPPage() {
                             setVerificationSent(true);
                         }
                         if (response.data.code === "601") {
-                            alert("이미 존재하는 이메일입니다.");
+                            setEmailMessage("이미 존재하는 이메일입니다.");
                             setIsEmail(false);
                         } else if (response.data.code === "603") {
-                            alert("올바르지 않은 이메일 양식입니다.");
+                            setEmailMessage("올바르지 않은 이메일 양식입니다.");
                             setIsEmail(false);
                         } else if (response.data.code === "606") {
-                            alert("인증번호 보내는 데 실패했습니다.");
+                            setEmailMessage("인증번호 보내는 데 실패했습니다.");
                             setIsEmail(false);
                         } else if (response.data.code === "299") {
-                            alert("알 수 없는 오류가 발생했습니다.");
+                            setEmailMessage("알 수 없는 오류가 발생했습니다.");
                             setIsEmail(false);
                         }
                         console.log(response);
                     })
                     .catch(error => {
                         console.log(error);
-                        alert("인증 이메일 발송 중 오류가 발생했습니다.");
+                        setEmailMessage("인증 이메일 발송 중 오류가 발생했습니다.");
                     });
             } else if (response.data.code === "601") {
                 setEmailMessage("이미 존재하는 이메일입니다.");
@@ -279,7 +279,7 @@ function SignUPPage() {
             }
         }).catch(error=>{
             console.log(error);
-            alert("이메일 확인 중 오류가 발생했습니다.");
+            setEmailMessage("이메일 확인 중 오류가 발생했습니다.");
         })
     };
 
@@ -339,9 +339,9 @@ function SignUPPage() {
         if (!inputemail) {
             setEmailMessage("");
         } else if (!isValid) {
-            setEmailMessage("유효한 이메일 형식이 아닙니다.");
+            setEmailMessage("이메일 형식이 올바르지 않습니다.")
         } else {
-            setEmailMessage("");
+            setEmailMessage("올바른 이메일 형식입니다.");
         }
     };
 
