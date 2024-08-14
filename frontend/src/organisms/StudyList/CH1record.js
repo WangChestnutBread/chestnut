@@ -6,6 +6,7 @@ import { fetchFile } from "@ffmpeg/util";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuthStore from "../../stores/authStore";
 import baseApi from "../../api/fetchAPI";
+import CustomAlert from "../../atoms/alert";
 
 const CH1record = ({ func, func2 }) => {
   const [isRecording, setIsRecording] = useState(false);
@@ -19,6 +20,7 @@ const CH1record = ({ func, func2 }) => {
   const { studyId, chapterId } = useParams();
   const [check, setData] = useState("");
   const setPronunciation = useAuthStore((state) => state.setPronunciation);
+  const [alertContent, setAlertContent] = useState("");
 
   const checkPoint = useAuthStore((state) => state.checkPoint);
 
@@ -79,8 +81,12 @@ const CH1record = ({ func, func2 }) => {
       //   },
       // });
     } else {
-      alert("다음 학습 페이지가 없습니다.");
+      setAlertContent(`다음 학습 페이지가 없습니다.`);
     }
+  };
+
+  const handleCloseAlert = () => {
+    setAlertContent(null); // Alert 닫기
   };
 
   const downPage = () => {
@@ -129,7 +135,7 @@ const CH1record = ({ func, func2 }) => {
       //   },
       // });
     } else {
-      alert("첫 학습페이지 입니다.");
+      setAlertContent(`첫 학습페이지 입니다.`);
     }
   };
 
@@ -229,7 +235,7 @@ const CH1record = ({ func, func2 }) => {
           func2(res.data.data.answerMismatchIndices);
         })
         .catch((err) => {
-          alert("다시 말좀...");
+          setAlertContent(`다시 한번 말씀해주세요`);
           console.log(err);
         });
     } catch (error) {
@@ -275,6 +281,11 @@ const CH1record = ({ func, func2 }) => {
           </a>
         </div>
       )}
+
+      {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+      />}
     </div>
   );
 };

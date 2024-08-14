@@ -40,7 +40,7 @@ function LoginInputPwForm(props) {
             setManager(response.data.data.admin);
             navigate("/main");
           } else if (response.data.code == 706) {
-            setAlertContent(`비밀번호 혹은 아이디를 잘못 작성했습니다.`);
+            setAlertContent(`비밀번호 혹은 아이디를<br>잘못 작성했습니다.`);
           }
           console.log(response);
           setUserId(Id);

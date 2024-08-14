@@ -81,9 +81,7 @@ function SignUPPage() {
         .then(res => {
             if (res.data.code === "200") {
                 setIsSignup(true);
-                setTimeout(() => {
-                    setAlertContent("회원가입에 성공했습니다.");
-                }, 100); // 상태 업데이트 후 약간의 지연을 줌
+                setAlertContent("회원가입에 성공했습니다.");
                 return;
             }
             if (res.data.code === "611" || res.data.code === "614") {
@@ -108,7 +106,10 @@ function SignUPPage() {
 
     const handleCloseAlert = () => {
         setAlertContent(null);
-        if (isSignup) navigate("/member/login");
+        if (isSignup) {
+            setIsSignup(false);
+            navigate("/member/login");
+        }
         else {
             setId("");
             setnickname("");
@@ -296,7 +297,7 @@ function SignUPPage() {
         e.preventDefault();
 
         if (!Auth) {
-            setAuthMessage("인증번호를 입력해주세요.");
+            setEmailMessage("인증번호를 입력해주세요.");
             return;
         }
 

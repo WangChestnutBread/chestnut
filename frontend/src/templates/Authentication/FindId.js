@@ -70,19 +70,14 @@ function FindId() {
             console.log(res);
             if (res.data.code === "200") {
                 setIsFind(true);
-                setAlertContent(`<div style="display: block;">
-                                    ${name}님의 아이디는 '${res.data.data.loginId}'입니다.
-                                <div>`);
+                setAlertContent(`${name}님의 아이디는<br>'${res.data.data.loginId}'입니다.`);
                 return;
             }
             if (res.data.code === "714" || res.data.code === "713") {
-                setAlertContent(`<div style="display: block;">
-                    등록된 사용자가 아닙니다.
-                    <div>`);
+                setAlertContent(`등록된 사용자가 아닙니다.`);
             } else {
-                setAlertContent(`<div style="display: block;">
-                    알 수 없는 오류가 발생했습니다.
-                    <div>`);
+                setAlertContent(`오류가 발생했습니다.<br>
+                    잠시후 다시 시도해주세요.`);
             }
             setIsFind(false);
         }).catch(error => {
