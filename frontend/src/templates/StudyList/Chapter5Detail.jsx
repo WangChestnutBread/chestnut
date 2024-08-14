@@ -56,6 +56,7 @@ const Chapter5Detail = () => {
           },2000)
         })
     }
+    
   };
 
   const handleIsVocabulary = (isVocabulary) => {

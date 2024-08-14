@@ -48,12 +48,7 @@ const Chapter3Detail = () => {
             isCorrect(false);
           }, 2000);
         })
-        .catch((err) => {
-          isWrong(true);
-          setTimeout(() => {
-            isWrong(false);
-          }, 2000);
-        });
+        
     }
   };
 
