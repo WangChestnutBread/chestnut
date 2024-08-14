@@ -64,7 +64,6 @@ const Chapter2Detail = () => {
         <div className="row">
           <div className="col-4 mt-2">
             <Ch2Notation word={params} />
-            {/* <Notation word={params}/> */}
           </div>
           <div className="col-8 mt-2">
             <SoundMethod hangeul={params} />
