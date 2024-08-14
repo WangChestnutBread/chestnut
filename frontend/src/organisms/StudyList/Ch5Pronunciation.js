@@ -76,7 +76,6 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick, handleI
         <div 
           style={{
             width:"76%",
-            
         }}>
           {pronounce ? (
             <Ch5PronunciationRight data={realData} location={[]} onCharacterClick={onCharacterClick}/>

@@ -20,30 +20,73 @@ const Pronunciations = ({saying, realData, location}) => {
 
 
   return (
-    <div className="">
-      <div className="d-flex">
-        <div className="">
+    <div style={{
+      height:"100%",
+        display:"flex",
+        flexDirection:"column",
+    }}>
+      {/* 1행 */}
+      <div 
+      style={{
+        display:"flex",
+        width:"100%",
+        height:"50%"
+      }}>
+        {/* 1행 1열 */}
+        <div style={{
+          width:"24%",
+          backgroundColor:"#DCB78F",
+          display:"flex",
+          justifyContent:"center"
+        }}>
           <PronunciationLeft data={"발음"} />
         </div>
+        <div 
+          style={{
+            width:"76%",
+            backgroundColor:"lightgray",
+            marginRight:"10px",
+            display:"flex",
+            justifyContent:"center"
+          }}>
         {word ? (
-          <div>
-            <PronunciationRight data={word} location={location} />
-          </div>
+          <PronunciationRight data={word} location={location} />
         ) : (
           <></>
         )}
+        </div>
       </div>
-      <div className="d-flex" style={{ marginTop: 30 }}>
-        <div>
+      <div 
+      style={{ 
+        display:"flex",
+        width:"100%",
+        height:"50%",
+        marginTop:"2%",
+      }}>
+        <div
+          style={{
+            width:"24%",
+            backgroundColor:"#DCB78F",
+            display:"flex",
+            justifyContent:"center"
+          }}>
           <PronunciationLeft data={"내 발음"} />
         </div>
-        {pronounce ? (
-          <div>
+          <div
+            style={{
+              width:"76%",
+              backgroundColor:"lightgray",
+              marginRight:"10px",
+              display:"flex",
+              justifyContent:"center"
+
+            }}>
+            {pronounce ? (
             <PronunciationRight data={realData} location={[]}/>
-          </div>
-        ) : (
-          <></>
-        )}
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );

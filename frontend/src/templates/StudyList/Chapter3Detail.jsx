@@ -12,11 +12,11 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import baseApi from "../../api/fetchAPI";
 import Ch3SM from "../../organisms/StudyList/Ch3SM";
-import Ch3Notation from './../../organisms/StudyList/Ch3Notaion';
+import Ch3Notation from "./../../organisms/StudyList/Ch3Notaion";
 import Lottie from "lottie-react";
 import Correct from "../../assets/lottie/correct.json";
-import Wrong from "../../assets/lottie/wrong.json"
-import "./ChapterDetail.css"
+import Wrong from "../../assets/lottie/wrong.json";
+import "./ChapterDetail.css";
 
 const Chapter3Detail = () => {
   const params = useParams();
@@ -24,8 +24,7 @@ const Chapter3Detail = () => {
   const [answerData, setAnswerData] = useState([100000]);
   const [show, isShow] = useState(false);
   const [correct, isCorrect] = useState(false);
-  const [wrong, isWrong] = useState(false)
-  
+  const [wrong, isWrong] = useState(false);
 
   const moveData = (value) => {
     console.log(value);
@@ -48,102 +47,142 @@ const Chapter3Detail = () => {
           setTimeout(() => {
             isCorrect(false);
           }, 2000);
-        }).catch((err) => {
+        })
+        .catch((err) => {
           isWrong(true);
           setTimeout(() => {
-            isWrong(false)
-          },2000)
-        })
+            isWrong(false);
+          }, 2000);
+        });
     }
   };
 
   return (
     <div className="ChapterDetail">
       {/* 헤더 */}
-
-      <NavbarExample showBookMarkButton={true} studyId={params.studyId}></NavbarExample>
-      <div 
-        style={{
-          width:"100%",
-          height:"100%",
-          display:"flex",
-          flexDirection:"column",
-      }}>
-        {/* 1행 */}
-        <div 
+      <NavbarExample showBookMarkButton={true}></NavbarExample>
+      <div className="container">
+        <div
           style={{
-            display:"flex",
-            width:"100%",
-        }}>
-          {/* 1행 1열: 3개 묶음 */}
-          <div 
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {/* 1행 */}
+          <div
             style={{
-              display:"flex",
-              flexDirection:"column",
-              width:"70%",
-              height:"30%",
-          }}>
-            {/* 1행 1열 1행: 2개 묶음 */}
-            <div 
+              display: "flex",
+              width: "100%",
+            }}
+          >
+            {/* 1행 1열: 3개 묶음 */}
+            <div
               style={{
-                display:"flex",
-                height:"100%",
-            }}>
-              {/* 1행 1열 1행 1열: */}
-              <div style={{
-                width:"50%",
-              }}>
->>>>>>> frontend/src/templates/StudyList/Chapter3Detail.jsx
-                <Ch3Notation word={params} />
-
+                display: "flex",
+                flexDirection: "column",
+                width: "70%",
+                height: "30%",
+              }}
+            >
+              {/* 1행 1열 1행: 2개 묶음 */}
+              <div
+                style={{
+                  display: "flex",
+                  height: "100%",
+                  width:"89%",
+                
+                }}
+              >
+                {/* 1행 1열 1행 1열: */}
+                <div
+                  style={{
+                    width: "50%",
+                    marginRight:"10px",
+                    height:"340px",
+                      
+                  }}
+                >
+                  <Ch3Notation word={params} />
+                </div>
+                {/* 1행 1열 1행 2열: */}
+                <div
+                  style={{
+                    width: "50%",
+                  }}
+                >
+                  <CameraOrganism />
+                </div>
               </div>
-              {/* 1행 1열 1행 2열: */}
-              <div style={{
-                width:"50%", 
-              }}>
-                <CameraOrganism />
+              {/* 1행 1열 2행: 발음 */}
+              <div
+                style={{
+                  width: "100%",
+                  height: "250px",
+                  marginTop:"7px"
+                }}
+              >
+                <Pronunciation
+                  saying={params}
+                  realData={realData}
+                  location={answerData}
+                />
               </div>
             </div>
-            {/* 1행 1열 2행: 발음 */}
-            <div 
+            {/* 1행 2열: Chapter3 Notation */}
+            <div
               style={{
-                width:"100%",
-                height:"30%",
-            }}>
-              <Pronunciation
-                saying={params}
-                realData={realData}
-                location={answerData}
-              />
+                display: "flex",
+                width: "30%",
+              }}
+            >
+              <Ch3SM hangeul={params} />
             </div>
           </div>
-          {/* 1행 2열: Chapter3 Notation */}
-          <div 
+          {/* 2행 */}
+          <div
             style={{
-              display:"flex",
-              width:"30%",
-          }}>
-            <Ch3SM hangeul={params} />
-
+              display: "flex",
+              justifyContent: "center",
+            }}
+          > <div style={{marginTop:"10px"}}>
+            <RecordData func={moveData} func2={answer} />
+            </div>
           </div>
-        </div>
-        {/* 2행 */}
-        <div 
+          <div
           style={{
-            display:"flex",
-            justifyContent:"center",
-        }}>
-          <RecordData func={moveData} func2={answer} />
-
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            zIndex: 1000,
+            width: "800px",
+            height: "800px",
+            transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+            pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+          }}
+        >
+          {correct ? <Lottie animationData={Correct} /> : <></>}
         </div>
-
+        <div style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            zIndex: 1000,
+            width: "800px",
+            height: "800px",
+            transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+            pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+          }}>
+              {wrong ? <Lottie animationData={Wrong} /> : <></>}
+        </div>
+        </div>
       </div>
     </div>
 
     /////////////// 이전 코드 //////////////////////
     // <div className="ChapterDetail">
     //   {/* 표기, 입모양, 혀모양 */}
-
 
     //         <div className="mt-2 justify-content-center">
 
@@ -152,7 +191,7 @@ const Chapter3Detail = () => {
     //         </div>
     //       </div>
     //       <div className="col-4 mt-2">
-  
+
     //       </div>
     //     </div>
     //     {/* 소리나는 방법, 카메라 */}
@@ -189,10 +228,6 @@ const Chapter3Detail = () => {
     //     {/* 마이크 */}
     //   </div>
     // </div>
-
-
-
-
 
     /////////////// 이전 코드 //////////////////////
     // <div className="ChapterDetail">
