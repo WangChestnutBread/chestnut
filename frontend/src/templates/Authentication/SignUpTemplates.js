@@ -29,7 +29,7 @@ function SignUPPage() {
     const navigate = useNavigate();
     //뒤로가기 버튼
     const GotoBack = () => {
-        navigate(-1);
+        navigate("/");
     };
     //회원 가입에 필요한 변수 선언
     const [Id, setId] = useState("");
