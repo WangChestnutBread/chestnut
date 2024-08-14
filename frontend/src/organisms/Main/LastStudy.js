@@ -6,6 +6,7 @@ import LastStudyButton from "../../molecules/Main/LastStudyButton";
 
 import "./LastStudy.css";
 import baseApi from "../../api/fetchAPI";
+import { Col } from "react-bootstrap";
 
 function LastStudy({ chapter, word, chapterId, studyId }) {
   let navigate = useNavigate();
@@ -36,7 +37,7 @@ function LastStudy({ chapter, word, chapterId, studyId }) {
   };
 
   return (
-    <div className="LastStudy">
+    <Col className="LastStudy">
       <div className="LastStudyHead">
         <Text20 text="오늘도 열심히 가보자고!" />
       </div>
@@ -53,7 +54,7 @@ function LastStudy({ chapter, word, chapterId, studyId }) {
         </div>
         <LastStudyButton word={word} onClick={handleOnClick} />
       </div>
-    </div>
+    </Col>
   );
 }
 

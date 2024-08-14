@@ -7,11 +7,10 @@ import { useNavigate } from "react-router-dom";
 import baseApi from "../../api/fetchAPI";
 import useAuthStore from "../../stores/authStore";
 import CustomAlert from "../../atoms/alert";
+import { Col } from "react-bootstrap";
 
 function MainProfileTextBox({ profile }) {
-  // console.log(profile)
   let navigate = useNavigate();
-  // const clearAccessToken = useAuthStore((state) => state.clearAccessToken);
   const setAccessToken = useAuthStore((state) => state.setAccessToken);
   const [alertContent, setAlertContent] = useState("");
 
