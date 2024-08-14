@@ -92,6 +92,8 @@ public class MemberService {
         redisService.deleteData("CheckEmailDuplication:" + checkDuplicationEmail);
         redisService.deleteData("CheckEmailCode:signup:" + checkCodeEmail);
 
+        session.invalidate();
+
     }
 
     @Transactional
