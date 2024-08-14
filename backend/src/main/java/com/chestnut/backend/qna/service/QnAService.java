@@ -66,10 +66,10 @@ public class QnAService {
         QnA qna = qnARepository.findByqnaId(qnaId)
                 .orElseThrow(ArticleNotFoundException::new);
 
-//        if(!qna.getMember().getLoginId().equals(loginId)) {
-//            //권한 없음
-//            throw new IncorrectAccessException();
-//        }
+        if(!member.isAdmin() && !qna.getMember().getLoginId().equals(loginId)) {
+            //권한 없음
+            throw new IncorrectAccessException();
+        }
 
         return QnADetailResDto.from(qna);
 
