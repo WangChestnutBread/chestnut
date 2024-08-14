@@ -107,7 +107,7 @@ function SignUPPage() {
     const handleCloseAlert = () => {
         setAlertContent(null);
         if (isSignup) {
-            // setIsSignup(false);
+            setIsSignup(false);
             navigate("/member/login");
         }
         else {
