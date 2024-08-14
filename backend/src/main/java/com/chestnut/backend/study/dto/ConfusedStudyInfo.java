@@ -10,4 +10,8 @@ public class ConfusedStudyInfo {
     private int confusedGroupId;
     private String word;
     private String pronounce;
+    @Setter
+    private int isPass;
+    @Setter
+    private int isStudy;
 }
