@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
-
-import { useState } from "react";
 import NavbarExample from "../NavbarExample";
 import Notation from "../../organisms/StudyList/NotationChapter1";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
@@ -60,21 +58,10 @@ const Chapter5Detail = () => {
 
   return (
     <div>
-      {/* 헤더 */}
-<<<<<<< frontend/src/templates/StudyList/Chapter5Detail.jsx
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
-      {/* 표기, 입모양, 혀모양 */}
-=======
+
+
       <NavbarExample showBookMarkButton={true} showSentenceButton={true}/>
       {/* 표기, 카메라 */}
->>>>>>> frontend/src/templates/StudyList/Chapter5Detail.jsx
       <div className="container">
         <div className="row">
           <div className="col-8 mt-2">
