@@ -106,7 +106,10 @@ function SignUPPage() {
 
     const handleCloseAlert = () => {
         setAlertContent(null);
-        if (isSignup) navigate("/member/login");
+        if (isSignup) {
+            // setIsSignup(false);
+            navigate("/member/login");
+        }
         else {
             setId("");
             setnickname("");
@@ -284,7 +287,7 @@ function SignUPPage() {
         e.preventDefault();
 
         if (!Auth) {
-            alert("인증번호를 입력해주세요.");
+            setEmailMessage("인증번호를 입력해주세요.");
             return;
         }
 

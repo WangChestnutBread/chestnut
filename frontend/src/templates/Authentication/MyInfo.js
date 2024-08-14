@@ -5,6 +5,7 @@ import BackButton from "../../atoms/BackButton";
 import Button from "../../molecules/Authentication/Button";
 import InfoBox from "../../molecules/Authentication/InfoBox";
 import baseApi from "../../api/fetchAPI";
+import CustomAlert from "../../atoms/alert";
 
 function MyInfo() {
     const [Id, setId] = useState("");
@@ -13,6 +14,7 @@ function MyInfo() {
     const [nickname, setNickname] = useState("");
     const [birthday, setBirthday] = useState(null);
     const [birth, setBirth] = useState(null);
+    const [alertContent, setAlertContent] = useState("");
 
     const navigate = useNavigate();
 
@@ -37,13 +39,13 @@ function MyInfo() {
                     setBirth(birthString);
                 }
             } else if (response.data.code === "801") {
-                alert("유효하지 않는 토큰입니다.");
+                setAlertContent(`잠시후 다시 시도해 주세요.`);
             } else if (response.data.code === "710") {
-                alert("db에 정보가 없습니다.");
+                setAlertContent(`사용자 정보가 존재하지 않습니다.`);
             } else if (response.data.code === "714") {
-                alert("아이디가 존재하지 않습니다.");
+                setAlertContent(`아이디가 존재하지 않습니다.`);
             } else if (response.data.code) {
-                alert("계정 권한이 없음");
+                setAlertContent(`열람 권한이 없습니다.`);
             }
         })
         .catch(error => {
@@ -58,6 +60,10 @@ function MyInfo() {
     const GotoBack = () => {
         navigate(-1);
     };
+
+    const handleCloseAlert = () => {
+        setAlertContent(null); // Alert 닫기
+      };
 
     return (
         <div className="container">
@@ -87,6 +93,10 @@ function MyInfo() {
                     </div>
                 </div>
             </div>
+            {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
         </div>
     );
 }
