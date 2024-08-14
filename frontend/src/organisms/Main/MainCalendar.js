@@ -35,7 +35,7 @@ function MainCalendar({ attendance }) {
 
 
   return (
-    <div>
+    <div className="container">
       <Calendar
         onChange={onChange}
         locale={enUS}

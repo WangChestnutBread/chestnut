@@ -9,6 +9,7 @@ import OpenChat from "../organisms/OpenChat";
 import Tutorial from "../atoms/Tutorial";
 import MainTutorialStep from "../data/MainTutorialStep";
 import WelcomeModal from "../atoms/WelcomeModal";
+import { Row } from "react-bootstrap";
 
 
 
@@ -89,7 +90,7 @@ const MainTemplate = ({ profile, attendance }) => {
         {/* 밤 메뉴 */}
         <MainMenu menu={menu} />
 
-        <div className="MainStatus">
+        <Row className="MainStatus container">
           {/* 프로필 */}
           <MainProfile profile={profile} />
 
@@ -100,7 +101,7 @@ const MainTemplate = ({ profile, attendance }) => {
             chapterId={profile.chapterId}
             studyId={profile.studyId}
           />
-        </div>
+        </Row>
 
         {/* 출석 캘린더 */}
         <MainCalendar attendance={attendance.attendanceAt} />

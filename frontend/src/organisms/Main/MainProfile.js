@@ -1,11 +1,11 @@
 import "./MainProfile.css";
 import Text20 from "../../atoms/Text20";
 import MainProfileTextBox from "../../molecules/Main/MainProfileTextBox";
+import { Col } from "react-bootstrap";
 
 function MainProfile({profile}) {
-  // console.log(profile)
   return (
-    <div className="MainProfile">
+    <Col xl={8} className="MainProfile">
       {/* 프로필 이미지 */}
       <div className="ProfileImage">
         <img src={profile.avatarImgUrl} height="200px" />
@@ -19,7 +19,7 @@ function MainProfile({profile}) {
       <div className="LeafImage">
         <img src="/image/Leaf.png" width="49px" />
       </div>
-    </div>
+    </Col>
   );
 }
 
