@@ -38,10 +38,10 @@ public class LogService {
                 .orElseThrow(MemberNotFoundException::new);
         Study study = studyRepository.findByStudyIdWithChapter(studyId)
                 .orElseThrow(StudyNotFoundException::new);
-        byte todayCount = studyLogRepository.findRecentLogByMemberId(member.getMemberId(), PageRequest.of(0, 1))
+        int todayCount = studyLogRepository.findRecentLogByMemberId(member.getMemberId(), PageRequest.of(0, 1))
                 .stream()
                 .findFirst()
-                .orElse((byte) 0);
+                .orElse(0);
 
         //todayCount == 0 이면 출석 로그 찍기 -> 출석 보상 지급
         //todayCount == 9 이면 학습 보상 지급
