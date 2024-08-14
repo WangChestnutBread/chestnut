@@ -238,7 +238,7 @@ const ArticleList = ({ isAnnouncement, articleArray, manager }) => {
                       handleDetailClick(isAnnouncement ? announceId : qnaId)
                     }
                   >
-                    <span style={{ fontSize: "20px" }}>{title}</span> <br /> <br />
+                    <br /> <span style={{ fontSize: "18px" }}>{title}</span> <br />
                     <div className="text-end">
                       <span>{nickname || "운영자"}</span>
                       <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -260,7 +260,7 @@ const ArticleList = ({ isAnnouncement, articleArray, manager }) => {
                     {isAnnouncement ? (
                       <>
                         <div>
-                          <img src="/image/eye.png" alt="눈" className="m-2" />
+                          <img src="/image/eye.png" alt="눈" className="m-2" style={{width: "15px"}} />
                         </div>
                         <div>{Math.floor(hit / 4)}</div>
                       </>

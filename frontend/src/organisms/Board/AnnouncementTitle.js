@@ -24,17 +24,17 @@ const AnnouncementTitle = () => {
     : "";
 
   return (
-    <div className="qna-detail p-4 mt-2 border-top border-4 border-black">
+    <div className="qna-detail pt-3 pb-3 ps-4 pe-4 mt-2">
       <div className="d-flex justify-content-between mb-3">
-        <div style={{fontSize:"1.5rem"}}>
+        <div style={{fontSize:"1.25rem"}}>
           <p className="mt-2" >
             {"(" + list[data.announceCategoryId - 1] + ") "}
             {data.title}
           </p>
         </div>
         <div className="text-center">
-          <p>{date}</p>
-          <p className="mt-3">관리자</p>
+          <p className="mt-1">{date}</p>
+          <p className="mt-1">관리자</p>
         </div>
       </div>
       <div className="mt-5">{/* <p>{data.content}</p> */}</div>

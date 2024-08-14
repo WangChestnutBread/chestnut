@@ -65,9 +65,9 @@ const QNAWritePage = () => {
         </div>
         {/* // 공지 유형 */}
         <div>
-          <p className="p-3 fs-5">공지유형</p>
+          <p className="p-2 fs-5">공지유형</p>
           <select
-            className="form-select rounded-3 selected fs-5"
+            className="form-select rounded-3 selected fs-6"
             aria-label="Default select example"
             value={qnaCategoryId}
             onChange={(e) => setQnaCategoryId(e.target.value)}
@@ -82,21 +82,21 @@ const QNAWritePage = () => {
         </div>
 
         {/* //제목 */}
-        <p className="p-3 fs-5">제목</p>
+        <p className="p-2 fs-5 mt-2">제목</p>
         <div class="input-group mb-3">
           <input
             type="text"
-            className="form-control rounded-3 text fs-5"
+            className="form-control rounded-3 text fs-6"
             placeholder="제목을 입력하시오"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         {/* //내용 */}
-        <p className="p-3 fs-5">내용</p>
+        <p className="p-2 fs-5">내용</p>
         <div class="form-floating">
           <textarea
-            className="form-control rounded-3 content fs-5"
+            className="form-control rounded-3 content fs-6"
             placeholder="Leave a comment here"
             id="floatingTextarea2"
             value={content}
@@ -106,11 +106,11 @@ const QNAWritePage = () => {
         </div>
 
         {/* // 취소 등록 버튼 */}
-        <div className="d-flex justify-content-between">
-          <button className="nobtn fs-3" onClick={handleQnaClick} style={{border:"none"}}>
+        <div className="d-flex justify-content-end" style={{gap: "15px", marginRight: "1px", marginBottom: "30px"}}>
+          <button className="nobtn fs-5" onClick={handleQnaClick} style={{border:"none", borderRadius: "15px", height: "40px", width: "78px"}}>
             취소
           </button>
-          <button className="yesbtn fs-3" onClick={handleDetailClick2} style={{border:"none"}}>
+          <button className="yesbtn fs-5" onClick={handleDetailClick2} style={{border:"none", borderRadius: "15px", height: "40px", width: "78px"}}>
             등록
           </button>
         </div>

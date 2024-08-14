@@ -103,7 +103,7 @@ const AnnouncementDetail = () => {
           </div>
         )}
         {/* 삭제 수정 버튼 */}
-        { manager ? <div className="row justify-content-evenly">
+        { manager ? <div className="row justify-content-end pe-2 mb-4" style={{gap: 10}}>
           <button className="updatebtn" onClick={updateAnnouncement} style={{border:"none"}}>
             {isEditing ? "저장" : "수정"}
           </button>
