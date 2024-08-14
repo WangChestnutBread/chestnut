@@ -82,6 +82,7 @@ function SignUPPage() {
             if (res.data.code === "200") {
                 setIsSignup(true);
                 setAlertContent("회원가입에 성공했습니다.");
+                return;
             }
             if (res.data.code === "611" || res.data.code === "614") {
                 setAlertContent("아이디를 확인하세요.");
@@ -93,8 +94,7 @@ function SignUPPage() {
                 setAlertContent("이메일을 인증하세요.");
             } else if (res.data.code === "604") {
                 setAlertContent("비밀번호를 확인하세요.");
-            }
-             else {
+            } else {
                 setAlertContent("회원가입에 실패하였습니다.");
             }
             setIsSignup(false);
