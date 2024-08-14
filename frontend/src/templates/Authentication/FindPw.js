@@ -104,7 +104,7 @@ function FindPw() {
     };
 
     const GotoBack = () => {
-        navigate(-1);
+        navigate("/");
     };
 
     const inputAuth = (e) => {

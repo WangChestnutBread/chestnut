@@ -56,7 +56,7 @@ function MyInfo() {
     };
 
     const GotoBack = () => {
-        navigate(-1);
+        navigate("/main");
     };
 
     return (

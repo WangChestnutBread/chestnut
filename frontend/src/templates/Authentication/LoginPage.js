@@ -34,7 +34,7 @@ function LoginPage() {
     setPw(event.target.value);
   };
   const GotoBack = () => {
-    navigate(-1);
+    navigate("/");
   };
   const handleLogin = (event) => {
     console.log(event);
