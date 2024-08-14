@@ -224,6 +224,8 @@ function SignUPPage() {
             return;
         }
 
+        setEmailMessage("인증번호를 보내는 중입니다.");
+
         axios.get(url+"/member/check-email",{
             params: {
                 email: Email,
@@ -238,6 +240,7 @@ function SignUPPage() {
                 })
                     .then(response => {
                         console.log("이메일 발송")
+                        setEmailMessage("");
                         if (response.data.code === "200") {
                             setEmailMessage("인증 이메일을 발송했습니다.");
                             //인증번호 재전송
@@ -281,7 +284,7 @@ function SignUPPage() {
         e.preventDefault();
 
         if (!Auth) {
-            alert("인증번호를 입력해주세요.");
+            setAuthMessage("인증번호를 입력해주세요.");
             return;
         }
 
@@ -292,7 +295,7 @@ function SignUPPage() {
         }).then(response => {
             console.log(Auth);
             if (response.data.code === "200") {
-                setAuthMessage("인증번호가 일치합니다.");
+                setAuthMessage("인증되었습니다.");
                 setIsAuth(true);
             } else if (response.data.code === "605") {
                 setAuthMessage("인증번호가 일치하지 않습니다.");

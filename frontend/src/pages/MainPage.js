@@ -7,13 +7,15 @@ import Loading from "../organisms/Loading";
 function MainPage() {
 
   const setCheckPoint = useAuthStore((state)=>state.setCheckPoint)
-  useEffect(() => {
-    // console.log("체크포인트 불러오기")
-    baseApi.get(`/study/study-id`,).then((res) => {
-      setCheckPoint(res.data.data)
-    })
-  },[setCheckPoint])
-
+  
+    const study = () => {
+      baseApi.get(`/study/study-id`,).then((res) => {
+        console.log(res.data.data);
+        setCheckPoint(res.data.data)
+      
+    })}
+  
+ 
 
   const { accessToken, setAccessToken } = useAuthStore((state) => ({
     ...state,
@@ -56,7 +58,7 @@ function MainPage() {
     // console.log("달력이랑 출석 불러오기")
     const fetchData = async () => {
       try {
-        const promiseResult = Promise.all([getProfile(), getAttendance()]);
+        const promiseResult = Promise.all([getProfile(), getAttendance(), study()]);
       } catch (err) {
         console.error(err);
       }

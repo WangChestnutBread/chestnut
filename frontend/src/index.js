@@ -32,6 +32,7 @@ import Ranking from "./pages/Ranking";
 import ChapterListPage from "./pages/ChapterListPage";
 import ProtectedRoute from "./templates/Authentication/ProtectedRoute";
 import ChapterMainPage from "./pages/ChapterMainPage";
+import ProtectedRoute2 from "./templates/Authentication/ProtectedRoute2";
 
 
 const router = createBrowserRouter([
@@ -101,19 +102,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "login",
-        element: <LoginPage />
+        element: <ProtectedRoute2><LoginPage /></ProtectedRoute2>
       },
       {
         path: "signup",
-        element: <SignUPPage />
+        element:<ProtectedRoute2><SignUPPage /></ProtectedRoute2> 
       },
       {
         path: "find-id",
-        element: <FindId />
+        element: <ProtectedRoute2><FindId /></ProtectedRoute2>
       },
       {
         path: "password",
-        element: <FindPw />
+        element: <ProtectedRoute2><FindPw /></ProtectedRoute2>
       }
     ]
   },

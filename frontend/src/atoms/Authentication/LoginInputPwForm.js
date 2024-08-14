@@ -5,6 +5,7 @@ import axios from "axios";
 import baseApi from "../../api/fetchAPI";
 import useAuthStore from "../../stores/authStore";
 import { useNavigate } from 'react-router-dom';
+import CustomAlert from "../../atoms/alert";
 
 function LoginInputPwForm(props) {
 //   console.log(props);
@@ -14,6 +15,8 @@ function LoginInputPwForm(props) {
   const setAccessToken = useAuthStore((state) => state.setAccessToken);
   const setUserId = useAuthStore((state) => state.setUserId);
   const setManager = useAuthStore((state) => state.setManager);
+
+  const [alertContent, setAlertContent] = useState("");
   const navigate = useNavigate()
 
   const activeEnter = (event) => {
@@ -37,7 +40,7 @@ function LoginInputPwForm(props) {
             setManager(response.data.data.admin);
             navigate("/main");
           } else if (response.data.code == 706) {
-            alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
+            setAlertContent(`비밀번호 혹은 아이디를 잘못 작성했습니다.`);
           }
           console.log(response);
           setUserId(Id);
@@ -48,14 +51,18 @@ function LoginInputPwForm(props) {
     }
   };
 
+  const handleCloseAlert = () => {
+    setAlertContent(null); // Alert 닫기
+  };
+
   const handleChangeName = (event) => {
     setName(event.target.value);
   };
 
   const handleSubmit = (event) => {
-    alert(`이름: ${name}`);
     event.preventDefault();
   };
+
   return (
     <form className="FormBorder LoginFormFont">
       <input
@@ -66,6 +73,10 @@ function LoginInputPwForm(props) {
         placeholder={props.content}
         onKeyDown={(e) => activeEnter(e)}
       />
+      {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
     </form>
   );
 }

@@ -1,4 +1,6 @@
 import "./SoundMethod.css";
+import "./Ch5SM.css"
+
 import HowSpeak from "../../molecules/StudyList/HowSpeak";
 import SpeakExplanation from "../../molecules/StudyList/SpeakExplanation";
 import { useEffect, useState } from "react";
@@ -137,12 +139,12 @@ const Ch5SM = ({ hangeul, selectedChar }) => {
   }, [selectedChar]);
   console.log(word);
   return (
-    <div className="ch2 rounded-3 shadow">
+    <div className="ch5 rounded-3 shadow">
       <HowSpeak />
       {word ? (
         <SpeakExplanation data={word} />
       ) : (
-        <p>글자를 클릭하여 설명을 확인하세요</p>
+        <p className="p-5" style={{fontSize:"1.5rem"}}>글자를 클릭하여 설명을 확인하세요</p>
       )}
     </div>
   );

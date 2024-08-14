@@ -2,6 +2,7 @@ package com.chestnut.backend.log.service;
 
 import com.chestnut.backend.avatar.entity.Avatar;
 import com.chestnut.backend.avatar.repository.AvatarRepository;
+import com.chestnut.backend.common.exception.InvalidMemberException;
 import com.chestnut.backend.common.exception.MemberNotFoundException;
 import com.chestnut.backend.common.exception.StudyNotFoundException;
 import com.chestnut.backend.log.entity.*;
@@ -11,6 +12,8 @@ import com.chestnut.backend.member.repository.MemberRepository;
 import com.chestnut.backend.member.service.MemberService;
 import com.chestnut.backend.study.entity.Study;
 import com.chestnut.backend.study.repository.StudyRepository;
+import java.time.LocalDate;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -36,6 +39,7 @@ public class LogService {
     public void saveStudyLog(String loginId, Long studyId, boolean isPass) {
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
+        if(member.isWithdraw()) throw new InvalidMemberException();
         Study study = studyRepository.findByStudyIdWithChapter(studyId)
                 .orElseThrow(StudyNotFoundException::new);
         int todayCount = studyLogRepository.findRecentLogByMemberId(member.getMemberId(), PageRequest.of(0, 1))
@@ -148,5 +152,13 @@ public class LogService {
             case (byte) 6 -> 105L;
             default -> Long.MAX_VALUE;
         };
+    }
+
+    public List<String> getStudiedWordList(String loginId, int year, int month, int day) {
+        Member member = memberRepository.findByLoginId(loginId)
+            .orElseThrow(MemberNotFoundException::new);
+        if(member.isWithdraw()) throw new InvalidMemberException();
+        LocalDate date = LocalDate.of(year,month,day);
+        return studyLogRepository.getStudiedWordAtTheDay(member, date);
     }
 }

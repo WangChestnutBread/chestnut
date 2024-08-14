@@ -9,7 +9,6 @@ function SentenceButton() {
     <div className="SentenceButton">
       <img
         src="/icons/Book.svg"
-        height="100%"
         onClick={() => {
           setShowSentence(!showSentence);
         }}

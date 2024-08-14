@@ -84,7 +84,7 @@ const BirthCalendarWrapper = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
-  width: 50%;
+  width: 55%;
   display: ${(props) => (props.$isOpen ? "block" : "none")};
 `;
 

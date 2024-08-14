@@ -5,11 +5,10 @@ function IdLengthText(props){
         <>
         {props.text && (
             <div className="Box">
-            <div className="LengthAlert">{props.text}</div>
+                <div className="LengthAlert">{props.text}</div>
             </div>
         )}
         </>
-        
     );
 }
 export default IdLengthText;

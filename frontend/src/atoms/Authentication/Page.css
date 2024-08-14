@@ -74,7 +74,14 @@
 }
 .LoginButtonBorder{
     background: #6B3906;
+    border: none;
 }
+
+.LoginButtonBorder:hover{
+    background: #a5472d;
+    color: #fff;
+}
+
 .pwResetFont{
     color: #000000;
     font-size: 1.25rem;
@@ -142,6 +149,7 @@
     word-wrap: break-word;
 }
 .InspectionButton{
+    border: none;
     height: 35px;
     padding: 10px;
     margin-right: 10px;

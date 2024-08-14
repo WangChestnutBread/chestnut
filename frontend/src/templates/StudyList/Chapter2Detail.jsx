@@ -1,6 +1,5 @@
 import "../NavbarExample.css";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
 import Notation from "../../organisms/StudyList/NotationChapter1";
 import SoundMethod from "../../organisms/StudyList/SoundMethod";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
@@ -10,15 +9,20 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import baseApi from "../../api/fetchAPI";
 import Ch2Notation from "./../../organisms/StudyList/Ch2Notation";
+import Lottie from "lottie-react";
+import Correct from "../../assets/lottie/correct.json";
+import Wrong from "../../assets/lottie/wrong.json"
 
 const Chapter2Detail = () => {
   const params = useParams();
   console.log(params);
-  const [realData, setRealData] = useState("내발음😎");
+  const [realData, setRealData] = useState("녹음된 발음");
   const [answerData, setAnswerData] = useState([100000]);
   const [show, isShow] = useState(false);
   const [correct, setCorrect] = useState(false);
-  console.log();
+  const [yes, setYes] = useState(false)
+  const [no, setNo] = useState(false)
+
 
   const moveData = (value) => {
     setRealData(value);
@@ -37,22 +41,23 @@ const Chapter2Detail = () => {
         .then((res) => {
           console.log(res);
           setCorrect(true);
-          alert("축하드려요 성공입니다.");
-        });
+          setYes(true)
+          setTimeout(() => {
+            setYes(false)
+          },2000)
+        }).catch((err) => {
+          setNo(true)
+          setTimeout(() => {
+            setNo(false)
+          },2000)
+        })
     }
   };
 
   return (
     <div>
       {/* 헤더 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample showBookMarkButton={true}/>
       {/* 표기, 소리나는 방법*/}
       <div className="container">
         <div className="row">
@@ -74,6 +79,30 @@ const Chapter2Detail = () => {
             />
             <div className="mt-5 d-flex ms-5">
               <RecordData func={moveData} func2={answer} />
+              <div style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  zIndex: 1000,
+                  width: "800px",
+                  height: "800px",
+                  transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+                  pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+                }}>
+                {yes ? <Lottie animationData={Correct} /> : <></>}
+              </div>
+              <div style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  zIndex: 1000,
+                  width: "800px",
+                  height: "800px",
+                  transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+                  pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+                }}>
+                  {no ? <Lottie animationData={Wrong} /> : <></>}
+                </div>
             </div>
           </div>
 

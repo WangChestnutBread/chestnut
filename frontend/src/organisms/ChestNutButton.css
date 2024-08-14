@@ -1,8 +1,12 @@
-.ChestNutButton {
-  width: 50px;
-  height: 40px;
+.hamburger-menu {
   position: relative;
   cursor: pointer;
+}
+
+.hamburger-menu img {
+  height: 35px; /* 로고 크기 조정 */
+  width: auto;
+  align-items: center;
 }
 
 .DropMenu {
@@ -31,4 +35,42 @@
   height: 20px;
   background: white;
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.DropMenu > .DropItem{
+  color: black;
+}
+
+/* Navbar.css */
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #f0e6d2;
+}
+
+.navbar {
+  display: flex;
+  align-items: flex-end;
+}
+
+.nav-item {
+  text-decoration: none;
+  font-size: 20px;
+  margin-right: 20px;
+  color:black;
+}
+
+.nav-item img {
+  display: flex;
+  align-items: center;
+  height: 40px; /* 로고 크기 조정 */
+  width: auto;
+}
+
+.nav-menu{
+  padding-bottom: 0.5rem;
+}
+
+.nav-menu > .nav-item:hover {
+  border-bottom: 2px solid #8b4513;
 }

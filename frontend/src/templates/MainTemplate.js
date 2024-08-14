@@ -10,6 +10,9 @@ import OpenChat from "../organisms/OpenChat";
 import Tutorial from "../atoms/Tutorial";
 import MainTutorialStep from "../data/MainTutorialStep";
 import WelcomeModal from "../atoms/WelcomeModal";
+import baseApi from "../api/fetchAPI";
+
+
 
 const MainTemplate = ({ profile, attendance }) => {
   // 메뉴 밤
@@ -19,6 +22,7 @@ const MainTemplate = ({ profile, attendance }) => {
     { name: "단어장", path: "/myVocabulary" },
     { name: "게시판", path: "/board/announcement/1" },
   ]);
+
 
   const { hasVisitedBefore, setHasVisitedBefore } = useAuthStore();
 

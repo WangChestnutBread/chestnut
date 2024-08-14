@@ -20,14 +20,14 @@ public interface VocabularyRepository extends JpaRepository<Vocabulary, Vocabula
     Optional<Vocabulary> findByMemberAndStudy(Member member, Study study);
 
     @Query(value = "select new com.chestnut.backend.vocabulary.dto." +
-            "VocabularyDto(v.study.studyId, v.study.chapter.chapterId, v.study.word) " +
+            "VocabularyDto(v.study.studyId, v.study.chapter.chapterId, v.study.word, v.study.pronounce) " +
             "from Vocabulary v join v.study " +
             "where v.member = :member and v.study.chapter.chapterId = :chapterId",
             countQuery = "select count(v) from Vocabulary v where v.member = :member and v.study.chapter.chapterId = :chapterId")
     Page<VocabularyDto> findByMemberAndChapter(@Param("member") Member member, @Param("chapterId") Byte chapterId, Pageable pageable);
 
     @Query(value = "select new com.chestnut.backend.vocabulary.dto." +
-            "VocabularyDto(v.study.studyId, v.study.chapter.chapterId, v.study.word) " +
+            "VocabularyDto(v.study.studyId, v.study.chapter.chapterId, v.study.word, v.study.pronounce) " +
             "from Vocabulary v join v.study " +
             "where v.member = :member",
             countQuery = "select count(v) from Vocabulary v where v.member = :member")
