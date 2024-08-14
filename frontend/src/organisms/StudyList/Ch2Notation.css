@@ -2,7 +2,7 @@
 .ch2box {
   background-color: #0C4518;
   position: relative;
-  height: 263px;
+  height: 100%;
   display: flex;
   justify-content: center; 
   align-items: center; 

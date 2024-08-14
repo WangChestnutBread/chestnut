@@ -23,6 +23,7 @@ const Chapter2Detail = () => {
   const [correct, setCorrect] = useState(false);
   const [yes, setYes] = useState(false)
   const [no, setNo] = useState(false)
+  const [wrong, isWrong] = useState(false);
 
 
   const moveData = (value) => {
@@ -58,8 +59,74 @@ const Chapter2Detail = () => {
   return (
     <div className="ChapterDetail">
       {/* 헤더 */}
-      <NavbarExample showBookMarkButton={true}/>
-      {/* 표기, 소리나는 방법*/}
+
+      <NavbarExample showBookMarkButton={true}></NavbarExample>
+      <div className="container">
+        <div className="row">
+          <div className="col-8">
+            <div className="d-flex">
+              <div className="col-5" style={{height:'341px'}}>
+                {/* <Notation word={params} /> */}
+                <Ch2Notation word={params} />
+              </div>
+              <div className="col-7" style={{marginLeft:"5px"}}>
+                <CameraOrganism />
+              </div>
+            </div>
+
+            <div className="mt-2 justify-content-center" 
+              style={{
+                height:"250px",
+            }}>
+              <Pronunciation
+                saying={params}
+                realData={realData}
+                location={answerData}
+              />
+            </div>
+            <div className="mt-2">
+              
+              <div
+                style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  zIndex: 1000,
+                  width: "800px",
+                  height: "800px",
+                  transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+                  pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+                }}
+              >
+                {yes ? <Lottie animationData={Correct} /> : <></>}
+              </div>
+              <div style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  zIndex: 1000,
+                  width: "800px",
+                  height: "800px",
+                  transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+                  pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+                }}>
+                   {no ? <Lottie animationData={Wrong} /> : <></>}
+              </div>
+            </div>
+          </div>
+          <div className="col-4 mt-2">
+            <SoundMethod hangeul={params} />
+          </div>
+        </div>
+        {/* 소리나는 방법, 카메라 */}
+        <RecordData func={moveData} func2={answer} />
+      
+    </div>
+    </div>
+  );
+};
+export default Chapter2Detail;
+{/* <NavbarExample showBookMarkButton={true}/>
       <div className="container">
         <div className="row">
           <div className="col-4 mt-2">
@@ -69,7 +136,6 @@ const Chapter2Detail = () => {
             <SoundMethod hangeul={params} />
           </div>
         </div>
-        {/* 발음, 카메라 */}
         <div className="row">
           <div className="col-6 mt-2 ">
             <Pronunciation
@@ -110,9 +176,4 @@ const Chapter2Detail = () => {
             <CameraOrganism />
           </div>
         </div>
-        {/* 마이크 */}
-      </div>
-    </div>
-  );
-};
-export default Chapter2Detail;
+      </div> */}
