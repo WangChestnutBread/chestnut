@@ -8,7 +8,7 @@ import baseApi from "../../api/fetchAPI";
 import NavbarExample from "../NavbarExample";
 import SMCH1 from "./../../organisms/StudyList/SMCH1";
 import CH1record from "./../../organisms/StudyList/CH1record";
-
+import "./ChapterDetail.css"
 const Chapter1Detail = () => {
   const params = useParams();
   const [realData, setRealData] = useState("내발음😎");
@@ -36,12 +36,12 @@ const Chapter1Detail = () => {
     }
   };
   return (
-    <div>
+    <div class="ChapterDetail">
       {/* 헤더 */}
       <NavbarExample />
       {/* 표기, 입모양, 혀모양 */}
       <div className="container">
-        <div className="row">
+        <div className="row mb-2">
           <div className="col-4 mt-2 ">
             <Notation word={params} />
           </div>
@@ -50,16 +50,16 @@ const Chapter1Detail = () => {
           </div>
         </div>
         {/* 소리나는 방법, 카메라 */}
-        <div className="row d-flex">
-          <div className="col-6 justify-content-center">
+        <div className="d-flex justify-content-between" style={{gap:"20px"}}>
+          <div className="flex-grow-1 justify-content-center">
             <div>
               <SMCH1 hangeul={params} />
             </div>
-            <div className="col-6 mt-2 ms-5 d-flex">
+            <div className="mt-2 me-4 d-flex justify-content-center">
               <CH1record func={moveData} func2={answer} />
             </div>
           </div>
-          <div className="col-6">
+          <div className="">
             <CameraOrganism />
           </div>
         </div>

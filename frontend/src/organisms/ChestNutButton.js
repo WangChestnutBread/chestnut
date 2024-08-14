@@ -13,7 +13,7 @@ function ChestNutButton() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  if (windowWidth <= 880) {
+  if (windowWidth <= 910) {
     return <HamburgerMenu />;
   } else {
     return (
