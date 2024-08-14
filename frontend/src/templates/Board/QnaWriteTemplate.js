@@ -3,11 +3,13 @@ import NavbarExample from "../NavbarExample";
 import "./QnaWriteTemplate.css";
 import { useNavigate } from "react-router-dom";
 import baseApi from "../../api/fetchAPI";
+import CustomAlert from "../../atoms/alert";
 
 const QNAWritePage = () => {
   const [qnaCategoryId, setQnaCategoryId] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [alertContent, setAlertContent] = useState("");
 
   const navigate = useNavigate();
   const handleQnaClick = () => {
@@ -16,15 +18,15 @@ const QNAWritePage = () => {
 
   const handleDetailClick2 = () => {
     if (title.length < 3){
-      alert('제목을 3글자 이상 적어주세요')
+      setAlertContent(`제목을 3글자 이상 적어주세요.`);
       return
     }
     else if (content.length < 10) {
-      alert('내용을 10글자 이상 적어주세요')
+      setAlertContent(`내용을 10글자 이상 적어주세요.`);
       return
     }
     else if (!qnaCategoryId) {
-      alert('유형을 선택해주세요')
+      setAlertContent(`유형을 선택해주세요.`);
       return
     }
 
@@ -41,6 +43,10 @@ const QNAWritePage = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleCloseAlert = () => {
+    setAlertContent(null); // Alert 닫기
   };
 
   return (
@@ -109,6 +115,10 @@ const QNAWritePage = () => {
           </button>
         </div>
       </div>
+      {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
     </div>
   );
 };

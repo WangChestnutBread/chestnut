@@ -6,6 +6,7 @@ import Text24 from "../atoms/Text24";
 import Text32 from "../atoms/Text32";
 import { useState } from "react";
 import baseApi from "../api/fetchAPI";
+import CustomAlert from "../atoms/alert";
 
 const VocaModal = ({ word, pronounce, studyId, onClose }) => {
   const [myPronounce, setMyProunce] = useState(
@@ -13,9 +14,14 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
   );
   const [answerPronounce, setAnswerPronounce] = useState([100000]);
   const [show, isShow] = useState(false);
+  const [alertContent, setAlertContent] = useState("");
 
   const movePronounce = (value) => {
     setMyProunce(value);
+  };
+
+  const handleCloseAlert = () => {
+    setAlertContent(null); // Alert 닫기
   };
 
   const answer = (value) => {
@@ -32,7 +38,7 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
         })
         .then((res) => {
           console.log(res);
-          alert("축하드려요 성공입니다.");
+          setAlertContent(`✨ 축하합니다~! ✨<br> 성공입니다~! 🥳`);
         });
     }
   };
@@ -91,6 +97,11 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
           <Record func={movePronounce} func2={answer} />
         </Modal.Footer>
       </Modal>
+
+      {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
     </div>
   );
 };

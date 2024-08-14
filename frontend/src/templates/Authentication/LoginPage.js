@@ -8,6 +8,8 @@ import BackButton from "../../atoms/BackButton";
 import "../../atoms/Authentication/Page.css";
 import axios from "axios";
 import useAuthStore from "../../stores/authStore";
+import CustomAlert from "../../atoms/alert";
+
 function LoginPage() {
   //ID설정하는 부분에 대한 변수
   const [Id, setName] = useState("");
@@ -21,7 +23,7 @@ function LoginPage() {
   const setManager = useAuthStore((state) => state.setManager);
   const setId = useAuthStore((state) => state.setId);
   const setPw = useAuthStore((state) => state.setPw);
-
+  const [alertContent, setAlertContent] = useState("");
   
 
   const handleChangeName = (event) => {
@@ -54,7 +56,7 @@ function LoginPage() {
           
           // console.log("토의 열심히 하시네");
         } else if (response.data.code == 706) {
-          alert("비밀번호 혹은 아이디를 잘못 작성했습니다.");
+          setAlertContent(`비밀번호 혹은 아이디를<br>잘못 작성했습니다.`);
         }
         console.log(response);
         setUserId(Id);
@@ -63,6 +65,11 @@ function LoginPage() {
         console.log(error);
       });
   };
+
+  const handleCloseAlert = () => {
+    setAlertContent(null); // Alert 닫기
+  };
+
   return (
     <div className="container">
       <div
@@ -149,6 +156,10 @@ function LoginPage() {
           </div>
         </div>
       </div>
+      {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
     </div>
   );
 }

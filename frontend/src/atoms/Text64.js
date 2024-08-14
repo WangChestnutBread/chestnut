@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 
 function Text64({ text, location }) {
   console.log(location)

@@ -11,12 +11,11 @@ import PasswordButton from "../../molecules/Authentication/PasswordButton";
 import HiddenForm from "../../organisms/Authentication/hiddenForm";
 import NewInputForm from "../../organisms/Authentication/NewInputForm";
 import axios from "axios";
-import Swal from 'sweetalert2'
 import baseApi from "../../api/fetchAPI";
 import BirthCalendar from "../../atoms/Authentication/MemberBirth/BirthCalendar";
 import moment from "moment";
 import LoginIdPwFont from "../../atoms/Authentication/LoginIdPwFont";
-
+import CustomAlert from "../../atoms/alert";
 
 function EditMyInfo(){
     const navigate = useNavigate();
@@ -54,6 +53,9 @@ function EditMyInfo(){
     const [isAuth, setIsAuth] = useState(false);
     const [isCurPw, setIsCurPw] = useState(false);
     const [isNickname, setIsNickname] = useState(false);
+    const [isEditInfo, setIsEditInfo] = useState(false);
+
+    const [alertContent, setAlertContent] = useState("");
 
     const url = "https://i11d107.p.ssafy.io/chestnutApi";
 
@@ -79,13 +81,13 @@ function EditMyInfo(){
                     setBirth(null);
                 }
             } else if (response.data.code === "801") {
-                alert("유효하지 않는 토큰입니다.");
+                setAlertContent(`잠시후 다시 시도해 주세요.`);
             } else if (response.data.code === "710") {
-                alert("db에 정보가 없습니다.");
+                setAlertContent(`사용자 정보가 존재하지 않습니다.`);
             } else if (response.data.code === "714") {
-                alert("아이디가 존재하지 않습니다.");
+                setAlertContent(`아이디가 존재하지 않습니다.`);
             } else {
-                alert("계정 권한이 없음");
+                setAlertContent(`열람 권한이 없습니다.`);
             }
         })
         .catch(error => {
@@ -121,26 +123,22 @@ function EditMyInfo(){
         })
         .then(response => {
             if (response.data.code === "200") {
-                Swal.fire({
-                    icon: "info",
-                    title: "회원정보 수정",
-                    text: "회원 정보수정을 완료했습니다."
-                });
-                navigate("/myprofile/myinfo");
+                setIsEditInfo(true);
+                setAlertContent(`회원 수정을 완료했습니다.`);
             } else if (response.data.code === "801") {
-                alert("유효하지 않은 토큰");
+                setAlertContent(`잠시후 다시 시도해 주세요.`);
             } else if (response.data.code === "710") {
-                alert("DB에 정보 없음");
+                setAlertContent(`사용자 정보가 존재하지 않습니다.`);
             } else if (response.data.code === "714") {
-                alert("아이디 없음");
+                setAlertContent(`아이디가 존재하지 않습니다.`);
             } else if (response.data.code === "299") {
-                alert("알 수 없는 오류");
+                setAlertContent(`잠시후 다시 시도해주세요`);
             } else if (response.data.code === "810") {
-                alert("계정 권한 없음");
+                setAlertContent(`열람 권한이 없습니다.`);
             } else if (response.data.code === "812") {
-                alert("계정이 유효하지 않음");
+                setAlertContent(`계정이 유효하지 않습니다.`);
             } else if (response.data.code === "603") {
-                alert("부적절한 양식");
+                setAlertContent(`부적절한 양식입니다.`);
             }
         })
         .catch(error => {
@@ -240,7 +238,7 @@ function EditMyInfo(){
         e.preventDefault();
         
         if (!isEmail) {
-            alert("유효한 이메일 주소를 입력해주세요.");
+            setAlertContent(`유효한 이메일 주소를<br>입력해주세요.`);
             return;
         }
 
@@ -262,29 +260,29 @@ function EditMyInfo(){
                         console.log("이메일 발송")
                         setEmailMessage("");
                         if (response.data.code === "200") {
-                            alert("인증 이메일을 발송했습니다. 이메일을 확인해주세요.");
+                            setAlertContent("인증 이메일을 발송했습니다.<br>이메일을 확인해주세요.");
                             setIsEmail(true);
                             setSentCode(true);
                             setVerificationSent(!verificationSent);
                         }
                         if (response.data.code === "601") {
-                            alert("이미 존재하는 이메일입니다.");
+                            setAlertContent(`이미 존재하는 이메일입니다.`);
                             setIsEmail(false);
                         } else if (response.data.code === "603") {
-                            alert("올바르지 않은 이메일 양식입니다.");
+                            setAlertContent(`올바르지 않은 이메일 양식입니다.`);
                             setIsEmail(false);
                         } else if (response.data.code === "606") {
-                            alert("인증번호 보내는 데 실패했습니다.");
+                            setAlertContent(`인증번호 보내는 데 실패했습니다.`);
                             setIsEmail(false);
                         } else if (response.data.code === "299") {
-                            alert("알 수 없는 오류가 발생했습니다.");
+                            setAlertContent(`오류가 발생했습니다.`);
                             setIsEmail(false);
                         }
                         console.log(response);
                     })
                     .catch(error => {
                         console.log(error);
-                        alert("인증 이메일 발송 중 오류가 발생했습니다.");
+                        setAlertContent(`인증 이메일 발송 중<br>오류가 발생했습니다.`);
                     });
             } else if (response.data.code === "601") {
                 setEmailMessage("이미 존재하는 이메일입니다.");
@@ -292,7 +290,7 @@ function EditMyInfo(){
             }
         }).catch(error=>{
             console.log(error);
-            alert("이메일 확인 중 오류가 발생했습니다.");
+            setAlertContent(`이메일 확인 중<br>오류가 발생했습니다.`);
         })
     };
 
@@ -300,7 +298,7 @@ function EditMyInfo(){
         e.preventDefault();
 
         if (!Auth) {
-            alert("인증번호를 입력해주세요.");
+            setAlertContent(`인증번호를 입력해주세요.`);
             return;
         }
 
@@ -393,19 +391,11 @@ function EditMyInfo(){
         })
         .then(response => {
             if (response.data.code === "200") {
-                Swal.fire({
-                    icon: "info",
-                    title: "비밀번호 재설정",
-                    text: "비밀번호 변경을 완료했습니다."
-                });
+                setAlertContent(`비밀번호 변경을 완료했습니다.`);
                 setCurPw(Pw);
                 setModalIsOpen(false);
             } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "비밀번호 재설정",
-                    text: "올바르지 않은 양식이거나 정보가 없습니다.",
-                });
+                setAlertContent(`올바르지 않은 양식이거나 정보가 없습니다.`);
             }
             console.log(response);
         }).catch(error => {
@@ -413,7 +403,13 @@ function EditMyInfo(){
         });
     }
 
-
+    const handleCloseAlert = () => {
+        setAlertContent(null); // Alert 닫기
+        if(isEditInfo) {
+            setIsEditInfo(false);
+            navigate("/myprofile/myinfo");
+        }
+      };
 
     return(
         <div>
@@ -495,6 +491,10 @@ function EditMyInfo(){
                     </div>
                 </div>
             </Modal>
+            {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
         </div>
     );
 }
