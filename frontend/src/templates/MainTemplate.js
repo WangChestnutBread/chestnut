@@ -18,6 +18,12 @@ const MainTemplate = ({ profile, attendance }) => {
     { name: "단어장", path: "/myVocabulary" },
     { name: "게시판", path: "/board/announcement/1" },
   ]);
+    // useEffect(() => {
+  //   baseApi.get(`/study/study-id`,).then((res) => {
+  //     console.log(res.data.data);
+  //     setCheckPoint(res.data.data)
+  //   })
+  // },[])
 
   let [showOpenChat, setShowOpenChat] = useState(false);
   let [startTutorial, setStartTutorial] = useState(false);
