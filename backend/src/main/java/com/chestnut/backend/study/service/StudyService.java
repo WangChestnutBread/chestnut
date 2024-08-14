@@ -53,7 +53,7 @@ public class StudyService {
                 .orElseThrow(MemberNotFoundException::new);
         if (member.isWithdraw()) throw new InvalidMemberException();
         return switch (chapterId) {
-            case 4 -> this.phonologyGroupInfo();
+            case 4 -> this.phonologyGroupInfo(member.getMemberId());
             case 7 -> this.confusedWordsGroup();
             default -> convertData(member.getMemberId(), chapterId);
         };
@@ -121,22 +121,33 @@ public class StudyService {
     }
 
 
-
-
     /**
      * 챕터내 학습 목록 조회 (4단원)
      */
-    public List<PhonologyGroupInfoDto> phonologyGroupInfo() {
+    public List<PhonologyGroupInfoDto> phonologyGroupInfo(Long memberId) {
         List<Byte> studyCategoryIds = Arrays.asList((byte)22, (byte)23, (byte)24, (byte)25);
+        List<Long> studyIdList = studyLogRepository.findStudyIdByChapterIdAndMemberId(memberId, (byte) 4); //회원이 학습한 study_id
+        Set<Long> studyIdSet = new HashSet<>(studyIdList);
         List<String> categoryName = studyInfoRepository.getCategoryName(studyCategoryIds);
         Map<Byte, List<PhonologyStudyInfo>> phonologyStudyInfo = studyInfoRepository.getPhonologyStudyInfo(studyCategoryIds);
 
         return IntStream.range(0, studyCategoryIds.size())
-                .mapToObj(i -> new PhonologyGroupInfoDto(
+                .mapToObj(i -> {
+                    List<PhonologyStudyInfo> infoList = phonologyStudyInfo.getOrDefault(
+                        studyCategoryIds.get(i), Collections.emptyList());
+                    for (PhonologyStudyInfo info : infoList) {
+                        if (studyIdSet.contains(info.getStudyId())) {
+                            info.setIsPass(1);
+                        } else {
+                            info.setIsPass(2);
+                        }
+                    }
+                    return new PhonologyGroupInfoDto(
                         categoryName.get(i),
                         studyCategoryIds.get(i),
-                        phonologyStudyInfo.getOrDefault(studyCategoryIds.get(i), Collections.emptyList())
-                ))
+                        infoList
+                    );
+                })
                 .collect(Collectors.toList());
     }
 
