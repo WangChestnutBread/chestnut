@@ -60,68 +60,203 @@ const Chapter3Detail = () => {
     <div className="ChapterDetail">
       {/* 헤더 */}
       <NavbarExample showBookMarkButton={true}></NavbarExample>
-      {/* 표기, 입모양, 혀모양 */}
-      <div className="container">
-        <div className="row">
-          <div className="col-8 mt-2">
-            <div className="d-flex">
-              <div className="col-4">
+      <div 
+        style={{
+          width:"100%",
+          height:"100%",
+          display:"flex",
+          flexDirection:"column",
+      }}>
+        {/* 1행 */}
+        <div 
+          style={{
+            display:"flex",
+            width:"100%",
+        }}>
+          {/* 1행 1열: 3개 묶음 */}
+          <div 
+            style={{
+              display:"flex",
+              flexDirection:"column",
+              width:"70%",
+              height:"30%",
+          }}>
+            {/* 1행 1열 1행: 2개 묶음 */}
+            <div 
+              style={{
+                display:"flex",
+                height:"100%",
+            }}>
+              {/* 1행 1열 1행 1열: */}
+              <div style={{
+                width:"50%",
+              }}>
                 <Ch3Notation word={params} />
+
               </div>
-              <div className="col-8 ms-5">
+              {/* 1행 1열 1행 2열: */}
+              <div style={{
+                width:"50%", 
+              }}>
                 <CameraOrganism />
               </div>
             </div>
-
-            <div className="mt-2 justify-content-center">
+            {/* 1행 1열 2행: 발음 */}
+            <div 
+              style={{
+                width:"100%",
+                height:"30%",
+            }}>
               <Pronunciation
                 saying={params}
                 realData={realData}
                 location={answerData}
               />
             </div>
-            <div className="mt-2">
-              <RecordData func={moveData} func2={answer} />
-            </div>
           </div>
-          <div className="col-4 mt-2">
+          {/* 1행 2열: Chapter3 Notation */}
+          <div 
+            style={{
+              display:"flex",
+              width:"30%",
+          }}>
             <Ch3SM hangeul={params} />
+
           </div>
         </div>
-        {/* 소리나는 방법, 카메라 */}
-        <div className="row">
-          <div className="col-6 mt-2 mb-3"></div>
-        </div>
-        <div
-                style={{
-                  position: "fixed",
-                  top: "50%",
-                  left: "50%",
-                  zIndex: 1000,
-                  width: "800px",
-                  height: "800px",
-                  transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
-                  pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
-                }}
-              >
-                {correct ? <Lottie animationData={Correct} /> : <></>}
-              </div>
-              <div style={{
-                  position: "fixed",
-                  top: "50%",
-                  left: "50%",
-                  zIndex: 1000,
-                  width: "800px",
-                  height: "800px",
-                  transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
-                  pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
-                }}>
-                   {wrong ? <Lottie animationData={Wrong} /> : <></>}
-              </div>
+        {/* 2행 */}
+        <div 
+          style={{
+            display:"flex",
+            justifyContent:"center",
+        }}>
+          <RecordData func={moveData} func2={answer} />
 
-        {/* 마이크 */}
+        </div>
+
       </div>
     </div>
+
+    /////////////// 이전 코드 //////////////////////
+    // <div className="ChapterDetail">
+    //   {/* 표기, 입모양, 혀모양 */}
+
+
+    //         <div className="mt-2 justify-content-center">
+
+    //         </div>
+    //         <div className="mt-2">
+    //         </div>
+    //       </div>
+    //       <div className="col-4 mt-2">
+  
+    //       </div>
+    //     </div>
+    //     {/* 소리나는 방법, 카메라 */}
+    //     <div className="row">
+    //       <div className="col-6 mt-2 mb-3"></div>
+    //     </div>
+    //     <div
+    //       style={{
+    //         position: "fixed",
+    //         top: "50%",
+    //         left: "50%",
+    //         zIndex: 1000,
+    //         width: "800px",
+    //         height: "800px",
+    //         transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+    //         pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+    //       }}
+    //     >
+    //       {correct ? <Lottie animationData={Correct} /> : <></>}
+    //     </div>
+    //     <div style={{
+    //         position: "fixed",
+    //         top: "50%",
+    //         left: "50%",
+    //         zIndex: 1000,
+    //         width: "800px",
+    //         height: "800px",
+    //         transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+    //         pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+    //       }}>
+    //           {wrong ? <Lottie animationData={Wrong} /> : <></>}
+    //     </div>
+
+    //     {/* 마이크 */}
+    //   </div>
+    // </div>
+
+
+
+
+
+    /////////////// 이전 코드 //////////////////////
+    // <div className="ChapterDetail">
+    //   {/* 헤더 */}
+    //   <NavbarExample showBookMarkButton={true}></NavbarExample>
+    //   {/* 표기, 입모양, 혀모양 */}
+    //   <div className="container">
+    //     <div className="row">
+    //       <div className="col-8 mt-2">
+    //         <div className="d-flex">
+    //           <div className="col-4">
+    //             <Ch3Notation word={params} />
+    //           </div>
+    //           <div className="col-8 ms-5">
+    //             <CameraOrganism />
+    //           </div>
+    //         </div>
+
+    //         <div className="mt-2 justify-content-center">
+    //           <Pronunciation
+    //             saying={params}
+    //             realData={realData}
+    //             location={answerData}
+    //           />
+    //         </div>
+    //         <div className="mt-2">
+    //           <RecordData func={moveData} func2={answer} />
+    //         </div>
+    //       </div>
+    //       <div className="col-4 mt-2">
+    //         <Ch3SM hangeul={params} />
+    //       </div>
+    //     </div>
+    //     {/* 소리나는 방법, 카메라 */}
+    //     <div className="row">
+    //       <div className="col-6 mt-2 mb-3"></div>
+    //     </div>
+    //     <div
+    //       style={{
+    //         position: "fixed",
+    //         top: "50%",
+    //         left: "50%",
+    //         zIndex: 1000,
+    //         width: "800px",
+    //         height: "800px",
+    //         transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+    //         pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+    //       }}
+    //     >
+    //       {correct ? <Lottie animationData={Correct} /> : <></>}
+    //     </div>
+    //     <div style={{
+    //         position: "fixed",
+    //         top: "50%",
+    //         left: "50%",
+    //         zIndex: 1000,
+    //         width: "800px",
+    //         height: "800px",
+    //         transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+    //         pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+    //       }}>
+    //           {wrong ? <Lottie animationData={Wrong} /> : <></>}
+    //     </div>
+
+    //     {/* 마이크 */}
+    //   </div>
+    // </div>
   );
 };
 export default Chapter3Detail;
