@@ -81,7 +81,9 @@ function SignUPPage() {
         .then(res => {
             if (res.data.code === "200") {
                 setIsSignup(true);
-                setAlertContent("회원가입에 성공했습니다.");
+                setTimeout(() => {
+                    setAlertContent("회원가입에 성공했습니다.");
+                }, 100); // 상태 업데이트 후 약간의 지연을 줌
                 return;
             }
             if (res.data.code === "611" || res.data.code === "614") {
@@ -123,6 +125,16 @@ function SignUPPage() {
         console.log("선택된 날짜: ", date);
     }
 
+    useEffect(() => {
+        if (alertContent) {
+            // 알림이 있을 때만 실행
+            const timer = setTimeout(() => {
+                handleCloseAlert();
+            }, 3000); // 3초 후에 알림을 자동으로 닫도록 설정
+
+            return () => clearTimeout(timer); // 컴포넌트가 언마운트될 때 타이머 정리
+        }
+    }, [alertContent]);
 
     //onchange할 때마다 Id변수에 저장시켜줄 기능을 가진 함수
     const inputId = (e) => {
