@@ -3,18 +3,18 @@ package com.chestnut.backend.study.controller;
 import com.chestnut.backend.common.dto.ResponseDto;
 import com.chestnut.backend.member.dto.CustomMemberDetails;
 import com.chestnut.backend.study.dto.ChapterInfoDto;
-import com.chestnut.backend.study.dto.PronounceMethodDto;
-import com.chestnut.backend.study.dto.WordPronounceDto;
 import com.chestnut.backend.study.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,8 +45,8 @@ public class StudyController {
 
     @GetMapping("/study-id")
     public ResponseEntity<?> getStudyIdList() {
-//        List<Long> studyIdList = studyService.getWholeStudyIdList();
-        List<Long> studyIdList = List.of(1L, 2L, 3L);
+        List<Long> studyIdList = studyService.getWholeStudyIdList();
+//        List<Long> studyIdList = List.of(1L, 2L, 3L);
         log.debug("study-id");
         ResponseDto<List<Long>> result = new ResponseDto<>("200", studyIdList);
         return new ResponseEntity<>(result, HttpStatus.OK);
