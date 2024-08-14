@@ -58,6 +58,7 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick}) => {
           display:"flex",
           width:"100%",
           height:"50%",
+          marginTop:"2%"
       }}>
         {/* 2행 1열 */}
         <div 
