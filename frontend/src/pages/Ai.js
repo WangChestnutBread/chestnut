@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import baseApi from "../api/fetchAPI";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
-import StudyBackButton from "../molecules/StudyBackButton";
-import ChestNutButton from "../organisms/ChestNutButton";
+import NavbarExample from "../templates/NavbarExample";
 
 const Ai = ({ userId }) => {
   const [messages, setMessages] = useState([]); // 대화 메시지 상태
@@ -140,15 +139,7 @@ const Ai = ({ userId }) => {
 
   return (
     <div>
-      {/* nav바 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample/>
       {/* 로고 */}
       <div className="container text-start justify-center">
         <div className="logo-container">

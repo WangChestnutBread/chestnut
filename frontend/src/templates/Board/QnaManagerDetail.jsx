@@ -3,8 +3,7 @@ import LogoQna from "../../molecules/Board/LogoQna";
 import QnaDetail from "../../organisms/Board/QnaDetail";
 import ListBtn from "../../molecules/Board/ListBtn";
 import "./QnaManagerDetail.css";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
 import baseApi from "../../api/fetchAPI";
 import { useParams } from "react-router-dom";
 import useAuthStore from "../../stores/authStore";
@@ -59,15 +58,7 @@ const QnaManagerDetail = () => {
 
   return (
     <div>
-      {/* 헤더 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample/>
       <div className="container text-start">
         {/* 로고 */}
         <LogoQna />

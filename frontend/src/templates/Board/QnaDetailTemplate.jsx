@@ -4,8 +4,7 @@ import "./QnaDetailTemplate.css";
 import LogoQna from "../../molecules/Board/LogoQna";
 import QnaAnswer from "../../organisms/Board/QnaAnswer";
 import ListBtn from "../../molecules/Board/ListBtn";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
 
 
 
@@ -14,14 +13,7 @@ const QnaDetailTemplate = () => {
   return (
     <div>
       {/* 헤더 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample/>
       <div className="container text-start">
         {/* 로고 */}
         <LogoQna />
