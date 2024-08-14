@@ -5,13 +5,34 @@ import Text32 from "../../atoms/Text32";
 import LastStudyButton from "../../molecules/Main/LastStudyButton";
 
 import "./LastStudy.css";
+import baseApi from "../../api/fetchAPI";
 
 function LastStudy({ chapter, word, chapterId, studyId }) {
   let navigate = useNavigate();
+  const giveFirstWordLog = () => {
+    baseApi({
+      method: "get",
+      url: "/log/study",
+      params: {
+        studyId: 1,
+        isPass: 1,
+      }
+    })
+    .then((res) => {
+      console.log(res)
+      navigate("/study/detail1/1/1")
+      console.log("학습 로그 찍기 성공");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
+
+  // 마지막 학습 버튼 클릭 시
   const handleOnClick = () => {
     chapterId
       ? navigate(`/study/detail${chapterId}/${chapterId}/${studyId}`)
-      : navigate("/study/detail1/1/1");
+      : giveFirstWordLog();
   };
 
   return (
