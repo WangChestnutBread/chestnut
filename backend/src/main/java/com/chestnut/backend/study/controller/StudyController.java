@@ -43,7 +43,8 @@ public class StudyController {
 
     @GetMapping("/study-id")
     public ResponseEntity<?> getStudyIdList() {
-        List<Long> studyIdList = studyService.getWholeStudyIdList();
+//        List<Long> studyIdList = studyService.getWholeStudyIdList();
+        List<Long> studyIdList = List.of(1L, 2L, 3L);
         ResponseDto<List<Long>> result = new ResponseDto<>("200", studyIdList);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
