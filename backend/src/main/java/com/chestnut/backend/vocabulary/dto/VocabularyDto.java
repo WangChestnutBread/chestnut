@@ -11,4 +11,5 @@ public class VocabularyDto {
     private Long studyId;
     private Byte chapterId;
     private String word;
+    private String pronounce;
 }
