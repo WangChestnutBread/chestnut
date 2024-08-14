@@ -79,13 +79,6 @@ function SignUPPage() {
             birthday: selectedDate,
         })
         .then(res => {
-            console.log(res.data);
-            console.log(res.data.loginId);
-            console.log(res.data.Id);
-            console.log(Id);
-            console.log(res.data.password);
-            console.log(res.data.Pw);
-            console.log(Pw);
             if (res.data.code === "200") {
                 isSignup(true);
                 setAlertContent("회원가입에 성공했습니다.");
@@ -430,7 +423,7 @@ function SignUPPage() {
                             <SignUpPwInput content={'PW'} text={PwMessage} work={createPw} value={Pw} />
                             <SignUpPwInput content={'PW 재확인'} text={PwConMessage} work={createPwCon} value={PwCon} />
 
-                            <InspectionForm content={'이메일'} text={EmailMessage} name={'인증'} work={createEmail} input={inputEmail} value={Email} disabled={!isEmailValid}/>
+                            <InspectionForm content={'이메일'} text={EmailMessage} name={'인증'} work={createEmail} input={inputEmail} value={Email}/>
                             <TimeWrapper>
                                 {verificationSent && !isAuth && (
                                     <Timer>{formatTime()}</Timer>
