@@ -278,8 +278,6 @@ public class StudyService {
     public List<Long> getWholeStudyIdList() {
         List<Long> studyIdList = studyRepository.getStudyIdList();
         studyIdList.sort(Long::compareTo);
-        int n = studyIdList.size();
-        studyIdList.subList(n-6, n).clear(); //자음 중 받침 부분 제거
         return studyIdList;
     }
 
