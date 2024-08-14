@@ -1,6 +1,5 @@
 import "../NavbarExample.css";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
 import Notation from "../../organisms/StudyList/NotationChapter1";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
@@ -40,14 +39,7 @@ const Chapter6Detail = () => {
   return (
     <div>
       {/* 헤더 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample showBookMarkButton={true}/>
       {/* 표기, 카메라 */}
       <div className="container">
         <div className="row">

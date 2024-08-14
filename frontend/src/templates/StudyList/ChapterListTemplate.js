@@ -1,8 +1,7 @@
 import "./ChapterListTemplate.css";
 import "../NavbarExample.css";
 import { useEffect, useState } from "react";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
 import Chapter1List from "../../organisms/StudyChapter/Chapter1List";
 import Chapter2List from "../../organisms/StudyChapter/Chapter2List";
 import Chapter3List from "../../organisms/StudyChapter/Chapter3List";
@@ -19,14 +18,7 @@ function ChapterListTemplate({ data, chapterId }) {
   return (
     <div className="ChapterListTemplate">
       {/* navbar */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample/>
 
       {/* 칠판 콘텐츠 전체 */}
       <div className="container">

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
 import "./QnaWriteTemplate.css";
 import { useNavigate } from "react-router-dom";
 import baseApi from "../../api/fetchAPI";
@@ -47,14 +46,7 @@ const QNAWritePage = () => {
   return (
     <div>
       {/* // 헤더 영역 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample/>
       <div className="container text-start justify-center">
         {/* // 메인타이틀 QNA */}
         <div className="logo-container">
