@@ -56,21 +56,11 @@ const Chapter6Detail = () => {
 
   return (
     <div>
-      {/* 헤더 */}
-<<<<<<< frontend/src/templates/StudyList/Chapter6Detail.jsx
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
-      {/* 표기, 입모양, 혀모양 */}
-=======
+
+
       <NavbarExample showBookMarkButton={true}/>
       {/* 표기, 카메라 */}
->>>>>>> frontend/src/templates/StudyList/Chapter6Detail.jsx
+
       <div className="container">
         <div className="row">
           <div className="col-8 mt-2">
