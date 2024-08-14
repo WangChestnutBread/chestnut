@@ -4,6 +4,7 @@ import baseApi from "../api/fetchAPI";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
 import NavbarExample from "../templates/NavbarExample";
+import CustomAlert from "../atoms/alert";
 
 const Ai = ({ userId }) => {
   const [messages, setMessages] = useState([]); // 대화 메시지 상태
@@ -16,6 +17,7 @@ const Ai = ({ userId }) => {
   const ffmpeg = new FFmpeg();
   const navigate = useNavigate();
   const messagesEndRef = useRef(null);
+  const [alertContent, setAlertContent] = useState("");
 
   useEffect(() => {
     const startConversation = async () => {
@@ -131,13 +133,18 @@ const Ai = ({ userId }) => {
       setMessages((prevMessages) => [...prevMessages, ...newMessages]);
     } catch (error) {
       console.error("Error uploading file:", error);
-      alert("다시 시도해 주세요.");
+      setAlertContent(`다시 시도해 주세요.`);
     }
 
     setAudioBlob(null);
     setWavBlob(null);
     setIsRecording(false); // 녹음 완료 후 녹음 상태 해제
   };
+
+  const handleCloseAlert = () => {
+    setAlertContent(null); // Alert 닫기
+  };
+
 
   return (
     <div>
@@ -253,6 +260,10 @@ const Ai = ({ userId }) => {
           </div>
         </div>
       </div>
+      {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
     </div>
   );
 };

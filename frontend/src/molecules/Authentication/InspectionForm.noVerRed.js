@@ -9,7 +9,7 @@ function InspectionFormNoRed(props){
     };
 
     const handleSubmit = (event) =>{
-        alert(`이름: ${name}`);
+        // alert(`이름: ${name}`);
         event.preventDefault();
     };
     return(
