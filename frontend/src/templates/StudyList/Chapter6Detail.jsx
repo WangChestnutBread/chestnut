@@ -55,60 +55,73 @@ const Chapter6Detail = () => {
   };
 
   return (
-
-    <div className="container">
+    <div>
       <NavbarExample showBookMarkButton={true}/>
-      {/* 표기, 카메라 */}
 
-      {/* 1행 */}
-      <div 
-        style={{
-          display:"flex",
-          justifyContent:"space-evenly"
-      }}>
-        {/* 1행 1열 */}
-        <div 
-          style={{
-            maxWidth:"30%",
-        }}>
-          {/* <Notation word={params} /> */}
-          <Ch3Notation word={params} />
-        </div>
-        {/* 1행 2열: 소리나는 방법, 카메라 */}
-        <div 
-          style={{
-            maxWidth:"40%",
-        }}>
-          <CameraOrganism />
-        </div>
-        {/* 1행 3열: 발음과 내 발음 */}
-        <div 
-          style={{
-            width:"30%",
-        }}>
-          <Ch5Pronunciation
-            saying={params}
-            realData={realData}
-            location={answerData}
-            onCharacterClick={setSelectedChar}
-          />
-        </div>
-      </div>
-      
-      {/* 2행 */}
-      <div 
-        style={{
-          maxHeight:"30%",
-      }}>
-        <Ch5SM hangeul={params} selectedChar={selectedChar} />
-      </div>
-      {/* 3행: 네비게이션 바 */}
-      <div>
-      <RecordData func={moveData} func2={answer} />
-      </div>
+    
+      {/* 행과 열로 나눔. Style 위주로 함. 
+      marginTop으로 행 사이 margin을 주고
+      1행 사이에 marginLeft와 marginRight로 열 간 간격을 줌*/}
 
+      <div className="container">
+        {/* 표기, 카메라 */}
+
+        {/* 1행 */}
+        <div 
+          style={{
+            display:"flex",
+            justifyContent:"space-evenly",
+            marginTop:"25px",
+        }}>
+          {/* 1행 1열 */}
+          <div 
+            style={{
+              maxWidth:"30%",
+          }}>
+            {/* <Notation word={params} /> */}
+            <Ch3Notation word={params} />
+          </div>
+          {/* 1행 2열: 소리나는 방법, 카메라 */}
+          <div 
+            style={{
+              maxWidth:"40%",
+              marginLeft:"20px",              
+          }}>
+            <CameraOrganism />
+          </div>
+          {/* 1행 3열: 발음과 내 발음 */}
+          <div 
+            style={{
+              width:"30%",
+              marginLeft:"20px", 
+          }}>
+            <Ch5Pronunciation
+              saying={params}
+              realData={realData}
+              location={answerData}
+              onCharacterClick={setSelectedChar}
+            />
+          </div>
+        </div>
+        
+        {/* 2행 */}
+        <div 
+          style={{
+            maxHeight:"30%",
+            marginTop:"25px",
+        }}>
+          <Ch5SM hangeul={params} selectedChar={selectedChar} />
+        </div>
+        {/* 3행: 네비게이션 바 */}
+        <div 
+          style={{
+            marginTop:"25px",
+        }}>
+        <RecordData func={moveData} func2={answer} />
+        </div>
+
+      </div>
     </div>
-
 
 
     // <div>
