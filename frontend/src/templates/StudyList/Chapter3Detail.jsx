@@ -68,7 +68,7 @@ const Chapter3Detail = () => {
               <div className="col-4">
                 <Ch3Notation word={params} />
               </div>
-              <div className="col-8">
+              <div className="col-8 ms-5">
                 <CameraOrganism />
               </div>
             </div>

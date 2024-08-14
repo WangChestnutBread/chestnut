@@ -66,7 +66,7 @@ public class QnAService {
         QnA qna = qnARepository.findByqnaId(qnaId)
                 .orElseThrow(ArticleNotFoundException::new);
 
-        if(!qna.getMember().getLoginId().equals(loginId)) {
+        if (!qna.getMember().getLoginId().equals(loginId) && !member.isAdmin()) {
             //권한 없음
             throw new IncorrectAccessException();
         }

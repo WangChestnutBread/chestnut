@@ -18,6 +18,7 @@ const useAuthStore = create(
       setPronunciation: (pronunciation) => set({ pronunciation }),
       checkPoint: undefined,
       setCheckPoint: (checkPoint) => set({ checkPoint }),
+
     }),
     {
       name: "chestNut",

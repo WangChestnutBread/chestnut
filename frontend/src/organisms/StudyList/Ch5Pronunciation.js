@@ -20,32 +20,97 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick}) => {
 
 
   return (
-    <div className="">
-      <div className="d-flex">
-        <div className="">
+    <div 
+      style={{
+        height:"100%",
+        display:"flex",
+        flexDirection:"column",        
+    }}>
+      {/* 1행 */}
+      <div 
+        style={{
+          display:"flex",
+          width:"100%",
+          height:"50%",
+          backgroundColor:"#DCB78F"
+      }}>
+        {/* 1행 1열 */}
+        <div 
+          style={{
+            width:"24%",
+        }}>
           <Ch5PronunciationLeft data={"발음"} />
         </div>
-        {word ? (
-          <div>
+        {/* 1행 2열 */}
+        <div 
+          style={{
+            width:"76%",
+        }}>
+          {word ? (
             <Ch5PronunciationRight data={word} location={location} onCharacterClick={onCharacterClick} />
-          </div>
-        ) : (
-          <></>
-        )}
-      </div>
-      <div className="d-flex" style={{ marginTop: 30 }}>
-        <div>
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>    
+      {/* 2행 */}
+      <div
+        style={{
+          display:"flex",
+          width:"100%",
+          height:"50%",
+          marginTop:"2%",
+          backgroundColor:"#DCB78F"
+      }}>
+        {/* 2행 1열 */}
+        <div 
+          style={{
+            width:"24%",
+        }}>
           <Ch5PronunciationLeft data={"내 발음"} />
         </div>
-        {pronounce ? (
-          <div>
+        {/* 2행 2열 */}
+        <div 
+          style={{
+            width:"76%",
+        }}>
+          {pronounce ? (
             <Ch5PronunciationRight data={realData} location={[]} onCharacterClick={onCharacterClick}/>
-          </div>
-        ) : (
-          <></>
-        )}
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
+
+
+    /////////// 변경 전 코드임 /////////////////
+    // <div className="">
+    //   <div className="d-flex">
+    //     <div className="">
+    //       <Ch5PronunciationLeft data={"발음"} />
+    //     </div>
+    //     {word ? (
+    //       <div>
+    //         <Ch5PronunciationRight data={word} location={location} onCharacterClick={onCharacterClick} />
+    //       </div>
+    //     ) : (
+    //       <></>
+    //     )}
+    //   </div>
+    //   <div className="d-flex" style={{ marginTop: 30 }}>
+    //     <div>
+    //       <Ch5PronunciationLeft data={"내 발음"} />
+    //     </div>
+    //     {pronounce ? (
+    //       <div>
+    //         <Ch5PronunciationRight data={realData} location={[]} onCharacterClick={onCharacterClick}/>
+    //       </div>
+    //     ) : (
+    //       <></>
+    //     )}
+    //   </div>
+    // </div>
   );
 };
 

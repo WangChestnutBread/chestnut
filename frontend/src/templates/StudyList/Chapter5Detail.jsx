@@ -69,12 +69,16 @@ const Chapter5Detail = () => {
                 {/* <Notation word={params} /> */}
                 <Ch3Notation word={params} />
               </div>
-              <div className="col-8">
+              <div className="col-8" style={{marginLeft:"30px"}}>
                 <CameraOrganism />
               </div>
             </div>
 
-            <div className="mt-2 justify-content-center">
+            <div className="mt-2 justify-content-center" 
+              style={{
+                height:"250px",
+                
+            }}>
               <Ch5Pronunciation
                 saying={params}
                 realData={realData}

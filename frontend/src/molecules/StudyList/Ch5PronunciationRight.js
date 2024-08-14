@@ -4,8 +4,11 @@ import Text64 from "../../atoms/Text64";
 const Ch5PronunciationRight = ({ data, location, onCharacterClick }) => {
   return (
     <div
-      className="right d-flex justify-content-center align-items-center text-center rounded-end"
+      className="d-flex justify-content-center align-items-center text-center rounded-end"
       style={{
+        marginRight: "40px",
+        backgroundColor:"lightgray",
+        height:"100%",
         wordBreak: "break-word",     
         whiteSpace: "pre-wrap",      
         maxWidth: "100%",             

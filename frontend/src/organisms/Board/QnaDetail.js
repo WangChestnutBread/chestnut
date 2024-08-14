@@ -23,14 +23,14 @@ const QnaDetail = () => {
       setNickname(res.data.data.nickname)
     });
   },[]);
-
+  //  console.log(data); 
   const date = data.createdAt ? `${data.createdAt[0]}-${data.createdAt[1]}-${data.createdAt[2]}` : ""
   console.log(date);
   return (
     <div className="qna-detail p-4 mt-5 border-top border-4 border-black">
       <div className="d-flex justify-content-between">
         <div>
-          <p className="mt-2">
+          <p className="mt-2" style={{fontSize:"1.5rem"}}>
             {'('+list[data.qnaCategoryId-1]+') '}
             {data.title}
           </p>
@@ -41,7 +41,7 @@ const QnaDetail = () => {
         </div>
       </div>
       <div>
-        <p>{data.content}</p>
+        <p style={{fontSize:"1.3rem"}}>{data.content}</p>
       </div>
     </div>
   );

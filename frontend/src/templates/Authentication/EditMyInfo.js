@@ -97,7 +97,7 @@ function EditMyInfo(){
 
 
     const GotoBack = () => {
-        navigate(-1);
+        navigate("/main");
     };
 
     //생년월일

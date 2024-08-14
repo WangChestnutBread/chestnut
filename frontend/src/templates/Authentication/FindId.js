@@ -92,7 +92,7 @@ function FindId() {
     }
 
     const GotoBack = () => {
-        navigate(-1);
+        navigate("/");
     };
 
     const handleCloseAlert = () => {
