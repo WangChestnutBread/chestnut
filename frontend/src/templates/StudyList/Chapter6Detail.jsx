@@ -6,7 +6,7 @@ import Notation from "../../organisms/StudyList/NotationChapter1";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import baseApi from "../../api/fetchAPI";
 import Ch3Notation from "./../../organisms/StudyList/Ch3Notaion";
 import Ch5Pronunciation from "./../../organisms/StudyList/Ch5Pronunciation";
@@ -18,7 +18,7 @@ import Wrong from "../../assets/lottie/wrong.json";
 const Chapter6Detail = () => {
   const params = useParams();
   const [realData, setRealData] = useState("녹음된 발음");
-  const [answerData, setAnswerData] = useState([100000]);
+  const [answerData, setAnswerData] = useState([100000,15656,1561568,156186,15615615,156,156,156,456,456,99,999,999,999,99,999,1000,9999,99999,99999,9999,999,99999,99999,99999,9999]);
   const [show, isShow] = useState(false);
   const [selectedChar, setSelectedChar] = useState("");
   const [correct, isCorrect] = useState(false);
@@ -27,6 +27,10 @@ const Chapter6Detail = () => {
   const moveData = (value) => {
     setRealData(value);
   };
+
+  useEffect(() => {
+    setAnswerData([100000,15656,1561568,156186,15615615,156,156,156,456,456,99,999,999,999,99,999,1000,9999,99999,99999,9999,999,99999,99999,99999,9999])
+  },[])
 
   const answer = (value) => {
     setAnswerData(value);
@@ -37,7 +41,8 @@ const Chapter6Detail = () => {
           params: {
             studyId: params.studyId,
             isPass: 1,
-          },
+          }
+          
         })
         .then((res) => {
           isCorrect(true);
@@ -46,13 +51,12 @@ const Chapter6Detail = () => {
           }, 2000);
         })
         .catch((err) => {
-          isWrong(true);
-          setTimeout(() => {
-            isWrong(false);
-          }, 2000);
+         
         });
     }
+  
   };
+  
 
   return (
     <div>
