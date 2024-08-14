@@ -54,7 +54,7 @@ public class StudyService {
         if (member.isWithdraw()) throw new InvalidMemberException();
         return switch (chapterId) {
             case 4 -> this.phonologyGroupInfo(member.getMemberId());
-            case 7 -> this.confusedWordsGroup();
+            case 7 -> this.confusedWordsGroup(member.getMemberId());
             default -> convertData(member.getMemberId(), chapterId);
         };
     }
@@ -63,8 +63,7 @@ public class StudyService {
      * 챕터내 학습 목록 조회 (1,2,3,5,6단원 데이터 가공)
      */
     public List<ChapterStudyInfoParentDto> convertData(Long memberId, int chapterId) {
-        List<ChapterStudyInfo> list = studyInfoRepository.findChapterStudyInfo(memberId, chapterId);  //기존 조회 쿼리 (한방쿼리)
-//        List<ChapterStudyInfo> list = getChapterStudyInfoList(memberId, chapterId); //새로운 쿼리 (쿼리4번)
+        List<ChapterStudyInfo> list = studyInfoRepository.findChapterStudyInfo(memberId, chapterId);
         Map<String, List<ChapterStudyInfo>> collect = list.stream()
                 .collect(Collectors.groupingBy(item -> item.getCategoryContent(),
                         TreeMap::new, Collectors.toList()));
@@ -79,45 +78,6 @@ public class StudyService {
                 .map(item -> new ChapterStudyInfoChildDto(item.getStudyId(), item.getWord(), item.getIsPass(), item.getIsStudy(), item.getIsVocabList()))
                 .toList();
         return new ChapterStudyInfoParentDto(key, child);
-    }
-
-    // 실험용 : 간단한 쿼리 4개 날리고 비즈니스 로직은 자바코드에서 처리
-    public List<ChapterStudyInfo> getChapterStudyInfoList(Long memberId, int chapterId) {
-        List<Study> studyList = studyRepository.findStudyListByChapter((byte) chapterId);
-        List<StudyLog> studyLogList = studyLogRepository.findRecentStudyLogByMemberId(memberId);
-        List<Long> vocabList = vocabularyRepository.findVocabListByMemberAndChapter((byte) chapterId, memberId);
-        List<StudyCategory> studyCategoryList = studyCategoryRepository.findByChapterId((byte) chapterId);
-
-        Map<Long, StudyLog> studyLogMap = studyLogList.stream()
-                .collect(Collectors.toMap(item -> item.getStudy().getStudyId(), Function.identity()));
-        Map<Byte, StudyCategory> studyCategoryMap = studyCategoryList.stream()
-                .collect(Collectors.toMap(item -> item.getStudyCategoryId(), Function.identity()));
-        Set<Long> vocabSet = new HashSet<>(vocabList);
-
-        return studyList.stream()
-                .map(item -> {
-                    StudyCategory category = studyCategoryMap.get(item.getStudyCategory().getStudyCategoryId());
-                    StudyLog log = studyLogMap.get(item.getStudyId());
-
-                    String categoryContent = category.getCategoryContent();
-                    Byte studyCategoryId = category.getStudyCategoryId();
-                    Long studyId = item.getStudyId();
-                    String word = item.getWord();
-                    int isPass = log != null && log.isPass() ? 1 : 0;
-                    int isStudy = log != null && log.isPassRecord() ? 1 : 0;
-                    int isVocab = vocabSet.contains(studyId) ? 1 : 0;
-
-                    return new ChapterStudyInfo(
-                            categoryContent,
-                            studyCategoryId,
-                            studyId,
-                            word,
-                            isPass,
-                            isStudy,
-                            isVocab
-                    );
-                })
-                .toList();
     }
 
 
@@ -154,14 +114,14 @@ public class StudyService {
     /**
      * 챕터내 학습 목록 조회 (7단원)
      */
-    public List<ParentDto> confusedWordsGroup() {
+    public List<ParentDto> confusedWordsGroup(Long memberId) {
         List<StudyCategory> parents = studyCategoryRepository.findByStudyCategoryIds(Arrays.asList((byte) 1, (byte) 2)); //parent 카테고리
         List<StudyCategory> collectedChildren = collectChildCategories(parents); //parent 카테고리들의 child를 하나의 리스트로 합침
         List<StudyConfusedPronounce> confusedWords = studyConfusedPronounceRepository.findByCategories(collectedChildren); //각 child 카테고리에 속한 학습 목록을 가져옴
         Map<Byte, List<StudyConfusedPronounce>> wordsMappedByCategory = groupWords(confusedWords); //학습 목록을 child 카테고리를 기준으로 묶음 (키: child 카테고리 id, 값: 학습목록)
 
         return parents.stream()
-                .map(parent -> mapToParentDto(parent, wordsMappedByCategory))
+                .map(parent -> mapToParentDto(parent, wordsMappedByCategory, memberId))
                 .toList();
     }
 
@@ -179,10 +139,10 @@ public class StudyService {
     }
 
     //ParentDto 생성
-    private ParentDto mapToParentDto(StudyCategory studyCategory, Map<Byte, List<StudyConfusedPronounce>> collect) {
+    private ParentDto mapToParentDto(StudyCategory studyCategory, Map<Byte, List<StudyConfusedPronounce>> collect, Long memberId) {
         //childCategory에 들어갈 객체 생성
         List<ChildDto> childs = studyCategory.getChild().stream()
-                .map(childCategory -> mapToChildDto(childCategory, collect))
+                .map(childCategory -> mapToChildDto(childCategory, collect, memberId))
                 .toList();
 
         return ParentDto.builder()
@@ -193,13 +153,38 @@ public class StudyService {
     }
 
     //ChildDto 생성
-    private ChildDto mapToChildDto(StudyCategory studyCategory, Map<Byte, List<StudyConfusedPronounce>> collect) {
+    private ChildDto mapToChildDto(StudyCategory studyCategory, Map<Byte, List<StudyConfusedPronounce>> collect, Long memberId) {
         //맵에서 해당 카테고리에 속하는 학습 목록 가져오기
         List<StudyConfusedPronounce> studyInfos = collect.getOrDefault(studyCategory.getStudyCategoryId(), Collections.emptyList());
         //해당 학습 목록을 dto에 맞게 변환
         List<ConfusedStudyInfo> confusedWords = studyInfos.stream()
                 .map(this::makeStudyInfo)
                 .toList();
+
+        //학습 기록 끼워넣기
+        List<StudyLog> recentStudyLogList = studyLogRepository.findRecentStudyLogByMemberId(memberId, (byte) 7);
+        Set<Long> passedSet = new HashSet<>();
+        Set<Long> studiedSet = new HashSet<>();
+        for (StudyLog log : recentStudyLogList) {
+            Long studyId = log.getStudy().getStudyId();
+            studiedSet.add(studyId);
+            if (log.isPassRecord()) {
+                passedSet.add(studyId);
+            }
+        }
+        confusedWords = confusedWords.stream().peek(info -> {
+            if (passedSet.contains(info.getStudyId())) {
+                info.setIsPass(1);
+            } else {
+                info.setIsPass(0);
+            }
+            if (studiedSet.contains(info.getStudyId())) {
+                info.setIsStudy(1);
+            } else {
+                info.setIsStudy(0);
+            }
+        }).toList();
+
         //confusedWords를 confusedGroupId를 키로 묶기
         Map<Integer, List<ConfusedStudyInfo>> groupedWords = confusedWords.stream()
                 .collect(Collectors.groupingBy(item -> item.getConfusedGroupId()));
