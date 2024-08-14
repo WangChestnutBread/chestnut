@@ -3,6 +3,7 @@ import './OpenChat.css';
 import * as StompJs from '@stomp/stompjs';
 import $ from 'jquery';
 import useAuthStore from '../stores/authStore';
+import CustomAlert from '../atoms/alert';
 
 
 const OpenChat = () => {
@@ -12,6 +13,8 @@ const OpenChat = () => {
     const [messages, setMessages] = useState([]);
     const [userNickname, setUserNickname] = useState('');
     const [inputMessage, setInputMessage] = useState('');
+
+    const [alertContent, setAlertContent] = useState("");
 
     const token = useAuthStore((state) => state.accessToken);
     const userId = useAuthStore((state) => state.userId);
@@ -23,6 +26,10 @@ const OpenChat = () => {
             stompClient.activate();
         }
     }, [stompClient]);
+
+    const handleCloseAlert = () => {
+        setAlertContent(null); // Alert 닫기
+      };
 
     useEffect(() => {
         //컴포넌트가 마운트될 때 실행되는 함수들
@@ -59,7 +66,7 @@ const OpenChat = () => {
             console.error('STOMP Error:', frame);
             console.error('Broker reported error: ' + frame.headers['message']);
             console.error('Additional details: ' + frame.body);
-            alert("소켓 연결 실패");
+            setAlertContent(`채팅 연결 실패.`);
             disconnect();
         };
 
@@ -163,6 +170,10 @@ const OpenChat = () => {
                     </button>
                 </form>
             </div>
+            {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
         </div>
     );
 

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import NavbarExample from "../NavbarExample";
 import baseApi from "../../api/fetchAPI";
 import useAuthStore from "./../../stores/authStore";
+import CustomAlert from "../../atoms/alert";
 
 const AnnouncementManagerWrite = () => {
   const userId = useAuthStore((state) => state.userId);
@@ -12,6 +13,7 @@ const AnnouncementManagerWrite = () => {
   const [announceCategoryId, setAnnounceCategoryId] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [alertContent, setAlertContent] = useState("");
 
   const handleQnaClick = () => {
     navigate("/board/announcement/1");
@@ -19,15 +21,15 @@ const AnnouncementManagerWrite = () => {
 
   const handleDetailClick2 = () => {
     if (title.length < 3){
-      alert("제목 3글자 이상 적어주세요")
+      setAlertContent(`제목을 3글자 이상<br>적어주세요.`);
       return
     }
     else if (content.length < 10){
-      alert("내용을 10글자 이상 적어주세요")
+      setAlertContent(`내용을 10글자 이상<br>적어주세요.`);
       return
     }
     else if (!announceCategoryId){
-      alert('유형선택 부탁드립니다.')
+      setAlertContent(`유형을 선택해주세요.`);
       return
     }
     baseApi
@@ -45,6 +47,10 @@ const AnnouncementManagerWrite = () => {
           console.log(error);
         });
   }
+
+  const handleCloseAlert = () => {
+    setAlertContent(null); // Alert 닫기
+  };
 
   return (
     <div>
@@ -114,6 +120,10 @@ const AnnouncementManagerWrite = () => {
           </button>
         </div>
       </div>
+      {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
     </div>
   );
 };
