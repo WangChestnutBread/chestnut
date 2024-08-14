@@ -7,6 +7,7 @@ import com.chestnut.backend.study.dto.PronounceMethodDto;
 import com.chestnut.backend.study.dto.WordPronounceDto;
 import com.chestnut.backend.study.service.StudyService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +19,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/study")
+@Slf4j
 public class StudyController {
 
     private final StudyService studyService;
@@ -45,6 +47,7 @@ public class StudyController {
     public ResponseEntity<?> getStudyIdList() {
 //        List<Long> studyIdList = studyService.getWholeStudyIdList();
         List<Long> studyIdList = List.of(1L, 2L, 3L);
+        log.debug("study-id");
         ResponseDto<List<Long>> result = new ResponseDto<>("200", studyIdList);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
