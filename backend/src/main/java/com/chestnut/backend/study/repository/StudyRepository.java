@@ -1,6 +1,7 @@
 package com.chestnut.backend.study.repository;
 
 import com.chestnut.backend.study.dto.PronounceMethodDto;
+import com.chestnut.backend.study.dto.WordPronounceDto;
 import com.chestnut.backend.study.entity.Study;
 import com.chestnut.backend.study.entity.SyllableLocation;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,4 +33,10 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
 
     @Query("select s.studyId from Study s where s.studyId != 12 and s.studyId <= 2430 and s.chapter.chapterId != 4")
     List<Long> getStudyIdList();
+
+    @Query("select new com.chestnut.backend.study.dto.WordPronounceDto(s.word, s.pronounce, case when(v.study.studyId is null) then 0 else 1 end) " +
+            "from Study s left join Vocabulary v on s.studyId = v.study.studyId " +
+            "where s.studyId = :studyId"
+    )
+    WordPronounceDto findWordByStudyId(@Param("studyId") Long studyId);
 }

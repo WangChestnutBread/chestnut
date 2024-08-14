@@ -252,7 +252,7 @@ const CH1record = ({ func, func2 }) => {
   return (
     <div className="d-flex row">
       
-      <div className="record justify-content-between ms-5">
+      <div className="record justify-content-between">
         <img src="/image/left.png" alt="left" onClick={downPage} />
         {/* <div>
           <img

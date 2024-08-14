@@ -48,8 +48,9 @@ function LoginPage() {
         if (response.data.code == 200) {
           setAccessToken(response.headers["access"]);
           setManager(response.data.data.admin);
-          navigate("/main");
           console.log(response);
+          navigate("/main");
+         
           
           // console.log("토의 열심히 하시네");
         } else if (response.data.code == 706) {

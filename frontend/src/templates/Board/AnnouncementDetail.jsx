@@ -18,6 +18,8 @@ const AnnouncementDetail = () => {
   const [announceCategoryId, setAnnounceCategoryId] = useState("")
   const Id = useAuthStore((state) => state.id);
   
+  const manager = useAuthStore((state) => state.manager)
+  console.log(manager);
 
   useEffect(() => {
     // 서버에서 공지사항 데이터 가져오기
@@ -101,14 +103,14 @@ const AnnouncementDetail = () => {
           </div>
         )}
         {/* 삭제 수정 버튼 */}
-        <div className="row justify-content-evenly">
+        { manager ? <div className="row justify-content-evenly">
           <button className="updatebtn" onClick={updateAnnouncement} style={{border:"none"}}>
             {isEditing ? "저장" : "수정"}
           </button>
           <button className="deletebtn" onClick={deleteAnnouncement} style={{border:"none"}}>
             삭제
           </button>
-        </div>
+        </div> : <></>}
       </div>
     </div>
   );

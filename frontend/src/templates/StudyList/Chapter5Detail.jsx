@@ -13,6 +13,7 @@ import Ch3Notation from "./../../organisms/StudyList/Ch3Notaion";
 import Lottie from "lottie-react";
 import Correct from "../../assets/lottie/correct.json";
 import Wrong from "../../assets/lottie/wrong.json"
+import "./ChapterDetail.css"
 
 const Chapter5Detail = () => {
   const params = useParams();
@@ -60,29 +61,30 @@ const Chapter5Detail = () => {
   const handleIsVocabulary = (isVocabulary) => {
     setIsVocabulary(isVocabulary)
   }
-
-  isVocabulary !== null && console.log('5단원 전달 성공 isVocabulary', isVocabulary)
   
   return (
-    <div>
 
-
+    <div className="ChapterDetail">
       <NavbarExample showBookMarkButton={true} showSentenceButton={true} studyId={params.studyId} {...(isVocabulary !== null ? { isVocabulary } : {})}/>
+
       {/* 표기, 카메라 */}
       <div className="container">
         <div className="row">
-          <div className="col-8 mt-2">
+          <div className="col-8">
             <div className="d-flex">
-              <div className="col-4">
+              <div className="col-5" style={{height:'341px'}}>
                 {/* <Notation word={params} /> */}
                 <Ch3Notation word={params} />
               </div>
-              <div className="col-8">
+              <div className="col-7" style={{marginLeft:"5px"}}>
                 <CameraOrganism />
               </div>
             </div>
 
-            <div className="mt-2 justify-content-center">
+            <div className="mt-2 justify-content-center" 
+              style={{
+                height:"250px",
+            }}>
               <Ch5Pronunciation
                 saying={params}
                 realData={realData}

@@ -1,7 +1,7 @@
 .ch3box {
   background-color: #0C4518;
   position: relative;
-  height: 340px;
+  height: 100%;
   display: flex;
   justify-content: center; 
   align-items: center; 
