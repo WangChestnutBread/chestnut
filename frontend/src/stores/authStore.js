@@ -21,6 +21,7 @@ const useAuthStore = create(
       
       hasVisitedBefore: false,
       setHasVisitedBefore: (value) => set({ hasVisitedBefore: value }),
+      resetHasVisitedBefore: () => set({ hasVisitedBefore: false }),
     }),
     {
       name: "chestNut",

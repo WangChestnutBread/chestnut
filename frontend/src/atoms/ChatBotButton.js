@@ -1,8 +1,8 @@
 import "./ChatBotButton.css";
 
-function ChatBotButton() {
+function ChatBotButton({restartTutorial}) {
   return (
-    <button className="ChatBotButton">
+    <button className="ChatBotButton" onClick={restartTutorial}>
       <img src="/icons/ChatBotIcon.svg"/>
     </button>
   );

@@ -1,6 +1,6 @@
 import Joyride from "react-joyride";
 
-function Tutorial ({steps, startTutorial}) {
+function Tutorial ({steps, startTutorial, onComplete}) {
     return (
         <Joyride
         steps={steps}
@@ -8,6 +8,7 @@ function Tutorial ({steps, startTutorial}) {
         continuous
         showProgress
         showSkipButton
+        onComplete={onComplete}
         styles={{
           options: {
             zIndex: 10000,
