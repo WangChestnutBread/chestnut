@@ -80,7 +80,7 @@ function SignUPPage() {
         })
         .then(res => {
             if (res.data.code === "200") {
-                isSignup(true);
+                setIsSignup(true);
                 setAlertContent("회원가입에 성공했습니다.");
             }
             if (res.data.code === "611" || res.data.code === "614") {
