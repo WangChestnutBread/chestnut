@@ -2,19 +2,20 @@ import { useEffect, useState } from "react";
 import Ch5PronunciationLeft from "../../molecules/StudyList/Ch5PronunciationLeft";
 import Ch5PronunciationRight from "../../molecules/StudyList/Ch5PronunciationRight";
 import baseApi from "../../api/fetchAPI";
-import { useParams } from "react-router-dom";
 
-const Ch5Pronunciation = ({saying, realData, location, onCharacterClick}) => {
+const Ch5Pronunciation = ({saying, realData, location, onCharacterClick, handleIsVocabulary}) => {
 
-  const params = useParams()
   const [word, setWrod] = useState("")
   const [pronounce, setPronounce] = useState("")
+  
 
   useEffect(() => {
     baseApi.get(`/study/detail/${saying.studyId}/word`).then((res) => {
       console.log(res);
       setWrod(res.data.data.word);
       setPronounce(res.data.data.pronounce);
+      console.log('5단원', res.data.data.isVocabulary);
+      handleIsVocabulary(res.data.data.isVocabulary);
     });
   });
 
@@ -32,12 +33,13 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick}) => {
           display:"flex",
           width:"100%",
           height:"50%",
-          backgroundColor:"#DCB78F"
       }}>
         {/* 1행 1열 */}
         <div 
           style={{
             width:"24%",
+            backgroundColor:"#DCB78F"
+
         }}>
           <Ch5PronunciationLeft data={"발음"} />
         </div>
@@ -60,12 +62,13 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick}) => {
           width:"100%",
           height:"50%",
           marginTop:"2%",
-          backgroundColor:"#DCB78F"
       }}>
         {/* 2행 1열 */}
         <div 
           style={{
             width:"24%",
+            backgroundColor:"#DCB78F"
+
         }}>
           <Ch5PronunciationLeft data={"내 발음"} />
         </div>
@@ -73,6 +76,7 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick}) => {
         <div 
           style={{
             width:"76%",
+            
         }}>
           {pronounce ? (
             <Ch5PronunciationRight data={realData} location={[]} onCharacterClick={onCharacterClick}/>

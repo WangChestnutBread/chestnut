@@ -111,7 +111,7 @@ function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
                     onClick={() => {
                       handleWordClick(
                         item.word,
-                        "item.pronounce",
+                        item.pronounce,
                         item.studyId
                       );
                     }}
