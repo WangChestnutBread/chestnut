@@ -208,14 +208,14 @@ function FindPw() {
         <div className="container">
             <div className="totalpage">
                 <BackButton work={GotoBack} />
-                <div style={{ width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
+                <div style={{ width: 786, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', display: 'flex', gap: '22px' }}>
                     <MemberLogo title={'PW 찾기'} />
                     <div className="formlist">
                             <div className="formbox">
                                 <InspectionForm title={'ID'} content={'아이디를 입력하세요'} value={Id} input={inputId} />
                             </div>
                             <div className="formbox">
-                                <InspectionForm title={'이메일'} content={'이메일을 입력하세요'} name={'전송'} work={handleSubmit} value={Email} input={inputEmail} text={EmailMessage} disabled={!isEmail}/>
+                                <InspectionForm title={'이메일'} content={'이메일을 입력하세요'} name={'전송'} work={handleSubmit} value={Email} input={inputEmail} text={EmailMessage}/>
                             </div>
                             <div className="formbox">
                                 <InspectionForm title={'인증번호'} text={AuthMessage} content={'인증번호를 입력하세요'} name={'확인'} work={checkAuth} value={Auth} input={inputAuth}/>
