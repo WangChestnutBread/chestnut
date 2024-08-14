@@ -14,6 +14,7 @@ import Ch5SM from "./../../organisms/StudyList/Ch5SM";
 import Lottie from "lottie-react";
 import Correct from "../../assets/lottie/correct.json";
 import Wrong from "../../assets/lottie/wrong.json";
+import "./ChapterDetail.css"
 
 const Chapter6Detail = () => {
   const params = useParams();
@@ -55,7 +56,7 @@ const Chapter6Detail = () => {
   };
 
   return (
-    <div>
+    <div className="ChapterDetail">
 
 
       <NavbarExample showBookMarkButton={true}/>
