@@ -1,5 +1,5 @@
 .answer {
-  height: 500px;
+  height: 350px;
 }
 .word-wrap {
   overflow-wrap: break-word; /* 긴 단어를 자동으로 줄바꿈 */

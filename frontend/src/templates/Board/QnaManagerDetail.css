@@ -3,7 +3,7 @@
   padding: 1rem;
   margin-bottom: 1rem;
   margin-top: 1.25rem;
-  border-bottom: 2px solid black;
+  /* border-bottom: 2px solid black; */
 }
 
 .answer-form {
@@ -63,8 +63,8 @@
   border-color: #6c757d; /* 클릭 시 동일한 색상 유지 */
 }
 
-.submitted-answer {
+/* .submitted-answer {
   padding: 1rem;
   background-color: #e9ecef;
   border-radius: 5px;
-}
+} */
