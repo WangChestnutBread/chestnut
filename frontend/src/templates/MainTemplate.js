@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useLocalAuthStore from "../stores/localAuthStore";
 import MainMenu from "../organisms/Main/MainMenu";
 import "./MainTemplate.css";
 import LastStudy from "../organisms/Main/LastStudy";
@@ -22,25 +21,15 @@ const MainTemplate = ({ profile, attendance }) => {
     { name: "게시판", path: "/board/announcement/1" },
   ]);
 
-
-  const { hasVisitedBefore, setHasVisitedBefore } = useLocalAuthStore();
-
   let [showOpenChat, setShowOpenChat] = useState(false);
   let [startTutorial, setStartTutorial] = useState(false);
   let [welcomeModal, setWelcomeModal] = useState(false);
 
-  //튜토리얼은 최초 접속했을 때 한 번만
+  //튜토리얼은 학습 기록이 없을 때 한 번만
   useEffect(() => {
-    // console.log("useEffect 실행됨");
-    console.log("welcomeModal :", welcomeModal);
-    console.log("hasVisitedBefore : ", hasVisitedBefore);
-    if (!hasVisitedBefore) {
-      setHasVisitedBefore(true);
-      // console.log("hasVisitedBefore가 false였으므로, welcomeModal을 true로 설정");
+    if (profile.word === null) {      
       setWelcomeModal(true);
-      // console.log("모달이 트루로 설정됨");
     } else {
-      // console.log("hasVisitedBefore가 true임");
       setWelcomeModal(false);
     }
   }, []);
