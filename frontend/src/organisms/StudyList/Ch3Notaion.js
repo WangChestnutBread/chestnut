@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import baseApi from "../../api/fetchAPI";
 import "./Ch3Notation.css";
 
-
-
-
 const Ch3Notation = ({word}) => {
   // console.log(word.word);
   
