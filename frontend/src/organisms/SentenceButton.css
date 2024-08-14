@@ -1,7 +1,12 @@
 .SentenceButton {
     position: relative;
     cursor: pointer;
-    height: 40px;
+}
+
+.SentenceButton  img {
+    height : 30px;
+    width : auto;
+    align-items : center;
 }
 
 .RelatedSentence {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
 import baseApi from "../../api/fetchAPI";
 import useAuthStore from "./../../stores/authStore";
 
@@ -50,14 +49,7 @@ const AnnouncementManagerWrite = () => {
   return (
     <div>
       {/* 헤더 영역 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample/>
       <div className="container text-start justify-center">
         {/* 메인타이틀 QNA */}
         <div className="logo-container">

@@ -11,8 +11,7 @@ import RecordData from "../../organisms/StudyList/Record";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import baseApi from "../../api/fetchAPI";
-import SMCH1 from "./../../organisms/StudyList/SMCH1";
-import CH1record from "./../../organisms/StudyList/CH1record";
+import NavbarExample from "../NavbarExample";
 
 const Chapter1Detail = () => {
   const params = useParams();
@@ -43,14 +42,7 @@ const Chapter1Detail = () => {
   return (
     <div>
       {/* 헤더 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample />
       {/* 표기, 입모양, 혀모양 */}
       <div className="container">
         <div className="row">

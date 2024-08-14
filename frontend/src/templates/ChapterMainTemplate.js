@@ -1,23 +1,14 @@
 import "./ChapterMainTemplate.css";
 import ChapterCard from "../organisms/ChapterCard";
 import "./NavbarExample.css";
-import StudyBackButton from "../molecules/StudyBackButton";
-import ChestNutButton from "../organisms/ChestNutButton";
 import Text32 from "../atoms/Text32";
 import { Row, Col, ProgressBar } from "react-bootstrap";
+import NavbarExample from "./NavbarExample";
 
 function ChapterMainTemplate({ listdata }) {
   return (
     <div>
-      {/* navbar */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample/>
 
       {/* 챕터 카드 목록 */}
       <div className="container">
