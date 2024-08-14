@@ -5,7 +5,7 @@ import Text24 from "./Text24";
 
 function WelcomeModal({ onClose, handleStartTutorial }) {
   return (
-    <Modal className="modal WelcomeModal" show onHide={onClose} centered>
+    <Modal className="WelcomeModal" show onHide={onClose} centered>
       {/* <Modal.Header closeButton className="WelcomeModalHeader"></Modal.Header> */}
       <Modal.Header className="WelcomeModalHeader"></Modal.Header>
       <Modal.Body className="WelcomeModalBody">
