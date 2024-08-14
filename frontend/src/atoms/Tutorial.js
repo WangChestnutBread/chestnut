@@ -5,6 +5,7 @@ function Tutorial ({steps, startTutorial, onComplete}) {
         <Joyride
         steps={steps}
         run={startTutorial}
+        disableScrolling
         continuous
         showProgress
         showSkipButton

@@ -67,7 +67,7 @@ const MainTemplate = ({ profile, attendance }) => {
     setStartTutorial(false);
     setTimeout(() => {
       setStartTutorial(true);
-    }, 0);
+    }, 0); // 0ms 지연 후 상태를 true로 설정
   };
 
   // 튜토리얼 완료 시 상태 초기화
