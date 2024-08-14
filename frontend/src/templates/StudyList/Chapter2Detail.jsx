@@ -1,6 +1,5 @@
 import "../NavbarExample.css";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
 import Notation from "../../organisms/StudyList/NotationChapter1";
 import SoundMethod from "../../organisms/StudyList/SoundMethod";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
@@ -58,14 +57,7 @@ const Chapter2Detail = () => {
   return (
     <div>
       {/* 헤더 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample showBookMarkButton={true}/>
       {/* 표기, 소리나는 방법*/}
       <div className="container">
         <div className="row">

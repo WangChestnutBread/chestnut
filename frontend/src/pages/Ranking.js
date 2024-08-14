@@ -2,9 +2,7 @@ import React, {useEffect, useState, useCallback} from 'react';
 import './Ranking.css';
 import $ from 'jquery';
 import baseApi from '../api/fetchAPI';
-import StudyBackButton from '../molecules/StudyBackButton';
-import ChestNutButton from '../organisms/ChestNutButton';
-import QuestionMarkButton from '../molecules/QuestionMarkButton';
+import NavbarExample from '../templates/NavbarExample';
 
 const Ranking = () => {
     //변수 선언
@@ -47,18 +45,8 @@ const Ranking = () => {
 
     return (
         <div>
-            {/* navbar */}
-            <div className="NavbarExample">
-                <div className="NavbarButton">
-                    <div className="LeftButton">
-                        <StudyBackButton/>
-                        <ChestNutButton/>
-                    </div>
-                    <div className="RightButton">
-                        <QuestionMarkButton/>
-                    </div>
-                </div>
-            </div>
+            <NavbarExample/>
+
             <div className='ranking-container'>
                 {/* 로고 */}
                 <div className='ranking-logo'>

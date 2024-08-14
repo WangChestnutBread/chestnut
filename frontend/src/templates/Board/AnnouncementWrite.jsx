@@ -5,22 +5,14 @@ import "./QnaDetailTemplate.css";
 import LogoAnnouncement from "../../molecules/Board/LogoAnnouncement";
 import QnaAnswer from "../../organisms/Board/QnaAnswer";
 import ListBtn from "../../molecules/Board/ListBtn";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
 
 
 const AnnouncementWrite = () => {
   return (
     <div>
       {/* 헤더 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample/>
       <div className="container text-start">
         {/* 로고 */}
         <LogoAnnouncement />

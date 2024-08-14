@@ -3,8 +3,7 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import "../MainTemplate.css";
 import "../NavbarExample.css";
 import "./QnaTemplate.css";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
 import Pagenation from "../../atoms/Pagenation";
 import baseApi from "../../api/fetchAPI";
 
@@ -99,14 +98,7 @@ const QnaPage = () => {
   return (
     <div>
       {/* 헤더 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample/>
       {/* 로고 */}
       <div className="container text-start justify-center">
         <div className="logo-container">

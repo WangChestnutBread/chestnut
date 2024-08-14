@@ -5,8 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import baseApi from "../../api/fetchAPI";
 import AnnouncementTitle from "../../organisms/Board/AnnouncementTitle";
 import AnnouncementContent from "../../organisms/Board/AnnouncementContent";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from '../NavbarExample';
 import useAuthStore from '../../stores/authStore';
 
 const AnnouncementDetail = () => {
@@ -72,15 +71,7 @@ const AnnouncementDetail = () => {
 
   return (
     <div>
-      {/* 헤더 */}
-      <div className="NavbarExample">
-        <div className="NavbarButton">
-          <div className="LeftButton">
-            <StudyBackButton />
-            <ChestNutButton />
-          </div>
-        </div>
-      </div>
+      <NavbarExample/>
       <div className="container text-start">
         {/* 로고 */}
         <LogoAnnouncement />

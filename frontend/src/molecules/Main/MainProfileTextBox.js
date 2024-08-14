@@ -1,16 +1,26 @@
 import "./MainProfileTextBox.css";
+import React, { useState } from "react";
 import MainProfileLine from "../../atoms/MainProfileLine";
 import Text24 from "../../atoms/Text24";
 import Text20 from "../../atoms/Text20";
 import { useNavigate } from "react-router-dom";
 import baseApi from "../../api/fetchAPI";
 import useAuthStore from "../../stores/authStore";
+import CustomAlert from "../../atoms/alert";
 
 function MainProfileTextBox({ profile }) {
   // console.log(profile)
   let navigate = useNavigate();
   // const clearAccessToken = useAuthStore((state) => state.clearAccessToken);
   const setAccessToken = useAuthStore((state) => state.setAccessToken);
+  const [alertContent, setAlertContent] = useState("");
+
+  const handleCloseAlert = () => {
+    setAccessToken(undefined)
+    setAlertContent(null); // Alert 닫기
+    // 로그아웃하면 자동으로 랜딩으로 넘어감
+    navigate("/"); 
+  };
 
   return (
     <div className="MainProfileTextBox">
@@ -82,8 +92,9 @@ function MainProfileTextBox({ profile }) {
           })
           .then((res)=>{
             console.log(res)
-            setAccessToken(undefined)
-            alert("로그인 해주세요")
+            setAlertContent(`<div style="display: block;">
+                               로그아웃 되었습니다.
+                            <div>`);
           })
           .catch((err)=>{
             console.log(err)
@@ -92,6 +103,10 @@ function MainProfileTextBox({ profile }) {
           <Text20 text="로그아웃"/>
         </div>
       </div>
+      {alertContent && 
+                <CustomAlert content={alertContent} 
+                onClose={handleCloseAlert}
+            />}
     </div>
   );
 }

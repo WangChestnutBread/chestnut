@@ -1,0 +1,30 @@
+.WelcomeModal {
+    display: flex;
+    --bs-modal-width: 500px;
+}
+
+.WelcomeModalHeader {
+    border-bottom: none;
+}
+
+.WelcomeModalBody {
+    text-align: center;
+    line-height: 200%;
+    border-bottom: none;
+}
+
+.WelcomeModalFooter {
+    border-top: none;
+    justify-content: center;
+}
+
+.RedDot {
+    font-size: 1rem;
+    color: rgb(117, 9, 9);
+    opacity: 0.8;
+}
+
+.WelcomeModalButton {
+    width: 100%;
+    font-size: 1.25rem;
+}

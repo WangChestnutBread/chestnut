@@ -30,6 +30,6 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
     @Query("select s from Study s where s.chapter.chapterId = :chapterId and (:chapterId != 1 or s.studyId < 100)")
     List<Study> findStudyListByChapter(@Param("chapterId") Byte chapterId);
 
-    @Query("select s.studyId from Study s")
+    @Query("select s.studyId from Study s where s.studyId != 12 and s.studyId <= 2430 and s.chapter.chapterId != 4")
     List<Long> getStudyIdList();
 }

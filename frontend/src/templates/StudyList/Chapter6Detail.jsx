@@ -1,6 +1,8 @@
 import "../NavbarExample.css";
 import StudyBackButton from "../../molecules/StudyBackButton";
 import ChestNutButton from "../../organisms/ChestNutButton";
+import NavbarExample from "../NavbarExample";
+import Notation from "../../organisms/StudyList/NotationChapter1";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
 import { useParams } from "react-router-dom";
@@ -55,6 +57,7 @@ const Chapter6Detail = () => {
   return (
     <div>
       {/* 헤더 */}
+<<<<<<< frontend/src/templates/StudyList/Chapter6Detail.jsx
       <div className="NavbarExample">
         <div className="NavbarButton">
           <div className="LeftButton">
@@ -64,6 +67,10 @@ const Chapter6Detail = () => {
         </div>
       </div>
       {/* 표기, 입모양, 혀모양 */}
+=======
+      <NavbarExample showBookMarkButton={true}/>
+      {/* 표기, 카메라 */}
+>>>>>>> frontend/src/templates/StudyList/Chapter6Detail.jsx
       <div className="container">
         <div className="row">
           <div className="col-8 mt-2">

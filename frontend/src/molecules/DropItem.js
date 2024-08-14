@@ -1,21 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Text20 from "../atoms/Text20";
 import "./DropItem.css";
 
 function DropItem({ img, path, menu }) {
-  let navigate = useNavigate();
-
   return (
-    <div
+    <Link to={path}
       className="DropItem"
-      onClick={() => {
-        navigate( path );
-      }}
     >
-      <img src={img} width="40px" />
-
+      <img src={img} alt={menu} width="40px" />
       <Text20 text={menu} />
-    </div>
+    </Link>
   );
 }
 
