@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useAuthStore from "../stores/authStore";
 import MainMenu from "../organisms/Main/MainMenu";
 import "./MainTemplate.css";
 import LastStudy from "../organisms/Main/LastStudy";
@@ -18,10 +19,22 @@ const MainTemplate = ({ profile, attendance }) => {
     { name: "단어장", path: "/myVocabulary" },
     { name: "게시판", path: "/board/announcement/1" },
   ]);
+  
+  const { hasVisitedBefore, setHasVisitedBefore } = useAuthStore();
 
   let [showOpenChat, setShowOpenChat] = useState(false);
   let [startTutorial, setStartTutorial] = useState(false);
   let [welcomeModal, setWelcomeModal] = useState(true);
+
+  useEffect(() => {
+    console.log(hasVisitedBefore);
+    if (!hasVisitedBefore) {
+      setHasVisitedBefore(true);
+      setWelcomeModal(true);
+    } else {
+      setWelcomeModal(false);
+    }
+  }, [hasVisitedBefore, setHasVisitedBefore]);
 
   const handleOpenChatClick = () => {
     setShowOpenChat(!showOpenChat);
@@ -35,10 +48,7 @@ const MainTemplate = ({ profile, attendance }) => {
     setStartTutorial(true);
     handleCloseModal();
   };
-
-  useEffect(() => {
-    setWelcomeModal(true);
-  }, []);
+  
 
 
   return (

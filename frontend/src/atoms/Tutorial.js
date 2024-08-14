@@ -11,6 +11,7 @@ function Tutorial ({steps, startTutorial}) {
         styles={{
           options: {
             zIndex: 10000,
+            lineHeight: '1.6',
           },
           tooltip: {
             whiteSpace: 'pre-line', // 줄 바꿈을 허용
