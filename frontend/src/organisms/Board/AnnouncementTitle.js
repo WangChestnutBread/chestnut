@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const AnnouncementTitle = () => {
   const params = useParams();
   const [data, setData] = useState("");
-  const list = ["랭킹", "오픈채팅", "학습", "게시판", "공지사항"];
+  const list = ["회원정보", "학습", "오픈채팅", "대화연습", "보상", "기타"];
 
   useEffect(() => {
     baseApi.get(`board/announcement/${params.id}`).then((res) => {
