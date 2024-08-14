@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import "./QnaDetail.css";
 import baseApi from "../../api/fetchAPI";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAuthStore from "../../stores/authStore";
 
 
@@ -26,6 +26,7 @@ const QnaDetail = () => {
   //  console.log(data); 
   const date = data.createdAt ? `${data.createdAt[0]}-${data.createdAt[1]}-${data.createdAt[2]}` : ""
   console.log(date);
+
   return (
     <div className="qna-detail pt-3 pb-3 ps-4 pe-4 mt-3">
       <div className="d-flex justify-content-between">
@@ -41,7 +42,7 @@ const QnaDetail = () => {
         </div>
       </div>
       <div>
-        <p style={{fontSize:"1.0rem"}}>{data.content}</p>
+        <p style={{fontSize:"1.0rem", whiteSpace: "pre-wrap"}}>{data.content}</p>
       </div>
     </div>
   );

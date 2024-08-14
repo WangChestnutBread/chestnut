@@ -17,7 +17,8 @@ const AnnouncementDetail = () => {
   const [announceId, setAnnounceId] = useState("")
   const [announceCategoryId, setAnnounceCategoryId] = useState("")
   const Id = useAuthStore((state) => state.id);
-  
+
+
   const manager = useAuthStore((state) => state.manager)
   console.log(manager);
 
@@ -71,6 +72,16 @@ const AnnouncementDetail = () => {
     }
   };
 
+  const formatAnswer = (text) => {
+    return text.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br/>
+      </React.Fragment>
+    ));
+  };
+
+
   return (
     <div>
       <NavbarExample/>
@@ -94,12 +105,13 @@ const AnnouncementDetail = () => {
               placeholder="내용을 입력하세요"
               className="form-control mb-3"
               rows="10"
+              style={{whiteSpace: "pre-wrap"}}
             ></textarea>
           </div>
         ) : (
           <div>
             <AnnouncementTitle title={title} />
-            <AnnouncementContent content={content} />
+            <AnnouncementContent content={formatAnswer(content)} />
           </div>
         )}
         {/* 삭제 수정 버튼 */}
