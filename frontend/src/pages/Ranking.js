@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import './Ranking.css';
-import $ from 'jquery';
 import baseApi from '../api/fetchAPI';
 import NavbarExample from '../templates/NavbarExample';
 
@@ -49,34 +48,28 @@ const Ranking = () => {
 
             <div className='ranking-container'>
                 {/* 로고 */}
-                <div className='ranking-logo'>
-                    <img src={logo} className='ranking-logo-image' style={{"width":"260px","height":"110px"}}/>
-                </div>
+                <h1 style={{fontSize:"2rem", color:"gray", margin:"50px"}}>Rank Top 10</h1>
                 {/* 표 */}
-                <div className='ranking-table-container' style={{"fontSize":"36px"}}>
+                <div className='ranking-table-container' style={{"fontSize":"1.5rem"}}>
                     <table className='ranking-table'>
                         <thead className='ranking-thead'>
                             <tr >
                                 <td>순위</td>
                                 <td>
-                                    <img src={userImage} style={{width:45, height:45, marginRight: 4}}/>
                                     유저
                                 </td>
                                 <td>
-                                    <img src={calendarImage} style={{width:45, height:45, marginRight: 4}}/>
                                     가입일자
                                 </td>
                                 <td>
-                                    <img src={ratImage} style={{width:45, height:45, marginRight: 4}}/>
                                     캐릭터
                                 </td>
                                 <td>
-                                    <img src={chestnut} style={{width:45, height:45, marginRight: 4}}/>
                                     밤송이
                                 </td>
                             </tr>
                         </thead>
-                        <tbody  style={{"fontSize":"24px"}}>
+                        <tbody  style={{"fontSize":"1rem"}}>
                             {data&&data.length > 0 ? (
                                 data.map((item, index) => (
                                     <tr key={index} className='ranking-table-row'>
