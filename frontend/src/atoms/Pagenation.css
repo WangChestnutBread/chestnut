@@ -2,47 +2,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap:3px;
+}
+
+.PaginationBtn {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  background-color: #dcb78f;
+  color: black;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
   border-radius: 10px;
+  font-size: 1rem;
 }
 
-.FirstBorder {
-  background: #6b3906;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.LastBorder {
-  background: #6b3906;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.NumberBorder {
-  background: #6b3906;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+.LastBorder, .FirstBorder {
+  width: 50px;
 }
 
 .NumberBorder.active {
-  background-color: #007bff;
+  background: #6b3906;
   color: white;
 }
 
-.NumberBorder:hover,
 .FirstBorder:hover,
+.NumberBorder:hover,
 .LastBorder:hover {
-  background-color: #007bff;
-}
-
-.NumberContent {
-  font-size: 1.5rem;
-  word-wrap: break-word;
-}
-
-.PageBorder {
-  width: 20px;
-  height: 20px;
+  background-color: #6b3906;
+  color: white;
 }
