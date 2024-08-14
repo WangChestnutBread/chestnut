@@ -63,13 +63,13 @@ const Chapter5Detail = () => {
       {/* 표기, 카메라 */}
       <div className="container">
         <div className="row">
-          <div className="col-8 mt-2">
+          <div className="col-8">
             <div className="d-flex">
-              <div className="col-4">
+              <div className="col-5" style={{height:'341px'}}>
                 {/* <Notation word={params} /> */}
                 <Ch3Notation word={params} />
               </div>
-              <div className="col-8" style={{marginLeft:"30px"}}>
+              <div className="col-7" style={{marginLeft:"5px"}}>
                 <CameraOrganism />
               </div>
             </div>
@@ -77,7 +77,6 @@ const Chapter5Detail = () => {
             <div className="mt-2 justify-content-center" 
               style={{
                 height:"250px",
-                
             }}>
               <Ch5Pronunciation
                 saying={params}
