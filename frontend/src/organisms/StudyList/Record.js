@@ -6,6 +6,8 @@ import baseApi from "../../api/fetchAPI";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuthStore from "../../stores/authStore";
 import CustomAlert from "../../atoms/alert";
+import Lottie from "lottie-react";
+import Save from "../../assets/lottie/record.json";
 
 const Record = ({ func, func2 }) => {
   const [isRecording, setIsRecording] = useState(false);
@@ -165,12 +167,12 @@ const Record = ({ func, func2 }) => {
     if (!wavBlob) return;
     console.log(check);
     const formData = new FormData();
-    formData.append("word", '그러나, 안녕하세요?'); //check로 넣으면 됨
-    // formData.append("audio", wavBlob, "audio.wav");
+    formData.append("word", check); //check로 넣으면 됨
+    formData.append("audio", wavBlob, "audio.wav");
     checkWavFile(wavBlob);
     try {
       baseApi
-        .post("/study/detail/pronunciation/evaluate/test/success", formData, {
+        .post("/study/detail/pronunciation/evaluate", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -196,19 +198,27 @@ const Record = ({ func, func2 }) => {
 
   const handleCloseAlert = () => {
     setAlertContent(null); // Alert 닫기
-};
+  };
 
   return (
     <div className="d-flex row justify-content-center">
       <div className="record">
         <img src="/image/left.png" alt="left" onClick={downPage} />
         <div>
-          <img
-            src={isRecording ? "/image/stop.png" : "/image/record.png"}
-            alt={isRecording ? "stop" : "record"}
-            className={isRecording ? "stop" : "continue"}
-            onClick={handleToggle}
-          />
+          {isRecording ? (
+            <Lottie
+              animationData={Save}
+              style={{ width: 50, height: 50 }}
+              onClick={handleToggle}
+            />
+          ) : (
+            <img
+              src="/image/record.png"
+              alt="record"
+              className="continue"
+              onClick={handleToggle}
+            />
+          )}
         </div>
         <img src="/image/right.png" alt="right" onClick={upPage} />
       </div>
@@ -222,10 +232,9 @@ const Record = ({ func, func2 }) => {
           </a>
         </div>
       )}
-      {alertContent && 
-                <CustomAlert content={alertContent} 
-                onClose={handleCloseAlert}
-            />}
+      {alertContent && (
+        <CustomAlert content={alertContent} onClose={handleCloseAlert} />
+      )}
     </div>
   );
 };

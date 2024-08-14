@@ -54,6 +54,7 @@ const Chapter2Detail = () => {
           },2000)
         })
     }
+    
   };
 
   return (
