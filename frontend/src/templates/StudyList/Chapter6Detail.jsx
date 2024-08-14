@@ -120,6 +120,36 @@ const Chapter6Detail = () => {
         <RecordData func={moveData} func2={answer} />
         </div>
 
+        {/* 별개 */}
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            zIndex: 1000,
+            width: "800px",
+            height: "800px",
+            transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+            pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+          }}
+        >
+          {correct ? <Lottie animationData={Correct} /> : <></>}
+        </div>
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            zIndex: 1000,
+            width: "800px",
+            height: "800px",
+            transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
+            pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
+          }}
+        >
+          {wrong ? <Lottie animationData={Wrong} /> : <></>}
+        </div>
+
       </div>
     </div>
 
@@ -159,34 +189,7 @@ const Chapter6Detail = () => {
     //     <div className="row">
     //       <div className="col-6 mt-2 mb-3"></div>
     //     </div>
-    //     <div
-    //       style={{
-    //         position: "fixed",
-    //         top: "50%",
-    //         left: "50%",
-    //         zIndex: 1000,
-    //         width: "800px",
-    //         height: "800px",
-    //         transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
-    //         pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
-    //       }}
-    //     >
-    //       {correct ? <Lottie animationData={Correct} /> : <></>}
-    //     </div>
-    //     <div
-    //       style={{
-    //         position: "fixed",
-    //         top: "50%",
-    //         left: "50%",
-    //         zIndex: 1000,
-    //         width: "800px",
-    //         height: "800px",
-    //         transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
-    //         pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
-    //       }}
-    //     >
-    //       {wrong ? <Lottie animationData={Wrong} /> : <></>}
-    //     </div>
+        
     //     {/* 마이크 */}
     //   </div>
     // </div>
