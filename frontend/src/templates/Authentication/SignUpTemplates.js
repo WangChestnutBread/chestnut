@@ -284,7 +284,7 @@ function SignUPPage() {
         e.preventDefault();
 
         if (!Auth) {
-            alert("인증번호를 입력해주세요.");
+            setAuthMessage("인증번호를 입력해주세요.");
             return;
         }
 
@@ -295,7 +295,7 @@ function SignUPPage() {
         }).then(response => {
             console.log(Auth);
             if (response.data.code === "200") {
-                setAuthMessage("인증번호가 일치합니다.");
+                setAuthMessage("인증되었습니다.");
                 setIsAuth(true);
             } else if (response.data.code === "605") {
                 setAuthMessage("인증번호가 일치하지 않습니다.");
