@@ -123,12 +123,12 @@ function FindPw() {
         const currentEmail = e.target.value;
         setEmail(currentEmail);
         console.log(currentEmail);
-        const emailRegExp = /^[A-Za-z0-9_]*[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+        const emailRegExp = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$/;
         if (!emailRegExp.test(currentEmail)) {
             setEmailMessage("이메일 형식이 올바르지 않습니다.")
             setIsEmail(false);
         } else {
-            setEmailMessage("사용 가능한 이메일 입니다.")
+            setEmailMessage("올바른 이메일 형식입니다.")
             setIsEmail(true);
         }
     };
