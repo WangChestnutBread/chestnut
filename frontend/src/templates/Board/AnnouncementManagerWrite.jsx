@@ -104,11 +104,11 @@ const AnnouncementManagerWrite = () => {
         </div>
 
         {/* 취소 등록 버튼 */}
-        <div className="d-flex justify-content-between">
-          <button className="nobtn fs-3" onClick={handleQnaClick} style={{border:"none"}}>
+        <div className="d-flex justify-content-end" style={{gap: "15px", marginRight: "1px", marginBottom: "30px"}}>
+          <button className="nobtn fs-5" onClick={handleQnaClick} style={{border:"none", borderRadius: "15px", height: "40px", width: "78px"}}>
             취소
           </button>
-          <button className="yesbtn fs-3" onClick={handleDetailClick2} style={{border:"none"}}>
+          <button className="yesbtn fs-5" onClick={handleDetailClick2} style={{border:"none", borderRadius: "15px", height: "40px", width: "78px"}}>
             등록
           </button>
         </div>
