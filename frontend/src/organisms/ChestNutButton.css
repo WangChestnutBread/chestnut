@@ -37,6 +37,10 @@
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
 
+.DropMenu > .DropItem{
+  color: black;
+}
+
 /* Navbar.css */
 .navbar {
   display: flex;
@@ -51,8 +55,6 @@
 
 .nav-item {
   text-decoration: none;
-  color: #8b4513;
-  font-weight: bold;
   font-size: 20px;
   margin-right: 20px;
 }
