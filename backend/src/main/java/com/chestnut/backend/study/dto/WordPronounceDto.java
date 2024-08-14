@@ -10,4 +10,5 @@ public class WordPronounceDto {
 
     private String word;
     private String pronounce;
+    private int isVocabulary;
 }
