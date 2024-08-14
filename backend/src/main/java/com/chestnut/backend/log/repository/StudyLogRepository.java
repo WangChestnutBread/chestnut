@@ -29,4 +29,7 @@ public interface StudyLogRepository extends JpaRepository<StudyLog, Long> {
     )
     List<StudyLog> findRecentStudyLogByMemberId(@Param("memberId") Long memberId);
 
+    //select study_id from study_log where member_id = 1 and chapter_id = 4 group by study_id;
+    @Query("select sl.study.studyId from StudyLog sl where sl.member.memberId = :memberId and sl.chapter.chapterId = :chapterId group by sl.study.studyId")
+    List<Long> findStudyIdByChapterIdAndMemberId(@Param("memberId") Long memberId, @Param("chapterId") Byte chapterId);
 }
