@@ -8,7 +8,7 @@ const PronunciationRight = ({data, location}) => {
     alert("다시 말씀해주십쇼");
   }
   return (
-    <div className="right d-flex justify-content-center align-items-center text-center rounded-end">
+    <div className="d-flex justify-content-center align-items-center text-center rounded-end">
       <Text64 text={data} location={location} />
     </div>
   );
