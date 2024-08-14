@@ -23,6 +23,7 @@ const Chapter5Detail = () => {
   const [show, isShow] = useState(false);
   const [correct, isCorrect] = useState(false);
   const [wrong, isWrong] = useState(false)
+  const [isVocabulary, setIsVocabulary] = useState(null)
 
   useEffect(() => {
     isShow(true);
@@ -57,9 +58,15 @@ const Chapter5Detail = () => {
     }
   };
 
+  const handleIsVocabulary = (isVocabulary) => {
+    setIsVocabulary(isVocabulary)
+  }
+  
   return (
+
     <div className="ChapterDetail">
-      <NavbarExample showBookMarkButton={true} showSentenceButton={true}/>
+      <NavbarExample showBookMarkButton={true} showSentenceButton={true} studyId={params.studyId} {...(isVocabulary !== null ? { isVocabulary } : {})}/>
+
       {/* 표기, 카메라 */}
       <div className="container">
         <div className="row">
@@ -83,6 +90,7 @@ const Chapter5Detail = () => {
                 realData={realData}
                 location={answerData}
                 onCharacterClick={setSelectedChar}
+                handleIsVocabulary={handleIsVocabulary}
               />
             </div>
             <div className="mt-2">

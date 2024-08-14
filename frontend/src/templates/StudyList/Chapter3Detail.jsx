@@ -25,6 +25,7 @@ const Chapter3Detail = () => {
   const [show, isShow] = useState(false);
   const [correct, isCorrect] = useState(false);
   const [wrong, isWrong] = useState(false)
+  
 
   const moveData = (value) => {
     console.log(value);
@@ -59,7 +60,8 @@ const Chapter3Detail = () => {
   return (
     <div className="ChapterDetail">
       {/* 헤더 */}
-      <NavbarExample showBookMarkButton={true}></NavbarExample>
+
+      <NavbarExample showBookMarkButton={true} studyId={params.studyId}></NavbarExample>
       <div 
         style={{
           width:"100%",
@@ -91,6 +93,7 @@ const Chapter3Detail = () => {
               <div style={{
                 width:"50%",
               }}>
+>>>>>>> frontend/src/templates/StudyList/Chapter3Detail.jsx
                 <Ch3Notation word={params} />
 
               </div>

@@ -3,16 +3,19 @@ import Ch5PronunciationLeft from "../../molecules/StudyList/Ch5PronunciationLeft
 import Ch5PronunciationRight from "../../molecules/StudyList/Ch5PronunciationRight";
 import baseApi from "../../api/fetchAPI";
 
-const Ch5Pronunciation = ({saying, realData, location, onCharacterClick}) => {
+const Ch5Pronunciation = ({saying, realData, location, onCharacterClick, handleIsVocabulary}) => {
 
   const [word, setWrod] = useState("")
   const [pronounce, setPronounce] = useState("")
+  
 
   useEffect(() => {
     baseApi.get(`/study/detail/${saying.studyId}/word`).then((res) => {
       console.log(res);
       setWrod(res.data.data.word);
       setPronounce(res.data.data.pronounce);
+      console.log('5단원', res.data.data.isVocabulary);
+      handleIsVocabulary(res.data.data.isVocabulary);
     });
   });
 
