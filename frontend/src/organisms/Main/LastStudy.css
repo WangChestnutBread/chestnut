@@ -2,9 +2,11 @@
     display: flex;
     flex-direction: column;
     width: 400px;
-    flex-grow: 1;
+    /* flex-grow: 1; */
     border-radius: 25px;
     border: 1px solid #6B3906;
+    padding: 0px;
+    flex-wrap: wrap;
 }
 
 .LastStudyHead {

@@ -7,11 +7,10 @@ import { useNavigate } from "react-router-dom";
 import baseApi from "../../api/fetchAPI";
 import useAuthStore from "../../stores/authStore";
 import CustomAlert from "../../atoms/alert";
+import { Col } from "react-bootstrap";
 
 function MainProfileTextBox({ profile }) {
-  // console.log(profile)
   let navigate = useNavigate();
-  // const clearAccessToken = useAuthStore((state) => state.clearAccessToken);
   const setAccessToken = useAuthStore((state) => state.setAccessToken);
   const [alertContent, setAlertContent] = useState("");
 
@@ -62,7 +61,9 @@ function MainProfileTextBox({ profile }) {
         <div className="Ranking" onClick={()=>{navigate('/ranking')}}>
           <img src="/image/Ranking.png" height="31px" />
           <Text20 text="내 랭킹" />
-          <Text24 text={profile.ranking} />
+          {
+            profile.ranking === 0 ? <Text24 text="-" /> : <Text24 text={profile.ranking} />
+          }
           <Text24 text="위" />
         </div>
       </div>
