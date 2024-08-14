@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useAuthStore from "../stores/authStore";
+import useLocalAuthStore from "../stores/localAuthStore";
 import MainMenu from "../organisms/Main/MainMenu";
 import "./MainTemplate.css";
 import LastStudy from "../organisms/Main/LastStudy";
@@ -10,7 +10,6 @@ import OpenChat from "../organisms/OpenChat";
 import Tutorial from "../atoms/Tutorial";
 import MainTutorialStep from "../data/MainTutorialStep";
 import WelcomeModal from "../atoms/WelcomeModal";
-import baseApi from "../api/fetchAPI";
 
 
 
@@ -24,15 +23,11 @@ const MainTemplate = ({ profile, attendance }) => {
   ]);
 
 
-  const { hasVisitedBefore, setHasVisitedBefore } = useAuthStore();
+  const { hasVisitedBefore, setHasVisitedBefore } = useLocalAuthStore();
 
   let [showOpenChat, setShowOpenChat] = useState(false);
   let [startTutorial, setStartTutorial] = useState(false);
   let [welcomeModal, setWelcomeModal] = useState(false);
-
-  // 상태 초기화 -> 누르면 초기화는 되는데 무한 랜더링함...
-  //   const resetHasVisitedBefore = useAuthStore((state) => state.resetHasVisitedBefore);
-  //   resetHasVisitedBefore();
 
   //튜토리얼은 최초 접속했을 때 한 번만
   useEffect(() => {
