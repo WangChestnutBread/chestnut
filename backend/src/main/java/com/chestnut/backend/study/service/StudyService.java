@@ -217,10 +217,7 @@ public class StudyService {
      * 학습 상세 페이지 - 표기와 발음 조회
      */
     public WordPronounceDto getWordInfo(Long studyId) {
-        Study study = studyRepository
-                .findById(studyId)
-                .orElseThrow(NotFoundException::new);
-        return new WordPronounceDto(study.getWord(), study.getPronounce());
+        return studyRepository.findWordByStudyId(studyId);
     }
 
     /**
