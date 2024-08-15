@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Text32 from "../../atoms/Text32";
 
 function Chapter5_6List({ content, chapterId }) {
+  console.log(content[3]);
   let navigate = useNavigate();
   let [currentTopic, setCurrentTopic] = useState(0);
   let [currentPage, setCurrentPage] = useState(1);
@@ -36,13 +37,15 @@ function Chapter5_6List({ content, chapterId }) {
 
   const handleUpPageChange = (currentPage) => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+      const newPage = currentPage + 1;
+      setCurrentPage(newPage);
     }
   };
 
   const handleDownPageChange = (currentPage) => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      const newPage = currentPage - 1;
+      setCurrentPage(newPage);
     }
   };
 
