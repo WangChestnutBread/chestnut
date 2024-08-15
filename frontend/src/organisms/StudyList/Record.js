@@ -47,7 +47,7 @@ const Record = ({ func, func2 }) => {
           studyId: nextId,
           isPass: 1,
         },
-      });
+      })
     } else if (nextId && studyId > 39 && studyId < 439) {
       navigate(`/study/detail2/2/${nextId}`);
     } else if (nextId && studyId > 438 && studyId < 446) {
@@ -100,7 +100,6 @@ const Record = ({ func, func2 }) => {
         console.log(res);
         setData(res.data.data.word);
       });
-
       // 녹음 중지
       mediaRecorderRef.current.stop();
       setIsRecording(false);
@@ -172,6 +171,7 @@ const Record = ({ func, func2 }) => {
     formData.append("audio", wavBlob, "audio.wav");
     checkWavFile(wavBlob);
     try {
+      if (check.length > 0){
       baseApi
         .post("/study/detail/pronunciation/evaluate", formData, {
           headers: {
@@ -188,6 +188,7 @@ const Record = ({ func, func2 }) => {
           setAlertContent(`다시 녹음해주시겠어요?`);
           console.log(err);
         });
+      }
     } catch (error) {
       console.error("Error uploading file:", error);
     }

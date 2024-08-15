@@ -89,9 +89,7 @@ const Chapter5Detail = () => {
           },2000)
         })
     }
-    
   };
-
 
   const handleIsVocabulary = (isVocabulary) => {
     setIsVocabulary(isVocabulary)
@@ -106,7 +104,6 @@ const Chapter5Detail = () => {
           <div className="col-8 mt-2">
             <div className="d-flex">
               <div>
-                {/* <Notation word={params} /> */}
                 <Ch3Notation word={params} />
               </div>
               <div style={{marginLeft:"30px"}}>
