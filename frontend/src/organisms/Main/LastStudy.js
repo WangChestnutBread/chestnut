@@ -31,9 +31,9 @@ function LastStudy({ chapter, word, chapterId, studyId }) {
 
   // 마지막 학습 버튼 클릭 시
   const handleOnClick = () => {
-    chapterId
+    chapterId && chapterId !== 4 && chapterId !== 7
       ? navigate(`/study/detail${chapterId}/${chapterId}/${studyId}`)
-      : giveFirstWordLog();
+      : chapterId === 4 || chapterId === 7 ? navigate(`/chapter/${chapterId}`) : !chapterId ? giveFirstWordLog() : <></>;
   };
 
   return (
