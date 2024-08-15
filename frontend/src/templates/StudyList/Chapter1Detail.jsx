@@ -88,7 +88,7 @@ const Chapter1Detail = () => {
         {/* 소리나는 방법, 카메라 */}
         <div className="d-flex justify-content-between" style={{ gap: "20px" }}>
           <div className="flex-grow-1 justify-content-center">
-            <div>
+            <div className="SMCH1">
               <SMCH1 hangeul={params} />
             </div>
             <div className="mt-2 me-4 d-flex justify-content-center">
