@@ -31,8 +31,9 @@ public final class StringComparator {
         ProcessedString processedAnswer = preprocessAndMap(answer);
         // 사용자 입력 전처리
         ProcessedString processedInput = preprocessAndMap(userInput);
-        log.debug("STT 태그 : 정답 전처리 결과 = "+processedAnswer.processed);
-        log.debug("STT 태그 : 사용자 발음 전처리 결과 = "+processedInput.processed);
+        log.debug("STT 태그 : 정답 전처리 결과 = {}", processedAnswer.processed);
+        log.debug("STT 태그 : 사용자 발음 전처리 결과 = {}", processedInput.processed);
+        log.debug("STT 태그 : 두 전처리 일치 여부 = {}", processedAnswer.processed.equals(processedInput.processed));
         // 통과 시 결과 반환
         if (processedAnswer.processed.equals(processedInput.processed)) {
             return new PronunceEvaluateDto (1, processedInput.processed, Collections.emptyList(), Collections.emptyList());
