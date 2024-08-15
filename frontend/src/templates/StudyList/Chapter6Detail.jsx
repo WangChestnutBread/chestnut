@@ -25,7 +25,19 @@ const Chapter6Detail = () => {
   const [wrong, isWrong] = useState(false);
   const [isVocabulary, setIsVocabulary] = useState(null)
 
-
+  useEffect(() => {
+    baseApi
+        .get("/log/study", {
+          params: {
+            studyId: params.studyId,
+            isPass: 0,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+  },[])
+  
   const moveData = (value) => {
     setRealData(value);
   };

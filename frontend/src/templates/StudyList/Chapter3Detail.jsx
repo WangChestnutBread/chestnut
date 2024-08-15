@@ -9,7 +9,7 @@ import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import RecordData from "../../organisms/StudyList/Record";
 import Pronunciation from "../../organisms/StudyList/Pronunciations";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import baseApi from "../../api/fetchAPI";
 import Ch3SM from "../../organisms/StudyList/Ch3SM";
 import Ch3Notation from "./../../organisms/StudyList/Ch3Notaion";
@@ -26,6 +26,19 @@ const Chapter3Detail = () => {
   const [correct, isCorrect] = useState(false);
   const [wrong, isWrong] = useState(false);
   const [isVocabulary, setIsVocabulary] = useState(null)
+
+  useEffect(() => {
+    baseApi
+        .get("/log/study", {
+          params: {
+            studyId: params.studyId,
+            isPass: 0,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+  },[])
 
   const moveData = (value) => {
     console.log(value);
