@@ -42,9 +42,9 @@ const Chapter2Detail = () => {
   const moveData = (value) => {
     setRealData(value);
   };
-  const answer = (value) => {
+  const answer = (isPass, value) => {
     setAnswerData(value);
-    if (value.length === 0) {
+    if (isPass === 1) {
       isShow(true);
       baseApi
         .get("/log/study", {

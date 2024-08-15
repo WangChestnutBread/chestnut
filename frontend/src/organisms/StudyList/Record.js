@@ -37,7 +37,7 @@ const Record = ({ func, func2 }) => {
 
   const upPage = () => {
     func("녹음된 발음");
-    func2([10000]);
+    func2(0, [10000]);
 
     const nextId = getNextId(Number(studyId)); // 다음 ID 가져오기
     if (studyId > 0 && studyId < 40) {
@@ -63,7 +63,7 @@ const Record = ({ func, func2 }) => {
 
   const downPage = () => {
     func("녹음된 발음");
-    func2([1000000]);
+    func2(0, [1000000]);
 
     const prevId = getPrevId(Number(studyId)); // 이전 ID 가져오기
     if (prevId && studyId > 0 && studyId < 42) {
@@ -182,7 +182,7 @@ const Record = ({ func, func2 }) => {
           console.log(res);
           setPronunciation(res.data.data.pronunciation);
           func(res.data.data.pronunciation);
-          func2(res.data.data.answerMismatchIndices);
+          func2(res.data.data.isPass, res.data.data.answerMismatchIndices);
         })
         .catch((err) => {
           setAlertContent(`다시 녹음해주시겠어요?`);
