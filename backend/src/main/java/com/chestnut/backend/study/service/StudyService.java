@@ -101,7 +101,7 @@ public class StudyService {
                         if (studyIdSet.contains(info.getStudyId())) {
                             info.setIsPass(1);
                         } else {
-                            info.setIsPass(2);
+                            info.setIsPass(0);
                         }
                     }
                     return new PhonologyGroupInfoDto(
