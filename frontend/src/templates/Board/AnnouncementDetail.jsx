@@ -88,7 +88,7 @@ const AnnouncementDetail = () => {
       <div className="container text-start">
         {/* 로고 */}
         <LogoAnnouncement />
-        <button className='listbtn mt-4' onClick={moveAnnouncement} style={{border:"none"}}>게시판 목록</button>
+        <button className='listbtn mt-4' onClick={moveAnnouncement} style={{border:"none"}}>공지사항 목록</button>
         {/* 게시판 제목 및 내용 */}
         {isEditing ? (
           <div>
