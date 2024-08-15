@@ -178,7 +178,7 @@ const Ai = ({ userId }) => {
           className="messages-container mt-5"
           style={{
             padding: "20px",
-            maxHeight: "500px",
+            maxHeight: "350px",
             overflowY: "auto", // 스크롤이 가능하도록 설정
             backgroundColor: "#fff9ef",
             borderRadius: "10px",
