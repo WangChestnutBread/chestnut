@@ -1,6 +1,6 @@
 package com.chestnut.backend.study.service;
 
-import com.chestnut.backend.common.exception.UnknownException;
+import com.chestnut.backend.common.exception.NullSTTException;
 import com.chestnut.backend.member.service.MemberService;
 import com.chestnut.backend.study.dto.PronunceEvaluateDto;
 import com.chestnut.backend.study.util.StringComparator;
@@ -33,12 +33,12 @@ public class PronounceEvaluateService {
     public PronunceEvaluateDto pronounceEvaluate(String loginId, String answer, MultipartFile audioFile) {
         //만약 빈 answer이 담겨서 넘어올 경우
         if(answer == null || answer.trim().isEmpty())
-            throw new UnknownException();
+            throw new NullSTTException();
         // 멤버 유효성 검사
         memberService.validateMember(loginId);
         // 음성 파일을 클로바 음성 인식 API에 업로드하여 STT 결과를 가져옴
         String sttResult = clovaSpeechClient.upload(audioFile);
-        log.debug("STT 태그 : STT 결과 = "+ sttResult);
+        log.debug("STT 태그 : STT 결과 = {}", sttResult);
         // // 정답 문자열과 STT 결과를 비교 후 발음 평가 결과 DTO 생성 및 반환
         return StringComparator.compareStrings(answer, sttResult);
     }
