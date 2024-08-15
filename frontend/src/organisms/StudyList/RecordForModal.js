@@ -9,7 +9,7 @@ import CustomAlert from "../../atoms/alert";
 import Lottie from "lottie-react";
 import Save from "../../assets/lottie/record.json";
 
-const Record = ({ func, func2 }) => {
+const RecordForModal = ({ func, func2, studyId }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const [wavBlob, setWavBlob] = useState(null);
@@ -17,87 +17,15 @@ const Record = ({ func, func2 }) => {
   const audioChunksRef = useRef([]);
   const ffmpeg = new FFmpeg();
   const navigate = useNavigate();
-  const { studyId, chapterId } = useParams();
   const [check, setData] = useState("");
   const setPronunciation = useAuthStore((state) => state.setPronunciation);
   const [alertContent, setAlertContent] = useState("");
-
-  const checkPoint = useAuthStore((state) => state.checkPoint);
-
-  // getNextId와 getPrevId 함수 정의
-  const getNextId = (currentId) => {
-    const index = checkPoint.findIndex((id) => id > currentId);
-    return index !== -1 ? checkPoint[index] : null;
-  };
-
-  const getPrevId = (currentId) => {
-    const index = checkPoint.findIndex((id) => id >= currentId) - 1;
-    return index >= 0 ? checkPoint[index] : null;
-  };
-
-  const upPage = () => {
-    func("녹음된 발음");
-    func2([10000]);
-
-    const nextId = getNextId(Number(studyId)); // 다음 ID 가져오기
-    if (studyId > 0 && studyId < 40) {
-      navigate(`/study/detail1/1/${nextId}`);
-      baseApi.get(`/log/study`, {
-        params: {
-          studyId: nextId,
-          isPass: 1,
-        },
-      });
-    } else if (nextId && studyId > 39 && studyId < 439) {
-      navigate(`/study/detail2/2/${nextId}`);
-    } else if (nextId && studyId > 438 && studyId < 446) {
-      navigate(`/study/detail3/3/${nextId}`);
-    } else if (nextId && studyId > 445 && studyId < 1381) {
-      navigate(`/study/detail5/5/${nextId}`);
-    } else if (studyId < 2368) {
-      navigate(`/study/detail6/6/${nextId}`);
-    } else {
-      setAlertContent(`다음 학습 페이지가 없습니다.`);
-    }
-  };
-
-  const downPage = () => {
-    func("녹음된 발음");
-    func2([1000000]);
-
-    const prevId = getPrevId(Number(studyId)); // 이전 ID 가져오기
-    if (prevId && studyId > 0 && studyId < 42) {
-      navigate(`/study/detail1/1/${prevId}`);
-      baseApi.get(`/log/study`, {
-        params: {
-          studyId: prevId,
-          isPass: 1,
-        },
-      });
-    } else if (prevId && studyId < 441) {
-      navigate(`/study/detail2/2/${prevId}`);
-    } else if (prevId && studyId < 448) {
-      navigate(`/study/detail3/3/${prevId}`);
-      baseApi.get(`/log/study`, {
-        params: {
-          studyId: prevId,
-          isPass: 1,
-        },
-      });
-    } else if (prevId && studyId < 1383) {
-      navigate(`/study/detail5/5/${prevId}`);
-    } else if (prevId && studyId < 2370) {
-      navigate(`/study/detail6/6/${prevId}`);
-    } else {
-      setAlertContent(`첫 학습페이지 입니다.`);
-    }
-  };
 
   // 녹음 시작/정지 토글
   const handleToggle = async () => {
     if (isRecording) {
       baseApi.get(`/study/detail/${studyId}/word`).then((res) => {
-        console.log(res);
+        console.log(res.data.data.word);
         setData(res.data.data.word);
       });
 
@@ -180,6 +108,9 @@ const Record = ({ func, func2 }) => {
         })
         .then((res) => {
           console.log(res);
+          // console.log(res.data.data.pronunciation);
+          console.log("!@#!@#!@");
+          console.log(res.data.data.answerMismatchIndices);
           setPronunciation(res.data.data.pronunciation);
           func(res.data.data.pronunciation);
           func2(res.data.data.answerMismatchIndices);
@@ -203,9 +134,9 @@ const Record = ({ func, func2 }) => {
 
   return (
     <div className="d-flex row justify-content-center">
-      <div className="record">
-        <img src="/image/left.png" alt="left" onClick={downPage} />
-        <div>
+      <div className="record" style={{justifyContent:"center"}}>
+        
+        <div >
           {isRecording ? (
             <Lottie
               animationData={Save}
@@ -221,7 +152,7 @@ const Record = ({ func, func2 }) => {
             />
           )}
         </div>
-        <img src="/image/right.png" alt="right" onClick={upPage} />
+       
       </div>
 
       {wavBlob && (
@@ -240,4 +171,4 @@ const Record = ({ func, func2 }) => {
   );
 };
 
-export default Record;
+export default RecordForModal;
