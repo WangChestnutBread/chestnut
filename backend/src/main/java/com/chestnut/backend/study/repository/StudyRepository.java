@@ -1,5 +1,6 @@
 package com.chestnut.backend.study.repository;
 
+import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.study.dto.PronounceMethodDto;
 import com.chestnut.backend.study.dto.WordPronounceDto;
 import com.chestnut.backend.study.entity.Study;
@@ -36,7 +37,7 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
 
     @Query("select new com.chestnut.backend.study.dto.WordPronounceDto(s.word, s.pronounce, case when(v.study.studyId is null) then 0 else 1 end) " +
             "from Study s left join Vocabulary v on s.studyId = v.study.studyId " +
-            "where s.studyId = :studyId"
+            "where s.studyId = :studyId and v.member = :member"
     )
-    WordPronounceDto findWordByStudyId(@Param("studyId") Long studyId);
+    WordPronounceDto findWordByStudyId(@Param("studyId") Long studyId, @Param("member")Member member);
 }

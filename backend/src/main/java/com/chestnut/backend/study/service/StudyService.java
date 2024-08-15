@@ -13,6 +13,7 @@ import com.chestnut.backend.study.entity.*;
 import com.chestnut.backend.study.repository.*;
 import com.chestnut.backend.vocabulary.repository.VocabularyRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ import java.util.stream.IntStream;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class StudyService {
 
     private final StudyInfoRepository studyInfoRepository;
@@ -216,8 +218,12 @@ public class StudyService {
     /**
      * 학습 상세 페이지 - 표기와 발음 조회
      */
-    public WordPronounceDto getWordInfo(Long studyId) {
-        return studyRepository.findWordByStudyId(studyId);
+    public WordPronounceDto getWordInfo(Long studyId, String loginId) {
+        Member member = memberRepository.findByLoginId(loginId)
+            .orElseThrow(MemberNotFoundException::new);
+        if (member.isWithdraw()) throw new InvalidMemberException();
+        WordPronounceDto wordByStudyId = studyRepository.findWordByStudyId(studyId, member);
+        return wordByStudyId;
     }
 
     /**
