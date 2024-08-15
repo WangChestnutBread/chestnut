@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 import Loading from "../organisms/Loading";
 function MainPage() {
 
+  // studyId 가져오기
   const setCheckPoint = useAuthStore((state)=>state.setCheckPoint)
   
     const study = () => {
       baseApi.get(`/study/study-id`,).then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setCheckPoint(res.data.data)
       
     })}
@@ -54,8 +55,8 @@ function MainPage() {
     }
   };
 
+  
   useEffect(() => {
-    // console.log("달력이랑 출석 불러오기")
     const fetchData = async () => {
       try {
         const promiseResult = Promise.all([getProfile(), getAttendance(), study()]);
