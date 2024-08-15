@@ -1,5 +1,4 @@
 import { Modal, Container, Stack } from "react-bootstrap";
-import Record from "../organisms/StudyList/Record";
 import "../organisms/StudyList/NotationChapter1.css";
 import "./VocaModal.css";
 import Text24 from "../atoms/Text24";
@@ -7,6 +6,7 @@ import Text32 from "../atoms/Text32";
 import { useState } from "react";
 import baseApi from "../api/fetchAPI";
 import CustomAlert from "../atoms/alert";
+import RecordForModal from "./StudyList/RecordForModal";
 
 const VocaModal = ({ word, pronounce, studyId, onClose }) => {
   const [myPronounce, setMyProunce] = useState(
@@ -14,6 +14,8 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
   );
   const [answerPronounce, setAnswerPronounce] = useState([100000]);
   const [show, isShow] = useState(false);
+  const [correct, isCorrect] = useState(false);
+  const [wrong, isWrong] = useState(false)
   const [alertContent, setAlertContent] = useState("");
 
   const movePronounce = (value) => {
@@ -26,7 +28,7 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
 
   const answer = (value) => {
     setAnswerPronounce(value);
-    console.log(value);
+    // console.log(value);
     if (value.length === 0) {
       isShow(true);
       baseApi
@@ -37,9 +39,21 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
           },
         })
         .then((res) => {
-          console.log(res);
+          isCorrect(true);
+          setTimeout(() => {
+            isCorrect(false);
+          }, 2000);
           setAlertContent(`✨ 축하합니다~! ✨<br> 성공입니다~! 🥳`);
-        });
+        }).catch((err) => {
+          isWrong(true);
+
+          setTimeout(() => {
+            isWrong(false)
+          },2000)
+        })
+    }
+    else if( value.length > 0 && value.length < 15){
+      setAlertContent(`❌ 실패입니다~! 😭<br>다시 한번 녹음해주세요~!`);
     }
   };
 
@@ -72,7 +86,22 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
                 </div>
                 {word ? (
                   <div className="RightSide">
-                    <Text24 text={pronounce} />
+                    {/* <Text24 text={pronounce}  /> */}
+                    {pronounce.split("").map((char, index) => (
+        <span
+          key={index}
+          style={{
+            color: answerPronounce.includes(index) ? "red" : "black",
+            fontSize: "1.5rem",
+            whiteSpace: "pre",
+            display: "inline-block",
+          }}
+          // onClick={() => onCharacterClick(char)}
+        >
+          {char}
+        </span>
+      ))}
+                    {/* <p>{pronounce.split("").map((char,index)=> )}</p> */}
                   </div>
                 ) : null}
               </div>
@@ -81,7 +110,7 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
                   <div className="LeftSide">
                     <Text24 text="내 발음" />
                   </div>
-                  {word ? (
+                  {pronounce ? (
                     <div className="RightSide">
                       <Text24 text={myPronounce} />
                     </div>
@@ -94,7 +123,7 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
 
         {/* 마이크 */}
         <Modal.Footer className="ModalFooter">
-          <Record func={movePronounce} func2={answer} />
+          <RecordForModal func={movePronounce} func2={answer} studyId={studyId}/>
         </Modal.Footer>
       </Modal>
 
