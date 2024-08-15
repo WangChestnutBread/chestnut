@@ -97,13 +97,13 @@ function MainCalendar({ attendance }) {
       <Overlay show={showPopover} target={target} placement="right" rootClose>
         <Popover className="CalendarPopover" ref={popoverRef}>
           <Popover.Header>
-            <button style={{ border: "none" }} onClick={handleOnClose}>
+            <button style={{ border: "none", background: "transparent", fontFamily:"Jua"}} onClick={handleOnClose}>
               오늘의 학습 기록 &times;
             </button>
           </Popover.Header>
-          <Popover.Body>
+          <Popover.Body style={{fontFamily:"Jua"}}>
             {studyLog ? (
-              <div>{studyLog.length}</div>
+              <div>{studyLog.length}건</div>
             ) : (
               <div>학습 기록이 없습니다.</div>
             )}
