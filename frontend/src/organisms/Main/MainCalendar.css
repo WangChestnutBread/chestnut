@@ -51,6 +51,7 @@ abbr[title] {
 
 .react-calendar__tile {
   color: black;
+  cursor: pointer;
 }
 
 .react-calendar__tile--active {
@@ -61,7 +62,6 @@ abbr[title] {
 .react-calendar__tile:hover,
 .react-calendar__tile:focus {
   background: none !important;
-  cursor: default !important;
 }
 
 .react-calendar__tile--now,
