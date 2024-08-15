@@ -66,7 +66,7 @@ const Chapter5Detail = () => {
   return (
 
     <div className="ChapterDetail">
-      <NavbarExample showBookMarkButton={true} showSentenceButton={true}/>
+      <NavbarExample showBookMarkButton={true} showSentenceButton={true} studyId={params.studyId} {...(isVocabulary !== null ? { isVocabulary } : {})}/>
       <div className="container">
         <div className="row">
           <div className="col-8 mt-2">

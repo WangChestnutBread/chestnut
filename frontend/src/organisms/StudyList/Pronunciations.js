@@ -4,7 +4,7 @@ import PronunciationRight from "../../molecules/StudyList/PronunciationRight";
 import baseApi from "../../api/fetchAPI";
 import { useParams } from "react-router-dom";
 
-const Pronunciations = ({ saying, realData, location }) => {
+const Pronunciations = ({ saying, realData, location, handleIsVocabulary }) => {
   const params = useParams();
   const [word, setWrod] = useState("");
   const [pronounce, setPronounce] = useState("");
@@ -14,6 +14,8 @@ const Pronunciations = ({ saying, realData, location }) => {
       console.log(res);
       setWrod(res.data.data.word);
       setPronounce(res.data.data.pronounce);
+      handleIsVocabulary(res.data.data.isVocabulary);
+
     });
   });
 
