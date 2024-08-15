@@ -1,4 +1,6 @@
 .VocaTabDropdownMenu {
+    padding-top: 0%;
+    padding-bottom: 0%;
     font-size: 1.5rem;
     overflow: auto;
   }
@@ -8,6 +10,10 @@
     border-bottom: 1px solid lightgray;
     cursor: pointer;
     transition: 0.2s background;
+  }
+
+  .VocaTabDropItem:last-child {
+    border-bottom: none;
   }
   
   .VocaTabDropItem:hover {

@@ -22,11 +22,14 @@ function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
   let [modalWord, setModalWord] = useState(null);
   let [modalPronounce, setModalPronounce] = useState(null);
   let [modalStudyId, setModalStudyId] = useState(null);
+  let [modalChapterId, setModalChapterId] = useState(null);
 
-  const handleWordClick = (word, pronounce, studyId) => {
+
+  const handleWordClick = (word, pronounce, studyId, chapterId) => {
     setModalWord(word);
     setModalPronounce(pronounce);
     setModalStudyId(studyId);
+    setModalChapterId(chapterId)
     setShowModal(true);
   };
 
@@ -34,6 +37,7 @@ function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
     setShowModal(false);
     setModalWord(null);
     setModalPronounce(null);
+
   };
 
   useEffect(() => {
@@ -112,7 +116,8 @@ function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
                       handleWordClick(
                         item.word,
                         item.pronounce,
-                        item.studyId
+                        item.studyId,
+                        item.chapterId
                       );
                     }}
                   >
@@ -145,6 +150,7 @@ function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
               word={modalWord}
               pronounce={modalPronounce}
               studyId={modalStudyId}
+              chapterId={modalChapterId}
               onClose={handleCloseModal}
             />
           ) : null}
