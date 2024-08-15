@@ -219,11 +219,16 @@ public class StudyService {
      * 학습 상세 페이지 - 표기와 발음 조회
      */
     public WordPronounceDto getWordInfo(Long studyId, String loginId) {
-        Member member = memberRepository.findByLoginId(loginId)
-            .orElseThrow(MemberNotFoundException::new);
-        if (member.isWithdraw()) throw new InvalidMemberException();
-        WordPronounceDto wordByStudyId = studyRepository.findWordByStudyId(studyId, member);
-        return wordByStudyId;
+        try {
+            Member member = memberRepository.findByLoginId(loginId)
+                .orElseThrow(MemberNotFoundException::new);
+            if (member.isWithdraw()) throw new InvalidMemberException();
+            WordPronounceDto wordByStudyId = studyRepository.findWordByStudyId(studyId, member);
+            return wordByStudyId;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

@@ -35,9 +35,8 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
     @Query("select s.studyId from Study s where s.studyId != 12 and s.studyId <= 2430 and s.chapter.chapterId != 4")
     List<Long> getStudyIdList();
 
-    @Query("select new com.chestnut.backend.study.dto.WordPronounceDto(s.word, s.pronounce, case when(v.study.studyId is null) then 0 else 1 end) " +
-            "from Study s left join Vocabulary v on s.studyId = v.study.studyId " +
-            "where s.studyId = :studyId and v.member = :member"
-    )
+    @Query("select new com.chestnut.backend.study.dto.WordPronounceDto(s.word, s.pronounce, case when(v2.id is null) then 0 else 1 end) " +
+         "from Study s left join (select v.study.studyId id from Vocabulary v where v.member = :member) v2 " +
+         "on s.studyId = v2.id where s.studyId = :studyId")
     WordPronounceDto findWordByStudyId(@Param("studyId") Long studyId, @Param("member")Member member);
 }
