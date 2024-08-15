@@ -2,9 +2,11 @@ import "./SentenceButton.css";
 import Text24 from "../atoms/Text24";
 import SentenceItem from "../molecules/SentenceItem";
 import { useState } from "react";
+import baseApi from "../api/fetchAPI";
 
-function SentenceButton() {
+function SentenceButton({sentences}) {
   let [showSentence, setShowSentence] = useState(false);
+
   return (
     <div className="SentenceButton">
       <img
@@ -13,9 +15,14 @@ function SentenceButton() {
           setShowSentence(!showSentence);
         }}
       />
-      {
-        showSentence ? <RelatedSentence sentences={["철수는 맥도날드에 가서 햄버거를 먹었다"]}/> : null
-      }
+        {
+      showSentence && sentences.length > 0 
+        ? <RelatedSentence sentences={sentences} /> 
+        : showSentence && sentences.length === 0 
+        ? <RelatedSentence sentences={["관련 단어가 없습니다"]} /> 
+        : null
+    } 
+      
     </div>
   );
 }
