@@ -7,6 +7,7 @@ import { useState } from "react";
 import baseApi from "../api/fetchAPI";
 import CustomAlert from "../atoms/alert";
 import RecordForModal from "./StudyList/RecordForModal";
+import CameraOrganism from "./StudyList/CameraOrganism";
 
 const VocaModal = ({ word, pronounce, studyId, onClose }) => {
   const [myPronounce, setMyProunce] = useState(
@@ -15,7 +16,7 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
   const [answerPronounce, setAnswerPronounce] = useState([100000]);
   const [show, isShow] = useState(false);
   const [correct, isCorrect] = useState(false);
-  const [wrong, isWrong] = useState(false)
+  const [wrong, isWrong] = useState(false);
   const [alertContent, setAlertContent] = useState("");
 
   const movePronounce = (value) => {
@@ -44,15 +45,15 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
             isCorrect(false);
           }, 2000);
           setAlertContent(`✨ 축하합니다~! ✨<br> 성공입니다~! 🥳`);
-        }).catch((err) => {
+        })
+        .catch((err) => {
           isWrong(true);
 
           setTimeout(() => {
-            isWrong(false)
-          },2000)
-        })
-    }
-    else if( value.length > 0 && value.length < 15){
+            isWrong(false);
+          }, 2000);
+        });
+    } else if (value.length > 0 && value.length < 15) {
       setAlertContent(`❌ 실패입니다~! 😭<br>다시 한번 녹음해주세요~!`);
     }
   };
@@ -68,16 +69,18 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
           <Container fluid className="ContentModal">
             {/* 표기 */}
             <Stack direction="horizontal" className="ShowBox">
-              <div className="col-12 col-lg-6 p-2">
-                <div className="box">
+              <div className="p-2 GreenBoard">
+                <div className="box GreenBox">
                   <div className="abc">표기</div>
                   <div className="data1" style={{ fontSize: "2rem" }}>
                     {word}
                   </div>
                 </div>
               </div>
+              <div className="col-lg-6 p-2 ModalCam">
+                <CameraOrganism />
+              </div>
             </Stack>
-
             {/* 발음 */}
             <Stack direction="horizontal" className="PronunciationStack">
               <div className="col-12 col-lg-6 PronunciationGroup">
@@ -88,19 +91,21 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
                   <div className="RightSide">
                     {/* <Text24 text={pronounce}  /> */}
                     {pronounce.split("").map((char, index) => (
-        <span
-          key={index}
-          style={{
-            color: answerPronounce.includes(index) ? "red" : "black",
-            fontSize: "1.5rem",
-            whiteSpace: "pre",
-            display: "inline-block",
-          }}
-          // onClick={() => onCharacterClick(char)}
-        >
-          {char}
-        </span>
-      ))}
+                      <span
+                        key={index}
+                        style={{
+                          color: answerPronounce.includes(index)
+                            ? "red"
+                            : "black",
+                          fontSize: "1.5rem",
+                          whiteSpace: "pre",
+                          display: "inline-block",
+                        }}
+                        // onClick={() => onCharacterClick(char)}
+                      >
+                        {char}
+                      </span>
+                    ))}
                     {/* <p>{pronounce.split("").map((char,index)=> )}</p> */}
                   </div>
                 ) : null}
@@ -123,14 +128,17 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
 
         {/* 마이크 */}
         <Modal.Footer className="ModalFooter">
-          <RecordForModal func={movePronounce} func2={answer} studyId={studyId}/>
+          <RecordForModal
+            func={movePronounce}
+            func2={answer}
+            studyId={studyId}
+          />
         </Modal.Footer>
       </Modal>
 
-      {alertContent && 
-                <CustomAlert content={alertContent} 
-                onClose={handleCloseAlert}
-            />}
+      {alertContent && (
+        <CustomAlert content={alertContent} onClose={handleCloseAlert} />
+      )}
     </div>
   );
 };
