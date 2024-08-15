@@ -2,13 +2,11 @@ import "./ChapterMainTemplate.css";
 import ChapterCard from "../organisms/ChapterCard";
 import "./NavbarExample.css";
 import Text32 from "../atoms/Text32";
-import { Row, Col, ProgressBar } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import NavbarExample from "./NavbarExample";
 import Tutorial from "../atoms/Tutorial";
 import ChapterMainTutorialStep from "../data/ChapterMainTutorialStep";
-import MainSideButtonGroup from "../molecules/Main/MainSideButtonGroup";
 import { useState } from "react";
-import OpenChat from "../organisms/OpenChat";
 import SideButtonWithModal from "../organisms/SideButtonWithModal";
 
 function ChapterMainTemplate({ listdata }) {
