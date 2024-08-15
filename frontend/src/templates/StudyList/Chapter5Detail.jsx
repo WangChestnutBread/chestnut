@@ -26,6 +26,19 @@ const Chapter5Detail = () => {
   const [isVocabulary, setIsVocabulary] = useState(null)
 
   useEffect(() => {
+    baseApi
+        .get("/log/study", {
+          params: {
+            studyId: params.studyId,
+            isPass: 0,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+  },[])
+
+  useEffect(() => {
     isShow(true);
   }, [selectedChar]);
 
