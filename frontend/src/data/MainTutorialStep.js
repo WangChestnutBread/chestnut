@@ -27,13 +27,42 @@ const MainTutorial = [
       target: ".Stamp", 
       content: "발음을 학습하면 달력에 출석도장이 찍힙니다. \n 달력을 출석도장으로 채워보세요!🐿️", 
     },
-    {
-      target: ".OpenChatButton", 
-      content: "다른 사용자와 오픈채팅으로 대화할 수 있습니다🐿️",
+   
+    { //상세 페이지 ch1
+      target: ".data1", 
+      content: "해당 문자의 표기와 발음에 대해 알 수 있습니다.🐿️",
     },
     {
-      target: ".ChatBotButton", 
-      content: "튜토리얼을 다시 확인할 수 있습니다🐿️",
+      target: ".mouth", 
+      content: "해당 문자의 입모양을 볼 수 있습니다.🐿️",
+    },
+    {
+      target: ".tongue-a", 
+      content: "해당 문자의 혀모양을 볼 수 있습니다.🐿️",
+    },
+    {
+      target: ".video", 
+      content: "유저의 입모양을 실시간으로 확인할 수 있습니다.🐿️",
+    },
+    { // 상세 페이지 ch2
+      target: ".ch2box", 
+      content: "해당 문자의 표기와 발음에 대해 알 수 있습니다.🐿️",
+    },
+    { 
+      target: ".video2", 
+      content: "해당 문자의 표기와 발음에 대해 알 수 있습니다.🐿️",
+    },
+    { 
+      target: ".ch2", 
+      content: "음소단위로 소리내는 방법에 대해 확인할 수 있습니다.🐿️",
+    },
+    { 
+      target: ".first", 
+      content: "발음해야하는 문자의 표기법에 대해 나옵니다. 틀릴 위치가 빨간색으로 표기됩니다.🐿️",
+    },
+    { 
+      target: ".second", 
+      content: "내가 말한 문자의 표기가 화면에 나타납니다.🐿️",
     },
   ];
 
