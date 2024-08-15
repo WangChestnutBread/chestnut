@@ -65,7 +65,7 @@ public class LogService {
                 .member(member)
                 .chapter(study.getChapter())
                 .study(study)
-                .todayCount((byte) (todayCount + 1))
+                .todayCount(todayCount + 1)
                 .isPass(isPass)
                 .passRecord(passRecord)
                 .build();
