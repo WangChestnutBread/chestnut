@@ -50,11 +50,11 @@ public class OpenAIChatClient {
     public ChatReposeJsonDto sendMessage(List<ChatMessageDto> chatHistory) {
         // 요청 Entity 설정
         HttpEntity<ChatCompletionDto> requestEntity = createRequestEntity(chatHistory);
-        log.debug("대화 태그 : 요청 형식 헤더 = "+requestEntity.getHeaders());
-        log.debug("대화 태그 : 요청 형식 바디 = "+requestEntity.getBody());
+        log.debug("대화 태그 : 요청 형식 헤더 = {}", requestEntity.getHeaders());
+        log.debug("대화 태그 : 요청 형식 바디 = {}", requestEntity.getBody());
         // 대답 요청
         ResponseEntity<String> response = sendRequest(requestEntity);
-        log.debug("대화 태그 : ai 답변 response"+response);
+        log.debug("대화 태그 : ai 답변 response{}", response);
         // json에서 결과 DTO 추출 후 반환
         return extractDtoFromJsonResponse(response);
     }
@@ -102,7 +102,7 @@ public class OpenAIChatClient {
     public ChatReposeJsonDto extractDtoFromJsonResponse(ResponseEntity<String> response) {
         try {
             Map<String, Object> resultMap = new ObjectMapper().readValue(response.getBody(), new TypeReference<>() {});
-            log.debug("대화 태그 : ai 답변 response 역직렬화"+resultMap);
+            log.debug("대화 태그 : ai 답변 response 역직렬화{}", resultMap);
             // AI 대화 거절 여부 확인
             String isRefusal = (String) ((Map<String, Object>) ((List<Map<String, Object>>) resultMap.get("choices")).get(0).get("message")).get("refusal");
             if(isRefusal != null)
@@ -111,7 +111,7 @@ public class OpenAIChatClient {
             String content = (String) ((Map<String, Object>) ((List<Map<String, Object>>) resultMap.get("choices")).get(0).get("message")).get("content");
             // 지금까지 대화로 사용된 토큰 추출
             int totalToken = (int)((Map<String, Object>) resultMap.get("usage")).get("total_tokens");
-            log.debug("대화 태그 : 현재 총 토큰 수 "+totalToken);
+            log.debug("대화 태그 : 현재 총 토큰 수 {}", totalToken);
             return new ChatReposeJsonDto(content, totalToken);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
