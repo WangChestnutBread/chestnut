@@ -188,7 +188,7 @@ public class ConversationService {
         redisService.deleteData(generatePrefixedKey(TOKEN_SIZE_PURPOSE, loginId)); // 대화 토큰 삭제
         // 초기 system 설정 세팅
         insertRedisChatHistory(loginId,
-                               List.of(new ChatMessageDto("system", "Answer in Korean, within 35 tokens. Respond in one concise sentence. Be engaging and supportive, encouraging further questions")),
+                               List.of(new ChatMessageDto("system", "Answer in Korean, within 35 tokens. Respond in one concise sentence. Be engaging and supportive")),
                          "23");
     }
 
