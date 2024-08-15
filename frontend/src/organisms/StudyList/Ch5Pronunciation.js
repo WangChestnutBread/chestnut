@@ -7,17 +7,20 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick, handleI
 
   const [word, setWrod] = useState("")
   const [pronounce, setPronounce] = useState("")
+  // const [result, setResult] = useState("")
   
 
   useEffect(() => {
     baseApi.get(`/study/detail/${saying.studyId}/word`).then((res) => {
-      console.log(res);
+      console.log(res.data.data);
+
       setWrod(res.data.data.word);
+      // setResult(res.data.data.word)
       setPronounce(res.data.data.pronounce);
       // console.log('5단원', res.data.data.isVocabulary);
       handleIsVocabulary(res.data.data.isVocabulary);
     });
-  });
+  },[saying]);
 
 
   return (
@@ -27,35 +30,35 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick, handleI
         display:"flex",
         flexDirection:"column",        
     }}>
-      {/* 1행 */}
       <div 
         style={{
           display:"flex",
           width:"100%",
           height:"50%",
       }}>
-        {/* 1행 1열 */}
         <div 
           style={{
             width:"24%",
             backgroundColor:"#DCB78F"
-
         }}>
           <Ch5PronunciationLeft data={"발음"} />
         </div>
-        {/* 1행 2열 */}
         <div 
           style={{
             width:"76%",
         }}>
           {word ? (
-            <Ch5PronunciationRight data={word} location={location} onCharacterClick={onCharacterClick} />
+            <Ch5PronunciationRight 
+              key={word} 
+              data={word} 
+              location={location} 
+              onCharacterClick={onCharacterClick} 
+            />
           ) : (
             <></>
           )}
         </div>
       </div>    
-      {/* 2행 */}
       <div
         style={{
           display:"flex",
@@ -63,30 +66,32 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick, handleI
           height:"50%",
           marginTop:"2%",
       }}>
-        {/* 2행 1열 */}
         <div 
           style={{
             width:"24%",
             backgroundColor:"#DCB78F"
-
         }}>
-          <Ch5PronunciationLeft data={"내 발음"} />
+          <Ch5PronunciationLeft data={"발음 결과"} />
         </div>
-        {/* 2행 2열 */}
         <div 
           style={{
             width:"76%",
         }}>
           {pronounce ? (
-            <Ch5PronunciationRight data={realData} location={[]} onCharacterClick={onCharacterClick}/>
+            <Ch5PronunciationRight 
+              key={pronounce} 
+              data={realData} 
+              location={[]} 
+              onCharacterClick={onCharacterClick}
+            />
           ) : (
             <></>
           )}
         </div>
       </div>
     </div>
-
-
+  );
+  
     /////////// 변경 전 코드임 /////////////////
     // <div className="">
     //   <div className="d-flex">
@@ -114,7 +119,7 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick, handleI
     //     )}
     //   </div>
     // </div>
-  );
+  
 };
 
 export default Ch5Pronunciation;

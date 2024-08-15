@@ -83,7 +83,6 @@ const Chapter5Detail = () => {
             <div className="mt-2 justify-content-center" 
               style={{
                 height:"250px",
-                
             }}>
               <Ch5Pronunciation
                 saying={params}
