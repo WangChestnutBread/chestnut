@@ -100,6 +100,7 @@ const RecordForModal = ({ func, func2, studyId }) => {
     formData.append("audio", wavBlob, "audio.wav");
     checkWavFile(wavBlob);
     try {
+      if (check.length > 0) {
       baseApi
         .post("/study/detail/pronunciation/evaluate", formData, {
           headers: {
@@ -119,6 +120,7 @@ const RecordForModal = ({ func, func2, studyId }) => {
           setAlertContent(`다시 녹음해주시겠어요?`);
           console.log(err);
         });
+      }
     } catch (error) {
       console.error("Error uploading file:", error);
     }

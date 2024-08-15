@@ -220,6 +220,7 @@ const CH1record = ({ func, func2 }) => {
     console.log(formData);
     checkWavFile(wavBlob);
     try {
+      if (check.length > 0) {
       baseApi
         .post("/study/detail/pronunciation/evaluate", formData, {
           headers: {
@@ -238,6 +239,7 @@ const CH1record = ({ func, func2 }) => {
           setAlertContent(`다시 한번 말씀해주세요`);
           console.log(err);
         });
+      }
     } catch (error) {
       console.error("Error uploading file:", error);
     }
