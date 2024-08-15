@@ -47,7 +47,7 @@ function BookMarkButton({ studyId, isVocabulary }) {
     <div
       className="BookMarkButton"
       onClick={() => {
-        if (isVocabulary) {
+        if (isVocabulary || inVoca) {
           setAlertContent(`이미 단어장에 존재하는 단어입니다.`);
         } else {
           setInVoca(true);

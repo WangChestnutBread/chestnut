@@ -29,7 +29,7 @@ const VocaModal = ({ word, pronounce, studyId, chapterId, onClose }) => {
 
   const answer = (isPass, value) => {
     setAnswerPronounce(value);
-    console.log(value);
+    //console.log(value);
     if (isPass === 1) {
       isShow(true);
       baseApi
