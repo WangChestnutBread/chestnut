@@ -53,7 +53,7 @@ public class StudyLog {
             Member member,
             Chapter chapter,
             Study study,
-            byte todayCount,
+            int todayCount,
             boolean isPass,
             boolean passRecord
     ) {
