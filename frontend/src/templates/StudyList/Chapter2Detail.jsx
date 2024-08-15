@@ -42,9 +42,9 @@ const Chapter2Detail = () => {
   const moveData = (value) => {
     setRealData(value);
   };
-  const answer = (value) => {
+  const answer = (isPass, value) => {
     setAnswerData(value);
-    if (value.length === 0) {
+    if (isPass === 1) {
       isShow(true);
       baseApi
         .get("/log/study", {
@@ -88,7 +88,7 @@ const Chapter2Detail = () => {
                 {/* <Notation word={params} /> */}
                 <Ch2Notation word={params} />
               </div>
-              <div className="col-7" style={{marginLeft:"5px"}}>
+              <div className="col-7 video2" style={{marginLeft:"5px"}}>
                 <CameraOrganism />
               </div>
             </div>

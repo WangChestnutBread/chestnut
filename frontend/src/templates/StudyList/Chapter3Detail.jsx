@@ -45,9 +45,9 @@ const Chapter3Detail = () => {
     setRealData(value);
   };
 
-  const answer = (value) => {
+  const answer = (isPass, value) => {
     setAnswerData(value);
-    if (value.length === 0) {
+    if (isPass === 1) {
       isShow(true);
       baseApi
         .get("/log/study", {
@@ -136,119 +136,6 @@ const Chapter3Detail = () => {
         <RecordData func={moveData} func2={answer} />
         {/* 마이크 */}
       </div>
-      {/* <div className="container">
-      <div 
-        style={{
-          width:"100%",
-          height:"100%",
-          display:"flex",
-          flexDirection:"column",
-      }}>
-
-        <div 
-          style={{
-            display:"flex",
-            width:"100%",
-        }}>
-
-          <div 
-            style={{
-              display:"flex",
-              flexDirection:"column",
-              width:"70%",
-              height:"30%",
-          }}>
-            <div 
-              style={{
-                display:"flex",
-                height:"100%",
-            }}>
-              <div style={{
-                width:"50%",
-              }}>
-                <Ch3Notation word={params} />
-
-              </div>
-              <div style={{
-                width:"50%", 
-              }}>
-                <CameraOrganism />
-              </div>
-            </div>
-            <div 
-              style={{
-                display: "flex",
-                width: "30%",
-              }}
-            >
-              <Ch3SM hangeul={params} />
-            </div>
-          </div>
-          <div 
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          > <div style={{marginTop:"10px"}}>
-            <RecordData func={moveData} func2={answer} />
-            </div>
-          </div>
-        </div>
-        <div 
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            zIndex: 1000,
-            width: "800px",
-            height: "800px",
-            transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
-            pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
-          }}
-        >
-          {correct ? <Lottie animationData={Correct} /> : <></>}
-        </div>
-        <div style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            zIndex: 1000,
-            width: "800px",
-            height: "800px",
-            transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
-            pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
-          }}>
-              {wrong ? <Lottie animationData={Wrong} /> : <></>}
-        </div>
-        </div>
-        <div
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            zIndex: 1000,
-            width: "800px",
-            height: "800px",
-            transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
-            pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
-          }}
-        >
-          {correct ? <Lottie animationData={Correct} /> : <></>}
-        </div>
-        <div style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            zIndex: 1000,
-            width: "800px",
-            height: "800px",
-            transform: "translate(-50%, -50%)", // 화면 중앙에 위치시키기 위해
-            pointerEvents: "none", // 이 요소는 클릭을 무시하도록 설정
-          }}>
-              {wrong ? <Lottie animationData={Wrong} /> : <></>}
-        </div>
-      </div>
-      </div> */}
     </div>
 
   );

@@ -37,7 +37,7 @@ const Record = ({ func, func2 }) => {
 
   const upPage = () => {
     func("녹음된 발음");
-    func2([10000]);
+    func2(0, [10000]);
 
     const nextId = getNextId(Number(studyId)); // 다음 ID 가져오기
     if (studyId > 0 && studyId < 40) {
@@ -47,7 +47,7 @@ const Record = ({ func, func2 }) => {
           studyId: nextId,
           isPass: 1,
         },
-      });
+      })
     } else if (nextId && studyId > 39 && studyId < 439) {
       navigate(`/study/detail2/2/${nextId}`);
     } else if (nextId && studyId > 438 && studyId < 446) {
@@ -63,7 +63,7 @@ const Record = ({ func, func2 }) => {
 
   const downPage = () => {
     func("녹음된 발음");
-    func2([1000000]);
+    func2(0, [1000000]);
 
     const prevId = getPrevId(Number(studyId)); // 이전 ID 가져오기
     if (prevId && studyId > 0 && studyId < 42) {
@@ -100,7 +100,6 @@ const Record = ({ func, func2 }) => {
         console.log(res);
         setData(res.data.data.word);
       });
-
       // 녹음 중지
       mediaRecorderRef.current.stop();
       setIsRecording(false);
@@ -172,6 +171,7 @@ const Record = ({ func, func2 }) => {
     formData.append("audio", wavBlob, "audio.wav");
     checkWavFile(wavBlob);
     try {
+      if (check.length > 0){
       baseApi
         .post("/study/detail/pronunciation/evaluate", formData, {
           headers: {
@@ -182,12 +182,13 @@ const Record = ({ func, func2 }) => {
           console.log(res);
           setPronunciation(res.data.data.pronunciation);
           func(res.data.data.pronunciation);
-          func2(res.data.data.answerMismatchIndices);
+          func2(res.data.data.isPass, res.data.data.answerMismatchIndices);
         })
         .catch((err) => {
           setAlertContent(`다시 녹음해주시겠어요?`);
           console.log(err);
         });
+      }
     } catch (error) {
       console.error("Error uploading file:", error);
     }

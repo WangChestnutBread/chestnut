@@ -46,9 +46,9 @@ const Chapter6Detail = () => {
     setAnswerData([100000,15656,1561568,156186,15615615,156,156,156,456,456,99,999,999,999,99,999,1000,9999,99999,99999,9999,999,99999,99999,99999,9999])
   },[])
 
-  const answer = (value) => {
+  const answer = (isPass, value) => {
     setAnswerData(value);
-    if (value.length === 0) {
+    if (isPass === 1) {
       isShow(true);
       baseApi
         .get("/log/study", {

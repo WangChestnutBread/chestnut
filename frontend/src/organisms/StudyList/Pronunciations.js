@@ -51,6 +51,7 @@ const Pronunciations = ({ saying, realData, location, handleIsVocabulary }) => {
             display:"flex",
             justifyContent:"center"
           }}
+          className="fist"
         >
           {word ? (
             <PronunciationRight data={word} location={location} />
@@ -84,6 +85,7 @@ const Pronunciations = ({ saying, realData, location, handleIsVocabulary }) => {
             display:"flex",
             justifyContent:"center"
           }}
+          className="second"
         >
           {pronounce ? (
             <PronunciationRight data={realData} location={[]} />
