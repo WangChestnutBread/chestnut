@@ -3,7 +3,7 @@ import "../NavbarExample.css";
 import Notation from "../../organisms/StudyList/NotationChapter1";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
 import {useParams} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import baseApi from "../../api/fetchAPI";
 import NavbarExample from "../NavbarExample";
 import SMCH1 from "./../../organisms/StudyList/SMCH1";
@@ -15,6 +15,19 @@ const Chapter1Detail = () => {
   const [answerData, setAnswerData] = useState([100000]);
   const [show, isShow] = useState(false);
 
+  
+  useEffect(() => {
+    baseApi
+        .get("/log/study", {
+          params: {
+            studyId: params.studyId,
+            isPass: 0,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+  },[])
   const moveData = (value) => {
     setRealData(value);
   };
