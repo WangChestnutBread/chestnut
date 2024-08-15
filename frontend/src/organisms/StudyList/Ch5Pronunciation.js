@@ -14,7 +14,7 @@ const Ch5Pronunciation = ({saying, realData, location, onCharacterClick, handleI
       console.log(res);
       setWrod(res.data.data.word);
       setPronounce(res.data.data.pronounce);
-      console.log('5단원', res.data.data.isVocabulary);
+      // console.log('5단원', res.data.data.isVocabulary);
       handleIsVocabulary(res.data.data.isVocabulary);
     });
   });
