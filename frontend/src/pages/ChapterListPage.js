@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ChapterListTemplate from "../templates/StudyList/ChapterListTemplate";
 import baseApi from "../api/fetchAPI";
 import { useParams } from "react-router-dom";
+import Loading from "../organisms/Loading";
 
 function ChapterListPage() {
   let [data, setData] = useState(null);
@@ -27,7 +28,7 @@ function ChapterListPage() {
       {data ? (
         <ChapterListTemplate data={data} chapterId={chapterId} />
       ) : (
-        <p>로딩중입니다</p>
+        <Loading/>
       )}
     </div>
   );
