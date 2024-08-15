@@ -104,3 +104,20 @@ abbr[title] {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.CalendarPopover {
+  font-family: 'Jua';
+
+}
+
+.CalendarPopoverHeader {
+  background: #6b3906;
+  font-size: 1rem;
+  height: 2.4rem;
+}
+
+.CalendarPopoverButton {
+  border: none;
+  background: transparent;
+  color: white;
+}
