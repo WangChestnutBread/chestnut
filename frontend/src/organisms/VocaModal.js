@@ -27,10 +27,10 @@ const VocaModal = ({ word, pronounce, studyId, chapterId, onClose }) => {
     setAlertContent(null); // Alert 닫기
   };
 
-  const answer = (value) => {
+  const answer = (isPass, value) => {
     setAnswerPronounce(value);
-    // console.log(value);
-    if (value.length === 0) {
+    //console.log(value);
+    if (isPass === 1) {
       isShow(true);
       baseApi
         .get("/log/study", {
