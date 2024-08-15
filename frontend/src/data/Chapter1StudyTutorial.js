@@ -12,6 +12,11 @@ const Chapter1StudyTutorial = [
     content: "해당 문자의 혀모양을 볼 수 있습니다.🐿️",
   },
   {
+    target: ".SMCH1", 
+    content: "해당 문자의 발음방법에 대해 볼 수 있습니다.🐿️",
+  },
+
+  {
     target: ".video", 
     content: "유저의 입모양을 실시간으로 확인할 수 있습니다.🐿️",
   },
