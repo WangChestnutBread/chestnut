@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { enUS } from "date-fns/locale";
 import { event } from "jquery";
 import baseApi from "../../api/fetchAPI";
-import CalendarPopover from "../../molecules/CalendarPopover";
 import { Button, Overlay, Popover } from "react-bootstrap";
 
 function MainCalendar({ attendance }) {
@@ -94,14 +93,14 @@ function MainCalendar({ attendance }) {
       />
 
       {/* 팝오버 */}
-      <Overlay show={showPopover} target={target} placement="right" rootClose>
-        <Popover className="CalendarPopover" ref={popoverRef}>
-          <Popover.Header>
-            <button style={{ border: "none", background: "transparent", fontFamily:"Jua"}} onClick={handleOnClose}>
+      <Overlay show={showPopover} target={target} placement="right" padding={20} >
+        <Popover className="CalendarPopover" ref={popoverRef} >
+          <Popover.Header className="CalendarPopoverHeader">
+            <button className="CalendarPopoverButton" onClick={handleOnClose}>
               오늘의 학습 기록 &times;
             </button>
           </Popover.Header>
-          <Popover.Body style={{fontFamily:"Jua"}}>
+          <Popover.Body >
             {studyLog ? (
               <div>{studyLog.length}건</div>
             ) : (
