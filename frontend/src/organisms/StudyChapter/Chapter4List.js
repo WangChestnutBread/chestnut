@@ -3,7 +3,6 @@ import ChapterList from "../../molecules/StudyList/ChapterList";
 import BlackBoardTab from "../../molecules/BlackBoardTab";
 import { useState } from "react";
 import Text32 from "../../atoms/Text32";
-import FinishStudyButton from "../../atoms/FinishStudyButton";
 import baseApi from "../../api/fetchAPI";
 
 function Chapter4List({ content }) {
