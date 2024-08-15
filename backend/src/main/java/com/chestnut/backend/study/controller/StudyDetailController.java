@@ -29,8 +29,9 @@ public class StudyDetailController {
     private final PronounceEvaluateService pronounceEvaluateService;
 
     @GetMapping("/{studyId}/word")
-    public ResponseEntity<?> wordInfo(@PathVariable("studyId") Long studyId) {
-        WordPronounceDto wordInfo = studyService.getWordInfo(studyId);
+    public ResponseEntity<?> wordInfo(@PathVariable("studyId") Long studyId, @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+        String loginId = customMemberDetails.getLoginId();
+        WordPronounceDto wordInfo = studyService.getWordInfo(studyId, loginId);
         ResponseDto<WordPronounceDto> result = new ResponseDto<>("200", wordInfo);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
