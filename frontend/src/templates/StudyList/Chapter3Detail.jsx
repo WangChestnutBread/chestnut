@@ -25,6 +25,7 @@ const Chapter3Detail = () => {
   const [show, isShow] = useState(false);
   const [correct, isCorrect] = useState(false);
   const [wrong, isWrong] = useState(false);
+  const [isVocabulary, setIsVocabulary] = useState(null)
 
   const moveData = (value) => {
     console.log(value);
@@ -52,10 +53,14 @@ const Chapter3Detail = () => {
     }
   };
 
+  const handleIsVocabulary = (isVocabulary) => {
+    setIsVocabulary(isVocabulary)
+  }
+
   return (
     <div className="ChapterDetail">
       {/* 헤더 */}
-      <NavbarExample showBookMarkButton={true}></NavbarExample>
+      <NavbarExample showBookMarkButton={true} studyId={params.studyId} {...(isVocabulary !== null ? { isVocabulary } : {})}></NavbarExample>
       <div className="container">
         <div className="row">
           <div className="col-8">
@@ -77,6 +82,7 @@ const Chapter3Detail = () => {
                 saying={params}
                 realData={realData}
                 location={answerData}
+                handleIsVocabulary={handleIsVocabulary}
               />
             </div>
             <div className="mt-2">

@@ -23,6 +23,8 @@ const Chapter6Detail = () => {
   const [selectedChar, setSelectedChar] = useState("");
   const [correct, isCorrect] = useState(false);
   const [wrong, isWrong] = useState(false);
+  const [isVocabulary, setIsVocabulary] = useState(null)
+
 
   const moveData = (value) => {
     setRealData(value);
@@ -56,11 +58,15 @@ const Chapter6Detail = () => {
     }
   
   };
+
+  const handleIsVocabulary = (isVocabulary) => {
+    setIsVocabulary(isVocabulary)
+  }
   
 
   return (
     <div>
-      <NavbarExample showBookMarkButton={true}/>
+      <NavbarExample showBookMarkButton={true} studyId={params.studyId} {...(isVocabulary !== null ? { isVocabulary } : {})}/>
 
     
       {/* 행과 열로 나눔. Style 위주로 함. 
@@ -104,6 +110,7 @@ const Chapter6Detail = () => {
               realData={realData}
               location={answerData}
               onCharacterClick={setSelectedChar}
+              handleIsVocabulary={handleIsVocabulary}
             />
           </div>
         </div>
