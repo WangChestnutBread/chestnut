@@ -24,10 +24,30 @@ const Chapter5Detail = () => {
   const [correct, isCorrect] = useState(false);
   const [wrong, isWrong] = useState(false)
   const [isVocabulary, setIsVocabulary] = useState(null)
+  let [sentences, setSentences] = useState(null);
 
   useEffect(() => {
     isShow(true);
   }, [selectedChar]);
+
+  useEffect(()=>{
+    getSentences()
+  }, [])
+
+
+  const getSentences = () => {
+    baseApi({
+      method: "get",
+      url: `/study/detail/${params.studyId}/example-sentences`,
+    })
+    .then((res)=>{
+      console.log(res.data.data);
+      setSentences(res.data.data);
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
 
   const moveData = (value) => {
     setRealData(value);
@@ -59,6 +79,7 @@ const Chapter5Detail = () => {
     
   };
 
+
   const handleIsVocabulary = (isVocabulary) => {
     setIsVocabulary(isVocabulary)
   }
@@ -66,7 +87,7 @@ const Chapter5Detail = () => {
   return (
 
     <div className="ChapterDetail">
-      <NavbarExample showBookMarkButton={true} showSentenceButton={true} studyId={params.studyId} {...(isVocabulary !== null ? { isVocabulary } : {})}/>
+      <NavbarExample showBookMarkButton={true} sentences={sentences} showSentenceButton={true} studyId={params.studyId} {...(isVocabulary !== null ? { isVocabulary } : {})}/>
       <div className="container">
         <div className="row">
           <div className="col-8 mt-2">
