@@ -88,7 +88,8 @@ function Chapter7List({ content }) {
                       {item.map((pair, j) => {
                         console.log(pair);
                         return (
-                          <div key={j} className="RightBoardPair">
+                          <div key={j} className="RightBoardPair"
+                          style={pair.isPass ? { color: "#74A6FD" } : pair.isStudy ? { color: "#CECECE" } : null}>
                             <div
                               className="RightBoardWord"
                               onClick={() => {
