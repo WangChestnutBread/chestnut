@@ -105,7 +105,7 @@ const QnaPage = () => {
       {/* 헤더 */}
       <NavbarExample/>
       {/* 로고 */}
-      <div className="container text-start justify-center mt-5">
+      <div className="container text-start justify-center">
         <div className="logo-container">
           <div className="position-relative">
             <img
