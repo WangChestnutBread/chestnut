@@ -9,7 +9,7 @@ import CustomAlert from "../atoms/alert";
 import RecordForModal from "./StudyList/RecordForModal";
 import CameraOrganism from "./StudyList/CameraOrganism";
 
-const VocaModal = ({ word, pronounce, studyId, onClose }) => {
+const VocaModal = ({ word, pronounce, studyId, chapterId, onClose }) => {
   const [myPronounce, setMyProunce] = useState(
     `이곳에 녹음한 내 발음이 \n 표시돼요😎`
   );
@@ -132,6 +132,7 @@ const VocaModal = ({ word, pronounce, studyId, onClose }) => {
             func={movePronounce}
             func2={answer}
             studyId={studyId}
+            chapterId={chapterId}
           />
         </Modal.Footer>
       </Modal>
