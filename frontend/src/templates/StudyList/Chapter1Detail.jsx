@@ -72,7 +72,7 @@ const Chapter1Detail = () => {
               <CH1record func={moveData} func2={answer} />
             </div>
           </div>
-          <div className="">
+          <div className="video">
             <CameraOrganism />
           </div>
         </div>

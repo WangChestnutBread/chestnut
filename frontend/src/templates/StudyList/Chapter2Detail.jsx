@@ -88,7 +88,7 @@ const Chapter2Detail = () => {
                 {/* <Notation word={params} /> */}
                 <Ch2Notation word={params} />
               </div>
-              <div className="col-7" style={{marginLeft:"5px"}}>
+              <div className="col-7 video2" style={{marginLeft:"5px"}}>
                 <CameraOrganism />
               </div>
             </div>
