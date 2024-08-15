@@ -42,7 +42,7 @@ const QnaDetail = () => {
         </div>
       </div>
       <div>
-        <p style={{fontSize:"1.0rem", whiteSpace: "pre-wrap"}}>{data.content}</p>
+        <p style={{fontSize:"1.0rem", whiteSpace: "pre-wrap", lineHeight: "1.5em"}}>{data.content}</p>
       </div>
     </div>
   );
