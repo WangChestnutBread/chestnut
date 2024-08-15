@@ -167,8 +167,13 @@ const Ai = ({ userId }) => {
 
         {/* 대화 시작 메시지 */}
         {showStartMessage && (
-          <div className="text-center mt-3" style={{ fontSize: "2rem", color: "#6B3906" }}>
-            녹음 버튼을 눌러서 시작해주세요.
+          <div className="text-center mt-3" style={{ lineHeight:"150%", fontSize: "1.2rem", color: "#6B3906" }}>
+            <p>녹음 버튼을 눌러서 시작해주세요.<br/>
+            다양한 주제로 AI와 대화를 할 수 있습니다.
+<br />
+AI 챗봇의 답변입니다.<br />
+
+내가 녹음한 내용을 확인하세요.</p>
           </div>
           
         )}

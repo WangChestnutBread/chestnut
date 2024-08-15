@@ -51,7 +51,7 @@ const Pronunciations = ({ saying, realData, location, handleIsVocabulary }) => {
             display:"flex",
             justifyContent:"center"
           }}
-          className="fist"
+          className="first"
         >
           {word ? (
             <PronunciationRight data={word} location={location} />
