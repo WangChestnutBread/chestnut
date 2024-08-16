@@ -4,14 +4,11 @@ import "./MainTemplate.css";
 import LastStudy from "../organisms/Main/LastStudy";
 import MainProfile from "../organisms/Main/MainProfile";
 import MainCalendar from "../organisms/Main/MainCalendar";
-import MainSideButtonGroup from "../molecules/Main/MainSideButtonGroup";
-import OpenChat from "../organisms/OpenChat";
 import Tutorial from "../atoms/Tutorial";
 import MainTutorialStep from "../data/MainTutorialStep";
 import WelcomeModal from "../atoms/WelcomeModal";
 import { Row } from "react-bootstrap";
-
-
+import SideButtonWithModal from "../organisms/SideButtonWithModal";
 
 const MainTemplate = ({ profile, attendance }) => {
   // 메뉴 밤
@@ -28,7 +25,7 @@ const MainTemplate = ({ profile, attendance }) => {
 
   //튜토리얼은 학습 기록이 없을 때 한 번만
   useEffect(() => {
-    if (profile.word === null) {      
+    if (profile.word === null) {
       setWelcomeModal(true);
     } else {
       setWelcomeModal(false);
@@ -107,15 +104,9 @@ const MainTemplate = ({ profile, attendance }) => {
         <MainCalendar attendance={attendance.attendanceAt} />
       </div>
 
-      {/* 오픈 채팅 모달 */}
-      {showOpenChat && (
-        <div className="MainOpenChat">
-          <OpenChat />
-        </div>
-      )}
-
-      {/* 사이드 버튼 모음 */}
-      <MainSideButtonGroup
+      {/* 사이드바 */}
+      <SideButtonWithModal
+        showOpenChat={showOpenChat}
         handleOpenChatClick={handleOpenChatClick}
         restartTutorial={restartTutorial}
       />
