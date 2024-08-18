@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @AllArgsConstructor
-public class GetInfoResDTO {
+public class GetInfoResDto {
 
     private String loginId;
     private String email;
@@ -16,7 +16,7 @@ public class GetInfoResDTO {
     private String nickname;
     private LocalDate birthday;
 
-    public static GetInfoResDTO toDto(Member member) {
-        return new GetInfoResDTO(member.getLoginId(), member.getEmail(), member.getMemberName(), member.getNickname(), member.getBirthday());
+    public static GetInfoResDto toDto(Member member) {
+        return new GetInfoResDto(member.getLoginId(), member.getEmail(), member.getMemberName(), member.getNickname(), member.getBirthday());
     }
 }

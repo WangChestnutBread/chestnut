@@ -6,6 +6,9 @@ import com.chestnut.backend.common.exception.*;
 import com.chestnut.backend.common.service.RedisService;
 import com.chestnut.backend.log.dto.AttendanceLogDto;
 import com.chestnut.backend.log.repository.AttendanceLogRepository;
+import com.chestnut.backend.member.controller.ChangeInfoReqDto;
+import com.chestnut.backend.member.controller.FindIdReqDto;
+import com.chestnut.backend.member.controller.SignupReqDto;
 import com.chestnut.backend.member.dto.*;
 import com.chestnut.backend.member.entity.Member;
 import com.chestnut.backend.member.repository.MainMemberRepository;
@@ -30,7 +33,7 @@ public class MemberService {
     private final AttendanceLogRepository attendanceLogRepository;
 
     @Transactional
-    public void signup(SignupReqDTO signupReqDTO, HttpSession session) {
+    public void signup(SignupReqDto signupReqDTO, HttpSession session) {
 
         String loginId = signupReqDTO.getLoginId();
         String checkDuplicationLoginId = (String) session.getAttribute("CheckLoginIdDuplication:");
@@ -97,7 +100,7 @@ public class MemberService {
     }
 
     @Transactional
-    public FindIdResDTO findId(FindIdReqDTO findIdReqDTO) {
+    public FindIdResDto findId(FindIdReqDto findIdReqDTO) {
 
         String memberName = findIdReqDTO.getMemberName();
         String email = findIdReqDTO.getEmail();
@@ -109,7 +112,7 @@ public class MemberService {
             throw new IdEmailMismatchException();
         }
 
-        return new FindIdResDTO(member.getLoginId());
+        return new FindIdResDto(member.getLoginId());
     }
 
     @Transactional
@@ -167,7 +170,7 @@ public class MemberService {
     }
 
     @Transactional
-    public void resetPwdUnknown(ResetPwdUnknownDTO resetPwdUnknownDTO) {
+    public void resetPwdUnknown(ResetPwdUnknownDto resetPwdUnknownDTO) {
         String loginId = resetPwdUnknownDTO.getLoginId();
         String newPassword = resetPwdUnknownDTO.getNewPassword();
         String newPasswordConfirm = resetPwdUnknownDTO.getNewPasswordConfirm();
@@ -196,15 +199,15 @@ public class MemberService {
     }
 
     @Transactional
-    public GetInfoResDTO getMemberInfo(String loginId) {
+    public GetInfoResDto getMemberInfo(String loginId) {
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
 
-        return GetInfoResDTO.toDto(member);
+        return GetInfoResDto.toDto(member);
     }
 
     @Transactional
-    public void changeMemberInfo(String loginId, ChangeInfoReqDTO changeInfoReqDTO) {
+    public void changeMemberInfo(String loginId, ChangeInfoReqDto changeInfoReqDTO) {
 
         if (!loginId.equals(changeInfoReqDTO.getLoginId())) {
             throw new IncorrectAccessException();

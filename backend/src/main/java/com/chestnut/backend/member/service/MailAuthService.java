@@ -5,7 +5,7 @@ import com.chestnut.backend.common.exception.MailSendException;
 import com.chestnut.backend.common.exception.MailSessionNotFoundException;
 import com.chestnut.backend.common.service.RedisService;
 import com.chestnut.backend.member.dto.MailAuthDto;
-import com.chestnut.backend.member.dto.SendMailReqDTO;
+import com.chestnut.backend.member.controller.SendMailReqDto;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -77,7 +77,7 @@ public class MailAuthService {
         }
     }
 
-    public void sendMail(SendMailReqDTO sendMailReqDTO) {
+    public void sendMail(SendMailReqDto sendMailReqDTO) {
 
         if (redisService.existData(generatePrefixedKey(sendMailReqDTO.getEmail(), sendMailReqDTO.getPurpose()))) {
             redisService.deleteData(generatePrefixedKey(sendMailReqDTO.getEmail(), sendMailReqDTO.getPurpose()));

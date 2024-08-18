@@ -2,7 +2,7 @@ package com.chestnut.backend.common.jwt;
 
 import com.chestnut.backend.common.dto.ResponseDto;
 import com.chestnut.backend.member.dto.CustomMemberDetails;
-import com.chestnut.backend.member.dto.SessionDTO;
+import com.chestnut.backend.member.dto.SessionDto;
 import com.chestnut.backend.member.entity.Member;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -50,7 +50,7 @@ public class JWTFilter extends OncePerRequestFilter {
         String loginId = jwtUtil.getLoginId(accessToken);
         String role = jwtUtil.getRole(accessToken);
 
-        SessionDTO sessionDTO = new SessionDTO(loginId, role);
+        SessionDto sessionDTO = new SessionDto(loginId, role);
         Member member = sessionDTO.toEntity();
         CustomMemberDetails customMemberDetails = new CustomMemberDetails(member);
 

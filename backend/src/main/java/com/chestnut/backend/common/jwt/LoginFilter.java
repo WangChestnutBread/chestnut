@@ -2,8 +2,8 @@ package com.chestnut.backend.common.jwt;
 
 import com.chestnut.backend.common.dto.ResponseDto;
 import com.chestnut.backend.member.dto.CustomMemberDetails;
-import com.chestnut.backend.member.dto.LoginReqDTO;
-import com.chestnut.backend.member.dto.LoginResDTO;
+import com.chestnut.backend.member.controller.LoginReqDto;
+import com.chestnut.backend.member.dto.LoginResDto;
 import com.chestnut.backend.member.service.RefreshService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -40,12 +40,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        LoginReqDTO loginReqDTO = new LoginReqDTO();
+        LoginReqDto loginReqDTO = new LoginReqDto();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             ServletInputStream inputStream = request.getInputStream();
             String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
-            loginReqDTO = objectMapper.readValue(messageBody, LoginReqDTO.class);
+            loginReqDTO = objectMapper.readValue(messageBody, LoginReqDto.class);
         } catch (IOException e) {
             throw new RuntimeException();
         }
@@ -68,11 +68,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String role = auth.getAuthority();
 
-        LoginResDTO loginResDTO = null;
+        LoginResDto loginResDTO = null;
         if(role.equals("ROLE_ADMIN")) {
-            loginResDTO = new LoginResDTO(loginId, true);
+            loginResDTO = new LoginResDto(loginId, true);
         } else {
-            loginResDTO = new LoginResDTO(loginId, false);
+            loginResDTO = new LoginResDto(loginId, false);
         }
 
         //loginId, role 사용해서 JWTUtil에서 토큰을 만든다.

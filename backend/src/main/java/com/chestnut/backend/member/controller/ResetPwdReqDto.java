@@ -4,7 +4,7 @@ import com.chestnut.backend.member.validation.annotation.Password;
 import lombok.Getter;
 
 @Getter
-public class ResetPwdReqDTO {
+public class ResetPwdReqDto {
 
     private String password;
     @Password
