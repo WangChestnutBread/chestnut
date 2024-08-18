@@ -1,4 +1,4 @@
-package com.chestnut.backend.member.dto;
+package com.chestnut.backend.member.controller;
 
 import com.chestnut.backend.avatar.entity.Avatar;
 import com.chestnut.backend.member.entity.Member;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignupReqDTO {
+public class SignupReqDto {
 
     @LoginId
     private String loginId;

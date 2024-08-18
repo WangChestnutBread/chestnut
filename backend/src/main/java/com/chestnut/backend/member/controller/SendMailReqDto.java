@@ -1,9 +1,9 @@
-package com.chestnut.backend.member.dto;
+package com.chestnut.backend.member.controller;
 
 import lombok.Getter;
 
 @Getter
-public class SendMailReqDTO {
+public class SendMailReqDto {
     private String email;
     private String purpose;
 }

@@ -35,14 +35,14 @@ public class MemberController {
     private final MailAuthService mailAuthService;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDTO signupReqDTO, HttpSession session) {
+    public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDto signupReqDTO, HttpSession session) {
         memberService.signup(signupReqDTO, session);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
     @PostMapping("/find-id")
-    public ResponseEntity<?> findId(@RequestBody FindIdReqDTO findIdReqDTO) {
-        FindIdResDTO findIdResDTO = memberService.findId(findIdReqDTO);
+    public ResponseEntity<?> findId(@RequestBody FindIdReqDto findIdReqDTO) {
+        FindIdResDto findIdResDTO = memberService.findId(findIdReqDTO);
         return new ResponseEntity<>(new ResponseDto<>("200", findIdResDTO), HttpStatus.OK);
     }
 
@@ -68,14 +68,14 @@ public class MemberController {
     }
 
     @PostMapping("/reset-pwd/known")
-    public ResponseEntity<?> resetPwd(@AuthenticationPrincipal CustomMemberDetails customMemberDetails, @Valid @RequestBody ResetPwdReqDTO resetPwdReqDTO) {
+    public ResponseEntity<?> resetPwd(@AuthenticationPrincipal CustomMemberDetails customMemberDetails, @Valid @RequestBody ResetPwdReqDto resetPwdReqDTO) {
         ResetPwdDTO resetPwdDTO = new ResetPwdDTO(customMemberDetails.getLoginId(), resetPwdReqDTO);
         memberService.resetPwd(resetPwdDTO);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
 
     @PostMapping("/reset-pwd/unknown")
-    public ResponseEntity<?> resetPwdUnknown(@Valid @RequestBody ResetPwdUnknownReqDTO resetPwdUnknownReqDTO,
+    public ResponseEntity<?> resetPwdUnknown(@Valid @RequestBody ResetPwdUnknownReqDto resetPwdUnknownReqDTO,
                                             @SessionAttribute(name = "CheckEmailCode:changePassword:", required = false) String authEmail) {
         if(!resetPwdUnknownReqDTO.getEmail().equals(authEmail)) {
             throw new NotVerifiedEmailException();
@@ -86,12 +86,12 @@ public class MemberController {
 
     @GetMapping("/info")
     public ResponseEntity<?> getInfo(@AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
-        GetInfoResDTO getInfoResDTO = memberService.getMemberInfo(customMemberDetails.getLoginId());
+        GetInfoResDto getInfoResDTO = memberService.getMemberInfo(customMemberDetails.getLoginId());
         return new ResponseEntity<>(new ResponseDto<>("200", getInfoResDTO), HttpStatus.OK);
     }
 
     @PostMapping("/info")
-    public ResponseEntity<?> changeInfo(@AuthenticationPrincipal CustomMemberDetails customMemberDetails, @Valid @RequestBody ChangeInfoReqDTO changeInfoReqDTO) {
+    public ResponseEntity<?> changeInfo(@AuthenticationPrincipal CustomMemberDetails customMemberDetails, @Valid @RequestBody ChangeInfoReqDto changeInfoReqDTO) {
         memberService.changeMemberInfo(customMemberDetails.getLoginId(), changeInfoReqDTO);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
@@ -116,7 +116,7 @@ public class MemberController {
     }
 
     @PostMapping("/email/code-request")
-    public ResponseEntity<?> sendMail(@RequestBody SendMailReqDTO sendMailReqDTO) {
+    public ResponseEntity<?> sendMail(@RequestBody SendMailReqDto sendMailReqDTO) {
         mailAuthService.sendMail(sendMailReqDTO);
         return new ResponseEntity<>(new ResponseDto<>("200", null), HttpStatus.OK);
     }
