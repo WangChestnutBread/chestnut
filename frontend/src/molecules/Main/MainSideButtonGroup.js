@@ -1,6 +1,6 @@
 import "./MainSideButtonGroup.css";
-import ChatBotButton from "../../atoms/ChatBotButton";
-import OpenChatButton from "../../atoms/OpenChatButton";
+import ChatBotButton from "../../atoms/SideButton/ChatBotButton";
+import OpenChatButton from "../../atoms/SideButton/OpenChatButton";
 
 
 function MainSideButtonGroup({handleOpenChatClick, restartTutorial}) {

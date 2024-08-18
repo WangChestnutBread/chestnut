@@ -1,5 +1,5 @@
 import "./ChapterList.css";
-import BlackBoard from "../../atoms/BlackBoard";
+import BlackBoard from "../../atoms/ChapterList/BlackBoard";
 import Text32 from "../../atoms/Text32";
 
 function ChapterList(props) {

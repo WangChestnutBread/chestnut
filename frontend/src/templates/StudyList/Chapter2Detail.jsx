@@ -13,7 +13,7 @@ import Lottie from "lottie-react";
 import Correct from "../../assets/lottie/correct.json";
 import Wrong from "../../assets/lottie/wrong.json";
 import "./ChapterDetail.css";
-import SideButtonWithModal from "../../organisms/SideButtonWithModal";
+import SideButtonWithModal from "../../organisms/SideButton/SideButtonWithModal";
 import Tutorial from "../../atoms/Tutorial";
 import Chapter2StudyTutorial from "../../data/Chapter2StudyTutorial";
 

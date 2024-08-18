@@ -1,6 +1,6 @@
 import "./Chapter4_7List.css";
-import ChapterList from "../../molecules/StudyList/ChapterList";
-import BlackBoardTab from "../../molecules/BlackBoardTab";
+import ChapterList from "../../molecules/ChapterList/ChapterList";
+import BlackBoardTab from "../../molecules/ChapterList/BlackBoardTab";
 import { useState } from "react";
 import Text32 from "../../atoms/Text32";
 import baseApi from "../../api/fetchAPI";
@@ -15,10 +15,10 @@ function Chapter4List({ content }) {
       method: "get",
       url: "/log/study",
       params: {
-        studyId:studyId,
-        isPass:1,
-      }
-    })
+        studyId: studyId,
+        isPass: 1,
+      },
+    });
   };
 
   let [currentTab, setCurrentTab] = useState(0);
@@ -56,10 +56,10 @@ function Chapter4List({ content }) {
                       className={`LeftBoardText ${
                         currentRule === i ? "active" : ""
                       }`}
-                      style={item.isPass ? { color: "#74A6FD" }:null}
+                      style={item.isPass ? { color: "#74A6FD" } : null}
                       onClick={() => {
                         setCurrentRule(i);
-                        handleOnClick(item.studyId)
+                        handleOnClick(item.studyId);
                       }}
                     >
                       <Text32 text={item.phonologyRule} />

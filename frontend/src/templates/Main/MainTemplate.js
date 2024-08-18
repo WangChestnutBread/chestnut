@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import MainMenu from "../organisms/Main/MainMenu";
+import MainMenu from "../../organisms/Main/MainMenu";
 import "./MainTemplate.css";
-import LastStudy from "../organisms/Main/LastStudy";
-import MainProfile from "../organisms/Main/MainProfile";
-import MainCalendar from "../organisms/Main/MainCalendar";
-import Tutorial from "../atoms/Tutorial";
-import MainTutorialStep from "../data/MainTutorialStep";
-import WelcomeModal from "../atoms/WelcomeModal";
+import LastStudy from "../../organisms/Main/LastStudy";
+import MainProfile from "../../organisms/Main/MainProfile";
+import MainCalendar from "../../organisms/Main/MainCalendar";
+import Tutorial from "../../atoms/Tutorial";
+import MainTutorialStep from "../../data/MainTutorialStep";
+import WelcomeModal from "../../atoms/Main/WelcomeModal";
 import { Row } from "react-bootstrap";
-import SideButtonWithModal from "../organisms/SideButtonWithModal";
+import SideButtonWithModal from "../../organisms/SideButton/SideButtonWithModal";
 
 const MainTemplate = ({ profile, attendance }) => {
   // 메뉴 밤

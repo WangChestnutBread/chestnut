@@ -1,13 +1,13 @@
 import "./ChapterMainTemplate.css";
-import ChapterCard from "../organisms/ChapterCard";
-import "./NavbarExample.css";
-import Text32 from "../atoms/Text32";
+import ChapterCard from "../../organisms/ChapterList/ChapterCard";
+import "../NavbarExample.css";
+import Text32 from "../../atoms/Text32";
 import { Row, Col } from "react-bootstrap";
-import NavbarExample from "./NavbarExample";
-import Tutorial from "../atoms/Tutorial";
-import ChapterMainTutorialStep from "../data/ChapterMainTutorialStep";
+import NavbarExample from "../NavbarExample";
+import Tutorial from "../../atoms/Tutorial";
+import ChapterMainTutorialStep from "../../data/ChapterMainTutorialStep";
 import { useState } from "react";
-import SideButtonWithModal from "../organisms/SideButtonWithModal";
+import SideButtonWithModal from "../../organisms/SideButton/SideButtonWithModal";
 
 function ChapterMainTemplate({ listdata }) {
   let [showOpenChat, setShowOpenChat] = useState(false);
@@ -31,10 +31,7 @@ function ChapterMainTemplate({ listdata }) {
       <NavbarExample />
 
       {/* 튜토리얼 */}
-      <Tutorial
-        steps={ChapterMainTutorialStep}
-        startTutorial={startTutorial}
-      />
+      <Tutorial steps={ChapterMainTutorialStep} startTutorial={startTutorial} />
 
       {/* 챕터 카드 목록 */}
       <div className="container">
@@ -54,7 +51,11 @@ function ChapterMainTemplate({ listdata }) {
       </div>
 
       {/* 사이드바 */}
-      <SideButtonWithModal showOpenChat={showOpenChat} handleOpenChatClick={handleOpenChatClick} restartTutorial={restartTutorial}/>
+      <SideButtonWithModal
+        showOpenChat={showOpenChat}
+        handleOpenChatClick={handleOpenChatClick}
+        restartTutorial={restartTutorial}
+      />
     </div>
   );
 }

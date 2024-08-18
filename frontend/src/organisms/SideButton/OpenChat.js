@@ -2,8 +2,8 @@ import React, { useEffect, useState, useCallback } from 'react';
 import './OpenChat.css';
 import * as StompJs from '@stomp/stompjs';
 import $ from 'jquery';
-import useAuthStore from '../stores/authStore';
-import CustomAlert from '../atoms/alert';
+import useAuthStore from '../../stores/authStore';
+import CustomAlert from '../../atoms/alert';
 
 
 const OpenChat = () => {

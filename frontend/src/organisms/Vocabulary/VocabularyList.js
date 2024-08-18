@@ -1,14 +1,14 @@
 import "./VocabularyList.css";
 import "./VocaModal.css";
-import "../molecules/TabDropDown.css";
-import ChapterList from "../molecules/StudyList/ChapterList";
+import "../../molecules/ChapterList/TabDropDown.css";
+import ChapterList from "../../molecules/ChapterList/ChapterList";
 import { useEffect, useState } from "react";
-import Pagenation from "../atoms/Pagenation";
-import Text32 from "../atoms/Text32";
+import Pagenation from "../../atoms/Pagenation";
+import Text32 from "../../atoms/Text32";
 import { Dropdown } from "react-bootstrap";
-import VocaTabDropDown from "../molecules/VocaTabDropDown";
+import VocaTabDropDown from "../../molecules/Vocabulary/VocaTabDropDown";
 import VocaModal from "./VocaModal";
-import baseApi from "../api/fetchAPI";
+import baseApi from "../../api/fetchAPI";
 
 function VocabularyList({ chapterTitle, getVocabulary, currentVocaItem }) {
   const modifiedChapterTitle = [...chapterTitle];
