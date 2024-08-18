@@ -4,7 +4,7 @@ import com.chestnut.backend.member.entity.Member;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class SessionDTO {
+public class SessionDto {
 
     private String loginId;
     private String role;

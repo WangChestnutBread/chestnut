@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResetPwdUnknownDTO {
+public class ResetPwdUnknownDto {
     private String loginId;
     @Password
     private String newPassword;
