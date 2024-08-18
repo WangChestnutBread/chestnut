@@ -9,7 +9,7 @@ import NavbarExample from "../NavbarExample";
 import SMCH1 from "./../../organisms/StudyList/SMCH1";
 import CH1record from "./../../organisms/StudyList/CH1record";
 import "./ChapterDetail.css";
-import SideButtonWithModal from "../../organisms/SideButtonWithModal";
+import SideButtonWithModal from "../../organisms/SideButton/SideButtonWithModal";
 import Tutorial from "../../atoms/Tutorial";
 import Chapter1StudyTutorial from "../../data/Chapter1StudyTutorial";
 

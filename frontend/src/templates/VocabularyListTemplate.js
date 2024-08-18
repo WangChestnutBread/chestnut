@@ -1,5 +1,5 @@
 import "./VocabularyListTemplate.css";
-import VocabularyList from "../organisms/VocabularyList";
+import VocabularyList from "../organisms/Vocabulary/VocabularyList";
 import "./NavbarExample.css";
 import NavbarExample from "./NavbarExample";
 import Pagenation from "../atoms/Pagenation";

@@ -1,8 +1,8 @@
 import "./Chapter5_6List.css";
 import { useState } from "react";
-import ChapterList from "../../molecules/StudyList/ChapterList";
+import ChapterList from "../../molecules/ChapterList/ChapterList";
 import Pagenation from "../../atoms/Pagenation";
-import TabDropDown from "../../molecules/TabDropDown";
+import TabDropDown from "../../molecules/ChapterList/TabDropDown";
 import { Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Text32 from "../../atoms/Text32";
@@ -16,9 +16,8 @@ function Chapter5_6List({ content, chapterId }) {
   let itemsPerPage = 6; // 페이지당 표시할 항목 수
   {
     if (chapterId == 5) {
-     itemsPerPage = 12; 
+      itemsPerPage = 12;
     }
-
   }
 
   const handleOnClick = (index) => {
@@ -29,8 +28,10 @@ function Chapter5_6List({ content, chapterId }) {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = content[currentTopic].child.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(content[currentTopic].child.length / itemsPerPage);
-  
+  const totalPages = Math.ceil(
+    content[currentTopic].child.length / itemsPerPage
+  );
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -85,11 +86,21 @@ function Chapter5_6List({ content, chapterId }) {
       </div>
 
       {/* 칠판 */}
-      <ChapterList title={chapterId == 5 ? "Ch5. 단어" : chapterId == 6 ? "Ch6. 문장" : null} />
-    
+      <ChapterList
+        title={
+          chapterId == 5 ? "Ch5. 단어" : chapterId == 6 ? "Ch6. 문장" : null
+        }
+      />
+
       {/* 페이지네이션 */}
       <div className="Chapter5_6Pagenation">
-        <Pagenation currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} upPageChange={handleUpPageChange} downPageChange={handleDownPageChange}/>
+        <Pagenation
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          upPageChange={handleUpPageChange}
+          downPageChange={handleDownPageChange}
+        />
       </div>
     </div>
   );

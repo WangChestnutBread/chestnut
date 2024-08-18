@@ -1,6 +1,6 @@
 import "./MainProfileTextBox.css";
 import React, { useState } from "react";
-import MainProfileLine from "../../atoms/MainProfileLine";
+import MainProfileLine from "../../atoms/Main/MainProfileLine";
 import Text24 from "../../atoms/Text24";
 import Text20 from "../../atoms/Text20";
 import { useNavigate } from "react-router-dom";

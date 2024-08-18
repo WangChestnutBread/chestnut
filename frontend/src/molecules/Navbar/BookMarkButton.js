@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import baseApi from "../api/fetchAPI";
+import baseApi from "../../api/fetchAPI";
 import { useLocation } from "react-router-dom";
-import "./BookMarkButton.css"
-import CustomAlert from "../atoms/alert";
+import "./BookMarkButton.css";
+import CustomAlert from "../../atoms/alert";
 
 function BookMarkButton({ studyId, isVocabulary }) {
   console.log("초기 isVocabulary", isVocabulary);
@@ -60,10 +60,9 @@ function BookMarkButton({ studyId, isVocabulary }) {
       ) : (
         <img src="/icons/EmptyBookMark.svg" height="100%" />
       )}
-      {alertContent && 
-                <CustomAlert content={alertContent} 
-                onClose={handleCloseAlert}
-            />}
+      {alertContent && (
+        <CustomAlert content={alertContent} onClose={handleCloseAlert} />
+      )}
     </div>
   );
 }

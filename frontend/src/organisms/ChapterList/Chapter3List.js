@@ -1,5 +1,5 @@
 import "./Chapter3List.css";
-import ChapterList from "../../molecules/StudyList/ChapterList";
+import ChapterList from "../../molecules/ChapterList/ChapterList";
 import Text32 from "../../atoms/Text32";
 import { useNavigate } from "react-router-dom";
 

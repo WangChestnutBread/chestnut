@@ -1,4 +1,4 @@
-import MainSideButtonGroup from "../molecules/Main/MainSideButtonGroup";
+import MainSideButtonGroup from "../../molecules/Main/MainSideButtonGroup";
 import OpenChat from "./OpenChat";
 
 function SideButtonWithModal({showOpenChat, handleOpenChatClick, restartTutorial}) {

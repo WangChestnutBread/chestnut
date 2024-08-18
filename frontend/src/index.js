@@ -9,7 +9,7 @@ import QnaDetailTemplate from "./templates/Board/QnaDetailTemplate";
 import QnaManagerDetail from "./templates/Board/QnaManagerDetail";
 import AnnouncementDetail from "./templates/Board/AnnouncementDetail";
 import AnnouncementWrite from "./templates/Board/AnnouncementWrite";
-import StartTemplates from "./templates/StartTemplates";
+import StartTemplates from "./templates/Authentication/StartTemplates";
 import reportWebVitals from "./reportWebVitals";
 import Member from "./pages/Member";
 import MyProfile from "./pages/MyProfile";

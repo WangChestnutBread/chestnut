@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./QuestionMarkButton.css";
-import Text24 from "../atoms/Text24";
-import Text20 from "../atoms/Text20";
+import Text24 from "../../atoms/Text24";
+import Text20 from "../../atoms/Text20";
 
 function QuestionMarkButton() {
   let [showGuide, setShowGuide] = useState(false);

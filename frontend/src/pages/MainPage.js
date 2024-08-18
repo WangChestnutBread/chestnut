@@ -1,4 +1,4 @@
-import MainTemplate from "../templates/MainTemplate";
+import MainTemplate from "../templates/Main/MainTemplate";
 import useAuthStore from "../stores/authStore";
 import baseApi from "../api/fetchAPI";
 import axios from "axios";
