@@ -39,6 +39,20 @@
 </ul>
 </div>
 <div class="team-member"> 
+<h3>김아름</h3>
+<ul>
+    <li>역할: 인프라 설계, 백엔드 개발</li>
+    <li>담당</li>
+        <ul>
+            <li>데이터 수집</li>
+            <li>CICD 파이프라인 설계 및 구축, Nginx 리버스 프록시 설정, Docker & Docker Compose를 활용한 컨테이너 관리</li>
+            <li>발음 평가, 개인정보 및 출석 관리, 공지사항, AI 음성 채팅 API 설계 및 구현</li>
+            <li>AI 음성 채팅 최적화: 프롬프트 작성 및 튜닝</li>
+            <li>아이디 찾기, Navbar, Pagination, Chapter 1 학습 상세 페이지 CSS 및 JavaScript 개선</li>
+        </ul>
+</ul>
+</div>
+<div class="team-member"> 
 <h3>이름</h3>
 <ul>
     <li>역할: 역할 작성</li>
