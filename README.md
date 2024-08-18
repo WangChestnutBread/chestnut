@@ -53,12 +53,14 @@
 </ul>
 </div>
 <div class="team-member"> 
-<h3>이름</h3>
+<h3>김시현</h3>
 <ul>
-    <li>역할: 역할 작성</li>
+    <li>역할: 프론트 개발</li>
     <li>담당</li>
         <ul>
-            <li>맡은 일 작성</li>
+            <li>ai 자유대화 페이지 개발</li>
+            <li>학습 상세페이지 개발</li>
+            <li>게시판, qna 페이지 개발</li>
         </ul>
 </ul>
 </div>
