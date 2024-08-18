@@ -1,9 +1,9 @@
 import "./Chapter4_7List.css";
-import ChapterList from "../../molecules/StudyList/ChapterList";
-import BlackBoardTab from "../../molecules/BlackBoardTab";
+import ChapterList from "../../molecules/ChapterList/ChapterList";
+import BlackBoardTab from "../../molecules/ChapterList/BlackBoardTab";
 import { useState } from "react";
 import Text32 from "../../atoms/Text32";
-import VocaModal from "../VocaModal";
+import VocaModal from "../Vocabulary/VocaModal";
 
 function Chapter7List({ content }) {
   // console.log(content)
@@ -88,12 +88,25 @@ function Chapter7List({ content }) {
                       {item.map((pair, j) => {
                         console.log(pair);
                         return (
-                          <div key={j} className="RightBoardPair"
-                          style={pair.isPass ? { color: "#74A6FD" } : pair.isStudy ? { color: "#CECECE" } : null}>
+                          <div
+                            key={j}
+                            className="RightBoardPair"
+                            style={
+                              pair.isPass
+                                ? { color: "#74A6FD" }
+                                : pair.isStudy
+                                ? { color: "#CECECE" }
+                                : null
+                            }
+                          >
                             <div
                               className="RightBoardWord"
                               onClick={() => {
-                                handleWordClick(pair.word, pair.pronounce, pair.studyId);
+                                handleWordClick(
+                                  pair.word,
+                                  pair.pronounce,
+                                  pair.studyId
+                                );
                               }}
                             >
                               <p>{pair.word}</p>

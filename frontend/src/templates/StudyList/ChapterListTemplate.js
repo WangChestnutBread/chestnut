@@ -2,12 +2,12 @@ import "./ChapterListTemplate.css";
 import "../NavbarExample.css";
 import { useEffect, useState } from "react";
 import NavbarExample from "../NavbarExample";
-import Chapter1List from "../../organisms/StudyChapter/Chapter1List";
-import Chapter2List from "../../organisms/StudyChapter/Chapter2List";
-import Chapter3List from "../../organisms/StudyChapter/Chapter3List";
-import Chapter4List from "../../organisms/StudyChapter/Chapter4List";
-import Chapter5_6List from "../../organisms/StudyChapter/Chapter5_6List";
-import Chapter7List from "../../organisms/StudyChapter/Chapter7List";
+import Chapter1List from "../../organisms/ChapterList/Chapter1List";
+import Chapter2List from "../../organisms/ChapterList/Chapter2List";
+import Chapter3List from "../../organisms/ChapterList/Chapter3List";
+import Chapter4List from "../../organisms/ChapterList/Chapter4List";
+import Chapter5_6List from "../../organisms/ChapterList/Chapter5_6List";
+import Chapter7List from "../../organisms/ChapterList/Chapter7List";
 
 function ChapterListTemplate({ data, chapterId }) {
   let [content, setContent] = useState(null);

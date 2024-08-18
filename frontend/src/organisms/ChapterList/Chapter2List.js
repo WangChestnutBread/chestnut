@@ -1,11 +1,11 @@
 import "./Chapter2List.css";
-import ChapterList from "../../molecules/StudyList/ChapterList";
+import ChapterList from "../../molecules/ChapterList/ChapterList";
 import Text32 from "../../atoms/Text32";
 import { useNavigate } from "react-router-dom";
-import BlackBoardTab from "../../molecules/BlackBoardTab";
+import BlackBoardTab from "../../molecules/ChapterList/BlackBoardTab";
 import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import TabDropDown from "../../molecules/TabDropDown";
+import TabDropDown from "../../molecules/ChapterList/TabDropDown";
 
 function Chapter2List({ content, chapterId }) {
   console.log(content);

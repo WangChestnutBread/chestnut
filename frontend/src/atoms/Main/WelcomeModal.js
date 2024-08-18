@@ -1,7 +1,7 @@
 import { Button, Modal } from "react-bootstrap";
 import "./WelcomeModal.css";
-import Text20 from "./Text20";
-import Text24 from "./Text24";
+import Text20 from "../Text20";
+import Text24 from "../Text24";
 
 function WelcomeModal({ onClose, handleStartTutorial }) {
   return (

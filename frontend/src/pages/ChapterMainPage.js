@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import baseApi from "../api/fetchAPI";
-import ChapterMainTemplate from "../templates/ChapterMainTemplate";
+import ChapterMainTemplate from "../templates/ChapterList/ChapterMainTemplate";
 
 function ChapterMainPage() {
     let [listdata, setListData] = useState(null);

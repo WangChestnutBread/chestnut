@@ -1,13 +1,13 @@
 import { Modal, Container, Stack } from "react-bootstrap";
-import "../organisms/StudyList/NotationChapter1.css";
+import "../StudyList/NotationChapter1.css";
 import "./VocaModal.css";
-import Text24 from "../atoms/Text24";
-import Text32 from "../atoms/Text32";
+import Text24 from "../../atoms/Text24";
+import Text32 from "../../atoms/Text32";
 import { useState } from "react";
-import baseApi from "../api/fetchAPI";
-import CustomAlert from "../atoms/alert";
-import RecordForModal from "./StudyList/RecordForModal";
-import CameraOrganism from "./StudyList/CameraOrganism";
+import baseApi from "../../api/fetchAPI";
+import CustomAlert from "../../atoms/alert";
+import RecordForModal from "../StudyList/RecordForModal";
+import CameraOrganism from "../StudyList/CameraOrganism";
 
 const VocaModal = ({ word, pronounce, studyId, chapterId, onClose }) => {
   const [myPronounce, setMyProunce] = useState(

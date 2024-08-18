@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import "../MainTemplate.css";
+import "../Main/MainTemplate.css";
 import "../NavbarExample.css";
 import "./QnaTemplate.css";
 import NavbarExample from "../NavbarExample";

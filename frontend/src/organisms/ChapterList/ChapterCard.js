@@ -1,8 +1,8 @@
 import "./ChapterCard.css";
 import { Button, Card, ProgressBar } from "react-bootstrap";
-import Text24 from "../atoms/Text24";
+import Text24 from "../../atoms/Text24";
 import { useNavigate } from "react-router-dom";
-import Text20 from "../atoms/Text20";
+import Text20 from "../../atoms/Text20";
 
 function ChapterCard({ content }) {
   let navigate = useNavigate();

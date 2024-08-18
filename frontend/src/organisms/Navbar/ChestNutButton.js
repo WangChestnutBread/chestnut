@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import DropItem from "../molecules/DropItem";
+import { Link } from "react-router-dom";
+import DropItem from "../../molecules/Navbar/DropItem";
 import "./ChestNutButton.css";
 
 function ChestNutButton() {
@@ -9,8 +9,8 @@ function ChestNutButton() {
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   if (windowWidth <= 910) {
@@ -19,13 +19,21 @@ function ChestNutButton() {
     return (
       <nav className="navbar">
         <Link to="/main" className="nav-item">
-          <img src="/image/Logo.png" alt="양방빵 로고"/>
+          <img src="/image/Logo.png" alt="양방빵 로고" />
         </Link>
         <div className="nav-menu">
-          <Link to="/study" className="nav-item">학습 목록</Link>
-          <Link to="/ai" className="nav-item">대화 연습</Link>
-          <Link to="/myVocabulary" className="nav-item">단어장</Link>
-          <Link to="/board/announcement/1" className="nav-item">게시판</Link>
+          <Link to="/study" className="nav-item">
+            학습 목록
+          </Link>
+          <Link to="/ai" className="nav-item">
+            대화 연습
+          </Link>
+          <Link to="/myVocabulary" className="nav-item">
+            단어장
+          </Link>
+          <Link to="/board/announcement/1" className="nav-item">
+            게시판
+          </Link>
         </div>
       </nav>
     );
@@ -37,8 +45,7 @@ function HamburgerMenu() {
   const toggleMenu = () => setShowMenu(!showMenu);
   return (
     <div className="hamburger-menu">
-      <img src="/icons/ChestNut.svg" alt="Menu" 
-        onClick={toggleMenu}/>
+      <img src="/icons/ChestNut.svg" alt="Menu" onClick={toggleMenu} />
       {showMenu && <DropMenu />}
     </div>
   );
@@ -50,7 +57,11 @@ function DropMenu() {
     { img: "/image/List.png", path: "/study", menu: "학습 목록" },
     { img: "/image/AITalk.png", path: "/ai", menu: "대화 연습" },
     { img: "/image/Board.png", path: "/myVocabulary", menu: "단어장" },
-    { img: "/image/BookMarkImage.png", path: "/board/announcement/1", menu: "게시판" },
+    {
+      img: "/image/BookMarkImage.png",
+      path: "/board/announcement/1",
+      menu: "게시판",
+    },
   ]);
   return (
     <div className="DropMenu">

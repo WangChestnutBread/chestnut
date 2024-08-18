@@ -1,6 +1,6 @@
 import "../NavbarExample.css";
-import StudyBackButton from "../../molecules/StudyBackButton";
-import ChestNutButton from "../../organisms/ChestNutButton";
+import StudyBackButton from "../../molecules/Navbar/StudyBackButton";
+import ChestNutButton from "../../organisms/Navbar/ChestNutButton";
 import NavbarExample from "../NavbarExample";
 import Notation from "../../organisms/StudyList/NotationChapter1";
 import CameraOrganism from "../../organisms/StudyList/CameraOrganism";
@@ -18,33 +18,41 @@ import Wrong from "../../assets/lottie/wrong.json";
 const Chapter6Detail = () => {
   const params = useParams();
   const [realData, setRealData] = useState("녹음된 발음");
-  const [answerData, setAnswerData] = useState([100000,15656,1561568,156186,15615615,156,156,156,456,456,99,999,999,999,99,999,1000,9999,99999,99999,9999,999,99999,99999,99999,9999]);
+  const [answerData, setAnswerData] = useState([
+    100000, 15656, 1561568, 156186, 15615615, 156, 156, 156, 456, 456, 99, 999,
+    999, 999, 99, 999, 1000, 9999, 99999, 99999, 9999, 999, 99999, 99999, 99999,
+    9999,
+  ]);
   const [show, isShow] = useState(false);
   const [selectedChar, setSelectedChar] = useState("");
   const [correct, isCorrect] = useState(false);
   const [wrong, isWrong] = useState(false);
-  const [isVocabulary, setIsVocabulary] = useState(null)
+  const [isVocabulary, setIsVocabulary] = useState(null);
 
   useEffect(() => {
     baseApi
-        .get("/log/study", {
-          params: {
-            studyId: params.studyId,
-            isPass: 0,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        })
-  },[])
-  
+      .get("/log/study", {
+        params: {
+          studyId: params.studyId,
+          isPass: 0,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  }, []);
+
   const moveData = (value) => {
     setRealData(value);
   };
 
   useEffect(() => {
-    setAnswerData([100000,15656,1561568,156186,15615615,156,156,156,456,456,99,999,999,999,99,999,1000,9999,99999,99999,9999,999,99999,99999,99999,9999])
-  },[])
+    setAnswerData([
+      100000, 15656, 1561568, 156186, 15615615, 156, 156, 156, 456, 456, 99,
+      999, 999, 999, 99, 999, 1000, 9999, 99999, 99999, 9999, 999, 99999, 99999,
+      99999, 9999,
+    ]);
+  }, []);
 
   const answer = (isPass, value) => {
     setAnswerData(value);
@@ -55,8 +63,7 @@ const Chapter6Detail = () => {
           params: {
             studyId: params.studyId,
             isPass: 1,
-          }
-          
+          },
         })
         .then((res) => {
           isCorrect(true);
@@ -64,23 +71,22 @@ const Chapter6Detail = () => {
             isCorrect(false);
           }, 2000);
         })
-        .catch((err) => {
-         
-        });
+        .catch((err) => {});
     }
-  
   };
 
   const handleIsVocabulary = (isVocabulary) => {
-    setIsVocabulary(isVocabulary)
-  }
-  
+    setIsVocabulary(isVocabulary);
+  };
 
   return (
     <div>
-      <NavbarExample showBookMarkButton={true} studyId={params.studyId} {...(isVocabulary !== null ? { isVocabulary } : {})}/>
+      <NavbarExample
+        showBookMarkButton={true}
+        studyId={params.studyId}
+        {...(isVocabulary !== null ? { isVocabulary } : {})}
+      />
 
-    
       {/* 행과 열로 나눔. Style 위주로 함. 
       marginTop으로 행 사이 margin을 주고
       1행 사이에 marginLeft와 marginRight로 열 간 간격을 줌*/}
@@ -89,34 +95,38 @@ const Chapter6Detail = () => {
         {/* 표기, 카메라 */}
 
         {/* 1행 */}
-        <div 
+        <div
           style={{
-            display:"flex",
-            justifyContent:"space-evenly",
-            marginTop:"25px",
-        }}>
+            display: "flex",
+            justifyContent: "space-evenly",
+            marginTop: "25px",
+          }}
+        >
           {/* 1행 1열 */}
-          <div 
+          <div
             style={{
-              maxWidth:"30%",
-          }}>
+              maxWidth: "30%",
+            }}
+          >
             {/* <Notation word={params} /> */}
             <Ch3Notation word={params} />
           </div>
           {/* 1행 2열: 소리나는 방법, 카메라 */}
-          <div 
+          <div
             style={{
-              maxWidth:"40%",
-              marginLeft:"20px",              
-          }}>
+              maxWidth: "40%",
+              marginLeft: "20px",
+            }}
+          >
             <CameraOrganism />
           </div>
           {/* 1행 3열: 발음과 내 발음 */}
-          <div 
+          <div
             style={{
-              width:"30%",
-              marginLeft:"20px", 
-          }}>
+              width: "30%",
+              marginLeft: "20px",
+            }}
+          >
             <Ch5Pronunciation
               saying={params}
               realData={realData}
@@ -126,21 +136,23 @@ const Chapter6Detail = () => {
             />
           </div>
         </div>
-        
+
         {/* 2행 */}
-        <div 
+        <div
           style={{
-            maxHeight:"30%",
-            marginTop:"25px",
-        }}>
+            maxHeight: "30%",
+            marginTop: "25px",
+          }}
+        >
           <Ch5SM hangeul={params} selectedChar={selectedChar} />
         </div>
         {/* 3행: 네비게이션 바 */}
-        <div 
+        <div
           style={{
-            marginTop:"25px",
-        }}>
-        <RecordData func={moveData} func2={answer} />
+            marginTop: "25px",
+          }}
+        >
+          <RecordData func={moveData} func2={answer} />
         </div>
 
         {/* 별개 */}
@@ -172,15 +184,10 @@ const Chapter6Detail = () => {
         >
           {wrong ? <Lottie animationData={Wrong} /> : <></>}
         </div>
-
       </div>
     </div>
 
-
     // <div>
-
-
-
 
     //   <div className="container">
     //     <div className="row">
@@ -190,7 +197,7 @@ const Chapter6Detail = () => {
 
     //           </div>
     //           <div className="col-6">
-    
+
     //           </div>
     //           <div className="col-3">
 
@@ -198,21 +205,21 @@ const Chapter6Detail = () => {
     //         </div>
 
     //         <div className="mt-2 justify-content-center">
-              
+
     //         </div>
     //         <div className="mt-2">
 
     //         </div>
     //       </div>
     //       <div className="col-4 mt-2">
-            
+
     //       </div>
     //     </div>
-        
+
     //     <div className="row">
     //       <div className="col-6 mt-2 mb-3"></div>
     //     </div>
-        
+
     //     {/* 마이크 */}
     //   </div>
     // </div>
