@@ -1,11 +1,10 @@
 # **🌰**서비스명: 왕밤빵
 
----
 <img src="./image/readme_image/mainImage.png">
 
 ## ✔프로젝트 소개
 
----
+
 
 **진행 기간**
     
@@ -55,7 +54,6 @@
 
 ## ✔주요 기능
 
----
 
 ### 회원관리 및 로그인
 
@@ -149,7 +147,6 @@ AI와의 음성 채팅을 통해 말로 하는 대화에 대한 자신감을 높
 
 ## ✔개발 구조
 
----
 
 <p align="center"><img src="./image/readme_image/개발구조.png" width=90%></p>
 
@@ -200,7 +197,6 @@ AI와의 음성 채팅을 통해 말로 하는 대화에 대한 자신감을 높
 
 ## ✔파일 구조
 
----
 <table>
 <tr>
 <td width="50%" valign="top">
@@ -330,12 +326,9 @@ chestnut/
 
 ## ✔ERD
 
----
 
 <p align="center"><img src="./image/readme_image/왕밤빵erd.png" width=90%></p>
 
 ## ✔API 명세서
-
----
 
 <p align="center"><img src="./image/readme_image/api명세서.png" width=50%></p>
