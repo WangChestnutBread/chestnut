@@ -17,9 +17,9 @@
 이를 통해 사용자들은 발음하는 방법을 익히고, 구화에 자신감을 얻을 수 있습니다.
     
 **팀원**
-|<img src="https://github.com/Elenaljh.png" width="200">|<img src="https://github.com/aa001R.png" width="200">|<img src="https://github.com/codemj99.png" width="200">|<img src="https://github.com/eunji04.png" width="200">|<img src="https://github.com/kimsihyeon24.png" width="200">|<img src="https://github.com/Elenaljh.png" width="200">|
+|<img src="https://github.com/Elenaljh.png" width="200">|<img src="https://github.com/aa001R.png" width="200">|<img src="https://github.com/codemj99.png" width="200">|<img src="https://github.com/eunji04.png" width="200">|<img src="https://github.com/kimsihyeon24.png" width="200">|<img src="https://github.com/Leejaehuck.png" width="200">|
  |:-:|:-:|:-:|:-:|:-:|:-:|
- |[이지혜](https://github.com/Elenaljh)|[김아름](https://github.com/aa001R)|[김민진](https://github.com/codemj99)|[박은지](https://github.com/eunji04)|[김시현](https://github.com/kimsihyeon24)|[이재혁](https://github.com/Elenaljh)|
+ |[이지혜](https://github.com/Elenaljh)|[김아름](https://github.com/aa001R)|[김민진](https://github.com/codemj99)|[박은지](https://github.com/eunji04)|[김시현](https://github.com/kimsihyeon24)|[이재혁](https://github.com/Leejaehuck)|
  |Backend Developer|Backend Developer|Frontend Developer|Backend Developer|Frontend Developer|Frontend Developer|
 <details>
 <summary>역할 상세</summary>
@@ -86,6 +86,18 @@
             <li>학습 분류 페이지 개발</li>
             <li>단어장 페이지 개발</li>
             <li>서비스 튜토리얼 기능 개발</li>
+        </ul>
+</ul>
+</div>
+<div class="team-member"> 
+<h3>이재혁</h3>
+<ul>
+    <li>역할: 프론트엔드 개발</li>
+    <li>담당</li>
+        <ul>
+            <li>서비스 기획</li>
+            <li>서비스 페이지 디자인</li>
+            <li>회원관리 프론트엔드 페이지 구현(로그인, 회원가입, 회원정보 조회, 수정, 아이디/비밀번호 찾기)</li>
         </ul>
 </ul>
 </div>
