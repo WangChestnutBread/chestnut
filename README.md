@@ -17,9 +17,9 @@
 이를 통해 사용자들은 발음하는 방법을 익히고, 구화에 자신감을 얻을 수 있습니다.
     
 **팀원**
-|<img src="https://github.com/Elenaljh.png" width="200">|<img src="https://github.com/aa001R.png" width="200">|<img src="https://github.com/codemj99.png" width="200">|<img src="https://github.com/eunji04.png" width="200">|<img src="https://github.com/Elenaljh.png" width="200">|<img src="https://github.com/Elenaljh.png" width="200">|
+|<img src="https://github.com/Elenaljh.png" width="200">|<img src="https://github.com/aa001R.png" width="200">|<img src="https://github.com/codemj99.png" width="200">|<img src="https://github.com/eunji04.png" width="200">|<img src="https://github.com/kimsihyeon24.png" width="200">|<img src="https://github.com/Elenaljh.png" width="200">|
  |:-:|:-:|:-:|:-:|:-:|:-:|
- |[이지혜](https://github.com/Elenaljh)|[김아름](https://github.com/aa001R)|[김민진](https://github.com/codemj99)|[박은지](https://github.com/eunji04)|[김시현](https://github.com/Elenaljh)|[이재혁](https://github.com/Elenaljh)|
+ |[이지혜](https://github.com/Elenaljh)|[김아름](https://github.com/aa001R)|[김민진](https://github.com/codemj99)|[박은지](https://github.com/eunji04)|[김시현](https://github.com/kimsihyeon24)|[이재혁](https://github.com/Elenaljh)|
  |Backend Developer|Backend Developer|Frontend Developer|Backend Developer|Frontend Developer|Frontend Developer|
 <details>
 <summary>역할 상세</summary>
