@@ -76,6 +76,19 @@
         </ul>
 </ul>
 </div>
+<div class="team-member"> 
+<h3>김민진</h3>
+<ul>
+    <li>역할: 프론트엔드 개발</li>
+    <li>담당</li>
+        <ul>
+            <li>메인 페이지 개발</li>
+            <li>학습 분류 페이지 개발</li>
+            <li>단어장 페이지 개발</li>
+            <li>서비스 튜토리얼 기능 개발</li>
+        </ul>
+</ul>
+</div>
 </div>
 </details>
     
