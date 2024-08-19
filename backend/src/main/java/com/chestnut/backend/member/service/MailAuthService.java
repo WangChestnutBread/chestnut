@@ -30,8 +30,8 @@ public class MailAuthService {
     private static final String senderEmail = "chestnutpronounce@gmail.com";
 
     private String createCode() {
-        int leftLimit = 48; // number '0'
-        int rightLimit = 122; // alphabet 'z'
+        int leftLimit = 48;
+        int rightLimit = 122;
         int targetStringLength = 6;
         Random random = new Random();
 
@@ -78,20 +78,18 @@ public class MailAuthService {
     }
 
     public void sendMail(SendMailReqDto sendMailReqDTO) {
-
         if (redisService.existData(generatePrefixedKey(sendMailReqDTO.getEmail(), sendMailReqDTO.getPurpose()))) {
             redisService.deleteData(generatePrefixedKey(sendMailReqDTO.getEmail(), sendMailReqDTO.getPurpose()));
         }
 
         MimeMessage emailForm = createEmailForm(sendMailReqDTO.getEmail(), sendMailReqDTO.getPurpose());
         javaMailSender.send(emailForm);
-
     }
 
     public Boolean verifyEmailCode(MailAuthDto mailAuthDto) {
         String issuedCode = redisService.getData(generatePrefixedKey(mailAuthDto.getEmail(), mailAuthDto.getPurpose()));
         if (issuedCode == null) {
-            throw new MailSessionNotFoundException(); //세션에 해당 키 값 없다.
+            throw new MailSessionNotFoundException();
         }
 
         if (!issuedCode.equals(mailAuthDto.getCode())) {
