@@ -64,6 +64,18 @@
         </ul>
 </ul>
 </div>
+<div class="team-member"> 
+<h3>박은지</h3>
+<ul>
+    <li>역할: 백엔드 개발</li>
+    <li>담당</li>
+        <ul>
+            <li>jwt 활용 회원 관리 로직 설계 및 구현</li>
+            <li>QnA 게시판 API 설계 및 구현</li>
+            <li>회원 가입, 비밀번호 찾기, 알림창 프론트엔드 수정 및 구현</li>
+        </ul>
+</ul>
+</div>
 </div>
 </details>
     
