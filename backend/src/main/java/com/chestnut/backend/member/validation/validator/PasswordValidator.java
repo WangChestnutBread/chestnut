@@ -1,6 +1,5 @@
 package com.chestnut.backend.member.validation.validator;
 
-import com.chestnut.backend.common.exception.InvalidFormatException;
 import com.chestnut.backend.member.validation.annotation.Password;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

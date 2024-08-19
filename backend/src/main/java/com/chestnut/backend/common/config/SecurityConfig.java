@@ -59,10 +59,10 @@ public class SecurityConfig {
                         CorsConfiguration configuration = new CorsConfiguration();
 
                         configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://i11d107.p.ssafy.io", "http://127.0.0.1:5500")); //front에서 정보를 보내니까
-                        configuration.setAllowedMethods(Collections.singletonList("*")); //허용할 메서드
-                        configuration.setAllowCredentials(true); //front에서 credential 설정을 하면 무조건 true로 바꿔줘야 한다.
-                        configuration.setAllowedHeaders(Collections.singletonList("*")); //사용할 헤더
-                        configuration.setMaxAge(3600L); //설정 시간
+                        configuration.setAllowedMethods(Collections.singletonList("*"));
+                        configuration.setAllowCredentials(true);
+                        configuration.setAllowedHeaders(Collections.singletonList("*"));
+                        configuration.setMaxAge(3600L);
 
                         configuration.setExposedHeaders(Collections.singletonList("access"));
 

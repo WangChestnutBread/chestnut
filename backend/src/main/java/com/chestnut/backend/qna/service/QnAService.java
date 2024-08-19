@@ -26,12 +26,11 @@ public class QnAService {
 
     @Transactional(readOnly = true)
     public QnAResDto getQnAList(String loginId, String role, Pageable pageable) {
-
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
 
         if (role.equals("ROLE_ADMIN") && !member.isAdmin()) {
-            throw new IncorrectAccessException(); //토큰 정보 - 관리자 / 현재 멤버 - 일반 유저
+            throw new IncorrectAccessException();
         }
 
         if (role.equals("ROLE_USER") && member.isAdmin()) {
@@ -52,14 +51,10 @@ public class QnAService {
 
         QnAResDto qna = new QnAResDto(categories, qnaList);
         return qna;
-
     }
 
     @Transactional(readOnly = true)
     public QnADetailResDto getQnADetail(String loginId, Long qnaId) {
-        // 받아온 qnaId로 해당 QnA 찾고 -> QnA의 memberId와 loginId을 이용한 memberId가 같은지 여부 확인 -> 멤버 여부 확인! -> MemberNotFound
-        // qnaId에 해당하는 qna 게시글이 있는지 확인 -> ArticleNotFound
-
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
 
@@ -67,18 +62,14 @@ public class QnAService {
                 .orElseThrow(ArticleNotFoundException::new);
 
         if (!qna.getMember().getLoginId().equals(loginId) && !member.isAdmin()) {
-            //권한 없음
             throw new IncorrectAccessException();
         }
 
         return QnADetailResDto.from(qna);
-
     }
 
     @Transactional
     public void writeQuestion(WriteQuestionDto writeQuestionDTO) {
-
-        // loginId로 member 찾고 -> memberId 을 활용하기
         Member member = memberRepository.findByLoginId(writeQuestionDTO.getLoginId())
                 .orElseThrow(MemberNotFoundException::new);
 
@@ -91,8 +82,6 @@ public class QnAService {
 
     @Transactional
     public void writeAnswer(WriteAnswerDto writeAnswerDTO) {
-
-        // 관리자인지 여부 확인
         String loginId = writeAnswerDTO.getLoginId();
         String role = writeAnswerDTO.getRole();
 
@@ -103,12 +92,10 @@ public class QnAService {
             throw new AdminPermissionDeniedException();
         }
 
-        // 질문이 존재하는지 확인
         Long qnaId = writeAnswerDTO.getQnaId();
         QnA qnA = qnARepository.findByqnaId(qnaId)
                 .orElseThrow(ArticleNotFoundException::new);
 
-        // 아직 답변하지 않은 글이 맞는지 확인 (이미 존재하면 안됨)
         if (qnA.isAnswer()) {
             throw new AlreadyAnsweredException();
         }
@@ -116,7 +103,6 @@ public class QnAService {
         String answer = writeAnswerDTO.getAnswer();
         qnA.writeAns(answer);
         qnARepository.save(qnA);
-
     }
 
 }

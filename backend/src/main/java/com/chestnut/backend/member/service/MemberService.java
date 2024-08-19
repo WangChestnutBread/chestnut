@@ -38,42 +38,34 @@ public class MemberService {
         String loginId = signupReqDTO.getLoginId();
         String checkDuplicationLoginId = (String) session.getAttribute("CheckLoginIdDuplication:");
         if (checkDuplicationLoginId == null) {
-            // loginId 중복 검사 안함
             throw new NotCheckDuplicationLoginId();
         }
         if (!checkDuplicationLoginId.equals(loginId)) {
-            // 입력한 loginId와 중복 검사 한 loginId가 다름 ( = 중복 검사 후에 입력한 아이디 바꾼 경우)
             throw new LoginIdSessionException();
         }
 
         String nickname = signupReqDTO.getNickname();
         String checkDuplicationNickname = (String) session.getAttribute("CheckNicknameDuplication:");
         if (checkDuplicationNickname == null) {
-            // 닉네임 중복 검사 안함
             throw new NotCheckDuplicationNickname();
         }
         if (!checkDuplicationNickname.equals(nickname)) {
-            // 입력한 닉네임과 중복 검사 한 닉네임이 다름 ( = 중복 검사 후에 입력한 닉네임 바꾼 경우)
             throw new NicknameSessionException();
         }
 
-        //DTO에서의 이메일 꺼내기 -> session에서 중복 검사 이메일과 같은지 확인 / 코드 검사 이메일과 같은지 확인
         String email = signupReqDTO.getEmail();
         String checkDuplicationEmail = (String) session.getAttribute("CheckEmailDuplication:");
         String checkCodeEmail = (String) session.getAttribute("CheckEmailCode:signup:");
 
         if(checkDuplicationEmail == null) {
-            // email 중복 검사 안함
             throw new NotCheckDuplicationEmail();
         }
 
         if(checkCodeEmail == null) {
-            // email 인증 번호 작성 안함
             throw new NotVerifiedEmailException();
         }
 
         if(!checkDuplicationEmail.equals(email) || !checkCodeEmail.equals(email)) {
-            // 입력한 이메일과 중복 검사 및 인증 한 이메일이 다름 ( = 검사 후에 입력한 이메일 바꾼 경우)
             throw new EmailSessionException();
         }
 
@@ -89,7 +81,6 @@ public class MemberService {
         Member member = signupReqDTO.toEntity(codePwd, avatar);
         memberRepository.save(member);
 
-        //체크 필요
         redisService.deleteData("CheckLoginIdDuplication:" + checkDuplicationLoginId);
         redisService.deleteData("CheckNicknameDuplication:" + checkDuplicationNickname);
         redisService.deleteData("CheckEmailDuplication:" + checkDuplicationEmail);
@@ -117,7 +108,6 @@ public class MemberService {
 
     @Transactional
     public void checkNicknameDuplicate(String nickname) {
-        //유효성 검사 + 중복 검사
         if (memberRepository.existsByNickname(nickname)) {
             throw new DataDuplicatedException();
         }
@@ -139,22 +129,17 @@ public class MemberService {
 
     @Transactional
     public void resetPwd(ResetPwdDTO resetPwdDTO) {
-
         String password = resetPwdDTO.getPassword();
         String newPassword = resetPwdDTO.getNewPassword();
         String newPasswordCheck = resetPwdDTO.getNewPasswordCheck();
 
-        //1. 기존 비번 - 새로운 비번 일치
         if (password.equals(newPassword)) {
             throw new NewPwdSameException();
         }
-
-        //2. 새로운 비번 - 새로운 비번 확인용 일치 여부
         if (!newPassword.equals(newPasswordCheck)) {
             throw new PasswordNotEqualException();
         }
 
-        //3. loginId로 해당 멤버 찾고 -> 그 멤버의 비번과 입력한 현재 비번이 일치한지 확인
         String loginId = resetPwdDTO.getLoginId();
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
@@ -175,10 +160,6 @@ public class MemberService {
         String newPassword = resetPwdUnknownDTO.getNewPassword();
         String newPasswordConfirm = resetPwdUnknownDTO.getNewPasswordConfirm();
 
-        //로그인 아이디로 해당 멤버 찾고
-        //기존 패스워드와 새로운 패스워드가 같은지 여부 체크 하고
-        //패스워드끼리 같은지 체크 하고
-
         Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(MemberNotFoundException::new);
 
@@ -187,12 +168,10 @@ public class MemberService {
         if (bCryptPasswordEncoder.matches(newPassword, password)) {
             throw new NewPwdSameException();
         }
-
         if (!newPassword.equals(newPasswordConfirm)) {
             throw new PasswordNotEqualException();
         }
 
-        //newPassword로 업데이트 하기
         String codePwd = bCryptPasswordEncoder.encode(newPasswordConfirm);
 
         member.changePassword(codePwd);
