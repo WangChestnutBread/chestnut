@@ -63,6 +63,7 @@ services:
     depends_on:
       - mysql
       - redis
+      - mongodb
 
   mysql:
     image: mysql:8.0
@@ -91,10 +92,26 @@ services:
     networks:
       - backend-network
 
+  mongodb:
+    image: mongo:latest
+    container_name: my-mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+      - TZ=Asia/Seoul
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "${MONGODB_BINDING_PORT}:27017"
+    networks:
+      - backend-network
+
 volumes:
   mysql_data:
     external: true
   redis_data:
+    external: true
+  mongodb_data:
     external: true
 
 networks:
